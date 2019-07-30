@@ -17,7 +17,7 @@
 
 |名称|类型|是否必需|描述|
 |--|--|----|--|
-|InstanceId|String|是|实例 ID，可使用 [ZH-CN\_TP\_998850\_.md\#](ZH-CN_TP_998850_.md#) 获取|
+|InstanceId|String|是|实例 ID，可使用 [GetInstanceList](cn.zh-CN/开发指南/管控 API 参考/实例管理接口/GetInstanceList.md#) 获取|
 |RegionId|String|是|此实例所在地域（Region），对应的 RegionId 请参见[接入指南](cn.zh-CN/开发指南/管控 API 参考/接入指南.md#)|
 |ConsumerId|String|是|创建的 Consumer Group ID，限制 64 个字符|
 
