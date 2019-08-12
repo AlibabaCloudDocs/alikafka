@@ -1,5 +1,7 @@
 # VPC 接入 {#concept_1374996 .concept}
 
+本文将通过 Java SDK 示例向您展示如何通过消息队列 Kafka 的 SDK 在 VPC 环境收发消息。
+
 ## 步骤一：准备配置 {#section_3c6_hyg_rto .section}
 
 添加 Maven 依赖的示例代码如下：
@@ -25,10 +27,10 @@
 
         ``` {#codeblock_al5_6ro_er0}
         ## 配置接入点，即控制台的实例详情页显示的“默认接入点”
-        bootstrap.servers=192.168.0.1:9092,192.168.0.2:9092
+        bootstrap.servers="xxxxxxxxxxxxxxxxxxxxx"
         ## 配置 Topic，可以在控制台上创建 Topic
         topic=alikafka-topic-demo
-        ## 配置 Consumer Grouo，可以在控制台创建 Consumer Group
+        ## 配置 Consumer Group，可以在控制台创建 Consumer Group
         group.id=CID-consumer-group-demo
         ```
 
