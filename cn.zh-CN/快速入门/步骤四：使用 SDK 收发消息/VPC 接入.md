@@ -186,7 +186,7 @@ try {
 
                 }
 
-                //参考常见报错: https://help.aliyun.com/document_detail/68168.html?spm=a2c4g.11186623.6.567.2OMgCB
+                //参考常见报错: [客户端报错](../../../../cn.zh-CN/常见问题/客户端报错.md#)
 
                 e.printStackTrace();
 
