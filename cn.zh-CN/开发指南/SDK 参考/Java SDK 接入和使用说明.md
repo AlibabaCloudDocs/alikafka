@@ -96,7 +96,7 @@
                 RecordMetadata recordMetadata = metadataFuture.get();
                 System.out.println("Produce ok:" + recordMetadata.toString());
             } catch (Exception e) {
-                //要考虑重试，参见常见问题: https://help.aliyun.com/document_detail/68168.html
+                //要考虑重试，参见常见问题: https://help.aliyun.com/document_detail/124136.html
                 System.out.println("error occurred");
                 e.printStackTrace();
             }
@@ -153,7 +153,7 @@ public class KafkaConsumerDemo {
                 } catch (Throwable ignore) {
 
                 }
-                //参见常见问题: https://help.aliyun.com/document_detail/68168.html
+                //参见常见问题: https://help.aliyun.com/document_detail/124136.html
                 e.printStackTrace();
             }
         }
