@@ -6,8 +6,6 @@
 
 该接口有以下使用限制：
 
--   接口调用受白名单限制，请[提交工单](https://selfservice.console.aliyun.com/ticket/createIndex)申请将用户 ID 加入白名单。
-
 -   单用户请求频率限制为 1 QPS。
 
 -   每个实例下最多可创建 100 个 Consumer Group。
