@@ -1,92 +1,97 @@
-# CreateConsumerGroup {#concept_94539_zh .concept}
+# CreateConsumerGroup {#doc_api_alikafka_CreateConsumerGroup .reference}
 
-使用 CreateConsumerGroup 接口，根据实例 ID 创建 Consumer Group。
+调用 CreateConsumerGroup 创建 Consumer Group。
 
-## 使用限制 {#section_xsq_8sb_hxe .section}
-
-该接口有以下使用限制：
+您在调用 CreateConsumerGroup 创建 Consumer Group 时，请注意：
 
 -   单用户请求频率限制为 1 QPS。
-
 -   每个实例下最多可创建 100 个 Consumer Group。
 
+## 调试 {#api_explorer .section}
 
-## 请求参数列表 {#section_iwj_kqa_fjh .section}
+[您可以在OpenAPI Explorer中直接运行该接口，免去您计算签名的困扰。运行成功后，OpenAPI Explorer可以自动生成SDK代码示例。](https://api.aliyun.com/#product=alikafka&api=CreateConsumerGroup&type=RPC&version=2018-10-15)
 
-|名称|类型|是否必需|描述|
-|--|--|----|--|
-|InstanceId|String|是|实例 ID，可使用 [GetInstanceList](cn.zh-CN/开发指南/管控 API 参考/实例管理接口/GetInstanceList.md#) 获取|
-|RegionId|String|是|此实例所在地域（Region），对应的 RegionId 请参见[接入指南](cn.zh-CN/开发指南/管控 API 参考/接入指南.md#)|
-|ConsumerId|String|是|创建的 Consumer Group ID，限制 64 个字符|
+## 请求参数 {#parameters .section}
 
-## 返回参数列表 {#section_coe_blz_0wz .section}
+|名称|类型|是否必选|示例值|描述|
+|--|--|----|---|--|
+|Action|String|是|CreateConsumerGroup|要执行的动作。取值：**CreateConsumerGroup**
 
-|名称|类型|描述|
-|--|--|--|
-|RequestId|String|请求的唯一标识 ID|
-|Code|Integer|返回码，返回 “200” 为成功|
-|Success|Boolean|成功与否|
-|Message|String|描述信息|
+ |
+|ConsumerId|String|是|consumer\_group\_test|Consumer Group 名称。
 
-## 使用示例 {#section_son_wx9_sc3 .section}
+ -   只能包含字母、数字、短横线（-）、下划线（\_）。
+-   长度限制在 **3-64** 个字符，多于 **64** 个字符将被自动截取。
+-   一旦创建后不能再修改。
 
-该示例为在“华北2（北京）”地域，在某个实例下创建一个 Consumer Group。
+ |
+|InstanceId|String|是|alikafka\_pre-cn-0pp1954n2003|实例 ID。可调用 [GetInstanceList](https://help.aliyun.com/document_detail/94533.html?spm=a2c4g.11186623.2.11.6efb754byCLl4z#concept-94533-zh) 获取。
 
-``` {#codeblock_gpc_spq_b70}
-public static void main(String[] args) {
-         //构建 Client
-        IAcsClient iAcsClient = buildAcsClient();
-        //构造创建 Consumer Group 的 request
-        CreateConsumerGroupRequest request = new CreateConsumerGroupRequest();
-        request.setAcceptFormat(FormatType.JSON);
-        //必要参数，实例 ID
-        request.setInstanceId("alikafka_XXXXXXXXXXXXX");
-        //必要参数，实例所在地域
-        request.setRegionId("cn-beijing");
+ |
+|RegionId|String|是|cn-hangzhou|地域 ID。
 
-        //必要参数，Consumer Group ID，限制在 64 个字符以内
-        request.setConsumerId("alikafka_for_test_XXXXXX");
+ |
 
-        //获取返回值
-        try {
-            CreateConsumerGroupResponse response = iAcsClient.getAcsResponse(request);
-            //log requestId for trace
-            String requestId = response.getRequestId();
-            if (200  == response.getCode()) {
-                if (response.getSuccess()) {
-                    //log success
-                } else {
-                    //log warn
-                }
-            } else {
-                //log warn
-            }
-        } catch (ClientException e) {
-            //log error
-        }
-    }
-    private static IAcsClient buildAcsClient() {
-        //产品 Code
-        String productName = "alikafka";
+## 返回数据 {#resultMapping .section}
 
-        //您的 AccessKeyId 和 AccessKeySecret
-        String accessKey = "xxxxxx";
-        String secretKey = "xxxxxx";
+|名称|类型|示例值|描述|
+|--|--|---|--|
+|Code|Integer|200|返回码。返回 **200** 为成功。
 
-        //设置接入点相关参数，通常 regionId 值和 endPointName 值相等，接入点也是用对应地域的 domain
-        String regionId = "cn-beijing";
-        String endPointName = "cn-beijing";
-        String domain = "alikafka.cn-beijing.aliyuncs.com";
-        try {
-            DefaultProfile.addEndpoint(endPointName, regionId, productName, domain);
-        } catch (ClientException e) {
-            //log error
-        }
+ |
+|Message|String|operation success|返回信息。
 
-        //构造 Client
-        IClientProfile profile = DefaultProfile.getProfile(regionId, accessKey, secretKey);
-        return new DefaultAcsClient(profile);
-    }
-			
+ |
+|RequestId|String|B191CC4D-B067-4508-987A-ACDA8D89BDAC|请求 ID。
+
+ |
+|Success|Boolean|true|调用是否成功。
+
+ |
+
+## 示例 {#demo .section}
+
+请求示例
+
+``` {#request_demo}
+
+http(s)://[Endpoint]/?Action=CreateConsumerGroup
+&ConsumerId=consumer_group_test
+&InstanceId=alikafka_pre-cn-0pp1954n2003 
+&RegionId=cn-hangzhou
+&<公共请求参数>
+
 ```
+
+正常返回示例
+
+`XML` 格式
+
+``` {#xml_return_success_demo}
+<CreateConsumerGroupResponse>
+      <Message>operation success</Message>
+      <RequestId>B191CC4D-B067-4508-987A-ACDA8D89BDAC</RequestId>
+      <Success>true</Success>
+      <Code>200</Code>
+</CreateConsumerGroupResponse>
+```
+
+`JSON` 格式
+
+``` {#json_return_success_demo}
+{
+	"Message":"operation success",
+	"RequestId":"B191CC4D-B067-4508-987A-ACDA8D89BDAC",
+	"Success":true,
+	"Code":200
+}
+```
+
+## 错误码 { .section}
+
+|HttpCode|错误码|错误信息|描述|
+|--------|---|----|--|
+|500|InternalError|An internal error occurred; please try again later.|系统内部错误，请稍后重试|
+
+访问[错误中心](https://error-center.aliyun.com/status/product/alikafka)查看更多错误码。
 
