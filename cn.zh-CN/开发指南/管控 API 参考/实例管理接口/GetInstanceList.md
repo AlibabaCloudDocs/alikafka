@@ -1,103 +1,144 @@
-# GetInstanceList {#concept_94533_zh .concept}
+# GetInstanceList {#doc_api_alikafka_GetInstanceList .reference}
 
-使用 GetInstanceList 接口来获取您在某地域（Region）下所购买的实例的信息。
+调用 GetInstanceList 获取您在某地域下所购买的实例的信息。
 
-## 请求参数列表 {#section_5ug_frz_k1m .section}
+## 调试 {#api_explorer .section}
 
-|名称|类型|是否必需|描述|
-|--|--|----|--|
-|RegionId|String|是|实例所属的地域|
+[您可以在OpenAPI Explorer中直接运行该接口，免去您计算签名的困扰。运行成功后，OpenAPI Explorer可以自动生成SDK代码示例。](https://api.aliyun.com/#product=alikafka&api=GetInstanceList&type=RPC&version=2018-10-15)
 
-|地域名称|RegionId|
-|----|--------|
-|华东1（杭州）|cn-hangzhou|
-|华东2（上海）|cn-shanghai|
-|华北1（青岛）|cn-qingdao|
-|华北2（北京）|cn-beijing|
-|华北3（张家口）|cn-zhangjiakou|
-|华北5（呼和浩特）|cn-huhehaote|
-|华南1（深圳）|cn-shenzhen|
-|中国（香港）|cn-hongkong|
-|新加坡|ap-southeast-1|
+## 请求参数 {#parameters .section}
 
-## 返回参数列表 {#section_zid_kwt_5sh .section}
+|名称|类型|是否必选|示例值|描述|
+|--|--|----|---|--|
+|Action|String|是|GetInstanceList|要执行的动作。取值：**GetInstanceList**
 
-|名称|类型|描述|
-|--|--|--|
-|RequestId|String|请求的唯一标识 ID|
-|Code|Integer|返回码，返回 “200” 代表成功|
-|Message|String|描述信息|
-|InstanceList|Array|实例列表信息|
+ |
+|RegionId|String|是|cn-hangzhou|实例所属的地域 ID。
 
-|名称|类型|描述|
-|--|--|--|
-|InstanceId|String|实例 ID|
-|RegionId|String|部署的实例所在地域的 RegionId|
-|ServiceStatus|Integer|服务状态|
-|VpcId|String|VPC 的 ID|
-|VSwitchId|String|VSwitch 的 ID|
-|EndPoint|String|接入点信息|
-|CreateTime|Long|创建时间|
-|ExpiredTime|Long|过期时间|
+ |
 
-## 使用示例 {#section_kty_uv1_w1c .section}
+## 返回数据 {#resultMapping .section}
 
-该示例为查询您在“华北2（北京）”地域下的实例列表。
+|名称|类型|示例值|描述|
+|--|--|---|--|
+|Code|Integer|200|返回码，返回 “200” 代表成功。
 
-``` {#codeblock_ni2_d4l_ikw}
-public static void main(String[] args) {
-        //构建 Client
-        IAcsClient iAcsClient = buildAcsClient();
+ |
+|InstanceList| | |实例列表信息。
 
-        //构造获取实例信息 request
-        GetInstanceListRequest request = new GetInstanceListRequest();
+ |
+|CreateTime|Long|1566215995000|创建时间。
 
-        //必要参数，注意此参数是指定获取哪个地域下的实例信息
-        request.setRegionId("cn-beijing");
-        request.setAcceptFormat(FormatType.JSON);
+ |
+|EndPoint|String|192.168.0.212:9092,192.168.0.210:9092,192.168.0.211:\*\*\*\*|默认接入点。
 
-        //获取返回值
-        try {
-            GetInstanceListResponse response = iAcsClient.getAcsResponse(request);
-            if (200  == response.getCode()) {
-                List<InstanceListItem> instanceListItems = response.getInstanceList();
-                if (CollectionUtils.isNotEmpty(instanceListItems)) {
-                    for (InstanceListItem instance : instanceListItems) {
-                        String instanceId = instance.getInstanceId();
-                        System.out.println(instanceId);
-                        //......
-                    }
-                }
-            } else {
-                //log warn
-            }
-        } catch (ClientException e) {
-            //log error
-        }
+ |
+|ExpiredTime|Long|1568908800000|过期时间。
 
-    }
-    private static IAcsClient buildAcsClient() {
-        //产品 Code
-        String productName = "alikafka";
+ |
+|InstanceId|String|alikafka\_pre-cn-mp919o4v\*\*\*\*|实例 ID。
 
-        //您的 AccessKeyId 和 AccessKeySecret
-        String accessKey = "xxxxxx";
-        String secretKey = "xxxxxx";
+ |
+|Name|String|alikafka\_pre-cn-mp919o4v\*\*\*\*|实例名称。
 
-        //设置接入点相关参数，通常 regionId 值和 endPointName 值相等，接入点也是用对应地域的 domain
-        String regionId = "cn-beijing";
-        String endPointName = "cn-beijing";
-        String domain = "alikafka.cn-beijing.aliyuncs.com";
-        try {
-            DefaultProfile.addEndpoint(endPointName, regionId, productName, domain);
-        } catch (ClientException e) {
-            //log error
-        }
+ |
+|RegionId|String|cn-hangzhou|实例所属的地域 ID。
 
-        //构造 Client
-        IClientProfile profile = DefaultProfile.getProfile(regionId, accessKey, secretKey);
-        return new DefaultAcsClient(profile);
-    }
-			
+ |
+|ServiceStatus|Integer|5|服务状态。
+
+ |
+|VSwitchId|String|vsw-bp13rg6bcpkxofr78\*\*\*\*|VSwitch ID。
+
+ |
+|VpcId|String|vpc-bp1l6hrlykj3405r7\*\*\*\*|VPC ID。
+
+ |
+|Message|String|operation success.|返回信息。
+
+ |
+|RequestId|String|ABA4A7FD-E10F-45C7-9774-A5236015\*\*\*\*|请求 ID。
+
+ |
+|Success|Boolean|true|调用是否成功。
+
+ |
+
+## 示例 {#demo .section}
+
+请求示例
+
+``` {#request_demo}
+
+http(s)://[Endpoint]/?Action=GetInstanceList
+&RegionId=cn-hangzhou
+&<公共请求参数>
+
 ```
+
+正常返回示例
+
+`XML` 格式
+
+``` {#xml_return_success_demo}
+<GetInstanceListResponse>
+      <Message>operation success.</Message>
+      <RequestId>0220FACD-4D57-4F46-BA77-AD333498****</RequestId>
+      <Success>true</Success>
+      <Code>200</Code>
+      <InstanceList>
+            <InstanceVO>
+                  <Name>alikafka_pre-cn-mp919o4v****</Name>
+                  <DeployType>4</DeployType>
+                  <CreateTime>1566215995000</CreateTime>
+                  <RegionId>cn-hangzhou</RegionId>
+                  <InstanceId>alikafka_pre-cn-mp919o4v****</InstanceId>
+                  <SslEndPoint>47.111.110.11:9093,121.40.96.141:9093,47.111.118.133:****</SslEndPoint>
+                  <EndPoint>192.168.0.212:9092,192.168.0.210:9092,192.168.0.211:****</EndPoint>
+                  <ExpiredTime>1568908800000</ExpiredTime>
+                  <VSwitchId>vsw-bp13rg6bcpkxofr78****</VSwitchId>
+                  <VpcId>vpc-bp1l6hrlykj3405r7****</VpcId>
+                  <UpgradeServiceDetailInfo>
+                        <Current2OpenSourceVersion>0.10</Current2OpenSourceVersion>
+                  </UpgradeServiceDetailInfo>
+                  <ServiceStatus>5</ServiceStatus>
+            </InstanceVO>
+      </InstanceList>
+</GetInstanceListResponse>
+```
+
+`JSON` 格式
+
+``` {#json_return_success_demo}
+{
+	"Message":"operation success.",
+	"RequestId":"0220FACD-4D57-4F46-BA77-AD333498****",
+	"Success":true,
+	"Code":200,
+	"InstanceList":{
+		"InstanceVO":[
+			{
+				"Name":"alikafka_pre-cn-mp919o4v****",
+				"DeployType":4,
+				"InstanceId":"alikafka_pre-cn-mp919o4v****",
+				"RegionId":"cn-hangzhou",
+				"CreateTime":1566215995000,
+				"SslEndPoint":"47.111.110.11:9093,121.40.96.141:9093,47.111.118.133:****",
+				"EndPoint":"192.168.0.212:9092,192.168.0.210:9092,192.168.0.211:****",
+				"VSwitchId":"vsw-bp13rg6bcpkxofr78****",
+				"ExpiredTime":1568908800000,
+				"VpcId":"vpc-bp1l6hrlykj3405r7****",
+				"ServiceStatus":5,
+				"UpgradeServiceDetailInfo":{
+					"Current2OpenSourceVersion":"0.10"
+				}
+			}
+		]
+	}
+}
+```
+
+## 错误码 { .section}
+
+访问[错误中心](https://error-center.aliyun.com/status/product/alikafka)查看更多错误码。
 
