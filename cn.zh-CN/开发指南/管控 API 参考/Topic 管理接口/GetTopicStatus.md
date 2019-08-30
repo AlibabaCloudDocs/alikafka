@@ -34,7 +34,7 @@
 |Message|String|operation success.|返回信息。
 
  |
-|RequestId|String|E475C7E2-8C35-46EF-BE7D-5D2A9F5DCC47|请求 ID。
+|RequestId|String|E475C7E2-8C35-46EF-BE7D-5D2A9F5D\*\*\*\*|请求 ID。
 
  |
 |Success|Boolean|true|调用是否成功。
@@ -87,58 +87,58 @@ http(s)://[Endpoint]/?Action=GetTopicStatus
 
 ``` {#xml_return_success_demo}
 <GetTopicStatusResponse>
-      <Message>operation success.</Message>
-      <RequestId>E475C7E2-8C35-46EF-BE7D-5D2A9F5DCC47</RequestId>
-      <TopicStatus>
-            <TotalCount>423</TotalCount>
-            <LastTimeStamp>1566470063575</LastTimeStamp>
-            <OffsetTable>
-                  <OffsetTable>
-                        <Partition>0</Partition>
-                        <LastUpdateTimestamp>1566470063547</LastUpdateTimestamp>
-                        <Topic>testkafka</Topic>
-                        <MaxOffset>76</MaxOffset>
-                        <MinOffset>0</MinOffset>
-                  </OffsetTable>
-                  <OffsetTable>
-                        <Partition>1</Partition>
-                        <LastUpdateTimestamp>1566470063575</LastUpdateTimestamp>
-                        <Topic>testkafka</Topic>
-                        <MaxOffset>69</MaxOffset>
-                        <MinOffset>0</MinOffset>
-                  </OffsetTable>
-                  <OffsetTable>
-                        <Partition>2</Partition>
-                        <LastUpdateTimestamp>1566470063554</LastUpdateTimestamp>
-                        <Topic>testkafka</Topic>
-                        <MaxOffset>70</MaxOffset>
-                        <MinOffset>0</MinOffset>
-                  </OffsetTable>
-                  <OffsetTable>
-                        <Partition>3</Partition>
-                        <LastUpdateTimestamp>1566470063538</LastUpdateTimestamp>
-                        <Topic>testkafka</Topic>
-                        <MaxOffset>67</MaxOffset>
-                        <MinOffset>0</MinOffset>
-                  </OffsetTable>
-                  <OffsetTable>
-                        <Partition>4</Partition>
-                        <LastUpdateTimestamp>1566470063568</LastUpdateTimestamp>
-                        <Topic>testkafka</Topic>
-                        <MaxOffset>67</MaxOffset>
-                        <MinOffset>0</MinOffset>
-                  </OffsetTable>
-                  <OffsetTable>
-                        <Partition>5</Partition>
-                        <LastUpdateTimestamp>1566470063561</LastUpdateTimestamp>
-                        <Topic>testkafka</Topic>
-                        <MaxOffset>74</MaxOffset>
-                        <MinOffset>0</MinOffset>
-                  </OffsetTable>
-            </OffsetTable>
-      </TopicStatus>
-      <Success>true</Success>
-      <Code>200</Code>
+	  <Message>operation success.</Message>
+	  <RequestId>E475C7E2-8C35-46EF-BE7D-5D2A9F5D****</RequestId>
+	  <TopicStatus>
+		    <TotalCount>423</TotalCount>
+		    <LastTimeStamp>1566470063575</LastTimeStamp>
+		    <OffsetTable>
+			      <OffsetTable>
+				        <Partition>0</Partition>
+				        <LastUpdateTimestamp>1566470063547</LastUpdateTimestamp>
+				        <Topic>testkafka</Topic>
+				        <MaxOffset>76</MaxOffset>
+				        <MinOffset>0</MinOffset>
+			      </OffsetTable>
+			      <OffsetTable>
+				        <Partition>1</Partition>
+				        <LastUpdateTimestamp>1566470063575</LastUpdateTimestamp>
+				        <Topic>testkafka</Topic>
+				        <MaxOffset>69</MaxOffset>
+				        <MinOffset>0</MinOffset>
+			      </OffsetTable>
+			      <OffsetTable>
+				        <Partition>2</Partition>
+				        <LastUpdateTimestamp>1566470063554</LastUpdateTimestamp>
+				        <Topic>testkafka</Topic>
+				        <MaxOffset>70</MaxOffset>
+				        <MinOffset>0</MinOffset>
+			      </OffsetTable>
+			      <OffsetTable>
+				        <Partition>3</Partition>
+				        <LastUpdateTimestamp>1566470063538</LastUpdateTimestamp>
+				        <Topic>testkafka</Topic>
+				        <MaxOffset>67</MaxOffset>
+				        <MinOffset>0</MinOffset>
+			      </OffsetTable>
+			      <OffsetTable>
+				        <Partition>4</Partition>
+				        <LastUpdateTimestamp>1566470063568</LastUpdateTimestamp>
+				        <Topic>testkafka</Topic>
+				        <MaxOffset>67</MaxOffset>
+				        <MinOffset>0</MinOffset>
+			      </OffsetTable>
+			      <OffsetTable>
+				        <Partition>5</Partition>
+				        <LastUpdateTimestamp>1566470063561</LastUpdateTimestamp>
+				        <Topic>testkafka</Topic>
+				        <MaxOffset>74</MaxOffset>
+				        <MinOffset>0</MinOffset>
+			      </OffsetTable>
+		    </OffsetTable>
+	  </TopicStatus>
+	  <Success>true</Success>
+	  <Code>200</Code>
 </GetTopicStatusResponse>
 ```
 
@@ -147,7 +147,7 @@ http(s)://[Endpoint]/?Action=GetTopicStatus
 ``` {#json_return_success_demo}
 {
 	"Message":"operation success.",
-	"RequestId":"E475C7E2-8C35-46EF-BE7D-5D2A9F5DCC47",
+	"RequestId":"E475C7E2-8C35-46EF-BE7D-5D2A9F5D****",
 	"TopicStatus":{
 		"TotalCount":423,
 		"OffsetTable":{
@@ -204,10 +204,6 @@ http(s)://[Endpoint]/?Action=GetTopicStatus
 ```
 
 ## 错误码 { .section}
-
-|HttpCode|错误码|错误信息|描述|
-|--------|---|----|--|
-|500|InternalError|An internal error occurred; please try again later.|系统内部错误，请稍后重试|
 
 访问[错误中心](https://error-center.aliyun.com/status/product/alikafka)查看更多错误码。
 
