@@ -1,103 +1,213 @@
-# GetTopicStatus {#concept_122194_zh .concept}
+# GetTopicStatus {#doc_api_alikafka_GetTopicStatus .reference}
 
-使用 GetTopicStatus 接口，根据实例 ID 和 Topic 名称来查询某 Topic 的消息收发数据。
+调用 GetTopicStatus 获取 Topic 的消息收发数据。
 
-## 请求参数列表 {#section_ie1_s84_bh8 .section}
+## 调试 {#api_explorer .section}
 
-|名称|类型|是否必需|描述|
-|--|--|----|--|
-|RegionId|String|是|此实例所在地域（Region），对应的 RegionId 请参见[接入指南](cn.zh-CN/开发指南/管控 API 参考/接入指南.md#)|
-|InstanceId|String|是|实例 ID，可使用 [GetInstanceList](cn.zh-CN/开发指南/管控 API 参考/实例管理接口/GetInstanceList.md#) 获取|
-|Topic|String|是|Topic 名称，可使用 [GetTopicList](cn.zh-CN/开发指南/管控 API 参考/Topic 管理接口/GetTopicList.md#) 获取|
+[您可以在OpenAPI Explorer中直接运行该接口，免去您计算签名的困扰。运行成功后，OpenAPI Explorer可以自动生成SDK代码示例。](https://api.aliyun.com/#product=alikafka&api=GetTopicStatus&type=RPC&version=2018-10-15)
 
-## 返回参数列表 {#section_g50_hf6_q2l .section}
+## 请求参数 {#parameters .section}
 
-|名称|类型|描述|
-|--|--|--|
-|RequestId|String|请求唯一标识 ID|
-|Code|Integer|返回码，返回 “200” 代表成功|
-|Message|String|描述信息|
-|TopicStatus|Struct|TopicStatus 的数据结构|
+|名称|类型|是否必选|示例值|描述|
+|--|--|----|---|--|
+|Action|String|是|GetTopicStatus|要执行的动作。取值：**GetTopicStatus**
 
-|名称|类型|描述|
-|--|--|--|
-|TotalCount|Long|消息总数|
-|LastTimeStamp|Long|最后被消费的一条消息的产生的时间|
-|OffsetTable|Array|Offset 列表|
+ |
+|InstanceId|String|是|alikafka\_pre-cn-v0h15tjmo003|实例 ID。
 
-|名称|类型|描述|
-|--|--|--|
-|Topic|String|Topic 名称|
-|Partition|Integer|分区的 ID|
-|MinOffset|Long|消息最小位点|
-|MaxOffset|Long|消息最大位点|
-|LastUpdateTimestamp|Long|最后被消费的一条消息的产生时间|
+ 可调用 [GetInstanceList](https://help.aliyun.com/document_detail/94533.html)获取。
 
-## 使用示例 {#section_xaz_kko_xnn .section}
+ |
+|Topic|String|是|normal\_topic\_9d034262835916103455551be06cc2dc\_6|Topic 名称。
 
-该示例为在“华北2（北京）”地域，查询某实例下的某个 Topic 的消息收发信息。
+ 可调用 [GetTopicList](https://help.aliyun.com/document_detail/94533.html?spm=a2c4g.11186623.2.11.5e374db4Cw7zT7#concept-94533-zh) 获取。
 
-``` {#codeblock_me4_2zu_9fn}
-public static void main(String[] args) {
-         //构建 Client
-        IAcsClient iAcsClient = buildAcsClient();
+ |
 
-        //构造获取 Topic 信息的 request
-        GetTopicStatusRequest request = new GetTopicStatusRequest();
-        request.setAcceptFormat(FormatType.JSON);
+## 返回数据 {#resultMapping .section}
 
+|名称|类型|示例值|描述|
+|--|--|---|--|
+|Code|Integer|200|状态吗。返回 **200** 代表成功。
 
-        //必要参数，实例 ID
-        request.setInstanceId("alikafka_pre-xxxxxx");
-         //必要参数，此实例所在地域，必须使用 GetInstanceList 返回值的实例所在的地域
-        request.setRegionId("cn-beijing");
-        //必要参数，Topic 名称
-        request.setTopic("test-xxxxxx");
+ |
+|Message|String|operation success.|返回信息。
 
-        //获取返回值
-        try {
-            GetTopicStatusResponse response = iAcsClient.getAcsResponse(request);
-            if (200  == response.getCode()) {
-                GetTopicStatusResponse.TopicStatus topicStatus = response.getTopicStatus();
-                if (topicStatus != null) {
-                    Long totalCount = topicStatus.getTotalCount();
-                    System.out.println(totalCount);
-                    for (GetTopicStatusResponse.TopicStatus.OffsetTableItem item : topicStatus.getOffsetTable()) {
-                        item.getTopic();
-                        item.getPartition();
-                        item.getMaxOffset();
-                        //......
-                    }
-                }
-            } else {
-                //log warn
-            }
-        } catch (ClientException e) {
-            //log error
-        }
-    }
-    private static IAcsClient buildAcsClient() {
-        //产品 Code
-        String productName = "alikafka";
+ |
+|RequestId|String|E475C7E2-8C35-46EF-BE7D-5D2A9F5DCC47|请求 ID。
 
-        //您的 AccessKeyId 和 AccessKeySecret
-        String accessKey = "xxxxxx";
-        String secretKey = "xxxxxx";
+ |
+|Success|Boolean|true|调用是否成功。
 
-        //设置接入点相关参数，通常 regionId 值和 endPointName 值相等，接入点也是用对应地域的 domain
-        String regionId = "cn-beijing";
-        String endPointName = "cn-beijing";
-        String domain = "alikafka.cn-beijing.aliyuncs.com";
-        try {
-            DefaultProfile.addEndpoint(endPointName, regionId, productName, domain);
-        } catch (ClientException e) {
-            //log error
-        }
+ |
+|TopicStatus| | |Topic 状态。
 
-        //构造 Client
-        IClientProfile profile = DefaultProfile.getProfile(regionId, accessKey, secretKey);
-        return new DefaultAcsClient(profile);
-    }
-			
+ |
+|LastTimeStamp|Long|1566470063575|最后一条被消费的消息的产生时间。
+
+ |
+|OffsetTable| | |偏移列表。
+
+ |
+|LastUpdateTimestamp|Long|1566470063547|最后被消费的消息的产生时间。
+
+ |
+|MaxOffset|Long|76|消息最大位点。
+
+ |
+|MinOffset|Long|0|消息最小位点。
+
+ |
+|Partition|Integer|0|分区 ID。
+
+ |
+|Topic|String|testkafka|Topic 名称。
+
+ |
+|TotalCount|Long|423|消息总数。
+
+ |
+
+## 示例 {#demo .section}
+
+请求示例
+
+``` {#request_demo}
+
+http(s)://[Endpoint]/?Action=GetTopicStatus
+&InstanceId=alikafka_pre-cn-v0h15tjmo003 
+&Topic=normal_topic_9d034262835916103455551be06cc2dc_6
+&<公共请求参数>
+
 ```
+
+正常返回示例
+
+`XML` 格式
+
+``` {#xml_return_success_demo}
+<GetTopicStatusResponse>
+      <Message>operation success.</Message>
+      <RequestId>E475C7E2-8C35-46EF-BE7D-5D2A9F5DCC47</RequestId>
+      <TopicStatus>
+            <TotalCount>423</TotalCount>
+            <LastTimeStamp>1566470063575</LastTimeStamp>
+            <OffsetTable>
+                  <OffsetTable>
+                        <Partition>0</Partition>
+                        <LastUpdateTimestamp>1566470063547</LastUpdateTimestamp>
+                        <Topic>testkafka</Topic>
+                        <MaxOffset>76</MaxOffset>
+                        <MinOffset>0</MinOffset>
+                  </OffsetTable>
+                  <OffsetTable>
+                        <Partition>1</Partition>
+                        <LastUpdateTimestamp>1566470063575</LastUpdateTimestamp>
+                        <Topic>testkafka</Topic>
+                        <MaxOffset>69</MaxOffset>
+                        <MinOffset>0</MinOffset>
+                  </OffsetTable>
+                  <OffsetTable>
+                        <Partition>2</Partition>
+                        <LastUpdateTimestamp>1566470063554</LastUpdateTimestamp>
+                        <Topic>testkafka</Topic>
+                        <MaxOffset>70</MaxOffset>
+                        <MinOffset>0</MinOffset>
+                  </OffsetTable>
+                  <OffsetTable>
+                        <Partition>3</Partition>
+                        <LastUpdateTimestamp>1566470063538</LastUpdateTimestamp>
+                        <Topic>testkafka</Topic>
+                        <MaxOffset>67</MaxOffset>
+                        <MinOffset>0</MinOffset>
+                  </OffsetTable>
+                  <OffsetTable>
+                        <Partition>4</Partition>
+                        <LastUpdateTimestamp>1566470063568</LastUpdateTimestamp>
+                        <Topic>testkafka</Topic>
+                        <MaxOffset>67</MaxOffset>
+                        <MinOffset>0</MinOffset>
+                  </OffsetTable>
+                  <OffsetTable>
+                        <Partition>5</Partition>
+                        <LastUpdateTimestamp>1566470063561</LastUpdateTimestamp>
+                        <Topic>testkafka</Topic>
+                        <MaxOffset>74</MaxOffset>
+                        <MinOffset>0</MinOffset>
+                  </OffsetTable>
+            </OffsetTable>
+      </TopicStatus>
+      <Success>true</Success>
+      <Code>200</Code>
+</GetTopicStatusResponse>
+```
+
+`JSON` 格式
+
+``` {#json_return_success_demo}
+{
+	"Message":"operation success.",
+	"RequestId":"E475C7E2-8C35-46EF-BE7D-5D2A9F5DCC47",
+	"TopicStatus":{
+		"TotalCount":423,
+		"OffsetTable":{
+			"OffsetTable":[
+				{
+					"Partition":0,
+					"LastUpdateTimestamp":1566470063547,
+					"Topic":"testkafka",
+					"MaxOffset":76,
+					"MinOffset":0
+				},
+				{
+					"Partition":1,
+					"LastUpdateTimestamp":1566470063575,
+					"Topic":"testkafka",
+					"MaxOffset":69,
+					"MinOffset":0
+				},
+				{
+					"Partition":2,
+					"LastUpdateTimestamp":1566470063554,
+					"Topic":"testkafka",
+					"MaxOffset":70,
+					"MinOffset":0
+				},
+				{
+					"Partition":3,
+					"LastUpdateTimestamp":1566470063538,
+					"Topic":"testkafka",
+					"MaxOffset":67,
+					"MinOffset":0
+				},
+				{
+					"Partition":4,
+					"LastUpdateTimestamp":1566470063568,
+					"Topic":"testkafka",
+					"MaxOffset":67,
+					"MinOffset":0
+				},
+				{
+					"Partition":5,
+					"LastUpdateTimestamp":1566470063561,
+					"Topic":"testkafka",
+					"MaxOffset":74,
+					"MinOffset":0
+				}
+			]
+		},
+		"LastTimeStamp":1566470063575
+	},
+	"Success":true,
+	"Code":200
+}
+```
+
+## 错误码 { .section}
+
+|HttpCode|错误码|错误信息|描述|
+|--------|---|----|--|
+|500|InternalError|An internal error occurred; please try again later.|系统内部错误，请稍后重试|
+
+访问[错误中心](https://error-center.aliyun.com/status/product/alikafka)查看更多错误码。
 
