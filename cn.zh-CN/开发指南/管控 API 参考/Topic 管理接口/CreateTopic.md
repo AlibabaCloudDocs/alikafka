@@ -1,95 +1,105 @@
-# CreateTopic {#concept_94538_zh .concept}
+# CreateTopic {#doc_api_alikafka_CreateTopic .reference}
 
-使用 CreateTopic 接口，根据实例 ID 创建 Topic。
+调用 CreateTopic 创建 Topic。
 
-## 使用限制 {#section_l9p_y9j_ml2 .section}
-
-该接口有以下使用限制：
+调用该接口创建 Topic 时，请注意：
 
 -   单用户请求频率限制为 1 QPS。
+-   每个实例下最多可创建的 Topic 数量与您所购买的实例版本相关，详情请参见[计费说明](https://help.aliyun.com/document_detail/84737.html)。
 
--   每个实例下最多可创建的 Topic 数量与您所购买的实例版本相关。详情请参见[计费说明](../../../../cn.zh-CN/产品定价/计费说明.md#)。
+## 调试 {#api_explorer .section}
 
+[您可以在OpenAPI Explorer中直接运行该接口，免去您计算签名的困扰。运行成功后，OpenAPI Explorer可以自动生成SDK代码示例。](https://api.aliyun.com/#product=alikafka&api=CreateTopic&type=RPC&version=2018-10-15)
 
-## 请求参数列表 {#section_n9p_o6e_siu .section}
+## 请求参数 {#parameters .section}
 
-|名称|类型|是否必需|描述|
-|--|--|----|--|
-|InstanceId|String|是|实例 ID，可使用 [GetInstanceList](cn.zh-CN/开发指南/管控 API 参考/实例管理接口/GetInstanceList.md#) 获取|
-|RegionId|String|是|此实例所在地域（Region），对应的 RegionId 请参见[接入指南](cn.zh-CN/开发指南/管控 API 参考/接入指南.md#)|
-|Topic|String|是|创建的 Topic 名称，限制 64 个字符|
-|Remark|String|是|创建的 Topic 的备注，限制 64个字符|
+|名称|类型|是否必选|示例值|描述|
+|--|--|----|---|--|
+|Action|String|是|CreateTopic|系统规定参数。
 
-## 返回参数列表 {#section_id4_ohf_kg3 .section}
+ 取值：**CreateTopic**
 
-|名称|类型|描述|
-|--|--|--|
-|RequestId|String|请求的唯一标识 ID|
-|Code|Integer|返回码，返回 “200” 为成功|
-|Success|Boolean|是否成功|
-|Message|String|描述信息|
+ |
+|InstanceId|String|是|alikafka\_pre-cn-mp919o4v\*\*\*\*|实例 ID。
 
-## 使用示例 {#section_qqz_qby_k4x .section}
+ 可调用 [GetInstanceList](https://help.aliyun.com/document_detail/94533.html?spm=a2c4g.11186623.2.12.774c7dc8F5cWRE#concept-94533-zh) 获取。
 
-该示例为在“华北2（北京）”地域的某实例下创建一个 Topic。
+ |
+|RegionId|String|是|cn-hangzhou|实例所属的地域 ID。
 
-``` {#codeblock_jne_0zb_h5a}
-public static void main(String[] args) {
-         //构建 Client
-        IAcsClient iAcsClient = buildAcsClient();
-        //构造创建 Topic 信息的 request
-        CreateTopicRequest request = new CreateTopicRequest();
-        request.setAcceptFormat(FormatType.JSON);
-        //必要参数，实例 ID
-        request.setInstanceId("alikafka_XXXXXXXXXXXXXX");
-        //必要参数，实例所在的地域
-        request.setRegionId("cn-beijing");
+ |
+|Remark|String|是|alikafka\_topic\_test|Topic 的备注。
 
-        //必要参数 Topic 名称，限制在 64 个字符以内
-        request.setTopic("alikafka_for_test_1");
-        //必要参数 Topic 备注，限制在 64 个字符以内
-        request.setRemark("myTest");
+ 限制 64 个字符。
 
-        //获取返回值
-        try {
-            CreateTopicResponse response = iAcsClient.getAcsResponse(request);
-            //log requestId for trace
-            String requestId = response.getRequestId();
-            if (200  == response.getCode()) {
-                if (response.getSuccess()) {
-                    //log success
-                } else {
-                    //log warn
-                }
-            } else {
-                //log warn
-            }
-        } catch (ClientException e) {
-            //log error
-        }
-    }
-    private static IAcsClient buildAcsClient() {
-        //产品 Code
-        String productName = "alikafka";
+ |
+|Topic|String|是|alikafka\_topic\_test|Topic 的名称。
 
-        //您的 AccessKeyId 和 AccessKeySecret
-        String accessKey = "xxxxxx";
-        String secretKey = "xxxxxx";
+ -   只能包含字母、数字、下划线（\_）和短横线（-）。
+-   长度为 3-64 个字符，多于 64 个字符将被自动截取。
+-   一旦创建后不能再修改。
 
-        //设置接入点相关参数，通常 regionId 值和 endPointName 值相等，接入点也是用对应地域的 domain
-        String regionId = "cn-beijing";
-        String endPointName = "cn-beijing";
-        String domain = "alikafka.cn-beijing.aliyuncs.com";
-        try {
-            DefaultProfile.addEndpoint(endPointName, regionId, productName, domain);
-        } catch (ClientException e) {
-            //log error
-        }
+ |
 
-        //构造 Client
-        IClientProfile profile = DefaultProfile.getProfile(regionId, accessKey, secretKey);
-        return new DefaultAcsClient(profile);
-    }
-			
+## 返回数据 {#resultMapping .section}
+
+|名称|类型|示例值|描述|
+|--|--|---|--|
+|Code|Integer|200|返回码。
+
+ 返回 **200** 为成功。
+
+ |
+|Message|String|operation success|返回信息。
+
+ |
+|RequestId|String|9C0F207C-77A6-43E5-991C-9D98510A\*\*\*\*|请求的唯一标识 ID。
+
+ |
+|Success|Boolean|true|调用是否成功。
+
+ |
+
+## 示例 {#demo .section}
+
+请求示例
+
+``` {#request_demo}
+
+http(s)://[Endpoint]/?Action=CreateTopic
+&InstanceId=alikafka_pre-cn-mp919o4v**** 
+&RegionId=cn-hangzhou
+&Remark=alikafka_topic_test
+&Topic=alikafka_topic_test
+&<公共请求参数>
+
 ```
+
+正常返回示例
+
+`XML` 格式
+
+``` {#xml_return_success_demo}
+<CreateTopicResponse>
+	  <Message>operation success</Message>
+	  <RequestId>9C0F207C-77A6-43E5-991C-9D98510A****</RequestId>
+	  <Success>true</Success>
+	  <Code>200</Code>
+</CreateTopicResponse>
+```
+
+`JSON` 格式
+
+``` {#json_return_success_demo}
+{
+	"Message":"operation success",
+	"RequestId":"9C0F207C-77A6-43E5-991C-9D98510A****",
+	"Success":true,
+	"Code":200
+}
+```
+
+## 错误码 { .section}
+
+访问[错误中心](https://error-center.aliyun.com/status/product/alikafka)查看更多错误码。
 
