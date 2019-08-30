@@ -1,88 +1,118 @@
-# GetConsumerList {#concept_122222_zh .concept}
+# GetConsumerList {#doc_api_alikafka_GetConsumerList .reference}
 
-使用 GetConsumerList 接口，根据实例 ID 获取该实例下的 Consumer Group 列表。
+调用 GetConsumerList 获取 Consumer Group 列表。
 
-## 请求参数列表 {#section_1aw_8b2_ajm .section}
+## 调试 {#api_explorer .section}
 
-|名称|类型|是否必需|描述|
-|--|--|----|--|
-|InstanceId|String|是|实例 ID，可使用 [GetInstanceList](cn.zh-CN/开发指南/管控 API 参考/实例管理接口/GetInstanceList.md#) 获取|
-|RegionId|String|是|此实例所在地域，对应的 RegionId 请参见[接入指南](cn.zh-CN/开发指南/管控 API 参考/接入指南.md#)|
+[您可以在OpenAPI Explorer中直接运行该接口，免去您计算签名的困扰。运行成功后，OpenAPI Explorer可以自动生成SDK代码示例。](https://api.aliyun.com/#product=alikafka&api=GetConsumerList&type=RPC&version=2018-10-15)
 
-## 返回参数列表 {#section_qz5_bsf_ff3 .section}
+## 请求参数 {#parameters .section}
 
-|名称|类型|描述|
-|--|--|--|
-|RequestId|String|请求的唯一标识 ID|
-|Code|Integer|返回码，返回 “200” 为成功|
-|Message|String|描述信息|
-|ConsumerList|Array|Consumer Group 列表信息|
+|名称|类型|是否必选|示例值|描述|
+|--|--|----|---|--|
+|Action|String|是|GetConsumerList|要执行的动作。取值：**GetConsumerList**
 
-|名称|类型|描述|
-|--|--|--|
-|RegionId|String|地域的 ID|
-|InstanceId|Long|实例 ID|
-|ConsumerId|String|Consumer Group ID|
+ |
+|InstanceId|String|是|alikafka\_post-cn-v0h18sav0001|实例 ID。
 
-## 使用示例 {#section_ikt_mgx_w0a .section}
+ |
+|RegionId|String|是|cn-hangzhou|地域 ID。
 
-该示例为在“华北2（北京）”地域，查询某个实例 ID 下的 Consumer Group 列表。
+ |
 
-``` {#codeblock_0q7_hal_bg9}
-public static void main(String[] args) {
-         //构建 Client
-        IAcsClient iAcsClient = buildAcsClient();
+## 返回数据 {#resultMapping .section}
 
-        //构造获取 consumerList 信息 request
-        GetConsumerListRequest request = new GetConsumerListRequest();
-        request.setAcceptFormat(FormatType.JSON);
+|名称|类型|示例值|描述|
+|--|--|---|--|
+|Code|Integer|200|返回码。返回 **200** 代表成功。
 
-        //必要参数实例 ID
-        request.setInstanceId("alikafka_pre-xxxxxx");
-        //必要参数，此实例所在地域，必须使用 GetInstanceList 返回值的实例所在的地域
-        request.setRegionId("cn-beijing");
+ |
+|ConsumerList| | |Consumer Group 列表。
 
-        //获取返回值
-        try {
-            GetConsumerListResponse response = iAcsClient.getAcsResponse(request);
-            if (200  == response.getCode()) {
-                List<ConsumerListItem> consumerList = response.getConsumerList();
-                if (CollectionUtils.isNotEmpty(consumerList)) {
-                    for (ConsumerListItem item : consumerList) {
-                        String consumerId = item.getConsumerId();
-                        System.out.println(consumerId);
-                        //......
-                    }
-                }
-            } else {
-                //log warn
-            }
-        } catch (ClientException e) {
-            //log error
-        }
-    }
-    private static IAcsClient buildAcsClient() {
-        //产品 Code
-        String productName = "alikafka";
+ |
+|ConsumerId|String|CID\_c34a6f44915f80d70cb42c4b14ee40c3\_4|Consumer Group 名称。
 
-        //您的 AccessKeyId 和 AccessKeySecret
-        String accessKey = "xxxxxx";
-        String secretKey = "xxxxxx";
+ |
+|InstanceId|String|alikafka\_post-cn-v0h18sav0001|实例 ID。
 
-        //设置接入点相关参数，通常 regionId 值和 endPointName 值相等，接入点也是用对应地域的 domain
-        String regionId = "cn-beijing";
-        String endPointName = "cn-beijing";
-        String domain = "alikafka.cn-beijing.aliyuncs.com";
-        try {
-            DefaultProfile.addEndpoint(endPointName, regionId, productName, domain);
-        } catch (ClientException e) {
-            //log error
-        }
+ |
+|RegionId|String|cn-hangzhou|地域 ID。
 
-        //构造 Client
-        IClientProfile profile = DefaultProfile.getProfile(regionId, accessKey, secretKey);
-        return new DefaultAcsClient(profile);
-    }
-			
+ |
+|Message|String|operation success.|返回信息。
+
+ |
+|RequestId|String|808F042B-CB9A-4FBC-9009-00E7DDB64B8C|请求 ID。
+
+ |
+|Success|Boolean|true|调用是否成功。
+
+ |
+
+## 示例 {#demo .section}
+
+请求示例
+
+``` {#request_demo}
+
+http(s)://[Endpoint]/?Action=GetConsumerList
+&InstanceId=alikafka_post-cn-v0h18sav0001
+&RegionId=cn-hangzhou
+&<公共请求参数>
+
 ```
+
+正常返回示例
+
+`XML` 格式
+
+``` {#xml_return_success_demo}
+<GetConsumerListResponse>
+      <ConsumerList>
+            <ConsumerVO>
+                  <ConsumerId>CID_c34a6f44915f80d70cb42c4b14ee40c3_4</ConsumerId>
+                  <InstanceId>alikafka_post-cn-v0h18sav0001</InstanceId>
+                  <RegionId>cn-hangzhou</RegionId>
+            </ConsumerVO>
+            <ConsumerVO>
+                  <ConsumerId>CID_c34a6f44915f80d70cb42c4b14ee40c3_3</ConsumerId>
+                  <InstanceId>alikafka_post-cn-v0h18sav0001</InstanceId>
+                  <RegionId>cn-hangzhou</RegionId>
+            </ConsumerVO>
+      </ConsumerList>
+      <Message>operation success.</Message>
+      <RequestId>808F042B-CB9A-4FBC-9009-00E7DDB64B8C</RequestId>
+      <Success>true</Success>
+      <Code>200</Code>
+</GetConsumerListResponse>
+```
+
+`JSON` 格式
+
+``` {#json_return_success_demo}
+{
+	"ConsumerList":{
+		"ConsumerVO":[
+			{
+				"ConsumerId":"CID_c34a6f44915f80d70cb42c4b14ee40c3_4",
+				"RegionId":"cn-hangzhou",
+				"InstanceId":"alikafka_post-cn-v0h18sav0001"
+			},
+			{
+				"ConsumerId":"CID_c34a6f44915f80d70cb42c4b14ee40c3_3",
+				"RegionId":"cn-hangzhou",
+				"InstanceId":"alikafka_post-cn-v0h18sav0001"
+			}
+		]
+	},
+	"Message":"operation success.",
+	"RequestId":"808F042B-CB9A-4FBC-9009-00E7DDB64B8C",
+	"Success":true,
+	"Code":200
+}
+```
+
+## 错误码 { .section}
+
+访问[错误中心](https://error-center.aliyun.com/status/product/alikafka)查看更多错误码。
 
