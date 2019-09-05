@@ -9,11 +9,11 @@
 ## 添加 Maven 依赖 {#section_1yg_yur_t22 .section}
 
 ``` {#codeblock_mei_s5r_gbg .language-java}
-//消息队列 Kafka 服务端版本是 0.10.0.0，建议客户端版本也是 0.10.0.0
+//消息队列 Kafka 服务端版本为 0.10.0.0，建议客户端版本为 0.10.2.2
 <dependency>
     <groupId>org.apache.kafka</groupId>
     <artifactId>kafka-clients</artifactId>
-    <version>0.10.0.0</version>
+    <version>0.10.2.2</version>
 </dependency>
 ```
 
