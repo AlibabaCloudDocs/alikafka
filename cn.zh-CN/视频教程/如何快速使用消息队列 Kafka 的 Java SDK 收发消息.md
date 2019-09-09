@@ -2,3 +2,7 @@
 
   
 
+## 文档教程 {#section_who_mtx_wz7 .section}
+
+[快速入门](../../../../cn.zh-CN/快速入门/概述.md#)
+
