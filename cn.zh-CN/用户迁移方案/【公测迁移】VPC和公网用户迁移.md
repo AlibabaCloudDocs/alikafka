@@ -1,6 +1,6 @@
 # 【公测迁移】VPC和公网用户迁移 {#concept_89773_zh .concept}
 
-为了保证服务质量和用户体验，阿里云消息队列 Kafka 商业化后将提供用户专有的商业化实例，不再提供公测版的共享实例服务。
+为了保证服务质量和用户体验，阿里云消息队列 for Apache Kafka 商业化后将提供用户专有的商业化实例，不再提供公测版的共享实例服务。
 
 **说明：** 
 
@@ -8,18 +8,18 @@
 
 本文以 VPC 网络类型的实例为例。公网接入的更多信息请参见[公网 + VPC 接入](../../../../cn.zh-CN/快速入门/步骤二：购买和部署实例/公网 + VPC 接入.md#)。
 
--   若您已经是 VPC 的用户，请按照以下步骤将现有业务迁移到消息队列 Kafka 商用实例上。
+-   若您已经是 VPC 的用户，请按照以下步骤将现有业务迁移到消息队列 for Apache Kafka 商用实例上。
 
 -   若您目前是经典网络的用户，请参见[【公测迁移】经典网络用户迁移](cn.zh-CN/用户迁移方案/【公测迁移】经典网络用户迁移.md#)迁移业务。
 
 
-## 步骤一：购买消息队列 Kafka 实例 {#section_pbi_os1_u5w .section}
+## 步骤一：购买消息队列 for Apache Kafka 实例 {#section_pbi_os1_u5w .section}
 
 前往[产品购买页](https://common-buy.aliyun.com/?commodityCode=alikafka_pre#/buy)，请根据业务所在地域购买相应的实例。
 
-## 步骤二：部署消息队列 Kafka 实例 {#section_4nw_uka_2bw .section}
+## 步骤二：部署消息队列 for Apache Kafka 实例 {#section_4nw_uka_2bw .section}
 
-1.  登录[消息队列 Kafka 控制台](http://kafka.console.aliyun.com/)，在概览页查看已购买的实例。
+1.  登录[消息队列 for Apache Kafka 控制台](http://kafka.console.aliyun.com/)，在概览页查看已购买的实例。
 
 2.  选择处于**未部署**状态的实例，单击**部署**按钮，然后根据页面提示填写 VPC 信息。
 
@@ -32,11 +32,11 @@
 
 ## 步骤三：创建 Topic {#section_sbf_wmj_klo .section}
 
-消息主题（Topic）是消息队列 Kafka 里对消息的一级归类，比如可以创建“Topic\_Trade”这一主题用来识别交易类消息。 使用消息队列 Kafka 的第一步就是先为您的应用创建 Topic。
+消息主题（Topic）是消息队列 for Apache Kafka 里对消息的一级归类，比如可以创建“Topic\_Trade”这一主题用来识别交易类消息。 使用消息队列 for Apache Kafka 的第一步就是先为您的应用创建 Topic。
 
 请按照以下步骤创建 Topic：
 
-1.  在消息队列 Kafka 控制台的左侧导航栏中，单击**Topic管理** 。
+1.  在消息队列 for Apache Kafka 控制台的左侧导航栏中，单击**Topic管理** 。
 
 2.  在 Topic管理页面的上方选择相应的地域，例如**华北2（上海）**，然后单击**创建Topic**按钮。
 
@@ -53,7 +53,7 @@ Consumer Group 是一类 Consumer 的标识，这类 Consumer 通常接收并消
 
 创建完 Topic 后，请按以下步骤创建 Consumer Group：
 
-1.  在消息队列 Kafka 控制台的左侧导航栏中，单击**Consumer Group管理** 。
+1.  在消息队列 for Apache Kafka 控制台的左侧导航栏中，单击**Consumer Group管理** 。
 
 2.  在Consumer Group管理 页面的上方选择相应的地域，例如**华北2（上海）******，单击**创建Consumer Group** 按钮。
 
@@ -64,7 +64,7 @@ Consumer Group 是一类 Consumer 的标识，这类 Consumer 通常接收并消
 
 ## 步骤五：获取实例接入点 {#section_4xz_xl7_0ru .section}
 
-实例的接入点是您在使用 SDK 接入消息队列 Kafka 时需要配置的一个配置项。如果您选择迁移到您新部署的实例，则需获取您新部署的实例的接入点。
+实例的接入点是您在使用 SDK 接入消息队列 for Apache Kafka 时需要配置的一个配置项。如果您选择迁移到您新部署的实例，则需获取您新部署的实例的接入点。
 
 同一个实例的接入点一致，因此可任意选择该实例的资源（Topic 或 Consumer Group）获取接入点。
 
@@ -76,12 +76,12 @@ Consumer Group 是一类 Consumer 的标识，这类 Consumer 通常接收并消
 
 3.  在接入点页面，单击**复制**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/998815/156446729153116_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/998815/156837229653116_zh-CN.png)
 
 
 ## 步骤六：修改代码配置，执行迁移 {#section_l7i_1sc_uwq .section}
 
-消息队列 Kafka 提供以下两种迁移方案：
+消息队列 for Apache Kafka 提供以下两种迁移方案：
 
 -   **方案一**：若您的业务允许丢弃少量未消费的消息数据，那么，您可以直接将生产者和消费者更新为您新部署实例的配置，即可完成迁移。
 
@@ -118,14 +118,14 @@ Consumer Group 是一类 Consumer 的标识，这类 Consumer 通常接收并消
 
 **验证生产者是否能成功发送消息**
 
-1.  在消息队列 Kafka 控制台左侧导航栏单击 **Topic管理**。
+1.  在消息队列 for Apache Kafka 控制台左侧导航栏单击 **Topic管理**。
 2.  在 Topic 的**操作**列单击**查看分区状态**。
 
 若能看到**最近更新时间**有更新，则代表生产者已成功发送消息。
 
 **验证消费者是否能成功消费消息**
 
-1.  在消息队列 Kafka 控制台左侧导航栏单击 **Consumer Group管理**。
+1.  在消息队列 for Apache Kafka 控制台左侧导航栏单击 **Consumer Group管理**。
 2.  在 Consumer Group 的**操作**列单击**查看消息堆积**。
 
 若能看到**最近消费时间**有更新，则代表消费者已成功消费消息。
