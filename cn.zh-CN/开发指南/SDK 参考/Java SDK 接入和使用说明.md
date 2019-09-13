@@ -1,6 +1,6 @@
 # Java SDK 接入和使用说明 {#concept_68325_zh .concept}
 
-本文介绍如何通过 Java SDK 接入消息队列 Kafka 并进行消息收发，您也可以直接参考[消息队列 Kafka Demo 库](https://github.com/AliwareMQ/aliware-kafka-demos)中的 Demo 和说明。
+本文介绍如何通过 Java SDK 接入消息队列 for Apache Kafka 并进行消息收发，您也可以直接参考[消息队列 for Apache Kafka Demo 库](https://github.com/AliwareMQ/aliware-kafka-demos)中的 Demo 和说明。
 
 ## 前提条件 {#section_u9e_ac2_iqv .section}
 
@@ -9,7 +9,7 @@
 ## 添加 Maven 依赖 {#section_1yg_yur_t22 .section}
 
 ``` {#codeblock_mei_s5r_gbg .language-java}
-//消息队列 Kafka 服务端版本为 0.10.0.0，建议客户端版本为 0.10.2.2
+//消息队列 for Apache Kafka 服务端版本为 0.10.0.0，建议客户端版本为 0.10.2.2
 <dependency>
     <groupId>org.apache.kafka</groupId>
     <artifactId>kafka-clients</artifactId>
@@ -19,7 +19,7 @@
 
 ## 2. 使用 SDK {#section_2nq_id7_0xh .section}
 
-1.  准备配置文件 kafka.properties，可参考[消息队列 Kafka Demo 库](https://github.com/AliwareMQ/aliware-kafka-demos)中的 Demo 和说明进行修改。
+1.  准备配置文件 kafka.properties，可参考[消息队列 for Apache Kafka Demo 库](https://github.com/AliwareMQ/aliware-kafka-demos)中的 Demo 和说明进行修改。
 
     ``` {#codeblock_m7c_wwg_3kp}
     ## 您在控制台获取的接入点
@@ -73,7 +73,7 @@
             Properties props = new Properties();
             //设置接入点，请通过控制台获取对应 Topic 的接入点
             props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getProperty("bootstrap.servers"));
-            //消息队列 Kafka 消息的序列化方式
+            //消息队列 for Apache Kafka 消息的序列化方式
             props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
             props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
             //请求的最长等待时间
@@ -83,7 +83,7 @@
             //一般来说，一个进程内一个 Producer 对象即可。如果想提高性能，可构造多个对象，但最好不要超过 5 个
             KafkaProducer<String, String> producer = new KafkaProducer<String, String>(props);
     
-            //构造一个消息队列 Kafka 消息
+            //构造一个消息队列 for Apache Kafka 消息
             String topic = kafkaProperties.getProperty("topic"); //消息所属的 Topic，请在控制台创建后，填写在这里
             String value = "this is the message's value"; //消息的内容
     
