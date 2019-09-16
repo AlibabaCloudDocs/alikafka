@@ -4,11 +4,11 @@
 
 下图是业界广泛应用的大数据中台架构，其中 HBase 和 Spark 选择云 HBase X-Pack。产品详情请参见 [X-pack Spark 分析引擎](https://help.aliyun.com/document_detail/93899.html?spm=a2c4g.11186623.2.10.3bf81f630K08Hz)[立即购买\>\>](https://hbase.console.aliyun.com/hbase/cn-shenzhen/clusters)
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/998865/156839398553226_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/998865/156861552753226_zh-CN.png)
 
--   消息流入：Flume、Logstash 或者在线库的 Binlog 流入消息中间件 Kafka。
+-   消息流入：Flume、Logstash 或者在线库的 Binlog 流入消息队列 for Apache Kafka。
 
--   实时计算：通过 X-Pack Spark Streaming 实时的消费 Kafka 的消息，写入到云 HBase 中对外提供在线查询。
+-   实时计算：通过 X-Pack Spark Streaming 实时的消费消息队列 for Apache Kafka 的消息，写入到云 HBase 中对外提供在线查询。
 
 -   实时存储与检索：云 HBase 融合 Solr 以及 Phoenix SQL 层能够提供海量的实时存储，以及在线查询检索。
 
