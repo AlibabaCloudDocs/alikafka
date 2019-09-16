@@ -98,7 +98,7 @@
 
             -   配置 **acs:alikafka:\*:\*:Kafka\_XXX\_\*** 代表可以访问 **XXX** 实例的所有云存储 Topic；
             -   配置 **acs:alikafka:\*:\*:Local\_Kafka\_XXX\_\*** 代表可以访问 **XXX** 实例的所有 Local 存储 Topic；
-            -   配置 **acs:alikafka:\*:\*:%RETRY%Kafka\_XXX\_\*** 代表可以访问 **XXX**实例的所有 Consumer Group。存储类型的说明请参见 [Topic 存储最佳实践](../../../../cn.zh-CN/最佳实践/Topic 存储最佳实践.md#)
+            -   配置 **acs:alikafka:\*:\*:%RETRY%Kafka\_XXX\_\*** 代表可以访问 **XXX**实例的所有 Consumer Group。存储类型的说明请参见 [Topic 存储最佳实践](../cn.zh-CN/最佳实践/Topic 存储最佳实践.md#)
 4.  在**添加权限**的授权结果页面上，查看授权信息摘要，并单击**完成**。
 
 ## 后续步骤 {#section_b0m_vd7_ytu .section}
@@ -122,9 +122,9 @@
 
 ## 更多信息 {#section_zi7_myt_rjt .section}
 
--   [什么是访问控制](../../../../cn.zh-CN/产品简介/什么是访问控制.md#)
--   [基本概念](../../../../cn.zh-CN/产品简介/基本概念.md#)
--   [创建RAM用户](../../../../cn.zh-CN/用户管理/创建RAM用户.md#)
--   [为RAM用户授权](../../../../cn.zh-CN/用户管理/为RAM用户授权.md#)
--   [RAM用户登录控制台](../../../../cn.zh-CN/用户管理/RAM用户登录控制台.md#)
+-   [什么是访问控制](../../../../../cn.zh-CN/产品简介/什么是访问控制.md#)
+-   [基本概念](../../../../../cn.zh-CN/产品简介/基本概念.md#)
+-   [创建RAM用户](../../../../../cn.zh-CN/用户管理/创建RAM用户.md#)
+-   [为RAM用户授权](../../../../../cn.zh-CN/用户管理/为RAM用户授权.md#)
+-   [RAM用户登录控制台](../../../../../cn.zh-CN/用户管理/RAM用户登录控制台.md#)
 
