@@ -13,17 +13,17 @@
     1.  登录[消息队列 for Apache Kafka 控制台](http://kafka.console.aliyun.com/)。
     2.  在控制台的顶部导航栏，选择您将要购买和部署实例的地域（下图举例为**华东1（杭州）**，您可以根据需求进行切换）。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/998823/156837206653137_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/998823/156861530353137_zh-CN.png)
 
     3.  在消息队列 for Apache Kafka 控制台，单击左侧导航栏中的**概览**。
 
     4.  在实例列表页，单击**购买新实例**。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/998823/156837206653138_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/998823/156861530353138_zh-CN.png)
 
     5.  在实例购买页，根据自身业务需求选择相应的配置。注意，在**实例类型**一栏，选择**公网/VPC实例**类型。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/998823/156837206653139_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/998823/156861530353139_zh-CN.png)
 
     6.  单击页面右侧的**立即购买**，按照提示完成购买流程。
 2.  **获取 VPC 信息**
@@ -38,7 +38,7 @@
 
         -   可用区
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/998823/156837206653140_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/998823/156861530353140_zh-CN.png)
 
         **说明：** 请根据该页面的可用区（A～G）在消息队列 for Apache Kafka 控制台中选择对应的可用区（A～G）。例如，某 VPC 交换机（VSwitch）显示在**可用区E**，那么在消息队列 for Apache Kafka 控制台中就相应地选择**可用区E**。
 
@@ -60,7 +60,7 @@
 
             -   **是**：若您需要多实例共享同一用户名和密码，选择该项，然后自定义用户名和密码。
 
-                ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/998823/156837206653141_zh-CN.png)
+                ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/998823/156861530353141_zh-CN.png)
 
                 完成后，实例会进入**部署中**状态。实例部署预计需要 10~30 分钟。
 
@@ -71,7 +71,7 @@
 
     1.  实例部署成功后，实例类型显示为**公网/VPC实例**。单击该实例右侧的**详情**，查看实例详情。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/998823/156837206653142_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/998823/156861530353142_zh-CN.png)
 
         **说明：** 您也可在左侧导航栏单击**实例详情**，然后直接在页面上方选择要查看的实例，单击查看其详情。
 
@@ -85,6 +85,6 @@
 
         2.  若之前部署实例时重新设置了**用户名**和**密码**，查看重设的用户名和密码。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/998823/156837206653143_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/998823/156861530353143_zh-CN.png)
 
 
