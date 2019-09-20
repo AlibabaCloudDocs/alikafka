@@ -2,10 +2,7 @@
 
 调用 CreateConsumerGroup 创建 Consumer Group。
 
-您在调用 CreateConsumerGroup 创建 Consumer Group 时，请注意：
-
--   单用户请求频率限制为 1 QPS。
--   每个实例下最多可创建 100 个 Consumer Group。
+您在调用 CreateConsumerGroup 创建 Consumer Group 时，请注意：单用户请求频率限制为 1 QPS。
 
 ## 调试 {#api_explorer .section}
 
@@ -25,7 +22,7 @@
 -   一旦创建后不能再修改。
 
  |
-|InstanceId|String|是|alikafka\_pre-cn-0pp1954n2003|实例 ID。可调用 [GetInstanceList](https://help.aliyun.com/document_detail/94533.html?spm=a2c4g.11186623.2.11.6efb754byCLl4z#concept-94533-zh) 获取。
+|InstanceId|String|是|alikafka\_pre-cn-0pp1954n\*\*\*\*|实例 ID。可调用 [GetInstanceList](https://help.aliyun.com/document_detail/94533.html?spm=a2c4g.11186623.2.11.6efb754byCLl4z#concept-94533-zh) 获取。
 
  |
 |RegionId|String|是|cn-hangzhou|地域 ID。
@@ -42,7 +39,7 @@
 |Message|String|operation success|返回信息。
 
  |
-|RequestId|String|B191CC4D-B067-4508-987A-ACDA8D89BDAC|请求 ID。
+|RequestId|String|B191CC4D-B067-4508-987A-ACDA8D89\*\*\*\*|请求 ID。
 
  |
 |Success|Boolean|true|调用是否成功。
@@ -57,7 +54,7 @@
 
 http(s)://[Endpoint]/?Action=CreateConsumerGroup
 &ConsumerId=consumer_group_test
-&InstanceId=alikafka_pre-cn-0pp1954n2003 
+&InstanceId=alikafka_pre-cn-0pp1954n****
 &RegionId=cn-hangzhou
 &<公共请求参数>
 
@@ -70,7 +67,7 @@ http(s)://[Endpoint]/?Action=CreateConsumerGroup
 ``` {#xml_return_success_demo}
 <CreateConsumerGroupResponse>
       <Message>operation success</Message>
-      <RequestId>B191CC4D-B067-4508-987A-ACDA8D89BDAC</RequestId>
+      <RequestId>B191CC4D-B067-4508-987A-ACDA8D89****</RequestId>
       <Success>true</Success>
       <Code>200</Code>
 </CreateConsumerGroupResponse>
@@ -81,17 +78,13 @@ http(s)://[Endpoint]/?Action=CreateConsumerGroup
 ``` {#json_return_success_demo}
 {
 	"Message":"operation success",
-	"RequestId":"B191CC4D-B067-4508-987A-ACDA8D89BDAC",
+	"RequestId":"B191CC4D-B067-4508-987A-ACDA8D89****",
 	"Success":true,
 	"Code":200
 }
 ```
 
 ## 错误码 { .section}
-
-|HttpCode|错误码|错误信息|描述|
-|--------|---|----|--|
-|500|InternalError|An internal error occurred; please try again later.|系统内部错误，请稍后重试|
 
 访问[错误中心](https://error-center.aliyun.com/status/product/alikafka)查看更多错误码。
 
