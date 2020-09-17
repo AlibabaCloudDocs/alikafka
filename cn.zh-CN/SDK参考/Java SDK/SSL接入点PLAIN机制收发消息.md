@@ -252,7 +252,7 @@ keyword: [apache kafka, kafka, 公网, 收发消息, 9093]
                     //SASL鉴权方式，保持不变。
                     props.put(SaslConfigs.SASL_MECHANISM, "PLAIN");
                     //两次Poll之间的最大允许间隔。
-                    //可更加实际拉去数据和客户的版本等设置此值，默认30s。
+                    //消费者超过该值没有返回心跳，服务端判断消费者处于非存活状态，服务端将消费者从Consumer Group移除并触发Rebalance，默认30s。
                     props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 30000);
                     //设置单次拉取的量，走公网访问时，该参数会有较大影响。
                     props.put(ConsumerConfig.MAX_PARTITION_FETCH_BYTES_CONFIG, 32000);
@@ -346,7 +346,7 @@ keyword: [apache kafka, kafka, 公网, 收发消息, 9093]
                     //SASL鉴权方式，保持不变。
                     props.put(SaslConfigs.SASL_MECHANISM, "PLAIN");
                     //两次Poll之间的最大允许间隔。
-                    //可更加实际拉去数据和客户的版本等设置此值，默认30s。
+                    //消费者超过该值没有返回心跳，服务端判断消费者处于非存活状态，服务端将消费者从Consumer Group移除并触发Rebalance，默认30s。
                     props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 30000);
                     //每次Poll的最大数量。
                     //注意该值不要改得太大，如果Poll太多数据，而不能在下次Poll之前消费完，则会触发一次负载均衡，产生卡顿。
