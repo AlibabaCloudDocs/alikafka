@@ -22,7 +22,7 @@ Before you migrate topic metadata between Message Queue for Apache Kafka instanc
 
 3.  Run the following command to confirm the topic metadata to be migrated:
 
-    `java -jar kafka-migration.jar ConsumerGroupMigrationFromAliyun --sourceAk <yoursourceAccessKeyId> --sourceSk <yoursourceAccessKeySecret> --sourceRegionId <yoursourceRegionId> --sourceInstanceId <yoursourceInstanceId> --destAk <yourdestAccessKeyId> --destSk <yourdestAccessKeySecret> --destRegionId <yourdestRegionId> --destInstanceId <yourdestInstanceId>`
+    `java -jar kafka-migration.jar TopicMigrationFromAliyun --sourceAk <yoursourceAccessKeyId> --sourceSk <yoursourceAccessKeySecret> --sourceRegionId <yoursourceRegionId> --sourceInstanceId <yoursourceInstanceId> --destAk <yourdestAccessKeyId> --destSk <yourdestAccessKeySecret> --destRegionId <yourdestRegionId> --destInstanceId <yourdestInstanceId>`
 
     |Parameter|Description|
     |---------|-----------|
@@ -47,7 +47,7 @@ Before you migrate topic metadata between Message Queue for Apache Kafka instanc
 
 4.  Run the following command to commit the topic metadata to be migrated:
 
-    `java -jar kafka-migration.jar ConsumerGroupMigrationFromAliyun --sourceAk <yoursourceAccessKeyId> --sourceSk <yoursourceAccessKeySecret> --sourceRegionId <yoursourceRegionId> --sourceInstanceId <yoursourceInstanceId> --destAk <yourdestAccessKeyId> --destSk <yourdestAccessKeySecret> --destRegionId <yourdestRegionId> --destInstanceId <yourdestInstanceId> --commit`
+    `java -jar kafka-migration.jar TopicMigrationFromAliyun --sourceAk <yoursourceAccessKeyId> --sourceSk <yoursourceAccessKeySecret> --sourceRegionId <yoursourceRegionId> --sourceInstanceId <yoursourceInstanceId> --destAk <yourdestAccessKeyId> --destSk <yourdestAccessKeySecret> --destRegionId <yourdestRegionId> --destInstanceId <yourdestInstanceId> --commit`
 
     |Parameter|Description|
     |---------|-----------|
