@@ -2,6 +2,33 @@
 
 本文介绍如何在公网环境下使用Node.js SDK接入消息队列Kafka版的SSL接入点并使用PLAIN机制收发消息。
 
+-   [安装Node.js](https://nodejs.org/en/download/)
+
+    **说明：** Node.js版本必须大于等于4.0.0。
+
+-   [安装OpenSSL](https://www.openssl.org/source/)
+
+## 安装Node.js依赖库
+
+1.  执行以下命令为预处理器指定OpenSSL头文件路径。
+
+    ```
+    export CPPFLAGS=-I/usr/local/opt/openssl/include
+    ```
+
+2.  执行以下命令为连接器指定OpenSSL库路径。
+
+    ```
+    export LDFLAGS=-L/usr/local/opt/openssl/lib
+    ```
+
+3.  执行以下命令安装Node.js依赖库。
+
+    ```
+    npm install node-rdkafka
+    ```
+
+
 ## 准备配置
 
 1.  [下载SSL根证书](https://code.aliyun.com/alikafka/aliware-kafka-demos/raw/master/kafka-nodejs-demo/vpc-ssl/ca-cert.pem)。
@@ -24,7 +51,7 @@
     -   如果实例已开启ACL，请确保要使用的SASL用户为PLAIN类型且已授权收发消息的权限。详情请参见[SASL用户授权](/cn.zh-CN/权限控制/SASL用户授权.md)。 |
     |sasl\_plain\_password|密码。    -   如果实例未开启ACL，您可以在消息队列Kafka版控制台的**实例详情**页面获取默认用户的密码。
     -   如果实例已开启ACL，请确保要使用的SASL用户为PLAIN类型且已授权收发消息的权限。详情请参见[SASL用户授权](/cn.zh-CN/权限控制/SASL用户授权.md)。 |
-    |bootstrap\_servers|默认接入点。您可在消息队列Kafka版控制台的**实例详情**页面的**基本信息**区域获取。|
+    |bootstrap\_servers|SSL接入点。您可在消息队列Kafka版控制台的**实例详情**页面的**基本信息**区域获取。|
     |topic\_name|Topic名称。您可在消息队列Kafka版控制台的**Topic管理**页面获取。|
     |consumer\_id|Consumer Group名称。您可在消息队列Kafka版控制台的**Consumer Group管理**页面获取。|
 
