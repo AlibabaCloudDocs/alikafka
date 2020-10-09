@@ -4,7 +4,7 @@ keyword: [go, 公网, 收发消息, sasl\_plaintext]
 
 # SSL接入点PLAIN机制收发消息
 
-本文介绍如何在公网环境下使用Go SDK接入消息队列Kafka版的SSL接入点并收发消息。
+本文介绍如何在公网环境下使用Go SDK接入消息队列Kafka版的SSL接入点并使用PLAIN机制收发消息。
 
 您已安装Go，详情请参见[安装Go](https://golang.org/dl/)。
 
@@ -47,8 +47,10 @@ keyword: [go, 公网, 收发消息, sasl\_plaintext]
     |topics|Topic名称。您可在消息队列Kafka版控制台的**Topic管理**页面获取。|
     |servers|SSL接入点。您可在消息队列Kafka版控制台的**实例详情**页面的**基本信息**区域获取。|
     |consumerGroup|Consumer Group名称。您可在消息队列Kafka版控制台的**Consumer Group管理**页面获取。|
-    |username|用户名|
-    |password|密码。|
+    |username|用户名。    -   如果实例未开启ACL，您可以在消息队列Kafka版控制台的**实例详情**页面获取默认用户的用户名。
+    -   如果实例已开启ACL，请确保要使用的SASL用户为PLAIN类型且已授权收发消息的权限。详情请参见[SASL用户授权](/cn.zh-CN/权限控制/SASL用户授权.md)。 |
+    |password|密码。    -   如果实例未开启ACL，您可以在消息队列Kafka版控制台的**实例详情**页面获取默认用户的密码。
+    -   如果实例已开启ACL，请确保要使用的SASL用户为PLAIN类型且已授权收发消息的权限。详情请参见[SASL用户授权](/cn.zh-CN/权限控制/SASL用户授权.md)。 |
     |cert\_file|SSL根证书路径。|
 
 3.  创建配置程序configs.go。
@@ -335,7 +337,7 @@ keyword: [go, 公网, 收发消息, sasl\_plaintext]
             case msg, more := <-consumer.Messages():
                 if more {
                     fmt.Printf("Partition:%d, Offset:%d, Key:%s, Value:%s, Timestamp:%s\n", msg.Partition, msg.Offset, string(msg.Key), string(msg.Value), msg.Timestamp)
-                    consumer.MarkOffset(msg, "") // mark message as processed
+                    consumer.MarkOffset(msg, "") // 标记消息为已处理。
                 }
             case err, more := <-consumer.Errors():
                 if more {
@@ -375,7 +377,7 @@ keyword: [go, 公网, 收发消息, sasl\_plaintext]
     }
     ```
 
-2.  执行以下命令接收消息。
+2.  执行以下命令消费消息。
 
     ```
     go run consumer.go
