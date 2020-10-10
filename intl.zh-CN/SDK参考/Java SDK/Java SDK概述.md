@@ -14,5 +14,5 @@ Java客户端可以通过消息队列Kafka版提供的多种接入点接入并�
 |Demo|[PLAINTEXT](https://code.aliyun.com/alikafka/aliware-kafka-demos/tree/master/kafka-java-demo/vpc)|-   [SASL\_PLAINTEXT/PLAIN](https://code.aliyun.com/alikafka/aliware-kafka-demos/tree/master/kafka-java-demo/vpc-9094)
 -   [SASL\_PLAINTEXT/SCRAM](https://code.aliyun.com/alikafka/aliware-kafka-demos/tree/master/kafka-java-demo/vpc-9094) |
 |文档|[默认接入点收发消息](/intl.zh-CN/SDK参考/Java SDK/默认接入点收发消息.md)|-   [SASL接入点PLAIN机制收发消息](/intl.zh-CN/SDK参考/Java SDK/SASL接入点PLAIN机制收发消息.md)
--   [SASL接入点SCRAM机制收发消息]() |
+-   [SASL接入点SCRAM机制收发消息](/intl.zh-CN/SDK参考/Java SDK/SASL接入点SCRAM机制收发消息.md) |
 
