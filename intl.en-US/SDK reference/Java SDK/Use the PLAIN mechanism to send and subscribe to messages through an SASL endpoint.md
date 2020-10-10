@@ -6,23 +6,28 @@ keyword: [java, vpc, kafka, send and receive messages, plain]
 
 This topic describes how a Java client connects to Message Queue for Apache Kafka through an SASL endpoint in a virtual private cloud \(VPC\) and uses the PLAIN mechanism to send and subscribe to messages.
 
--   [JDK 1.8 or later has been installed.](https://www.oracle.com/java/technologies/javase-downloads.html)
--   [Maven 2.5 or later has been installed.](http://maven.apache.org/download.cgi#)
+-   JDK 1.8 or later is installed. For more information, see [Download JDK](https://www.oracle.com/java/technologies/javase-downloads.html).
+-   [Download Maven](http://maven.apache.org/download.cgi#)
 -   [Authorize SASL users](/intl.en-US/Access control/Authorize SASL users.md)
 
 ## Install Java dependencies
 
-1.  Add the following dependency to the pom.xml file.
+1.  Add the following dependencies to the pom.xml file:
 
     ```
     <dependency>
-           <groupId>org.apache.kafka</groupId>
-           <artifactId>kafka-clients</artifactId>
-           <version>0.10.2.2</version>
-    </dependency> 
+        <groupId>org.apache.kafka</groupId>
+        <artifactId>kafka-clients</artifactId>
+        <version>0.10.2.2</version>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>1.7.6</version>
+    </dependency>
     ```
 
-    **Note:** We recommend that you keep the version of the client consistent with that of the broker. That is, the client library version must be consistent with the major version of the Message Queue for Apache Kafka instance. You can query the major version of the Message Queue for Apache Kafka instance on the **Instance Details** page of the Message Queue for Apache Kafka console.
+    **Note:** We recommend that you keep the version of the client consistent with that of the broker. That is, the client library version must be consistent with the major version of the Message Queue for Apache Kafka instance. You can obtain the major version of the Message Queue for Apache Kafka instance on the **Instance Details** page in the Message Queue for Apache Kafka console.
 
 
 ## Prepare configurations
@@ -30,6 +35,21 @@ This topic describes how a Java client connects to Message Queue for Apache Kafk
 1.  Create a Log4j configuration file log4j.properties.
 
     ```
+    # Licensed to the Apache Software Foundation (ASF) under one or more
+    # contributor license agreements.  See the NOTICE file distributed with
+    # this work for additional information regarding copyright ownership.
+    # The ASF licenses this file to You under the Apache License, Version 2.0
+    # (the "License"); you may not use this file except in compliance with
+    # the License.  You may obtain a copy of the License at
+    #
+    #    http://www.apache.org/licenses/LICENSE-2.0
+    #
+    # Unless required by applicable law or agreed to in writing, software
+    # distributed under the License is distributed on an "AS IS" BASIS,
+    # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    # See the License for the specific language governing permissions and
+    # limitations under the License.
+    
     log4j.rootLogger=INFO, STDOUT
     
     log4j.appender.STDOUT=org.apache.log4j.ConsoleAppender
