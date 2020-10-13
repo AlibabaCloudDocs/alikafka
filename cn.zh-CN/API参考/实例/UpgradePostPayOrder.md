@@ -1,0 +1,101 @@
+# UpgradePostPayOrder
+
+调用UpgradePostPayOrder升配后付费实例。
+
+请确保在使用该接口前，已充分了解后付费实例的收费方式和价格。详情请参见[计费说明](~84737~)。
+
+## 调试
+
+[您可以在OpenAPI Explorer中直接运行该接口，免去您计算签名的困扰。运行成功后，OpenAPI Explorer可以自动生成SDK代码示例。](https://api.aliyun.com/#product=alikafka&api=UpgradePostPayOrder&type=RPC&version=2019-09-16)
+
+## 请求参数
+
+|名称|类型|是否必选|示例值|描述|
+|--|--|----|---|--|
+|Action|String|是|UpgradePostPayOrder|要执行的操作。 取值：
+
+ **UpgradePostPayOrder**。 |
+|DiskSize|Integer|是|900|磁盘容量。
+
+ -   填写的磁盘容量必须大于等于实例当前的磁盘容量。
+-   取值范围请参见[计费说明](~~84737~~)。 |
+|InstanceId|String|是|alikafka\_post-cn-mp919o4v\*\*\*\*|实例ID。 |
+|RegionId|String|是|cn-hangzhou|实例的地域ID。 |
+|TopicQuota|Integer|是|50|Topic规格。
+
+ -   填写的Topic规格必须大于或等于实例当前的Topic规格。
+-   流量规格不同，默认值不同。超过默认值，需额外收费。
+-   取值范围请参见[计费说明](~~84737~~)。 |
+|IoMax|Integer|否|20|流量峰值（不推荐）。
+
+ -   填写的流量峰值必须大于或等于实例当前的流量峰值。
+-   流量峰值和流量规格必须选填一个。同时填写时，以流量规格为准。建议您只填写流量规格。
+-   取值范围请参见[计费说明](~~84737~~)。 |
+|SpecType|String|否|normal|规格类型。取值：
+
+ -   **normal**：普通版（高写版）
+-   **professional**：专业版（高写版）
+-   **professionalForHighRead**：专业版（高读版）
+
+ 不支持将实例从专业版降级到标准版。以上规格类型的说明请参见[计费说明](~~84737~~)。 |
+|EipMax|Integer|否|1|公网流量。
+
+ -   填写的公网流量必须大于或等于实例当前的公网流量。
+-   实例类型为公网/VPC实例时填写。
+-   取值范围请参见[计费说明](~~84737~~)。 |
+|IoMaxSpec|String|否|alikafka.hw.2xlarge|流量规格（推荐）。
+
+ -   填写的流量规格必须大于或等于实例当前的流量规格。
+-   流量峰值和流量规格必须选填一个。同时填写时，以流量规格为准。建议您只填写流量规格。
+-   取值范围请参见[计费说明](~~84737~~)。 |
+
+## 返回数据
+
+|名称|类型|示例值|描述|
+|--|--|---|--|
+|Code|Integer|200|返回码。返回200代表成功。 |
+|Message|String|operation success.|返回信息。 |
+|RequestId|String|ABA4A7FD-E10F-45C7-9774-A5236015A\*\*\*|请求ID。 |
+|Success|Boolean|true|调用是否成功。 |
+
+## 示例
+
+请求示例
+
+```
+http(s)://[Endpoint]/?Action=UpgradePostPayOrder
+&DiskSize=900
+&InstanceId=alikafka_post-cn-mp919o4v****
+&RegionId=cn-hangzhou
+&TopicQuota=50
+&<公共请求参数>
+```
+
+正常返回示例
+
+`XML` 格式
+
+```
+<UpgradePostPayOrderResponse>
+      <Message>operation success.</Message>
+      <RequestId>ABA4A7FD-E10F-45C7-9774-A5236015A***</RequestId>
+      <Success>true</Success>
+      <Code>200</Code>
+</UpgradePostPayOrderResponse>
+```
+
+`JSON` 格式
+
+```
+{
+    "RequestId":"ABA4A7FD-E10F-45C7-9774-A5236015A***",
+    "Message":"operation success.",
+    "Code":"200",
+    "Success":"true"
+}
+```
+
+## 错误码
+
+访问[错误中心](https://error-center.aliyun.com/status/product/alikafka)查看更多错误码。
+
