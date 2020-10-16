@@ -4,7 +4,7 @@ keyword: [kafka, c++, send and subscribe to messages]
 
 # Overview
 
-A C++ client can connect to Message Queue for Apache Kafka and send and subscribe to messages over various endpoints.
+A C++ client can connect to Message Queue for Apache Kafka and send and subscribe to messages through various endpoints.
 
 The following table lists the endpoints provided by Message Queue for Apache Kafka.
 
