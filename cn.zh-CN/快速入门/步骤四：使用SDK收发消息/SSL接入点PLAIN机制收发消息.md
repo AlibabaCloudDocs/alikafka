@@ -6,6 +6,7 @@ keyword: [apache kafka, kafka, 公网, 收发消息, 9093]
 
 本文以Java SDK为例介绍如何在公网环境下使用SDK接入消息队列Kafka版的SSL接入点并使用PLAIN机制收发消息。
 
+-   [步骤三：创建资源](/cn.zh-CN/快速入门/步骤三：创建资源.md)
 -   [安装1.8或以上版本JDK](https://www.oracle.com/java/technologies/javase-downloads.html)
 -   [安装2.5或以上版本Maven](http://maven.apache.org/download.cgi#)
 
@@ -26,7 +27,7 @@ keyword: [apache kafka, kafka, 公网, 收发消息, 9093]
     </dependency>
     ```
 
-    **说明：** 建议您保持服务端和客户端版本一致，即保持客户端库版本和消息队列Kafka版实例的大版本一致。您可以消息队列Kafka版控制台的**实例详情**页面获取消息队列Kafka版实例的大版本。
+    **说明：** 建议您保持服务端和客户端版本一致，即保持客户端库版本和消息队列Kafka版实例的大版本一致。您可以在消息队列Kafka版控制台的**实例详情**页面获取消息队列Kafka版实例的大版本。
 
 
 ## 准备配置
@@ -424,5 +425,5 @@ keyword: [apache kafka, kafka, 公网, 收发消息, 9093]
 
 ## 多语言SDK
 
-其他语言SDK请参见[Java SDK概述](/cn.zh-CN/SDK参考/Java SDK/Java SDK概述.md)。
+其他语言SDK请参见[SDK概述](/cn.zh-CN/SDK参考/SDK概述.md)。
 
