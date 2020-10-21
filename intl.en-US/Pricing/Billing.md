@@ -121,9 +121,9 @@ Billing rules include the rules for the peak traffic, disk capacity, and added t
 
 Message Queue for Apache Kafka supports the following regions:
 
-|Region group|Region|
-|------------|------|
-|Region group 1|China \(Hangzhou\)|
+|Region|Region|
+|------|------|
+|Region 1|China \(Hangzhou\)|
 |China \(Shanghai\)|
 |China \(Qingdao\)|
 |China \(Beijing\)|
@@ -132,14 +132,14 @@ Message Queue for Apache Kafka supports the following regions:
 |China \(Shenzhen\)|
 |China \(Heyuan\)|
 |China \(Chengdu\)|
-|Region group 2|China \(Hong Kong\)|
+|Region 2|China \(Hong Kong\)|
 |Singapore \(Singapore\)|
 |Japan \(Tokyo\)|
 |US \(Virginia\)|
 |US \(Silicon Valley\)|
 |Germany \(Frankfurt\)|
 |UK \(London\)|
-|Region group 3|Malaysia \(Kuala Lumpur\)|
+|Region 3|Malaysia \(Kuala Lumpur\)|
 |India \(Mumbai\)|
 |Indonesia \(Jakarta\)|
 
