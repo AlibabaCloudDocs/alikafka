@@ -33,7 +33,7 @@ The following table describes the billing items of Message Queue for Apache Kafk
 |Billing item|Description|Remarks|
 |------------|-----------|-------|
 |Peak traffic|The purchase of peak traffic is described as follows: -   Dual-channel read/write is implemented, and the read traffic is consistent with the write traffic. Set the peak traffic based on the maximum value of the peak read or write traffic. For business stability, a margin of about 30% of the maximum value of the peak read or write traffic is purchased for buffering. For example, if the peak write traffic is 100 MB/s and the peak read traffic is 200 MB/s, you need to purchase an instance that has the peak traffic as follows: 200 MB/s × \(1 + 30%\).
--   The maximum numbers of topics and partitions are specified for different peak traffic specifications. If the number of topics or partitions you want to create exceeds the maximum number specified for the peak traffic, you need to upgrade instance specifications or delete useless topics or partitions. For more information about how to upgrade instance specifications, see [Upgrade instance specifications](/intl.en-US/User guide/Instances/Upgrade the instance configuration.md).
+-   The maximum numbers of topics and partitions are specified for different peak traffic specifications. If the number of topics or partitions you want to create exceeds the maximum number specified for the peak traffic, you need to upgrade instance specifications or delete useless topics or partitions. For more information about how to upgrade instance specifications, see [Upgrade instance specifications](/intl.en-US/User guide/Instances/Upgrade instance specifications.md).
 -   Each peak traffic specification has a disk space limit.
 
 |None|
@@ -121,19 +121,25 @@ Billing rules include the rules for the peak traffic, disk capacity, and added t
 
 Message Queue for Apache Kafka supports the following regions:
 
-**Note:**
-
--   Region 1
-    -   China \(Hangzhou\)
-    -   China \(Shanghai\)
-    -   China \(Shenzhen\)
-    -   China \(Qingdao\)
-    -   China \(Beijing\)
-    -   China \(Zhangjiakou-Beijing Winter Olympics\)
-    -   China \(Hohhot\)
--   Region 2
-    -   China \(Hong Kong\)
-    -   Singapore \(Singapore\)
--   Region 3
-    -   Indonesia \(Jakarta\)
+|Region group|Region|
+|------------|------|
+|Region group 1|China \(Hangzhou\)|
+|China \(Shanghai\)|
+|China \(Qingdao\)|
+|China \(Beijing\)|
+|China \(Zhangjiakou-Beijing Winter Olympics\)|
+|China \(Hohhot\)|
+|China \(Shenzhen\)|
+|China \(Heyuan\)|
+|China \(Chengdu\)|
+|Region group 2|China \(Hong Kong\)|
+|Singapore \(Singapore\)|
+|Japan \(Tokyo\)|
+|US \(Virginia\)|
+|US \(Silicon Valley\)|
+|Germany \(Frankfurt\)|
+|UK \(London\)|
+|Region group 3|Malaysia \(Kuala Lumpur\)|
+|India \(Mumbai\)|
+|Indonesia \(Jakarta\)|
 
