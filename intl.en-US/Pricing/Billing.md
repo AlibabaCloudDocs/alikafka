@@ -121,8 +121,8 @@ Billing rules include the rules for the peak traffic, disk capacity, and added t
 
 Message Queue for Apache Kafka supports the following regions:
 
-|Region|Region|
-|------|------|
+|Region Type|Region|
+|-----------|------|
 |Region 1|China \(Hangzhou\)|
 |China \(Shanghai\)|
 |China \(Qingdao\)|
