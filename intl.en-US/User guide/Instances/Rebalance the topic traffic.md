@@ -12,7 +12,7 @@ Your Message Queue for Apache Kafka instance is in the **Running \(Pending Rebal
 
 ## Precautions
 
-When your Message Queue for Apache Kafka instance is in the **Running \(Pending Rebalancing\)** state, you can use this instance to receive and send messages but cannot create resources such as topics and consumer groups in this instance. You must complete topic traffic rebalancing or choose not to rebalance topic traffic before you can create a resource.
+When your Message Queue for Apache Kafka instance is in the **Running \(Pending Rebalancing\)** state, you can use this instance to send and subscribe to messages but cannot create resources such as topics and consumer groups in this instance. You must complete topic traffic rebalancing or choose not to rebalance topic traffic before you can create a resource.
 
 ## Traffic rebalancing method
 
@@ -25,7 +25,7 @@ The following table describes the traffic rebalancing methods supported by Messa
 
 |-   The partition order is not required.
 -   The partition to which messages are sent is not specified.
--   The consumption mode is Subscribe.
+-   The consumption method is Subscribe.
 
 |Seconds.|
 |Migrate Partitions of All Topics \(recommended\)|-   Local storage: The kafka-reassign-partitions tool is used to migrate topic data in partitions.
@@ -52,32 +52,21 @@ The following table describes the traffic rebalancing methods supported by Messa
 
 3.  In the left-side navigation pane, click **Instances**.
 
-4.  On the **Instance Details** page, select an instance. In the **Status** section, click **Rebalance Now**.
-
-    ![rebalance_1](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/2940549951/p103514.png)
+4.  On the **Instance Details** page, click an instance. In the **Status** section, click **Rebalance Now**.
 
 5.  In the **Rebalancing Method** dialog box, select a rebalancing method. The following rebalancing methods are supported:
 
     -   Add Partitions to All Topics
 
-        Select **Add Partitions to All Topics** and then click **OK**.
-
-        ![new_partition](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/2940549951/p103538.png)
+        Select **Add Partitions to All Topics** and click **OK**.
 
     -   Migrate Partitions of All Topics
         1.  Submita [ticket](https://workorder-intl.console.aliyun.com/?spm=a2c63.p38356.879954.5.7eda4058RBvAh8#/ticket/add/?productId=1352) and ask Message Queue for Apache Kafka Customer Services to upgrade your broker to the latest version.
-        2.  Select **Migrate Partitions of All Topics** and then click **OK**.
-
-            ![migrate](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/3940549951/p103539.png)
-
+        2.  Select **Migrate Partitions of All Topics** and click **OK**.
     -   Do Not Rebalance
 
-        Select **Do Not Rebalance** and then click **OK**.
-
-        ![no_rebalance](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/3940549951/p103540.png)
+        Select **Do Not Rebalance** and click **OK**.
 
 
 After topic traffic is rebalanced, the instance status is **Running**.
-
-![result](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/3940549951/p103541.png)
 
