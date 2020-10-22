@@ -20,15 +20,15 @@ keyword: [kafka, topic引流, 横向扩容]
 
 |引流方式|原理|影响|适用场景|持续时间|
 |----|--|--|----|----|
-|为所有Topic新增分区|为原集群节点上的所有Topic在扩容后的新节点中增加分区。|-   分区消息乱序。
+|所有Topic新增分区|为原集群节点上的所有Topic在扩容后的新节点中增加分区。|-   分区消息乱序。
 -   分区数量改变。如果您的客户端无法自动感知到新分区（例如：指定分区发送消费以及一些流计算场景），您可能需要重启或者修改客户端代码。
 
 |-   不要求分区顺序。
 -   不指定分区发送。
--   消费方式采取Subscribe。
+-   消费方式采取订阅。
 
 |秒级。|
-|为所有Topic迁移分区（推荐）|-   Local存储：使用kafka-reassign-partitions工具迁移分区数据。
+|所有Topic迁移分区（推荐）|-   Local存储：使用kafka-reassign-partitions工具迁移分区数据。
 -   云存储：修改映射关系，不迁移分区数据。
 
 |-   Local存储：临时性的内部流量。
@@ -54,30 +54,19 @@ keyword: [kafka, topic引流, 横向扩容]
 
 4.  在**实例详情**页面，选择实例，在**运行状态**区域，单击**立即引流**。
 
-    ![rebalance_1](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/4506119951/p103514.png)
-
 5.  在**引流方式**对话框，选择引流方式：
 
-    -   为所有Topic增加分区
+    -   所有Topic增加分区
 
-        选择**所有Topic新增分区**，然后单击**确认**。
+        选择**所有Topic新增分区**，然后单击**确定**。
 
-        ![new_partition](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/4506119951/p103538.png)
-
-    -   为所有Topic迁移分区
+    -   所有Topic迁移分区
         1.  提交[工单](https://workorder-intl.console.aliyun.com/?spm=a2c63.p38356.879954.5.7eda4058RBvAh8#/ticket/add/?productId=1352)联系消息队列Kafka版技术人员将服务端升级至最新版本。
-        2.  选择**所有Topic迁移分区**，然后单击**确认**。
-
-            ![migrate](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/4506119951/p103539.png)
-
+        2.  选择**所有Topic迁移分区**，然后单击**确定**。
     -   不引流
 
-        选择**不引流**，然后单击**确认**。
-
-        ![no_rebalance](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/4506119951/p103540.png)
+        选择**不引流**，然后单击**确定**。
 
 
 Topic引流完成后，实例运行状态显示**服务中**。
-
-![result](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/5506119951/p103541.png)
 
