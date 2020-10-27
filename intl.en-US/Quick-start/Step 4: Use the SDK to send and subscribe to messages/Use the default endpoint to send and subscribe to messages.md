@@ -1,11 +1,12 @@
 ---
-keyword: [kafka, message queue for apache kafka, vpc, aend and subscribe to messages, 9092]
+keyword: [kafka, message queue for apache kafka, vpc, send and subscribe to messages, 9092]
 ---
 
 # Use the default endpoint to send and subscribe to messages
 
-This topic describes how a Java client uses SDK for Java to connect to the default endpoint of Message Queue for Apache Kafka and send and subscribe to messages in a virtual private cloud \(VPC\).
+This topic describes how a Java client uses the SDK for Java to connect to the default endpoint of Message Queue for Apache Kafka and send and subscribe to messages in a virtual private cloud \(VPC\).
 
+-   [t998824.md\#](/intl.en-US/Quick-start/Step 3: Create resources.md)
 -   JDK 1.8 or later is installed. For more information, see [Download JDK](https://www.oracle.com/java/technologies/javase-downloads.html).
 -   Maven 2.5 or later is installed. For more information, see [Download Maven](http://maven.apache.org/download.cgi#).
 
@@ -56,7 +57,7 @@ This topic describes how a Java client uses SDK for Java to connect to the defau
     log4j.appender.STDOUT.layout.ConversionPattern=[%d] %p %m (%c)%n
     ```
 
-2.  Create a Kafka configuration file.
+2.  Create a Kafka configuration file kafka.properties.
 
     ```
     ## Configure the endpoint. Set it to the default endpoint displayed on the Instance Details page in the Message Queue for Apache Kafka console.
@@ -91,7 +92,7 @@ This topic describes how a Java client uses SDK for Java to connect to the defau
     ```
 
 
-## SDKs for multiple languages
+## SDKs for other languages
 
-For more information about how to use SDKs for other languages, see [Overview](/intl.en-US/SDK reference/Overview.md).
+For information about how to use the SDKs for other languages, see [t998844.md\#](/intl.en-US/SDK reference/Overview.md).
 
