@@ -154,22 +154,22 @@ keyword: [kafka, connector, fc]
 
     |Topic|描述|
     |-----|--|
-    |任务位点Topic|用于存储消费位点的Topic。    -   Topic名称：建议以connect-offset开头
+    |任务位点Topic|用于存储消费位点的Topic。    -   Topic名称：建议以connect-offset开头。
     -   分区数：Topic的分区数量必须大于1。
     -   存储引擎：Topic的存储引擎必须为Local存储。
     -   cleanup.policy：Topic的日志清理策略必须为compact。 |
-    |任务配置Topic|用于存储任务配置的Topic。    -   Topic名称：建议以connect-config开头
+    |任务配置Topic|用于存储任务配置的Topic。    -   Topic名称：建议以connect-config开头。
     -   分区数：Topic的分区数量必须为1。
     -   存储引擎：Topic的存储引擎必须为Local存储。
     -   cleanup.policy：Topic的日志清理策略必须为compact。 |
-    |任务状态Topic|用于存储任务状态的Topic。    -   Topic名称：建议以connect-status开头
+    |任务状态Topic|用于存储任务状态的Topic。    -   Topic名称：建议以connect-status开头。
     -   分区数：Topic的分区数量建议为6。
     -   存储引擎：Topic的存储引擎必须为Local存储。
     -   cleanup.policy：Topic的日志清理策略必须为compact。 |
-    |死信队列Topic|用于存储Connect框架的异常数据的Topic。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。    -   Topic名称：建议以connect-error开头
+    |死信队列Topic|用于存储Connect框架的异常数据的Topic。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。    -   Topic名称：建议以connect-error开头。
     -   分区数：Topic的分区数量建议为6。
     -   存储引擎：Topic的存储引擎可以为Local存储或云存储。 |
-    |异常数据Topic|用于存储Sink的异常数据的Topic。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。    -   Topic名称：建议以connect-error开头
+    |异常数据Topic|用于存储Sink的异常数据的Topic。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。    -   Topic名称：建议以connect-error开头。
     -   分区数：Topic的分区数量建议为6。
     -   存储引擎：Topic的存储引擎可以为Local存储或云存储。 |
 
@@ -226,26 +226,26 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
         -   earliest：从最初位点开始消费。
 |latest|
         |Connector消费组|Connector使用的Consumer Group。该Consumer Group的名称建议以connect-cluster开头。|connect-cluster-kafka-fc-sink|
-        |任务位点Topic|用于存储消费位点的Topic。        -   Topic名称：建议以connect-offset开头
+        |任务位点Topic|用于存储消费位点的Topic。        -   Topic名称：建议以connect-offset开头。
         -   分区数：Topic的分区数量必须大于1。
         -   存储引擎：Topic的存储引擎必须为Local存储。
         -   cleanup.policy：Topic的日志清理策略必须为compact。
 |connect-offset-kafka-fc-sink|
-        |任务配置Topic|用于存储任务配置的Topic。        -   Topic名称：建议以connect-config开头
+        |任务配置Topic|用于存储任务配置的Topic。        -   Topic名称：建议以connect-config开头。
         -   分区数：Topic的分区数量必须为1。
         -   存储引擎：Topic的存储引擎必须为Local存储。
         -   cleanup.policy：Topic的日志清理策略必须为compact。
 |connect-config-kafka-fc-sink|
-        |任务状态Topic|用于存储任务状态的Topic。        -   Topic名称：建议以connect-status开头
+        |任务状态Topic|用于存储任务状态的Topic。        -   Topic名称：建议以connect-status开头。
         -   分区数：Topic的分区数量建议为6。
         -   存储引擎：Topic的存储引擎必须为Local存储。
         -   cleanup.policy：Topic的日志清理策略必须为compact。
 |connect-status-kafka-fc-sink|
-        |死信队列Topic|用于存储Connect框架的异常数据的Topic。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。        -   Topic名称：建议以connect-error开头
+        |死信队列Topic|用于存储Connect框架的异常数据的Topic。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。        -   Topic名称：建议以connect-error开头。
         -   分区数：Topic的分区数量建议为6。
         -   存储引擎：Topic的存储引擎可以为Local存储或云存储。
 |connect-error-kafka-fc-sink|
-        |异常数据Topic|用于存储Sink的异常数据的Topic。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。        -   Topic名称：建议以connect-error开头
+        |异常数据Topic|用于存储Sink的异常数据的Topic。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。        -   Topic名称：建议以connect-error开头。
         -   分区数：Topic的分区数量建议为6。
         -   存储引擎：Topic的存储引擎可以为Local存储或云存储。
 |connect-error-kafka-fc-sink|
@@ -263,10 +263,78 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
         |服务名|函数计算服务的名称。|guide-hello\_world|
         |服务方法名|函数计算服务的函数名称。|hello\_world|
         |服务版本|函数计算服务的版本。|LATEST|
-        |发送模式|数据发送模式。取值：         -   异步：推荐。
-        -   同步：不推荐。同步发送模式下，如果函数计算的处理时间较长，消息队列Kafka版的处理时间也会较长。当同一批次数据的处理时间超过5分钟时，会触发消息队列Kafka版客户端Rebalance。
+        |发送模式|消息发送模式。取值：         -   异步：推荐。
+        -   同步：不推荐。同步发送模式下，如果函数计算的处理时间较长，消息队列Kafka版的处理时间也会较长。当同一批次消息的处理时间超过5分钟时，会触发消息队列Kafka版客户端Rebalance。
 |异步|
-        |发送批次大小|批量发送消息的大小。默认为20。同步任务会根据该值以及同步或异步请求的大小限制（同步请求大小限制为6 MB，异步请求大小限制为128 KB）将数据合并发送。如果单条数据大小超过请求大小上限，数据内容将不会包含在请求中，您可以通过offset主动拉取消息队列Kafka版数据。|50|
+        |发送批次大小|批量发送的消息条数。默认为20。Connector根据发送批次大小和请求大小限制（同步请求大小限制为6 MB，异步请求大小限制为128 KB）将多条消息聚合后发送。例如，发送模式为异步，发送批次大小为20，如果要发送18条消息，其中有17条消息的总大小为127 KB，有1条消息的大小为200 KB，Connector会将总大小不超过128 KB的17条消息聚合后发送，将大小超过128 KB的1条消息单独发送。**说明：** 如果您在发送消息时将key设置为null，则请求中不包含key；如果将value设置为null，则请求中不包含value。
+
+        -   如果批量发送的多条消息的大小不超过请求大小限制，则请求中包含消息内容。请求示例如下：
+
+            ```
+[
+    {
+        "key":"this is the message's key2",
+        "offset":8,
+        "overflowFlag":false,
+        "partition":4,
+        "timestamp":1603785325438,
+        "topic":"Test",
+        "value":"this is the message's value2",
+        "valueSize":28
+    },
+    {
+        "key":"this is the message's key9",
+        "offset":9,
+        "overflowFlag":false,
+        "partition":4,
+        "timestamp":1603785325440,
+        "topic":"Test",
+        "value":"this is the message's value9",
+        "valueSize":28
+    },
+    {
+        "key":"this is the message's key12",
+        "offset":10,
+        "overflowFlag":false,
+        "partition":4,
+        "timestamp":1603785325442,
+        "topic":"Test",
+        "value":"this is the message's value12",
+        "valueSize":29
+    },
+    {
+        "key":"this is the message's key38",
+        "offset":11,
+        "overflowFlag":false,
+        "partition":4,
+        "timestamp":1603785325464,
+        "topic":"Test",
+        "value":"this is the message's value38",
+        "valueSize":29
+    }
+]
+            ```
+
+        -   如果发送的单条消息的大小超过请求大小限制，则请求中不包含消息内容。请求示例如下：
+
+            ```
+[
+    {
+        "key":"123",
+        "offset":4,
+        "overflowFlag":true,
+        "partition":0,
+        "timestamp":1603779578478,
+        "topic":"Test",
+        "value":"1",
+        "valueSize":272687
+    }
+]
+            ```
+
+**说明：** 如需获取消息内容，您需要根据位点主动拉取消息。
+
+|50|
 
 6.  在**预览/创建**下方，确认Connector的配置，然后单击**提交**。
 
