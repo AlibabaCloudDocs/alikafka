@@ -4,13 +4,18 @@ keyword: [kafka, connector, fc]
 
 # Create a Function Compute sink connector
 
-This topic explains how to create a Function Compute sink connector to export data from Message Queue for Apache Kafka to Function Compute.
+This topic describes how to create a Function Compute sink connector to export data from topics in your Message Queue for Apache Kafka instance to functions in Function Compute.
 
 Before you create a Function Compute sink connector, ensure that you have completed the following operations:
 
-1.  Purchase a Message Queue for Apache Kafka instance and deploy. For more information, see [Connect Message Queue for Apache Kafka to a VPC](/intl.en-US/Quick-start/Step 2: Purchase and deploy an instance/Connect Message Queue for Apache Kafka to a VPC.md).
-2.  Enable the connector feature for the Message Queue for Apache Kafka instance. For more information, see [Enable the Connector feature](/intl.en-US/User guide/Connectors/Enable the connector feature.md).
-3.  Create an event function in Function Compute. Set the service name to guide-hello\_world, the function name to hello\_world, and the runtime environment to Python. After you create the function, modify the following function code:
+1.  Enable the Connector feature for the Message Queue for Apache Kafka instance. For more information, see [Enable the Connector feature](/intl.en-US/User guide/Connectors/Enable the Connector feature.md).
+2.  Create topics in the Message Queue for Apache Kafka instance. For more information, see [Step 1: Create a topic](/intl.en-US/Quick-start/Step 3: Create resources.md).
+
+    A topic named fc-test-input is used as an example.
+
+3.  Create a function in Function Compute. For more information, see [Create a function in the Function Compute console]().
+
+    An event function named hello\_world is used as an example. In this function, the service name is guide-hello\_world, and the runtime is Python. The following information shows the sample code of this function:
 
     ```
     # -*- coding: utf-8 -*-
@@ -28,31 +33,33 @@ Before you create a Function Compute sink connector, ensure that you have comple
       return 'hello world:' + bytes.decode(event)
     ```
 
-    For more information, see [Create a function in the Function Compute console]().
-
 
 ## Procedure
 
-Complete the following steps to export data from a topic in Message Queue for Apache Kafka to Function Compute by using a Function Compute sink connector:
+To export data from topics in the Message Queue for Apache Kafka instance to a function in Function Compute by using a Function Compute sink connector, perform the following steps:
 
-1.  Grant Message Queue for Apache Kafka the permission to access Function Compute.
+1.  Grant the Message Queue for Apache Kafka instance the permission to connect to Function Compute.
     1.  [Create a custom policy](#section_ein_kur_ed3)
     2.  [Create a RAM role](#section_onx_vzm_c6q)
     3.  [Add permissions](#section_ubx_dy2_thy)
-2.  Create the Message Queue for Apache Kafka resources that a Function Compute sink connector requires.
-    1.  [Create consumer groups](#section_876_je5_j2f)
-    2.  [Create topics](#section_17l_v1q_zyx)
-3.  Create a Function Compute sink connector.
+2.  Optional. Create topics and consumer groups that the Function Compute sink connector requires.
 
-    [Create a Function Compute sink connector](#section_4dk_lib_xrh)
+    If you do not want to customize the names of the topics and consumer groups, skip this step and select Automatically in the next step.
 
+    **Note:** Topics required by some Function Compute sink connectors must use a local storage engine. The Message Queue for Apache Kafka instance of major version 0.10.2 does not allow you to manually create topics by using a local storage engine. Instead, the topics must be automatically created.
+
+    1.  [Optional. Create topics that a Function Compute sink connector requires](#section_0wn_cbs_hf5)
+    2.  [Optional. Create consumer groups that a Function Compute sink connector requires](#section_fbf_mav_odr)
+3.  Create and deploy the Function Compute sink connector.
+    1.  [Create a Function Compute sink connector](#section_4dk_lib_xrh)
+    2.  [Deploy the Function Compute sink connector](#section_h1f_aa2_ydg)
 4.  Verify the result.
     1.  [Send messages](#section_rt2_26k_a0s)
     2.  [View function logs](#section_off_gyb_3lk)
 
 ## Create a custom policy
 
-Create a custom policy for accessing Function Compute.
+To create a custom policy for connecting to Function Compute, perform the following steps:
 
 1.  Log on to the [Resource Access Management \(RAM\) console](https://ram.console.aliyun.com/).
 
@@ -68,7 +75,7 @@ Create a custom policy for accessing Function Compute.
 
     3.  In the **Policy Document** field, enter the custom policy script.
 
-        The following code provides an example of a custom policy script for Function Compute access:
+        The following information shows a sample custom policy script for accessing Function Compute:
 
         ```
         {
@@ -91,7 +98,7 @@ Create a custom policy for accessing Function Compute.
 
 ## Create a RAM role
 
-You cannot directly select Message Queue for Apache Kafka as the trusted service of a RAM role. Therefore, select any support services as the trusted service when you create a RAM role. Then, manually modify the trust policy of the created RAM role.
+You cannot select Message Queue for Apache Kafka as the trusted service of a RAM role. Therefore, you must select any supported service as the trusted service when you create a RAM role. Then, you can manually modify the trust policy of the created RAM role.
 
 1.  In the left-side navigation pane, click **RAM Roles**.
 
@@ -99,15 +106,15 @@ You cannot directly select Message Queue for Apache Kafka as the trusted service
 
 3.  In the **Create RAM Role** wizard, create a RAM role.
 
-    1.  Select **Alibaba Cloud Service** for **Trusted Entity Type** and click **Next**.
+    1.  Select **Alibaba Cloud Service** for **Trusted entity type** and then click **Next**.
 
-    2.  Select **Normal Service Role** for **Role Type**. In the **RAM Role Name** field, enter AliyunKafkaConnectorRole. Then, choose **Function Compute** from the **Select Trusted Service** drop-down list, and click **OK**.
+    2.  Select **Normal Service Role** for **Role Type**. In the **RAM Role Name** field, enter AliyunKafkaConnectorRole. Then, select **Function Compute** from the **Select Trusted Service** drop-down list and click **OK**.
 
-4.  On the **RAM Roles** page, find **AliyunKafkaConnectorRole** and click **AliyunKafkaConnectorRole**.
+4.  On the **RAM Roles** page, find and click **AliyunKafkaConnectorRole**.****
 
 5.  On the **AliyunKafkaConnectorRole** page, click the **Trust Policy Management** tab, and then click **Edit Trust Policy**.
 
-6.  In the **Edit Trust Policy** pane, replace **fc** in the script with alikafka and click **OK**.
+6.  In the **Edit Trust Policy** dialog box, replace **fc** in the script with alikafka and then click **OK**.
 
     ![AliyunKafkaConnectorRole](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/6250549951/p128120.png)
 
@@ -120,140 +127,168 @@ Grant the created RAM role the permission to access Function Compute.
 
 2.  On the **RAM Roles** page, find **AliyunKafkaConnectorRole** and click **Add Permissions** in the **Actions** column.
 
-3.  In the **Add Permissions** pane, add the **KafkaConnectorFcAccess** permission.
+3.  In the **Add Permissions** dialog box, add the **KafkaConnectorFcAccess** permission.
 
     1.  In the **Select Policy** section, click **Custom Policy**.
 
-    2.  In the **Authorization Policy Name** column, find **KafkaConnectorFcAccess** and click **KafkaConnectorFcAccess**.
+    2.  In the **Authorization Policy Name** column, find and click **KafkaConnectorFcAccess**.****
 
     3.  Click **OK**.
 
     4.  Click **Complete**.
 
 
-## Create consumer groups
+## Optional. Create topics that a Function Compute sink connector requires
 
-After you have granted the RAM role in Message Queue for Apache Kafka the permission to access Function Compute, create consumer groups for performing data synchronization tasks by using a Function Compute sink connector.
+In the Message Queue for Apache Kafka console, you can manually create five topics for a Function Compute sink connector.
 
 1.  Log on to the [Message Queue for Apache Kafka console](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm).
 
 2.  In the top navigation bar, select a region.
 
-3.  In the left-side navigation pane, click **Consumer Groups**.
+3.  In the left-side navigation pane, click **Topics**.
 
-4.  On the **Consumer Groups** page, click **Create Consumer Group**.
+4.  On the **Topics** page, click **Create Topic**.
 
-5.  In the **Create Consumer Group** dialog box, create a consumer group.
+5.  In the **Create Topic** dialog box, set attributes for a topic and then click **Create**.
 
-    1.  In the **Consumer Group** field, enter connect-kafka-fc-sink.
+    |Topic|Description|
+    |-----|-----------|
+    |Task site topic|The topic that is used to store consumer offsets.    -   Topic: the name of the topic. We recommend that you start the name with connect-offset.
+    -   Partitions: the number of partitions in the topic. The value must be greater than 1.
+    -   Storage Engine: the storage engine of the topic. The value must be Local Storage.
+    -   cleanup.policy: the log cleanup policy for the topic. The value must be compact. |
+    |Task configuration topic|The topic that is used to store task configurations.    -   Topic: the name of the topic. We recommend that you start the name with connect-config.
+    -   Partitions: the number of partitions in the topic. The value must be 1.
+    -   Storage Engine: the storage engine of the topic. The value must be Local Storage.
+    -   cleanup.policy: the log cleanup policy for the topic. The value must be compact. |
+    |Task status topic|The topic that is used to store task statuses.    -   Topic: the name of the topic. We recommend that you start the name with connect-status.
+    -   Partitions: the number of partitions in the topic. We recommend that you set the value to 6.
+    -   Storage Engine: the storage engine of the topic. The value must be Local Storage.
+    -   cleanup.policy: the log cleanup policy for the topic. The value must be compact. |
+    |Dead-letter queue topic|The topic that is used to store abnormal data of the connector framework. To reduce topics, this topic can be reused as the abnormal data topic.    -   Topic: the name of the topic. We recommend that you start the name with connect-error.
+    -   Partitions: the number of partitions in the topic. We recommend that you set the value to 6.
+    -   Storage Engine: the storage engine of the topic. The value can be Local Storage or Cloud Storage. |
+    |Abnormal data topic|The topic that is used to store abnormal data of the sink connector. To reduce topics, this topic can be reused as the dead-letter queue topic.    -   Topic: the name of the topic. We recommend that you start the name with connect-error.
+    -   Partitions: the number of partitions in the topic. We recommend that you set the value to 6.
+    -   Storage Engine: the storage engine of the topic. The value can be Local Storage or Cloud Storage. |
 
-    2.  In the **Description** field, enter connect-kafka-fc-sink.
 
-    3.  Click **Create**.
+## Optional. Create consumer groups that a Function Compute sink connector requires
 
-6.  Create a connector consumer group by repeating Steps 4 and 5.
+In the Message Queue for Apache Kafka console, you can manually create two consumer groups for a Function Compute sink connector.
 
-    |Consumer group type|Parameter|Description|Example|
-    |-------------------|---------|-----------|-------|
-    |Connector consumer group|Consumer Group|The name of the consumer group. We recommend that you start the name with connect-cluster.|connect-cluster-kafka-fc-sink|
+1.  In the left-side navigation pane, click **Consumer Groups**.
 
-    The created consumer group appears on the **Consumer Groups** page.
+2.  On the **Consumer Groups** page, click **Create Consumer Group**.
 
+3.  In the **Create Consumer Group** dialog box, set attributes of the consumer group and then click **Create**.
 
-## Create topics
-
-Create topics for performing data synchronization tasks by using a Function Compute sink connector.
-
-1.  In the left-side navigation pane, click **Topics**.
-
-2.  On the **Topics** page, click **Create Topic**.
-
-3.  In the **Create Topic** dialog box, create a data source topic.
-
-    1.  In the **Topic** field, enter fc-test-input.
-
-    2.  In the **Description** field, enter fc-test-input.
-
-    3.  Click **Create**.
-
-4.  Create the following topic by repeating Steps 2 and 3.
-
-    |Topic type|Parameter|Description|Example|
-    |----------|---------|-----------|-------|
-    |Task site topic|Topic|The name of the topic. We recommend that you start the name with connect-offset.|connect-offset-fc-sink|
-    |Partitions|The number of partitions in the topic. The value must be greater than 1.|12|
-    |Storage Engine|The storage engine of the topic. The value must be Local Storage.|Local Storage|
-    |cleanup.policy|The log cleanup policy for the topic. The value must be compact.|compact|
-    |Task configuration topic|Topic|The name of the topic. We recommend that you start the name with connect-config.|connect-config-fc-sink|
-    |Partitions|The number of partitions in the topic. The value must be 1.|1|
-    |Storage Engine|The storage engine of the topic. The value must be Local Storage.|Local Storage|
-    |cleanup.policy|The log cleanup policy for the topic. The value must be compact.|compact|
-    |Task status topic|Topic|The name of the topic. We recommend that you start the name with connect-status.|connect-status-fc-sink|
-    |Partitions|The number of partitions in the topic. We recommend that you set the value to 6.|6|
-    |Storage Engine|The storage engine of the topic. The value must be Local Storage.|Local Storage|
-    |cleanup.policy|The log cleanup policy for the topic. The value must be compact.|compact|
-    |Dead-letter queue topic|Topic|The name of the topic.|fc\_dead\_letter\_error|
-    |Partitions|The number of partitions in the topic. We recommend that you set the value to 6.|6|
-    |Storage Engine|The storage engine of the topic. The value can be Local Storage or Cloud Storage.|Cloud Storage|
-    |Abnormal data topic|Topic|The name of the topic.|fc\_runtime\_error|
-    |Partitions|The number of partitions in the topic. We recommend that you set the value to 6.|6|
-    |Storage Engine|The storage engine of the topic. The value can be Local Storage or Cloud Storage.|Cloud Storage|
-
-    **Note:** You can combine the dead-letter queue topic and the abnormal data topic into one to store abnormal data.
-
-    The created topics appear on the **Topics** page.
+    |Consumer Group|Description|
+    |--------------|-----------|
+    |Connector task consumer group|The consumer group that is used by data synchronization tasks. The name of this consumer group must be in the connect-task name format.|
+    |Connector consumer group|The consumer group that is used by the connector. We recommend that you start the name of this consumer group with connect-cluster.|
 
 
 ## Create a Function Compute sink connector
 
-After you create the consumer groups and topics for performing data synchronization tasks by using a Function Compute sink connector, create a Function Compute sink connector to export data from the topics in Message Queue for Apache Kafka to Function Compute.
+After you grant Message Queue for Apache Kafka the permission for accessing Function Compute, perform the following steps to create a Function Compute sink connector to synchronize data from Message Queue for Apache Kafka to Function Compute:
 
-1.  In the left-side navigation pane, click **Connector**.
+1.  Log on to the [Message Queue for Apache Kafka console](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm).
 
-2.  On the **Connector** page, click **Create Connector**.
+2.  In the top navigation bar, select a region.
 
-3.  On the **Create Connector** page, enter the connector information and click **Pre-Check and Create**.
+3.  In the left-side navigation pane, click **Connector**.
 
-    |Section|Parameter|Description|Example|
-    |-------|---------|-----------|-------|
-    |Task Information|Task Name|The name of the data synchronization task. The name must be unique within the instance. The synchronization tasks that are performed by using a connector use the consumer groups named in the connect-task name format. Therefore, before you create a connector, create consumer groups that are named in the connect-task name format.|kafka-fc-sink|
-    |General Information|Task Type|The type of the data synchronization task. For more information about the task types that Message Queue for Apache Kafka supports, see [Types of connectors](/intl.en-US/User guide/Connectors/Connectors overview.md).|KAFKA2FC|
-    |User VPC|The virtual private cloud \(VPC\) where the data synchronization task runs. The default value is the VPC where the Message Queue for Apache Kafka instance is deployed, and you do not need to enter the value.|vpc-bp1xpdnd3l\*\*\*|
-    |VSwitch|The VSwitch where the data synchronization task runs. The VSwitch must be on the same VPC as the Message Queue for Apache Kafka instance. The default value is the VSwitch that you specified for the Message Queue for Apache Kafka instance.|vsw-bp1d2jgg81\*\*\*|
-    |Source Instance Information|Data Source Topic|The topic whose data needs to be synchronized.|fc-test-input|
-    |Consumer Offset|The offset where consumption starts. Valid values:     -   latest: Consumption starts from the latest offset.
-    -   earliest: Consumption starts from the initial offset.
+4.  On the **Connector** page, click **Create Connector**.
+
+5.  On the **Create Connector** page, perform the following steps:
+
+    1.  In the **Enter Basic Information** step, enter a connector name in the **Connector Name** field, select **Message Queue for Apache Kafka** from the **Dump Path** drop-down list, select **Function Compute** from the **Dump To** drop-down list, and then click **Next**.
+
+        |Parameter|Description|Example|
+        |---------|-----------|-------|
+        |Connector Name|The name of the connector. The value must comply with the following rules:        -   The connector name must be 1 to 48 characters in length. It can contain digits, lowercase letters, and dashes \(-\), but cannot start with a dash \(-\).
+        -   The name must be unique within a Message Queue for Apache Kafka instance.
+Data synchronization tasks of a connector must use a consumer group named connect-task name. If you have not manually created such a consumer group, the system automatically creates one.
+
+|kafka-fc-sink|
+        |Task Type|The type of the data synchronization task in the connector. In this example, the data synchronization task synchronizes data from Message Queue for Apache Kafka to Function Compute. For more information about task types, see [Types of connectors](/intl.en-US/User guide/Connectors/Overview.md).|KAFKA2FC|
+
+    2.  In the **Configure Source Instance** step, enter a topic name in the **Data Source Topic** field, select a consumer offset from the **Consumer Offset** drop-down list, and then select **Automatically** or **Manually** for **Create Resource**. If you select Manually, you must enter the name of the manually created topic. Then, click **Next**.
+
+        |Parameter|Description|Example|
+        |---------|-----------|-------|
+        |VPC ID|The virtual private cloud \(VPC\) where the data synchronization task runs. The default value is the VPC where the Message Queue for Apache Kafka instance resides. You do not need to set the parameter.|vpc-bp1xpdnd3l\*\*\*|
+        |VSwitch ID|The vSwitch where the data synchronization task runs. The vSwitch must be in the same VPC as the Message Queue for Apache Kafka instance. The default value is the vSwitch that you specified for the Message Queue for Apache Kafka instance.|vsw-bp1d2jgg81\*\*\*|
+        |Data Source Topic|The topic whose data needs to be synchronized.|fc-test-input|
+        |Consumer Offset|The offset where consumption starts. Valid values:         -   latest: Consumption starts from the latest offset.
+        -   earliest: Consumption starts from the initial offset.
 |latest|
-    |Connector Consumer Group|The consumer group that is used for data synchronization.|connect-cluster-kafka-fc-sink|
-    |Task Site Topic|The topic that is used to store consumer offsets.|connect-offset-fc-sink|
-    |Task Configuration Topic|The topic that is used to store task configurations.|connect-config-fc-sink|
-    |Task Status Topic|The topic that is used to store task statuses.|connect-status-fc-sink|
-    |Dead-letter Queue Topic|The topic that is used to store the abnormal data of the connector framework.|fc\_dead\_letter\_error|
-    |Abnormal Data Topic|The topic that is used to store the abnormal data of the sink connector.|fc\_runtime\_error|
-    |Destination Instance Information|Region|The region where Function Compute is located.|cn-hangzhou|
-    |Service Endpoint|The endpoint of Function Compute. You can find the endpoint in the **Common Info** section on the **Overview** page in the Function Compute console.     -   Internal Endpoint: recommended for low latency. The internal endpoint can be used when the Message Queue for Apache Kafka instance and Function Compute instance are in the same region.
-    -   Public Endpoint: not recommended due to high latency. The Public Endpoint value can be used when the Message Queue for Apache Kafka instance and Function Compute instance are in different regions. To use the Public Endpoint value, you must enable Internet access for the connector. For more information, see [Enable Internet access for a connector](/intl.en-US/User guide/Connectors/Enable Internet access for a connector.md).
-|http://188\*\*\*.cn-hangzhou.fc.aliyuncs.com|
-    |Alibaba Cloud Account|The ID of the Alibaba Cloud account that is used to log on to Function Compute. You can find the ID in the **Common Info** section on the **Overview** page in the Function Compute console.|188\*\*\*|
-    |RAM Role|The name of the RAM role in Message Queue for Apache Kafka. For more information, see [Create a RAM role](#section_onx_vzm_c6q).|AliyunKafkaConnectorRole|
-    |Service Name|The name of the Function Compute service.|guide-hello\_world|
-    |Function Name|The function name of the Function Compute service.|hello\_world|
-    |Service Version|The version of the Function Compute service.|LATEST|
-    |Transmission Mode|The data transmission mode. Valid values:     -   Asynchronous: recommended.
-    -   Synchronous: not recommended. In the synchronous transmission mode, if Function Compute takes a long time to process data, Message Queue for Apache Kafka will also take a long time to process data. If the processing time of the same batch of data exceeds 5 minutes, the Message Queue for Apache Kafka client will rebalance.
-|Asynchronous|
-    |Data Size|The number of messages that are sent in a batch. Default value: 20. A synchronization task consolidates and transfers data based on the combination of this value and the maximum size limits for synchronous or asynchronous requests \(6 MB for synchronous requests and 128 KB for asynchronous requests\). If the size of a single data record exceeds the limit, the data will not be included in the request. In this case, you can pull the Message Queue for Apache Kafka data by using an offset.|50|
+        |Connector consumer group|The consumer group that is used by the connector. We recommend that you start the name of this consumer group with connect-cluster.|connect-cluster-kafka-fc-sink|
+        |Task site Topic|The topic that is used to store consumer offsets.        -   Topic: the name of the topic. We recommend that you start the name with connect-offset.
+        -   Partitions: the number of partitions in the topic. The value must be greater than 1.
+        -   Storage Engine: the storage engine of the topic. The value must be Local Storage.
+        -   cleanup.policy: the log cleanup policy for the topic. The value must be compact.
+|connect-offset-kafka-fc-sink|
+        |Task configuration Topic|The topic that is used to store task configurations.        -   Topic: the name of the topic. We recommend that you start the name with connect-config.
+        -   Partitions: the number of partitions in the topic. The value must be 1.
+        -   Storage Engine: the storage engine of the topic. The value must be Local Storage.
+        -   cleanup.policy: the log cleanup policy for the topic. The value must be compact.
+|connect-config-kafka-fc-sink|
+        |Task status Topic|The topic that is used to store task statuses.        -   Topic: the name of the topic. We recommend that you start the name with connect-status.
+        -   Partitions: the number of partitions in the topic. We recommend that you set the value to 6.
+        -   Storage Engine: the storage engine of the topic. The value must be Local Storage.
+        -   cleanup.policy: the log cleanup policy for the topic. The value must be compact.
+|connect-status-kafka-fc-sink|
+        |Dead letter queue Topic|The topic that is used to store abnormal data of the connector framework. To reduce topics, this topic can be reused as the abnormal data topic.        -   Topic: the name of the topic. We recommend that you start the name with connect-error.
+        -   Partitions: the number of partitions in the topic. We recommend that you set the value to 6.
+        -   Storage Engine: the storage engine of the topic. The value can be Local Storage or Cloud Storage.
+|connect-error-kafka-fc-sink|
+        |Abnormal Data Topic|The topic that is used to store abnormal data of the sink connector. To reduce topics, this topic can be reused as the dead-letter queue topic.        -   Topic: the name of the topic. We recommend that you start the name with connect-error.
+        -   Partitions: the number of partitions in the topic. We recommend that you set the value to 6.
+        -   Storage Engine: the storage engine of the topic. The value can be Local Storage or Cloud Storage.
+|connect-error-kafka-fc-sink|
 
-    The created Function Compute sink connector appears on the **Connector** page.
+    3.  In the **Configure Destination Instance** step, set attributes of the Function Compute service, set the Transmission Mode and Data Size parameters, and then click **Next**.
+
+        |Parameter|Description|Example|
+        |---------|-----------|-------|
+        |Region|The region where Function Compute is located.|cn-hangzhou|
+        |Service Endpoint|The endpoint of Function Compute. You can find the endpoint in the **Common Info** section on the **Overview** page in the Function Compute console.         -   Internal Endpoint: recommended for low latency. The internal endpoint can be used when the Message Queue for Apache Kafka instance and Function Compute instance are in the same region.
+        -   Public Endpoint: not recommended due to high latency. The public endpoint can be used when the Message Queue for Apache Kafka instance and Function Compute instance are in different regions. To use the public endpoint, you must enable Internet access for the connector. For more information, see [Enable Internet access for a connector](/intl.en-US/User guide/Connectors/Enable Internet access for a connector.md).
+|http://188\*\*\*.cn-hangzhou.fc.aliyuncs.com|
+        |Alibaba Cloud Account|The ID of the Alibaba Cloud account that is used to log on to Function Compute. You can find the ID in the **Common Info** section on the **Overview** page in the Function Compute console.|188\*\*\*|
+        |RAM Role|The name of the RAM role in Message Queue for Apache Kafka. For more information, see [Create a RAM role](#section_onx_vzm_c6q).|AliyunKafkaConnectorRole|
+        |Service Name|The name of the Function Compute service.|guide-hello\_world|
+        |Function Name|The name of the function in Function Compute.|hello\_world|
+        |Service Version|The version of the Function Compute service.|LATEST|
+        |Transmission Mode|The data transmission mode. Valid values:         -   Async: recommended.
+        -   Sync: not recommended. In the synchronous transmission mode, if Function Compute takes a long time to process data, Message Queue for Apache Kafka will also take a long time to process data. If the processing time of the same batch of data exceeds 5 minutes, the Message Queue for Apache Kafka client will rebalance.
+|Async|
+        |Data Size|The number of messages that are sent at a time. Default value: 20. A synchronization task consolidates and transfers data based on this value and the limit for synchronous or asynchronous requests \(6 MB for synchronous requests and 128 KB for asynchronous requests\). If the size of a single data record exceeds the limit, the data will not be included in the request. This way, you can pull the Message Queue for Apache Kafka data by using an offset.|50|
+
+6.  In the **Preview/Create** step, confirm the configurations of the connector and then click **Submit**.
+
+    After you submit the configurations, refresh the **Connector** page. The connector that you created appears on the Connector page.
+
+
+## Deploy the Function Compute sink connector
+
+After you create a Function Compute sink connector, you must deploy it to synchronize data from Message Queue for Apache Kafka to Function Compute.
+
+1.  On the **Connector** page, find the Function Compute sink connector that you created and then click **Deploy** in the **Actions** column.
+
+    After you deploy the Function Compute sink connector, it enters the Running state.
 
 
 ## Send messages
 
-After you create a Function Compute sink connector to connect Message Queue for Apache Kafka and Function Compute, send a test message to the data source topic in Message Queue for Apache Kafka.
+After you deploy the Function Compute sink connector, you can send messages to topics in Message Queue for Apache Kafka to test whether the data can be synchronized to Function Compute.
 
 1.  In the left-side navigation pane, click **Topics**.
 
-2.  On the **Topics** page, find **fc-test-input** and click **Send Message** in the **Actions** column.
+2.  On the **Topics** page, select an instance, find **fc-test-input**, and then click **Send Message** in the **Actions** column.
 
 3.  In the **Send Message** dialog box, send a test message.
 
@@ -268,12 +303,9 @@ After you create a Function Compute sink connector to connect Message Queue for 
 
 ## View function logs
 
-After you send the message to the data source topic in Message Queue for Apache Kafka, view the function log to check whether the message is received. For more information, see [Configure and view function logs]().
+After you send a message to a topic in Message Queue for Apache Kafka, you can view the function log to check whether the message is received. For more information, see [Configure and view function logs]().
 
-The sent test message appears in the log.
+The log displays the sent test message.
 
--   [View the task configurations of a connector](/intl.en-US/User guide/Connectors/View the task configurations of a connector.md)
--   [View connector logs](/intl.en-US/User guide/Connectors/View connector logs.md)
--   [Delete a connector](/intl.en-US/User guide/Connectors/Delete a connector.md)
--   [Modify the connector description](/intl.en-US/User guide/Connectors/Modify connector descriptions.md)
+![fc LOG](../images/p127831.png)
 
