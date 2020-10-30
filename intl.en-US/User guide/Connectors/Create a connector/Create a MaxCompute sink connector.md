@@ -210,6 +210,4 @@ After you send a message to a topic in Message Queue for Apache Kafka, you can v
 
     The response displays the sent test message.
 
-    ![table_result](../images/p127744.png)
-
 
