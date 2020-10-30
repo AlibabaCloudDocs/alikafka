@@ -32,8 +32,8 @@ keyword: [kafka, connector, maxcompute]
 
     **说明：** 部分MaxCompute Sink Connector依赖的Topic的存储引擎必须为Local存储，大版本为0.10.2的消息队列Kafka版实例不支持手动创建Local存储的Topic，只支持自动创建。
 
-    1.  [创建MaxCompute Sink Connector依赖的Topic](#section_jvw_8cp_twy)
-    2.  [创建MaxCompute Sink Connector依赖的Consumer Group](#section_xu7_scc_88s)
+    1.  [创建MaxCompute Sink Connector依赖的Topic（可选）](#section_jvw_8cp_twy)
+    2.  [创建MaxCompute Sink Connector依赖的Consumer Group（可选）](#section_xu7_scc_88s)
 2.  创建并部署MaxCompute Sink Connector
     1.  [创建MaxCompute Sink Connector](#section_mjv_rqc_6ds)
     2.  [部署MaxCompute Sink Connector](#section_444_q49_c46)
@@ -41,7 +41,7 @@ keyword: [kafka, connector, maxcompute]
     1.  [发送消息](#section_idc_z6c_c33)
     2.  [查看表数据](#section_l1n_2qx_7kl)
 
-## 创建MaxCompute Sink Connector依赖的Topic
+## 创建MaxCompute Sink Connector依赖的Topic（可选）
 
 您可以在消息队列Kafka版控制台手动创建MaxCompute Sink Connector依赖的5个Topic。
 
@@ -77,7 +77,7 @@ keyword: [kafka, connector, maxcompute]
     -   存储引擎：Topic的存储引擎可以为Local存储或云存储。 |
 
 
-## 创建MaxCompute Sink Connector依赖的Consumer Group
+## 创建MaxCompute Sink Connector依赖的Consumer Group（可选）
 
 您可以在消息队列Kafka版控制台手动创建MaxCompute Sink Connector依赖的2个Consumer Group。
 
