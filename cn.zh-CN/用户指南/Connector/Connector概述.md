@@ -29,8 +29,8 @@ Connector的使用流程如下：
 3.  管理Connector
     -   [查看Connector任务配置](/cn.zh-CN/用户指南/Connector/查看Connector任务配置.md)
     -   [查看Connector日志](/cn.zh-CN/用户指南/Connector/查看Connector日志.md)
-    -   [暂停Connector]()
-    -   [恢复Connnector]()
+    -   [暂停Connector](/cn.zh-CN/用户指南/Connector/暂停Connector.md)
+    -   [恢复Connnector](/cn.zh-CN/用户指南/Connector/恢复Connnector.md)
     -   [删除Connector](/cn.zh-CN/用户指南/Connector/删除Connector.md)
     -   [修改Connector描述](/cn.zh-CN/用户指南/Connector/修改Connector描述.md)
 
