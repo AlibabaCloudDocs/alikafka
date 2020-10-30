@@ -8,8 +8,8 @@ This topic explains how to create a Function Compute sink connector to export da
 
 Before you create a Function Compute sink connector, ensure that you have completed the following operations:
 
-1.  Purchase a Message Queue for Apache Kafka instance and deploy. For more information, see [Access from VPC](/intl.en-US/Quick-start/Step 2: Purchase and deploy an instance/Access from VPC.md).
-2.  Enable the connector feature for the Message Queue for Apache Kafka instance. For more information, see [Enable the connector feature](/intl.en-US/User guide/Connectors/Enable the connector feature.md).
+1.  Purchase a Message Queue for Apache Kafka instance and deploy. For more information, see [Connect Message Queue for Apache Kafka to a VPC](/intl.en-US/Quick-start/Step 2: Purchase and deploy an instance/Connect Message Queue for Apache Kafka to a VPC.md).
+2.  Enable the connector feature for the Message Queue for Apache Kafka instance. For more information, see [Enable the Connector feature](/intl.en-US/User guide/Connectors/Enable the connector feature.md).
 3.  Create an event function in Function Compute. Set the service name to guide-hello\_world, the function name to hello\_world, and the runtime environment to Python. After you create the function, modify the following function code:
 
     ```
@@ -268,12 +268,12 @@ After you create a Function Compute sink connector to connect Message Queue for 
 
 ## View function logs
 
-After you send the message to the data source topic in Message Queue for Apache Kafka, view the function log to check whether the message is received. For more information, see [t1881019.md\#]().
+After you send the message to the data source topic in Message Queue for Apache Kafka, view the function log to check whether the message is received. For more information, see [Configure and view function logs]().
 
 The sent test message appears in the log.
 
 -   [View the task configurations of a connector](/intl.en-US/User guide/Connectors/View the task configurations of a connector.md)
 -   [View connector logs](/intl.en-US/User guide/Connectors/View connector logs.md)
 -   [Delete a connector](/intl.en-US/User guide/Connectors/Delete a connector.md)
--   [Modify connector descriptions](/intl.en-US/User guide/Connectors/Modify connector descriptions.md)
+-   [Modify the connector description](/intl.en-US/User guide/Connectors/Modify connector descriptions.md)
 
