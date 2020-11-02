@@ -9,7 +9,8 @@ This topic describes how to use MirrorMaker to migrate data in a user-created Ka
 The following operations are completed:
 
 -   [Download MirrorMaker](http://kafka.apache.org/downloads).
--   [Migrate topic metadata from a user-created Kafka cluster to Message Queue for Apache Kafka](/intl.en-US/User guide/Migration/Migrate topics/Migrate topic metadata from a user-created Kafka cluster to Message Queue for Apache Kafka.md).
+-   [Migrate topic metadata from a user-created Kafka cluster to Message Queue for Apache Kafka](/intl.en-US/User guide/Migration/Migrate topics/Migrate topic metadata from a user-created Kafka cluster to Message Queue for Apache
+         Kafka.md).
 
 Kafka mirroring can be used to back up data in Kafka clusters. MirrorMaker is the tool to implement this feature. You can use MirrorMaker to mirror the source user-created Kafka cluster to the destination cluster. The destination cluster is a Message Queue for Apache Kafka instance, as shown in the following figure. MirrorMaker uses a built-in consumer to consume messages from the user-created Kafka cluster and then uses a built-in producer to send these messages to the Message Queue for Apache Kafka instance.
 
