@@ -1,6 +1,6 @@
 # StartInstance
 
-You can call this operation to deploy a Message Queue for Apache Kafka instance.
+Deploys a Message Queue for Apache Kafka instance.
 
 ## Debugging
 
@@ -8,50 +8,55 @@ You can call this operation to deploy a Message Queue for Apache Kafka instance.
 
 ## Request parameters
 
-|Parameter|Type|Required|Example|Description|
-|---------|----|--------|-------|-----------|
-|Action|String|Yes|StartInstance|The operation that you want to perform. Set the value to StartInstance. |
-|DeployModule|String|Yes|vpc|The deployment mode of the Message Queue for Apache Kafka instance. Valid values:
+|Parameter|Type|Required|Example|Description |
+|---------|----|--------|-------|------------|
+|Action|String|Yes|StartInstance|The operation that you want to perform. Set the value to
 
- -   **vpc:**deployment on the Virtual Private Cloud \(VPC\)
--   **eip:**deployment on the Internet and VPC
+ **StartInstance**. |
+|DeployModule|String|Yes|vpc|The deployment mode of the instance. Valid values:
 
- **Note:** The deployment mode must be consistent with the instance type of the Message Queue for Apache Kafka instance. A Message Queue for Apache Kafka instance of the VPC type is to be deployed in the **vpc** mode. A Message Queue for Apache Kafka instance of the Internet and VPC type is to be deployed in the **eip**mode. |
-|InstanceId|String|Yes|alikafka\_post-cn-v0h1fgs2\*\*\*\*|The ID of the Message Queue for Apache Kafka instance to be deployed. |
-|RegionId|String|Yes|cn-hangzhou|The ID of the region where the Message Queue for Apache Kafka instance is to be deployed. |
-|VpcId|String|Yes|vpc-bp1r4eg3yrxmygv\*\*\*\*|The ID of the VPC where the Message Queue for Apache Kafka instance is to be deployed. |
-|VSwitchId|String|Yes|vsw-bp1j3sg5979fstnpl\*\*\*\*|The ID of the VSwitch associated with the VPC where the Message Queue for Apache Kafka instance is to be deployed. |
-|ZoneId|String|Yes|zonea|The ID of the zone where the Message Queue for Apache Kafka instance is to be deployed.
+ -   **vpc:** virtual private cloud \(VPC\)
+-   **eip:** Internet and VPC
 
- The zone ID of the Message Queue for Apache Kafka instance must be the same as that of the VSwitch. |
-|IsEipInner|Boolean|No|false|Specifies whether the Message Queue for Apache Kafka instance can be deployed in the eip mode, or in other words, supports elastic IP \(EIP\) addresses. Valid values:
+ The deployment mode of the instance must be consistent with the instance type. Set this value to **vpc** if your instance type is VPC. Set this value to **eip** if your instance type is Internet and VPC. |
+|InstanceId|String|Yes|alikafka\_post-cn-v0h1fgs2\*\*\*\*|The ID of the instance. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance is located. |
+|VpcId|String|Yes|vpc-bp1r4eg3yrxmygv\*\*\*\*|The ID of the VPC on which you want to deploy the instance. |
+|VSwitchId|String|Yes|vsw-bp1j3sg5979fstnpl\*\*\*\*|The ID of the vSwitch associated with the VPC. |
+|ZoneId|String|Yes|zonea|The ID of the zone where you want to deploy the instance.
 
- -   **true**: The Message Queue for Apache Kafka instance is of the Internet and VPC type, and therefore can be deployed in the eip mode.
--   **false**: The Message Queue for Apache Kafka instance is of the VPC type, and therefore cannot be deployed in the eip mode.
+ The zone ID of the instance must be the same as that of the vSwitch. |
+|IsEipInner|Boolean|No|false|Specifies whether the instance supports elastic IP addresses \(EIPs\). Valid values:
 
- **Note**: The support for the eip mode must be consistent with the instance type of the Message Queue for Apache Kafka instance. |
-|IsSetUserAndPassword|Boolean|No|false|Specifies whether to set a new user name and password for the Message Queue for Apache Kafka instance. Valid values:
+ -   **true**: The instance supports EIP mode.
+-   **false**: The instance does not support EIP mode.
+
+ This parameter must be consistent with the instance type. Set the parameter to true for instances of the Internet and VPC type or to false for instances of the VPC type. |
+|IsSetUserAndPassword|Boolean|No|false|Specifies whether to set a new user name and password for instance. Valid values:
 
  -   **true**: Set a new user name and password.
 -   **false**: Do not set a new user name and password.
 
- **Note:** This parameter only takes effect when the DeployModule parameter is set to eip. |
-|Username|String|No|username|The new user name for the Message Queue for Apache Kafka instance.
+ This parameter is supported only for instances of the Internet and VPC type. |
+|Username|String|No|username|The new user name for the instance.
 
- **Note:** This parameter only takes effect when the DeployModule parameter is set to eip. |
-|Password|String|No|password|The new password for the Message Queue for Apache Kafka instance.
+ This parameter is supported only for instances of the Internet and VPC type. |
+|Password|String|No|password|The new password for the instance.
 
- **Note:** This parameter only takes effect when the DeployModule parameter is set to eip. |
-|Name|String|No|newInstanceName|The new name of the Message Queue for Apache Kafka instance. |
+ This parameter is supported only for instances of the Internet and VPC type. |
+|Name|String|No|newInstanceName|The new name of the instance. |
+|SecurityGroup|String|No|sg-bp13wfx7kz9pkow\*\*\*|The security group of the instance.
+
+ If you do not specify this parameter, Message Queue for Apache Kafka automatically configures a security group for the instance. If you specify this parameter, you must create the specified security group in advance. For more information, see [Create a security group](~25468~). |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The returned status code. If "200" is returned, the request is successful. |
-|Message|String|operation success.|The returned message. |
-|RequestId|String|ABA4A7FD-E10F-45C7-9774-A5236015A923|The ID of the request. |
-|Success|Boolean|true|Indicates whether the request is successful. |
+|Code|Integer|200|The response code. The HTTP 200 code indicates that the request was successful. |
+|Message|String|operation success.|The response message. |
+|RequestId|String|ABA4A7FD-E10F-45C7-9774-A5236015A\*\*\*|The ID of the request. |
+|Success|Boolean|true|Indicates whether the request was successful. |
 
 ## Examples
 
@@ -73,20 +78,22 @@ Sample success responses
 `XML` format
 
 ```
-<Message>operation success. </Message>
-<RequestId>ABA4A7FD-E10F-45C7-9774-A5236015A923</RequestId>
-<Success>true</Success>
-<Code>200</Code>
+<StartInstanceResponse>
+      <Message>operation success. </Message>
+      <RequestId>ABA4A7FD-E10F-45C7-9774-A5236015A***</RequestId>
+      <Success>true</Success>
+      <Code>200</Code>
+</StartInstanceResponse>
 ```
 
 `JSON` format
 
 ```
 {
+    "RequestId":"ABA4A7FD-E10F-45C7-9774-A5236015A***",
     "Message":"operation success.",
-    "RequestId":"ABA4A7FD-E10F-45C7-9774-A5236015A923",
-    "Success":true,
-    "Code":200
+    "Code":"200",
+    "Success":"true"
 }
 ```
 
