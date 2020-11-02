@@ -1,92 +1,79 @@
 # Upgrade the instance version
 
-This topic describes how to upgrade the Message Queue for Apache Kafka instance version so that you can use the related features.
+This topic describes how to upgrade the Message Queue for Apache Kafka instance version.
 
-## Notes
+The Message Queue for Apache Kafka instance is in the **Running** state.
 
--   The Message Queue for Apache Kafka broker of version 0.10 may trigger bugs such as deadlocks and frequent rebalancing. We recommend that you upgrade the instance from version 0.10 to the stable version 0.10.2.
--   If the **Open-Source Version** of the instance is 0.10 on the **Instance Details** page, and the upgrade button is available, you need to upgrade your instance to version 0.10.2.
--   All newly purchased Message Queue for Apache Kafka instances are of version 0.10.2. The Message Queue for Apache Kafka team will gradually schedule a mandatory upgrade for instances of version 0.10. We recommend that you upgrade them beforehand.
+-   Upgrade the major version of an instance
 
-## Background
-
-You can upgrade the open-source version or internal version of an instance to the required version in the Message Queue for Apache Kafka console. Upgrade of the two versions is compared as follows:
-
--   Open-source version upgrade \(major version upgrade\)
-
-    Upgrade the open-source version of the running Message Queue for Apache Kafka instance. For example, upgrade the open-source version of the instance from version 0.10.2 to version 2.2.0.
+    Major version upgrade refers to a cross-version upgrade. For example, you can upgrade a Message Queue for Apache Kafka instance from version 0.10.x to version 2.x.
 
     **Note:**
 
-    -   The default deployment version of the Message Queue for Apache Kafka instance is version 0.10.x.
-    -   Message Queue for Apache Kafka Standard Edition does not support upgrade of the instance version from version 0.10.x to version 2.x. You need to upgrade the Standard Edition to the Professional Edition. For more information, see [Upgrade the instance configuration](/intl.en-US/User guide/Instances/Upgrade the instance configuration.md).
-    -   Only the open-source versions 0.10.x and 2.x are supported for Message Queue for Apache Kafka instances.
-    -   Version 2.x is compatible with version 0.11.x and version 1.x.
--   Internal version upgrade \(minor version upgrade\)
+    -   By default, major version 0.10.x of the Message Queue for Apache Kafka instance is deployed. The default version is 0.10.2 for a new instance and 0.10 for an old instance. Version 0.10 may trigger bugs such as deadlocks and frequent rebalancing. We recommend that you upgrade the instance from version 0.10 to version 0.10.2. For more information about the upgrade, see [Upgrade the minor version of an instance](#section_3te_xlw_iip).
+    -   Message Queue for Apache Kafka instances support major versions 0.10.x and 2.x. Major version 0.10.x provides 0.10 and 0.10.2, while major version 2.x only provides 2.2.0.
+-   Upgrade the minor version of an instance
 
-    Optimize the internal version of the running Message Queue for Apache Kafka instance. The open-source version of the instance does not change during the upgrade of the internal version. For example, the open-source version of an instance is version 0.10.2. After you upgrade the internal version of the instance, the open-source version of the instance is still version 0.10.2.
+    Minor version upgrade refers to a non-cross-version upgrade. For example, you can upgrade a Message Queue for Apache Kafka instance from 0.10 to 0.10.2, or from version 0.10.2 to the 0.10.2 kernel-optimized version.
 
 
-## Upgrade the open-source version of an instance
+## Upgrade the major version of an instance
 
-Prerequisites
-
--   You have purchased a Message Queue for Apache Kafka instance of the Professional Edition, and the instance is in the Running state.
--   The open-source version of your Message Queue for Apache Kafka instance is version 0.10.x.
-
-Procedure
-
-1.  Log on to the [Message Queue for Apache Kafka console](http://kafka.console.aliyun.com). In the top navigation bar, select the region where the instance is located.
-2.  In the left-side navigation pane, click **Instance Details**.
-3.  On the Instance Details page, click the ID of the target instance.
-4.  In the Basic Information section, when **Internal Version** is **Service Upgrade**, click **Service Upgrade** to upgrade the instance. When Internal Version is **Latest Version**, do not upgrade the instance.
-
-    The instance version will be upgraded to the most suitable open-source version based on your specific instance conditions.
-
-5.  In the Upgrade dialog box, click the **Cross-Version Upgrade** tab.
-    1.  Enter your name in the **Name** field.
-    2.  Enter your emergency phone number in the **Emergency Phone Number** field.
-    3.  Select **Yes** for **Cross-Version Upgrade to 2.0**.
-6.  Click **Upgrade**.
+The major version of a Message Queue for Apache Kafka Standard Edition instance cannot be upgraded from 0.10.x to 2.x. You need to first upgrade the instance from the Standard Edition to the Professional Edition and then upgrade the major version. For more information about how to upgrade the instance edition, see [Upgrade the instance configuration](/intl.en-US/User guide/Instances/Upgrade instance specifications.md).
 
 **Note:**
 
--   If the client does not support the reconnection mechanism \(enabled by default\), the client may be unavailable after being disconnected. Ensure that the consumer supports the reconnection mechanism.
--   It will take about 15 minutes for the upgrade. The service will not be interrupted during the upgrade and the business will not be affected.
--   The message storage format of instances of version 2.x is different from that of the instances of version 0.10.x. Therefore, you cannot roll back to version 0.10.x after the upgrade. Proceed with caution.
--   We recommend that you purchase a test instance for upgrade verification before you operate on the production instance.
+-   The upgrade is free of charge and compatible with the existing SDK and API.
+-   To avoid impact on your business during the upgrade, ensure that your client supports automatic reconnection and can handle disconnections. By default, the client supports automatic reconnection.
+-   It will take about 25 minutes for the upgrade. The service will not be interrupted during the upgrade and the business will not be affected.
+-   Instances of version 2.x use a different message storage format from that of instances of version 0.10.x. Therefore, you cannot roll back to version 0.10.x after the upgrade. Proceed with caution.
+-   We recommend that you purchase a test instance for upgrade verification before you upgrade the production instance.
+-   We recommend that you perform the upgrade during off-peak hours.
+-   We also recommend that you update the client version after the upgrade to keep the same versions of the client and broker.
 
-Verification
+1.  Log on to the [Message Queue for Apache Kafka console](http://kafka.console.aliyun.com).
 
-The value of **Open-Source Edition** is **2.2.0** in the **Basic Information** section on the Instance Details page.
+2.  In the top navigation bar, select a region.
 
-## Upgrade the internal version of an instance
+3.  In the left-side navigation pane, click **Instance Details**.
 
-Prerequisites
+4.  On the **Instance Details** page, click an instance. In the **Basic Information** section, click **Upgrade Major Version** next to **Open-Source Version**.
 
--   You have purchased a Message Queue for Apache Kafka instance, and the instance is in the Running state.
--   The internal version of your Message Queue for Apache Kafka instance is not the latest version.
+5.  In the **Upgrade Major Version** dialog box, perform the following steps:
 
-Procedure
+    1.  Enter your name in the **Name** field.
 
-1.  Log on to the [Message Queue for Apache Kafka console](http://kafka.console.aliyun.com). In the top navigation bar, select the region where the instance is located.
-2.  In the left-side navigation pane, click **Instance Details**.
-3.  On the Instance Details page, click the ID of the target instance.
-4.  In the Basic Information section, when **Internal Version** is **Service Upgrade**, click **Service Upgrade** to upgrade the instance. When Internal Version is **Latest Version**, do not upgrade the instance.
+    2.  Enter your emergency phone number in the **Emergency phone number:** field.
 
-    The instance version will be upgraded to the most suitable internal version based on your specific instance conditions.
+    3.  Select **Yes** for **Cross-Version Upgrade to 2.0**.
 
-5.  In the Upgrade dialog box, set the following parameters so that we can contact you when an error occurs during the upgrade:
-    -   Name
-    -   Emergency phone number
-6.  Click **Upgrade**.
+    4.  Click **Upgrade**.
 
-    **Note:**
 
-    -   If the client does not support the reconnection mechanism \(enabled by default\), the client may be unavailable after being disconnected. Ensure that the consumer supports the reconnection mechanism.
-    -   The upgrade will take about 15 minutes. The service will not be interrupted during the upgrade and the business will not be affected.
+## Upgrade the minor version of an instance
 
-Verification
+**Note:**
 
-The value of **Internal Version** is **Latest Version** in the **Basic Information** section on the Instance Details page.
+-   The upgrade is free of charge and compatible with the existing SDK and API.
+-   To avoid impact on your business during the upgrade, ensure that your client supports automatic reconnection and can handle disconnections. By default, the client supports automatic reconnection.
+-   It will take about 15 minutes for the upgrade. Services will not be interrupted during the upgrade and the business will not be affected.
+-   We recommend that you perform the upgrade during off-peak hours.
+-   We also recommend that you update the client version after the upgrade to keep the same versions of the client and broker.
+
+1.  Log on to the [Message Queue for Apache Kafka console](http://kafka.console.aliyun.com).
+
+2.  In the top navigation bar, select a region.
+
+3.  In the left-side navigation pane, click **Instance Details**.
+
+4.  On the **Instance Details** page, click an instance In the **Basic Information** section, click **Upgrade Minor Version** next to **Internal Version**.
+
+5.  In the **Upgrade Minor Version** dialog box, perform the following steps:
+
+    1.  Enter your name in the **Name** field.
+
+    2.  Enter your emergency phone number in the **Emergency phone number:** field.
+
+    3.  Click **Upgrade**.
+
 
