@@ -21,7 +21,7 @@ Perform the following steps to use connectors:
 
 1.  Enable the Connector feature.
 
-    [Enable the connector feature](/intl.en-US/User guide/Connectors/Enable the Connector feature.md)
+    [Enable the connector feature](/intl.en-US/User guide/Connectors/Enable the connector feature.md)
 
 2.  Create a connector.
     -   [Create a MaxCompute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MaxCompute sink connector.md)
