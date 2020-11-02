@@ -18,7 +18,7 @@ Complete the following steps to enable Internet access for a connector:
 
 1.  Create a NAT Gateway for virtual private cloud \(VPC\) 1 where the Message Queue for Apache Kafka instance is deployed.
 
-    For more information, see [Create a NAT gateway](/intl.en-US/NAT Gateway Instance/Create a NAT gateway.md).
+    For more information, see [Create a NAT gateway]().
 
 2.  Bind an elastic IP address \(EIP\) to the created NAT Gateway.
 
@@ -26,6 +26,6 @@ Complete the following steps to enable Internet access for a connector:
 
 3.  Create SNAT entries for the VSwitch that is used by the Message Queue for Apache Kafka instance on VPC 1.
 
-    For more information, see [Create a SNAT entry](/intl.en-US/SNAT/Create a SNAT entry.md).
+    For more information, see [Create a SNAT entry]().
 
 
