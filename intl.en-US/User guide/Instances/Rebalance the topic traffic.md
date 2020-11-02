@@ -8,7 +8,7 @@ When you upgrade the traffic specification of a Message Queue for Apache Kafka i
 
 Your Message Queue for Apache Kafka instance is in the **Running \(Pending Rebalancing\)** state.
 
-**Note:** For more information about how to upgrade the traffic specification of an instance and when cluster scale-out is triggered, see [Upgrade instance specifications](/intl.en-US/User guide/Instances/Upgrade instance specifications.md).
+**Note:** For more information about how to upgrade the traffic specification of an instance and when cluster scale-out is triggered, see [Upgrade the instance configuration](/intl.en-US/User guide/Instances/Upgrade instance specifications.md).
 
 ## Precautions
 
