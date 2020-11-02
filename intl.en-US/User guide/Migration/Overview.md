@@ -28,13 +28,15 @@ Perform the following operations to migrate a user-created Kafka cluster to a Me
 
 3.  Migrate the topics of the user-created Kafka cluster to the Message Queue for Apache Kafka instance.
 
-    For more information, see [Migrate topic metadata from a user-created Kafka cluster to Message Queue for Apache Kafka](/intl.en-US/User guide/Migration/Migrate topics/Migrate topic metadata from a user-created Kafka cluster to Message Queue for Apache Kafka.md).
+    For more information, see [Migrate topic metadata from a user-created Kafka cluster to Message Queue for Apache Kafka](/intl.en-US/User guide/Migration/Migrate topics/Migrate topic metadata from a user-created Kafka cluster to Message Queue for Apache
+         Kafka.md).
 
     ![dg_migrate_3](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/5350549951/p137635.png)
 
 4.  Migrate the consumer groups of the user-created Kafka cluster to the Message Queue for Apache Kafka instance.
 
-    For more information, see [Migrate consumer group metadata from a user-created Kafka cluster to Message Queue for Apache Kafka](/intl.en-US/User guide/Migration/Migrate consumer groups/Migrate consumer group metadata from a user-created Kafka cluster to Message Queue for Apache Kafka.md).
+    For more information, see [Migrate consumer group metadata from a user-created Kafka cluster to Message Queue for Apache Kafka](/intl.en-US/User guide/Migration/Migrate consumer groups/Migrate consumer group metadata from a user-created Kafka cluster to Message Queue
+         for Apache Kafka.md).
 
     ![dg_migrate_4](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/5350549951/p137636.png)
 
