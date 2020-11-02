@@ -15,18 +15,18 @@ keyword: [apache kafka, kafka, 公网, 收发消息, 9093]
 
     ```
     <dependency>
-    	<groupId>org.apache.kafka</groupId>
-    	<artifactId>kafka-clients</artifactId>
-    	<version>0.10.2.2</version>
+        <groupId>org.apache.kafka</groupId>
+        <artifactId>kafka-clients</artifactId>
+        <version>0.10.2.2</version>
     </dependency>
     <dependency>
-    	<groupId>org.slf4j</groupId>
-    	<artifactId>slf4j-log4j12</artifactId>
-    	<version>1.7.6</version>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>1.7.6</version>
     </dependency>
     ```
 
-    **说明：** 建议您保持服务端和客户端版本一致，即保持客户端库版本和消息队列Kafka版实例的大版本一致。您可以消息队列Kafka版控制台的**实例详情**页面获取消息队列Kafka版实例的大版本。
+    **说明：** 建议您保持服务端和客户端版本一致，即保持客户端库版本和消息队列Kafka版实例的大版本一致。您可以在消息队列Kafka版控制台的**实例详情**页面获取消息队列Kafka版实例的大版本。
 
 
 ## 准备配置
