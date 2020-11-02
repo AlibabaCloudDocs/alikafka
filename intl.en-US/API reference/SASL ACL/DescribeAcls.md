@@ -13,7 +13,7 @@ Queries access control lists \(ACLs\).
 |Action|String|Yes|DescribeAcls|The operation that you want to perform. Set the value to
 
  **DescribeAcls**. |
-|AclResourceName|String|Yes|demo|The name of the resource.
+|AclResourceName|String|Yes|demo|The name of the resource whose ACLs you want to query.
 
  -   The value can be the name of a topic or consumer group.
 -   You can use an asterisk \(\*\) to represent the names of all topics or consumer groups. |
@@ -21,30 +21,42 @@ Queries access control lists \(ACLs\).
 
  -   **Topic**
 -   **Group** |
-|InstanceId|String|Yes|alikafka\_pre-cn-v0h1cng0\*\*\*|The ID of the Message Queue for Apache Kafka instance. |
-|RegionId|String|Yes|cn-hangzhou|The ID of the region where the Message Queue for Apache Kafka instance is located. |
-|Username|String|Yes|test12\*\*\*\*|The username of the Simple Authentication and Security Layer \(SASL\) user. |
+|InstanceId|String|Yes|alikafka\_pre-cn-v0h1cng0\*\*\*|The ID of the Message Queue for Apache Kafka instance that contains the resource. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance is located. |
+|Username|String|Yes|test12\*\*\*\*|The name of the user. |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The returned HTTP status code. A 200 status code indicates that the request succeeded. |
-|KafkaAclList|Array| |The list of returned ACLs. |
+|Code|Integer|200|The response code. The HTTP 200 code indicates that the request was successful. |
+|KafkaAclList|Array| |The list of ACLs. |
 |KafkaAclVO| | | |
-|AclOperationType|String|Write|The type of operations allowed by the ACL. |
-|AclResourceName|String|demo|The name of the resource. |
-|AclResourcePatternType|String|LITERAL|The matching mode. |
-|AclResourceType|String|Topic|The type of the resource. |
+|AclOperationType|String|Write|The type of operation allowed by the ACL. Valid values:
+
+ -   **Write**
+-   **Read** |
+|AclResourceName|String|demo|The name of the resource.
+
+ -   The value can be the name of a topic or consumer group.
+-   An asterisk \(\*\) represents the names of all topics or consumer groups. |
+|AclResourcePatternType|String|LITERAL|The matching mode. Valid values:
+
+ -   **LITERAL:** full match
+-   **PREFIXED:** prefix match |
+|AclResourceType|String|Topic|The type of the resource. Valid values:
+
+ -   **Topic**
+-   **Group** |
 |Host|String|\*|The host. |
-|Username|String|test12\*\*\*|The username of the SASL user. |
-|Message|String|operation success.|The returned message. |
+|Username|String|test12\*\*\*|The name of the user. |
+|Message|String|operation success.|The response message. |
 |RequestId|String|46496E38-881E-4719-A2F3-F3DA6AEA\*\*\*|The ID of the request. |
 |Success|Boolean|true|Indicates whether the request was successful. |
 
 ## Examples
 
-Sample request
+Sample requests
 
 ```
 http(s)://[Endpoint]/? Action=DescribeAcls
@@ -83,20 +95,18 @@ Sample success responses
 
 ```
 {
-    "DescribeAclsResponse": {
-        "RequestId": "46496E38-881E-4719-A2F3-F3DA6AEA***",
-        "Message": "operation success.",
-        "Code": 200,
-        "Success": true,
-        "KafkaAclList": {
-            "KafkaAclVO": {
-                "AclResourceName": "demo",
-                "Username": "test12***",
-                "AclResourceType": "Topic",
-                "AclOperationType": "Write",
-                "AclResourcePatternType": "LITERAL",
-                "Host": "*"
-            }
+    "RequestId": "46496E38-881E-4719-A2F3-F3DA6AEA***",
+    "Message": "operation success.",
+    "Code": 200,
+    "Success": true,
+    "KafkaAclList": {
+        "KafkaAclVO": {
+            "AclResourceName": "demo",
+            "Username": "test12***",
+            "AclResourceType": "Topic",
+            "AclOperationType": "Write",
+            "AclResourcePatternType": "LITERAL",
+            "Host": "*"
         }
     }
 }
