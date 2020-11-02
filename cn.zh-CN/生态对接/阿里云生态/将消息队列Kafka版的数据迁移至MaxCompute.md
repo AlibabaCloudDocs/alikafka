@@ -25,7 +25,7 @@ DataWorks是基于MaxCompute计算和存储，提供工作流可视化开发、�
 
 1.  登录[消息队列Kafka版控制台](http://kafka.console.aliyun.com/)创建Topic和Consumer Group，分别命名为testkafka和console-consumer。具体步骤参见[步骤三：创建资源](/cn.zh-CN/快速入门/步骤三：创建资源.md)。本示例中，Consumer Group console-consumer将用于消费Topic testkafka中的数据。
 
-2.  向Topic testkafka中写入数据。由于消息队列Kafka版用于处理流式数据，您可以持续不断地向其中写入数据。为保证测试结果，建议您写入10条以上的数据。您可以直接在控制台使用发送消息功能来写入数据，也可以使用消息队列Kafka版的SDK收发消息。详情参见[使用SDK收发消息](/cn.zh-CN/快速入门/步骤四：使用SDK收发消息/VPC接入.md)。
+2.  向Topic testkafka中写入数据。由于消息队列Kafka版用于处理流式数据，您可以持续不断地向其中写入数据。为保证测试结果，建议您写入10条以上的数据。您可以直接在控制台使用发送消息功能来写入数据，也可以使用消息队列Kafka版的SDK收发消息。详情参见[使用SDK收发消息](/cn.zh-CN/快速入门/步骤四：使用SDK收发消息/默认接入点收发消息.md)。
 
 3.  为验证写入数据生效，您可以在控制台[查询消息](/cn.zh-CN/用户指南/查询消息.md)，看到之前写入Topic中的数据。
 
