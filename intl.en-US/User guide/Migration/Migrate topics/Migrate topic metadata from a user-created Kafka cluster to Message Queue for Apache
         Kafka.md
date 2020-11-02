@@ -1,15 +1,15 @@
 ---
-keyword: [topic, metadata, migration, Message Queue for Apache Kafka]
+keyword: [topic, metadata, migration, kafka]
 ---
 
 # Migrate topic metadata from a user-created Kafka cluster to Message Queue for Apache Kafka
 
-This topic describes how to use a metadata migration tool to migrate topic metadata from a user-created Kafka cluster to a Message Queue for Apache Kafka instance. The metadata of a topic is the basic information of the topic instead of the information stored in the topic.
+This topic describes how to use a metadata migration tool provided by Message Queue for Apache Kafka to migrate topic metadata from a user-created Kafka cluster to a Message Queue for Apache Kafka instance.
 
-Before you migrate topic metadata from a user-created Kafka cluster to Message Queue for Apache Kafka, make sure that you have completed the following steps:
+The following operations are completed:
 
--   [Download Java Development Kit \(JDK\) 8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
--   [Download the migration tool Java Archive \(JAR\) file](https://aliware-images.oss-cn-hangzhou.aliyuncs.com/Kafka/migration%20tool/7.30%20Migration%20Tool/kafka-migration.jar)
+-   [Download Java Development Kit \(JDK\) 8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html).
+-   [Download the migration tool Java Archive \(JAR\) file](https://aliware-images.oss-cn-hangzhou.aliyuncs.com/Kafka/migration%20tool/7.30%20Migration%20Tool/kafka-migration.jar).
 
 **Note:**
 
@@ -26,7 +26,7 @@ Before you migrate topic metadata from a user-created Kafka cluster to Message Q
 
     |Parameter|Description|
     |---------|-----------|
-    |sourceZkConnect|The IP address of the source user-created ZooKeeper cluster.|
+    |sourceZkConnect|The IP address of the source user-created Kafka cluster that uses ZooKeeper.|
     |destAk|The AccessKey ID of the Alibaba Cloud account to which the destination Message Queue for Apache Kafka instance belongs.|
     |destSk|The AccessKey secret of the Alibaba Cloud account to which the destination Message Queue for Apache Kafka instance belongs.|
     |destRegionId|The ID of the region where the destination Message Queue for Apache Kafka instance is located.|
@@ -48,7 +48,7 @@ Before you migrate topic metadata from a user-created Kafka cluster to Message Q
     |---------|-----------|
     |commit|Commits the topic metadata to be migrated.|
 
-    The following code provides an example of the output after the preceding commit:
+    The following code provides an example of the output generated after the migration is committed:
 
     ```
     13:51:12 INFO - Begin to migrate topics:[test]
