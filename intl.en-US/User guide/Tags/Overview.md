@@ -1,10 +1,10 @@
 ---
-keyword: [Kafka, Tag]
+keyword: [Kafka, tag]
 ---
 
 # Overview
 
-Tags can identify resources. You can use tags to classify Message Queue for Apache Kafka resources for easy resource search and aggregation. Message Queue for Apache Kafka allows you to bind or unbind tags to or from instances, topics, and consumer groups.
+Tags can identify resources. You can use tags to classify Message Queue for Apache Kafka resources for easy resource search and aggregation. Message Queue for Apache Kafka allows you to bind tags to or unbind tags from instances, topics, and consumer groups.
 
 ## Scenarios
 
@@ -15,15 +15,15 @@ You can use tags to group Message Queue for Apache Kafka resources you created f
 -   Each tag consists of a key-value pair.
 -   A tag must have a unique tag key.
 
-    For example, an ECS instance is bound to the `city:shanghai` tag. If the instance is subsequently bound to the `city:newyork` tag, the `city:shanghai` tag is automatically unbound from the instance.
+    For example, the `city:shanghai` tag is bound to a Message Queue for Apache Kafka instance. If you want to bind the `city:newyork` tag to the instance, the `city:shanghai` tag is automatically unbound from the instance.
 
--   Tag information is not shared across regions. For example, tags created in the China \(Hangzhou\) region are not visible to the China \(Shanghai\) region.
+-   Tags are not shared across regions. For example, tags created in the China \(Hangzhou\) region are not visible to the China \(Shanghai\) region.
 -   Tags are deleted when they are not bound to any resources.
--   For more information about the best practices for tag design, see [Best practices for tag design](/intl.en-US/Best Practices/Best practices for tag design.md).
+-   For more information about how to design tag keys and values, see [Best practices for tag design](/intl.en-US/Best Practices/Best practices for tag design.md).
 
 ## Limits
 
--   Up to 20 tags can be bound to a resource.
+-   A maximum of 20 tags can be bound to a resource.
 -   A tag can be bound to a maximum of 50 resources.
 -   A maximum of 20 tags can be bound or unbound at a time.
 
