@@ -1,0 +1,75 @@
+# ModifyPartitionNum
+
+调用ModifyPartitionNum修改Topic的分区数。
+
+## 调试
+
+[您可以在OpenAPI Explorer中直接运行该接口，免去您计算签名的困扰。运行成功后，OpenAPI Explorer可以自动生成SDK代码示例。](https://api.aliyun.com/#product=alikafka&api=ModifyPartitionNum&type=RPC&version=2019-09-16)
+
+## 请求参数
+
+|名称|类型|是否必选|示例值|描述|
+|--|--|----|---|--|
+|Action|String|是|ModifyPartitionNum|要执行的操作。取值：
+
+ **ModifyPartitionNum**。 |
+|AddPartitionNum|Integer|是|6|增加分区数。
+
+ -   必须大于0。
+-   建议分区数是6的倍数，减少数据倾斜风险。
+-   分区总数限制1~360。
+-   特殊需求请提交[工单](https://workorder-intl.console.aliyun.com/#/ticket/add/?productId=1352)。 |
+|InstanceId|String|是|alikafka\_post-cn-0pp1l9z8\*\*\*|实例ID。 |
+|RegionId|String|是|cn-hangzhou|实例的地域ID。 |
+|Topic|String|是|TopicPartitionNum|Topic名称。 |
+
+## 返回数据
+
+|名称|类型|示例值|描述|
+|--|--|---|--|
+|Code|Integer|200|返回码。返回200代表成功。 |
+|Message|String|operation success|返回信息。 |
+|RequestId|String|B7A39AE5-0B36-4442-A304-E0885265\*\*\*|请求ID。 |
+|Success|Boolean|true|调用是否成功。 |
+
+## 示例
+
+请求示例
+
+```
+http(s)://[Endpoint]/?Action=ModifyPartitionNum
+&AddPartitionNum=6
+&InstanceId=alikafka_post-cn-0pp1l9z8***
+&RegionId=cn-hangzhou
+&Topic=TopicPartitionNum
+&<公共请求参数>
+```
+
+正常返回示例
+
+`XML` 格式
+
+```
+<ModifyPartitionNumResponse>
+      <RequestId>B7A39AE5-0B36-4442-A304-E0885265***</RequestId>
+      <Message>operation success</Message>
+      <Code>200</Code>
+      <Success>true</Success>
+</ModifyPartitionNumResponse>
+```
+
+`JSON` 格式
+
+```
+{
+    "RequestId": "B7A39AE5-0B36-4442-A304-E0885265***",
+    "Message": "operation success",
+    "Code": 200,
+    "Success": true
+}
+```
+
+## 错误码
+
+访问[错误中心](https://error-center.alibabacloud.com/status/product/alikafka)查看更多错误码。
+
