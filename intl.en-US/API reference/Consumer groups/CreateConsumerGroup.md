@@ -1,6 +1,6 @@
 # CreateConsumerGroup
 
-You can call this operation to create a consumer group.
+Creates a consumer group.
 
 ## Debugging
 
@@ -8,25 +8,28 @@ You can call this operation to create a consumer group.
 
 ## Request parameters
 
-|Parameter|Type|Required|Example|Description|
-|---------|----|--------|-------|-----------|
-|Action|String|Yes|CreateConsumerGroup|The operation that you want to perform. Set the value to CreateConsumerGroup. |
-|ConsumerId|String|Yes|consumer\_group\_test|The name of the consumer group. The value of this parameter must meet the following requirements:
+|Parameter|Type|Required|Example|Description |
+|---------|----|--------|-------|------------|
+|Action|String|Yes|CreateConsumerGroup|The operation that you want to perform. Set the value to
 
- -   The name can only contain letters, digits, hyphens \(-\), and underscores \(\_\).
--   The name must be 3 to 64 characters in length, and will be automatically truncated if it contains more characters.
--   The name cannot be modified after being created. |
-|InstanceId|String|Yes|alikafka\_pre-cn-0pp1954n\*\*\*\*|The ID of the Message Queue for Apache Kafka instance where the consumer group is located. |
-|RegionId|String|Yes|cn-hangzhou|The region ID of the Message Queue for Apache Kafka instance where the consumer group is located. |
+ **CreateConsumerGroup**. |
+|ConsumerId|String|Yes|test|The name of the consumer group. Valid values:
+
+ -   The name can contain only letters, digits, hyphens \(-\), and underscores \(\_\).
+-   The name must be 3 to 64 characters in length. Names that contain more than 64 characters will be automatically truncated.
+-   After a consumer group is created, its name cannot be modified. |
+|InstanceId|String|Yes|alikafka\_post-cn-0pp1l9z8\*\*\*\*|The ID of the Message Queue for Apache Kafka instance where you want to create the consumer group. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance is located. |
+|Remark|String|No|test|The description of the consumer group. |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The returned status code. If "**200**" is returned, the request is successful. |
-|Message|String|operation success|The returned message. |
-|RequestId|String|B191CC4D-B067-4508-987A-ACDA8D89\*\*\*\*|The ID of the request. |
-|Success|Boolean|true|Indicates whether the request is successful. |
+|Code|Integer|200|The response code. The HTTP 200 code indicates that the request was successful. |
+|Message|String|operation success|The response message. |
+|RequestId|String|E57A8862-DF68-4055-8E55-B80CB417\*\*|The ID of the request. |
+|Success|Boolean|true|Indicates whether the request was successful. |
 
 ## Examples
 
@@ -34,8 +37,8 @@ Sample requests
 
 ```
 http(s)://[Endpoint]/? Action=CreateConsumerGroup
-&ConsumerId=consumer_group_test
-&InstanceId=alikafka_pre-cn-0pp1954n****
+&ConsumerId=test
+&InstanceId=alikafka_post-cn-0pp1l9z8****
 &RegionId=cn-hangzhou
 &<Common request parameters>
 ```
@@ -45,20 +48,22 @@ Sample success responses
 `XML` format
 
 ```
-<Message>operation success</Message>
-<RequestId>B191CC4D-B067-4508-987A-ACDA8D89****</RequestId>
-<Success>true</Success>
-<Code>200</Code>
+<CreateConsumerGroupResponse>
+      <RequestId>E57A8862-DF68-4055-8E55-B80CB417**</RequestId>
+      <Message>operation success</Message>
+      <Code>200</Code>
+      <Success>true</Success>
+</CreateConsumerGroupResponse>
 ```
 
 `JSON` format
 
 ```
 {
-    "Message":"operation success",
-    "RequestId":"B191CC4D-B067-4508-987A-ACDA8D89****",
-    "Success":true,
-    "Code":200
+    "RequestId": "E57A8862-DF68-4055-8E55-B80CB417**",
+    "Message": "operation success",
+    "Code": 200,
+    "Success": true
 }
 ```
 
