@@ -1,6 +1,6 @@
 # GetConsumerList
 
-You can call this operation to query the consumer groups created on a Message Queue for Apache Kafka instance.
+Queries consumer groups.
 
 ## Debugging
 
@@ -10,27 +10,28 @@ You can call this operation to query the consumer groups created on a Message Qu
 
 |Parameter|Type|Required|Example|Description|
 |---------|----|--------|-------|-----------|
-|Action|String|Yes|GetConsumerList|The operation that you want to perform. Set the value to GetConsumerList. |
+|Action|String|Yes|GetConsumerList|The operation that you want to perform. Set the value to **GetConsumerList**. |
 |InstanceId|String|Yes|alikafka\_post-cn-v0h18sav\*\*\*\*|The ID of the Message Queue for Apache Kafka instance whose consumer groups you want to query. |
-|RegionId|String|Yes|cn-hangzhou|The region ID of the Message Queue for Apache Kafka instance whose consumer groups you want to query. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance is located. |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The returned status code. If "200" is returned, the request is successful. |
-|ConsumerList|Array| |The returned list of consumer groups. |
+|Code|Integer|200|The response code. The HTTP 200 code indicates that the request was successful. |
+|ConsumerList|Array of ConsumerVO| |The list of consumer groups. |
 |ConsumerVO| | | |
-|ConsumerId|String|CID\_c34a6f44915f80d70cb42c4b14ee40c3\_4|The name of the consumer group. |
-|InstanceId|String|alikafka\_post-cn-v0h18sav\*\*\*\*|The ID of the Message Queue for Apache Kafka instance where the consumer group is located. |
-|RegionId|String|cn-hangzhou|The region ID of the Message Queue for Apache Kafka instance where the consumer group is located. |
-|Tags|Array| |The tags bound to the consumer group. |
+|ConsumerId|String|CID\_c34a6f44915f80d70cb42c4b14\*\*\*|The name of the consumer group. |
+|InstanceId|String|alikafka\_post-cn-v0h18sav\*\*\*\*|The ID of the instance that was queried. |
+|RegionId|String|cn-hangzhou|The ID of the region where the instance is located. |
+|Remark|String|test|The description of the consumer group. |
+|Tags|Array of TagVO| |The tags bound to the consumer group. |
 |TagVO| | | |
-|Key|String|test|The key of the tag bound to the consumer group. |
-|Value|String|test|The value of the tag bound to the consumer group. |
-|Message|String|operation success.|The returned message. |
+|Key|String|test|The key of the resource tag. |
+|Value|String|test|The value of the resource tag. |
+|Message|String|operation success.|The response message. |
 |RequestId|String|808F042B-CB9A-4FBC-9009-00E7DDB6\*\*\*\*|The ID of the request. |
-|Success|Boolean|true|Indicates whether the request is successful. |
+|Success|Boolean|true|Indicates whether the request was successful. |
 
 ## Examples
 
@@ -48,50 +49,56 @@ Sample success responses
 `XML` format
 
 ```
-<GetConsumerListResponse>
-        <ConsumerList>
-                <ConsumerVO>
-                        <ConsumerId>CID_c34a6f44915f80d70cb42c4b14ee40c3_4</ConsumerId>
-                        <InstanceId>alikafka_post-cn-v0h18sav****</InstanceId>
-                        <RegionId>cn-hangzhou</RegionId>
-                </ConsumerVO>
-                <ConsumerVO>
-                        <ConsumerId>CID_c34a6f44915f80d70cb42c4b14ee40c3_3</ConsumerId>
-                        <InstanceId>alikafka_post-cn-v0h18sav****</InstanceId>
-                        <RegionId>cn-hangzhou</RegionId>
-                </ConsumerVO>
-        </ConsumerList>
-        <Message>operation success. </Message>
-        <RequestId>808F042B-CB9A-4FBC-9009-00E7DDB6****</RequestId>
-        <Success>true</Success>
-        <Code>200</Code>
-</GetConsumerListResponse>
+<GetConsumerList>
+      <RequestId>808F042B-CB9A-4FBC-9009-00E7DDB6****</RequestId>
+      <Message>operation success. </Message>
+      <Code>200</Code>
+      <ConsumerList>
+            <ConsumerVO>
+                  <InstanceId>alikafka_post-cn-v0h18sav****</InstanceId>
+                  <ConsumerId>CID_c34a6f44915f80d70cb42c4b14***</ConsumerId>
+                  <RegionId>cn-hangzhou</RegionId>
+                  <Remark>test</Remark>
+            </ConsumerVO>
+            <ConsumerVO>
+                  <Tags>
+                        <TagVO>
+                              <Value>test</Value>
+                              <Key>test</Key>
+                        </TagVO>
+                  </Tags>
+            </ConsumerVO>
+      </ConsumerList>
+      <Success>true</Success>
+</GetConsumerList>
 ```
 
 `JSON` format
 
 ```
 {
-    "GetConsumerListResponse": {
-        "ConsumerList": {
-            "ConsumerVO": [
-                {
-                    "ConsumerId": "CID_c34a6f44915f80d70cb42c4b14ee40c3_4",
-                    "InstanceId": "alikafka_post-cn-v0h18sav****",
-                    "RegionId": "cn-hangzhou"
-                },
-                {
-                    "ConsumerId": "CID_c34a6f44915f80d70cb42c4b14ee40c3_3",
-                    "InstanceId": "alikafka_post-cn-v0h18sav****",
-                    "RegionId": "cn-hangzhou"
+    "RequestId": "808F042B-CB9A-4FBC-9009-00E7DDB6****",
+    "Message": "operation success.",
+    "Code": 200,
+    "ConsumerList": {
+        "ConsumerVO": [
+            {
+                "InstanceId": "alikafka_post-cn-v0h18sav****",
+                "ConsumerId": "CID_c34a6f44915f80d70cb42c4b14***",
+                "RegionId": "cn-hangzhou",
+                "Remark": "test"
+            },
+            {
+                "Tags": {
+                    "TagVO": {
+                        "Value": "test",
+                        "Key": "test"
+                    }
                 }
-            ]
-        },
-        "Message": "operation success.",
-        "RequestId": "808F042B-CB9A-4FBC-9009-00E7DDB6****",
-        "Success": true,
-        "Code": 200
-    }
+            }
+        ]
+    },
+    "Success": true
 }
 ```
 
