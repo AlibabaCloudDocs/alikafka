@@ -1,6 +1,6 @@
 # TagResources
 
-You can call this operation to bind a tag to a resource.
+Binds a tag to a resource.
 
 ## Debugging
 
@@ -10,30 +10,32 @@ You can call this operation to bind a tag to a resource.
 
 |Parameter|Type|Required|Example|Description|
 |---------|----|--------|-------|-----------|
-|Action|String|Yes|TagResources|The operation that you want to perform. Set the value to TagResources. |
-|RegionId|String|Yes|cn-hangzhou|The region ID of the resource. |
-|ResourceId.N|RepeatList|Yes|alikafka\_post-cn-v0h1fgs2\*\*\*\*|The ID of resource N to which the tag will be bound. The resource ID follows these rules:
+|Action|String|Yes|TagResources|The operation that you want to perform. Set the value to
 
- -   If the resource is an instance, the resource ID uses the same syntax as the value of the instanceId parameter.
--   If the resource is a topic, the resource ID uses the same syntax as the value of the Kafka\_instanceId\_topic parameter.
--   If the resource is a consumer group, the resource ID uses the same syntax as the value of the Kafka\_instanceId\_consumerGroup parameter.
+ **TagResources**. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the resource is located. |
+|ResourceId.N|RepeatList|Yes|alikafka\_post-cn-v0h1fgs2\*\*\*\*|The ID of the resource to which you want to bind a tag. The resource ID follows these rules:
 
- For example, the resources to which the tag will be bound include the alikafka\_post-cn-v0h1fgs2xxxx instance, the test-topic topic, and the test-consumer-group consumer group. In this case, their resource IDs are alikafka\_post-cn-v0h1fgs2xxxx, Kafka\_alikafka\_post-cn-v0h1fgs2xxxx\_test-topic, and Kafka\_alikafka\_post-cn-v0h1fgs2xxxx\_test-consumer-group respectively. |
-|ResourceType|String|Yes|instance|The type of the resource. The value is an enumerated value. Valid values:
+ -   The resource ID of an instance is the value of the instanceId parameter.
+-   The resource ID of a topic is the value of the Kafka\_alikafka\_instanceId\_topic parameter.
+-   The resource ID of a consumer group is the value of the Kafka\_alikafka\_instanceId\_consumerGroup parameter.
+
+ For example, the resources to which the tag will be bound include the alikafka\_post-cn-v0h1fgs2xxxx instance, the test-topic topic, and the test-consumer-group consumer group. In this case, their resource IDs are alikafka\_post-cn-v0h1fgs2xxxx, Kafka\_alikafka\_post-cn-v0h1fgs2xxxx\_test-topic, and Kafka\_alikafka\_post-cn-v0h1fgs2xxxx\_test-consumer-group, respectively. |
+|ResourceType|String|Yes|instance|The type of the resource. Valid values:
 
  -   **Instance**
 -   **Topic**
 -   **Consumer Group** |
-|Tag.N.Key|String|Yes|FinanceDept|The key of tag N to be bound to the resource. Valid values of N:
+|Tag.N.Key|String|Yes|FinanceDept|The key of the resource tag.
 
- -   1 to 20
--   This parameter cannot be an empty string.
--   It can be up to 128 characters in length. It cannot start with aliyun or acs: and cannot contain http:// or https://. |
-|Tag.N.Value|String|No|FinanceJoshua|The value of tag N to be bound to the resource.
+ -   Valid values of N: 1 to 20.
+-   The value cannot be empty.
+-   The tag key can be up to 128 characters in length. It cannot start with aliyun or acs:, or contain http:// or https://. |
+|Tag.N.Value|String|No|FinanceJoshua|The value of the resource tag.
 
- -   Valid values of N: 1 to 20
--   This parameter can be an empty string.
--   It can be up to 128 characters in length. It cannot start with aliyun or acs: and cannot contain http:// or https://. |
+ -   Valid values of N: 1 to 20.
+-   The value can be empty.
+-   The tag value can be up to 128 characters in length. It cannot start with aliyun or acs:, or contain http:// or https://. |
 
 ## Response parameters
 
@@ -59,14 +61,16 @@ Sample success responses
 `XML` format
 
 ```
-<RequestId>C46FF5A8-C5F0-4024-8262-B16B639225A0</RequestId>
+<TagResourcesResponse>
+      <RequestId>C46FF5A8-C5F0-4024-8262-B16B639225A0</RequestId>
+</TagResourcesResponse>
 ```
 
 `JSON` format
 
 ```
 {
-    "RequestId":"C46FF5A8-C5F0-4024-8262-B16B639225A0"
+    "RequestId": "C46FF5A8-C5F0-4024-8262-B16B639225A0"
 }
 ```
 
