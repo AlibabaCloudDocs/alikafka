@@ -1,10 +1,10 @@
 ---
-keyword: [Kafka, Migration]
+keyword: [kafka, migration]
 ---
 
 # Overview
 
-This topic describes the advantages, principle, and process of migrating a user-created Kafka cluster to a Message Queue for Apache Kafka instance.
+This topic describes the advantages, principle, and procedure of migrating a user-created Kafka cluster to a Message Queue for Apache Kafka instance.
 
 ## Advantages
 
@@ -12,13 +12,13 @@ For more information about the advantages of migrating a user-created Kafka clus
 
 ## How it works
 
-To migrate a cluster for message queues, you only need to consume all messages in the old cluster. The producers and consumers are deployed in clusters and can be operated one by one, without being perceived by upper-layer services.
+To migrate an existing cluster for message queues, you only need to consume all messages in the existing cluster. The producers and consumers are deployed in clusters and can be migrated one by one. The migration is not perceived by upper-layer services.
 
 ## Procedure
 
 Perform the following operations to migrate a user-created Kafka cluster to a Message Queue for Apache Kafka instance:
 
-1.  Evaluate the specifications of the user-created Kafka cluster to determine the edition of the Message Queue for Apache Kafka instance you want to purchase.
+1.  Evaluate the specifications of the user-created Kafka cluster to determine the edition of the Message Queue for Apache Kafka instance you need to purchase.
 
     For more information, see [Evaluate specifications](/intl.en-US/User guide/Migration/Evaluate specifications.md).
 
@@ -42,7 +42,7 @@ Perform the following operations to migrate a user-created Kafka cluster to a Me
 
 5.  Migrate the data of the user-created Kafka cluster to the Message Queue for Apache Kafka instance.
 
-    **Note:** For message queues, after the data of a cluster is consumed, the data will not be used except for backup. Therefore, generally, we recommend that you do not migrate data except that you must back up data of the user-created Kafka cluster to the Message Queue for Apache Kafka instance.
+    **Note:** For message queues, after the data of a cluster is consumed, the data will not be used except for backup. Therefore, we recommend that you do not migrate data except that you must back up data of the user-created Kafka cluster to the Message Queue for Apache Kafka instance.
 
     For more information, see [Migrate data to the cloud](/intl.en-US/User guide/Migration/Migrate data/Migrate data to the cloud.md).
 
