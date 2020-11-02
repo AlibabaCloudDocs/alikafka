@@ -1,15 +1,15 @@
 ---
-keyword: [topic, metadata, migration, Message Queue for Apache Kafka]
+keyword: [topic, metadata, migration, kafka]
 ---
 
 # Migrate topic metadata between Message Queue for Apache Kafka instances
 
-This topic describes how to use a metadata migration tool to migrate topic metadata from a Message Queue for Apache Kafka instance to another Message Queue for Apache Kafka instance. The metadata of a topic is the basic information of the topic instead of the information stored in the topic.
+This topic describes how to use a metadata migration tool provided by Message Queue for Apache Kafka to migrate topic metadata from a Message Queue for Apache Kafka instance to another Message Queue for Apache Kafka instance.
 
-Before you migrate topic metadata between Message Queue for Apache Kafka instances, make sure that you have completed the following steps:
+The following operations are completed:
 
--   [Download Java Development Kit \(JDK\) 8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
--   [Download the migration tool Java Archive \(JAR\) file](https://aliware-images.oss-cn-hangzhou.aliyuncs.com/Kafka/migration%20tool/7.30%20Migration%20Tool/kafka-migration.jar)
+-   [Download Java Development Kit \(JDK\) 8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html).
+-   [Download the migration tool Java Archive \(JAR\) file](https://aliware-images.oss-cn-hangzhou.aliyuncs.com/Kafka/migration%20tool/7.30%20Migration%20Tool/kafka-migration.jar).
 
 **Note:**
 
@@ -53,7 +53,7 @@ Before you migrate topic metadata between Message Queue for Apache Kafka instanc
     |---------|-----------|
     |commit|Commits the topic metadata to be migrated.|
 
-    The following code provides an example of the output after the preceding commit:
+    The following code provides an example of the output generated after the migration is committed:
 
     ```
     16:38:30 INFO - cmd=TopicMigrationFromAliyun, request=null, response={"code":200,"requestId":"A0CA4D70-46D4-45CF-B9E0-B117610A26DB","success":true,"message":"operation success"}
@@ -68,7 +68,7 @@ Before you migrate topic metadata between Message Queue for Apache Kafka instanc
 
 5.  Check whether the topic metadata is migrated.
 
-    1.  Log on to the [Message Queue for Apache Kafkaconsole](https://kafka.console.aliyun.com/).
+    1.  Log on to the [Message Queue for Apache Kafka console](https://kafka.console.aliyun.com/).
 
     2.  In the top navigation bar, select the region where the destination instance is located.
 
@@ -77,7 +77,5 @@ Before you migrate topic metadata between Message Queue for Apache Kafka instanc
     4.  On the **Topics** page, click the destination instance.
 
         The migrated topic appears on the **Topics** page.
-
-        ![Migration](../images/p88767.png)
 
 
