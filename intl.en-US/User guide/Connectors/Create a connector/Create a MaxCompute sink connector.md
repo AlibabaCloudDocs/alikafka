@@ -8,7 +8,7 @@ This topic describes how to create a MaxCompute sink connector to export data fr
 
 Before you create a MaxCompute sink connector, ensure that you have completed the following operations:
 
-1.  Enable the Connector feature for the Message Queue for Apache Kafka instance. For more information, see [Enable the connector feature](/intl.en-US/User guide/Connectors/Enable the Connector feature.md).
+1.  Enable the Connector feature for the Message Queue for Apache Kafka instance. For more information, see [Enable the connector feature](/intl.en-US/User guide/Connectors/Enable the connector feature.md).
 2.  Create topics in Message Queue for Apache Kafka. For more information, see [Step 1: Create a topic](/intl.en-US/Quick-start/Step 3: Create resources.md).
 
     A topic named maxcompute-test-input is used as an example.
