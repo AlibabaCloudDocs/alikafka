@@ -1,12 +1,12 @@
 ---
-keyword: [Kafka, connector, ]
+keyword: [kafka, connector, ]
 ---
 
 # Delete a connector
 
-This topic describes how to delete a connector that is no longer used in the Message Queue for Apache Kafka console.
+Message Queue for Apache Kafka limits the number of connectors for each instance. If you no longer need a connector, you can delete it in the Message Queue for Apache Kafka console.
 
-You have created a connector. For more information about how to create a connector, see the following topics:
+You have created a connector. For more information, see the following topics:
 
 -   [Create a MaxCompute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MaxCompute sink connector.md)
 -   [Create a Function Compute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a Function Compute sink connector.md)
@@ -15,16 +15,12 @@ You have created a connector. For more information about how to create a connect
 
 2.  In the top navigation bar, select a region.
 
-3.  In the left-side navigation pane, click **Instances**.
+3.  In the left-side navigation pane, click **Connector**.
 
-4.  In the left-side navigation pane, click **Connector**.
+4.  On the **Connector** page, select an instance, find the connector that you want to delete, click More, and then select Delete in the **Actions** column.
 
-5.  On the **Connector** page, find the target connector and click **Delete** in the **Actions** column.
+5.  In the **Delete** message, click **OK**.
 
-    ![Delete](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/1350549951/p127584.png)
-
-6.  In the **Delete** dialog box, click **Yes**.
-
-    ![Confirm deletion](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/1350549951/p127585.png)
+    **Note:** When you delete a connector, the system also deletes the five topics and two consumer groups that the connector requires, regardless of whether they were automatically or manually created.
 
 
