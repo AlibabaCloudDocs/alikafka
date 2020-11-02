@@ -1,19 +1,19 @@
 ---
-keyword: [consumer group, metadata, migration, Message Queue for Apache Kafka]
+keyword: [consumer group, metadata, migration, kafka]
 ---
 
 # Migrate consumer group metadata from a user-created Kafka cluster to Message Queue for Apache Kafka
 
-This topic describes how to use a metadata migration tool to migrate consumer group metadata from a user-created Kafka cluster to a Message Queue for Apache Kafka instance.
+This topic describes how to use a metadata migration tool provided by Message Queue for Apache Kafka to migrate consumer group metadata from a user-created Kafka cluster to a Message Queue for Apache Kafka instance.
 
-Before you migrate consumer group metadata from a user-created Kafka cluster to Message Queue for Apache Kafka, make sure that you have completed the following steps:
+The following operations are completed:
 
--   [Download Java Development Kit \(JDK\) 8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
--   [Download the migration tool Java Archive \(JAR\) file](https://aliware-images.oss-cn-hangzhou.aliyuncs.com/Kafka/migration%20tool/7.30%20Migration%20Tool/kafka-migration.jar)
+-   [Download Java Development Kit \(JDK\) 8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html).
+-   [Download the migration tool Java Archive \(JAR\) file](https://aliware-images.oss-cn-hangzhou.aliyuncs.com/Kafka/migration%20tool/7.30%20Migration%20Tool/kafka-migration.jar).
 
 **Note:**
 
--   After the migration, the corresponding consumer group in the source Kafka cluster is not deleted. Instead, a new consumer group with the same configuration is created in the destination Message Queue for Apache Kafka instance.
+-   After the migration, the corresponding consumer group in the source user-created Kafka cluster is not deleted. Instead, a new consumer group with the same configuration is created in the destination Message Queue for Apache Kafka instance.
 -   Only the consumer group configuration is migrated. Topics and consumer offsets are not migrated.
 
 1.  Start the command-line tool.
@@ -28,18 +28,18 @@ Before you migrate consumer group metadata from a user-created Kafka cluster to 
     ## The endpoint.
     bootstrap.servers=localhost:9092
     
-    ## The consumer group, which contains no consumer offset information so that consumption starts from the first message.
+    ## The consumer group, which does not contain consumer offset information so that consumption starts from the first message.
     group.id=XXX
     
     ## You can skip the following configuration if security configuration is unavailable.
     
-    ## The simple authentication and security layer (SASL)-based authentication.
+    ## The Simple Authentication and Security Layer (SASL) authentication.
     #sasl.mechanism=PLAIN
     
     ## The access protocol.
     #security.protocol=SASL_SSL
     
-    ## The path of the Secure Sockets Layer (SSL) root certificate.
+    ## The path of the SSL root certificate.
     #ssl.truststore.location=/Users/***/Documents/code/aliware-kafka-demos/main/resources/kafka.client.truststore.jks
     
     ## The SSL password.
@@ -75,7 +75,7 @@ Before you migrate consumer group metadata from a user-created Kafka cluster to 
     |---------|-----------|
     |commit|Commits the consumer group metadata to be migrated.|
 
-    The following code provides an example of the output after the preceding commit:
+    The following code provides an example of the output generated after the migration is committed:
 
     ```
     15:35:51 INFO - cmd=ConsumerGroupMigrationFromTopic, request=null, response={"code":200,"requestId":"C9797848-FD4C-411F-966D-0D4AB5D12F55","success":true,"message":"operation success"}
@@ -86,7 +86,7 @@ Before you migrate consumer group metadata from a user-created Kafka cluster to 
 
 6.  Check whether the consumer group metadata is migrated.
 
-    1.  Log on to the [Message Queue for Apache Kafkaconsole](https://kafka.console.aliyun.com/).
+    1.  Log on to the [Message Queue for Apache Kafka console](https://kafka.console.aliyun.com/).
 
     2.  In the top navigation bar, select the region where the destination instance is located.
 
