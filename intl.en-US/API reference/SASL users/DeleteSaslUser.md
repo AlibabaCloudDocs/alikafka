@@ -8,33 +8,33 @@ Deletes a Simple Authentication and Security Layer \(SASL\) user.
 
 ## Request parameters
 
-|Parameter|Type|Required|Example|Description|
-|---------|----|--------|-------|-----------|
+|Parameter|Type|Required|Example|Description |
+|---------|----|--------|-------|------------|
 |Action|String|Yes|DeleteSaslUser|The operation that you want to perform. Set the value to
 
  **DeleteSaslUser**. |
-|InstanceId|String|Yes|alikafka\_pre-cn-v0h1cng0\*\*\*\*|The ID of the Message Queue for Apache Kafka instance. |
-|RegionId|String|Yes|cn-hangzhou|The ID of the region where the Message Queue for Apache Kafka instance is located. |
-|Username|String|Yes|test\*\*\*|The username of the SASL user. |
-|Type|String|No|scram|The type of the authentication mechanism. Valid values:
+|InstanceId|String|Yes|alikafka\_pre-cn-v0h1cng0\*\*\*\*|The ID of the Message Queue for Apache Kafka instance that contains the SASL user. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance is located. |
+|Username|String|Yes|test\*\*\*|The name of the SASL user that you want to delete. |
+|Type|String|No|scram|The authentication mechanism. Valid values:
 
- -   **plain**
--   **scram**
+ -   **plain**: a simple username and password verification mechanism. Message Queue for Apache Kafka provides an improved PLAIN mechanism that allows you to dynamically add SASL users without restarting the instance.
+-   **SCRAM**: a username and password verification mechanism with higher security than PLAIN. Message Queue for Apache Kafka uses SCRAM-SHA-256.
 
- **Default value:** plain**.** |
+ Default value: **plain**. |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The returned HTTP status code. A 200 status code indicates that the request succeeded. |
-|Message|String|operation success|The returned message. |
+|Code|Integer|200|The response code. The HTTP 200 code indicates that the request was successful. |
+|Message|String|operation success|The response message. |
 |RequestId|String|3CB89F5C-CD97-4C1D-BC7C-FEDEC2F4\*\*\*\*|The ID of the request. |
 |Success|Boolean|true|Indicates whether the request was successful. |
 
 ## Examples
 
-Sample request
+Sample requests
 
 ```
 http(s)://[Endpoint]/? Action=DeleteSaslUser
@@ -62,12 +62,10 @@ Sample success responses
 
 ```
 {
-    "DeleteSaslUserResponse": {
-        "RequestId": "3CB89F5C-CD97-4C1D-BC7C-FEDEC2F4****",
-        "Message": "operation success",
-        "Code": 200,
-        "Success": true
-    }
+    "RequestId": "3CB89F5C-CD97-4C1D-BC7C-FEDEC2F4****",
+    "Message": "operation success",
+    "Code": 200,
+    "Success": true
 }
 ```
 
