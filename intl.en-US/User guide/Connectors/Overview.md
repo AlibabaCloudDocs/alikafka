@@ -21,18 +21,18 @@ Perform the following steps to use connectors:
 
 1.  Enable the Connector feature.
 
-    [Enable the Connector feature](/intl.en-US/User guide/Connectors/Enable the connector feature.md)
+    [Enable the connector feature](/intl.en-US/User guide/Connectors/Enable the Connector feature.md)
 
 2.  Create a connector.
     -   [Create a MaxCompute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MaxCompute sink connector.md)
     -   [Create a Function Compute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a Function Compute sink connector.md)
 3.  Manage connectors.
-    -   [View the task configurations of a connector](/intl.en-US/User guide/Connectors/View the task configurations of a connector.md)
+    -   [View task configurations of a connector](/intl.en-US/User guide/Connectors/View the task configurations of a connector.md)
     -   [View connector logs](/intl.en-US/User guide/Connectors/View connector logs.md)
-    -   [Suspend a connector]()
-    -   [Resume a connector]()
+    -   [Suspend a connector](/intl.en-US/User guide/Connectors/Suspend a connector.md)
+    -   [Resume a connector](/intl.en-US/User guide/Connectors/Resume a connector.md)
     -   [Delete a connector](/intl.en-US/User guide/Connectors/Delete a connector.md)
-    -   [Modify the connector description](/intl.en-US/User guide/Connectors/Modify connector descriptions.md)
+    -   [Modify connector descriptions](/intl.en-US/User guide/Connectors/Modify the connector description.md)
 
 ## Limits
 
@@ -52,7 +52,7 @@ The following table lists the limits of Message Queue for Apache Kafka on connec
 -   Singapore \(Singapore\)
 -   Japan \(Tokyo\) |
 
-**Note:** To increase connectors for your instance or use connectors in more regions, submit a[ticket](https://workorder-intl.console.aliyun.com/#/ticket/add/?productId=1352) to Customer Service of Message Queue for Apache Kafka.
+**Note:** To increase connectors for your instance or use connectors in more regions, submit a [ticket](https://workorder-intl.console.aliyun.com/#/ticket/add/?productId=1352) to Customer Service of Message Queue for Apache Kafka.
 
 ## Cross-region data synchronization
 
