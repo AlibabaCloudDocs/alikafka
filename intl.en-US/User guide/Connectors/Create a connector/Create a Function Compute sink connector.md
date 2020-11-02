@@ -8,7 +8,7 @@ This topic describes how to create a Function Compute sink connector to export d
 
 Before you create a Function Compute sink connector, ensure that you have completed the following operations:
 
-1.  Enable the Connector feature for the Message Queue for Apache Kafka instance. For more information, see [Enable the Connector feature](/intl.en-US/User guide/Connectors/Enable the Connector feature.md).
+1.  Enable the Connector feature for the Message Queue for Apache Kafka instance. For more information, see [Enable the connector feature](/intl.en-US/User guide/Connectors/Enable the connector feature.md).
 2.  Create topics in the Message Queue for Apache Kafka instance. For more information, see [Step 1: Create a topic](/intl.en-US/Quick-start/Step 3: Create resources.md).
 
     A topic named fc-test-input is used as an example.
@@ -306,6 +306,4 @@ After you deploy the Function Compute sink connector, you can send messages to t
 After you send a message to a topic in Message Queue for Apache Kafka, you can view the function log to check whether the message is received. For more information, see [Configure and view function logs]().
 
 The log displays the sent test message.
-
-![fc LOG](../images/p127831.png)
 
