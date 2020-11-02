@@ -1,15 +1,15 @@
 ---
-keyword: [consumer group, metadata, migration, Message Queue for Apache Kafka]
+keyword: [consumer group, metadata, migration, kafka]
 ---
 
 # Migrate consumer group metadata between Message Queue for Apache Kafka instances
 
-This topic describes how to use a metadata migration tool to migrate consumer group metadata from one Message Queue for Apache Kafka instance to another Message Queue for Apache Kafka instance.
+This topic describes how to use the metadata migration tool provided by Message Queue for Apache Kafka to migrate consumer group metadata from one Message Queue for Apache Kafka instance to another Message Queue for Apache Kafka instance.
 
-Before you migrate consumer group metadata between Message Queue for Apache Kafka instances, make sure that you have completed the following steps:
+The following operations are completed:
 
--   [Download Java Development Kit \(JDK\) 8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
--   [Download the migration tool Java Archive \(JAR\) file](https://aliware-images.oss-cn-hangzhou.aliyuncs.com/Kafka/migration%20tool/7.30%20Migration%20Tool/kafka-migration.jar)
+-   [Download Java Development Kit \(JDK\) 8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html).
+-   [Download the migration tool Java Archive \(JAR\) file](https://aliware-images.oss-cn-hangzhou.aliyuncs.com/Kafka/migration%20tool/7.30%20Migration%20Tool/kafka-migration.jar).
 
 **Note:**
 
@@ -50,7 +50,7 @@ Before you migrate consumer group metadata between Message Queue for Apache Kafk
     |---------|-----------|
     |commit|Commits the consumer group metadata to be migrated.|
 
-    The following code provides an example of the output after the preceding commit:
+    The following code provides an example of the output generated after the migration is committed:
 
     ```
     10:54:40 INFO - cmd=ConsumerGroupMigrationFromAliyun, request=null, response={"code":200,"requestId":"49E53B79-3C2C-4BCF-8BC8-07B0BB14B52A","success":true,"consumerList":[{"instanceId":"alikafka_post-cn-0pp1h0uv6***","regionId":"cn-hangzhou","consumerId":"Demo","tags":[{"value":"","key":"migration"}]}],"message":"operation success."}
@@ -60,7 +60,7 @@ Before you migrate consumer group metadata between Message Queue for Apache Kafk
 
 5.  Check whether the consumer group metadata is migrated.
 
-    1.  Log on to the [Message Queue for Apache Kafkaconsole](https://kafka.console.aliyun.com/).
+    1.  Log on to the [Message Queue for Apache Kafka console](https://kafka.console.aliyun.com/).
 
     2.  In the top navigation bar, select the region where the destination instance is located.
 
@@ -69,7 +69,5 @@ Before you migrate consumer group metadata between Message Queue for Apache Kafk
     4.  On the **Consumer Groups** page, click the destination instance.
 
         The created consumer group appears on the **Consumer Group** page.
-
-        ![Consumer group migration](../images/p88862.png)
 
 
