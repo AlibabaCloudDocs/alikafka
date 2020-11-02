@@ -1,6 +1,6 @@
 # GetInstanceList
 
-You can call this operation to query Message Queue for Apache Kafka instances in a specified region.
+Queries Message Queue for Apache Kafka instances in a specified region.
 
 ## Debugging
 
@@ -10,64 +10,81 @@ You can call this operation to query Message Queue for Apache Kafka instances in
 
 |Parameter|Type|Required|Example|Description|
 |---------|----|--------|-------|-----------|
-|Action|String|Yes|GetInstanceList|The operation that you want to perform. Set the value to CreateMasterSlaveServerGroup. |
-|RegionId|String|Yes|cn-hangzhou|The ID of the region where you want to query Message Queue for Apache Kafka instances. |
-|OrderId|String|No|test|The order ID of the Message Queue for Apache Kafka instance. |
-|InstanceId.N|RepeatList|No|alikafka\_post-cn-mp91gnw0p\*\*\*|The ID of Message Queue for Apache Kafka instance N. |
-|Tag.N.Key|String|No|test|The key of tag N bound to the Message Queue for Apache Kafka instance. |
-|Tag.N.Value|String|No|test|The value of tag N bound to the Message Queue for Apache Kafka instance. |
+|Action|String|Yes|GetInstanceList|The operation that you want to perform. Set the value to
+
+ **GetInstanceList**. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance is located. |
+|OrderId|String|No|test|The ID of the order. |
+|InstanceId.N|RepeatList|No|alikafka\_post-cn-mp91gnw0p\*\*\*|The ID of the instance. |
+|Tag.N.Key|String|No|test|The key of the resource tag.
+
+ -   Valid values of N: 1 to 20.
+-   If this value is empty, the keys of all tags are matched.
+-   The tag key can be up to 128 characters in length. It cannot start with aliyun or acs:, or contain http:// or https://. |
+|Tag.N.Value|String|No|test|The value of the resource tag.
+
+ -   Valid values of N: 1 to 20.
+-   If you do not specify a tag key, you cannot specify a tag value. If this parameter is empty, the values of all tags are matched.
+-   The tag value can be up to 128 characters in length. It cannot start with aliyun or acs:, or contain http:// or https://. |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Success|Boolean|true|Indicates whether the request is successful. |
-|RequestId|String|4B6D821D-7F67-4CAA-9E13-A5A997C3519B|The ID of the request. |
-|Code|Integer|200|The returned status code. If "200" is returned, the request is successful. |
-|Message|String|operation success.|The returned message. |
-|InstanceList|Array| |The returned list of Message Queue for Apache Kafka instances. |
-|InstanceId|String|alikafka\_pre-cn-mp919o4v\*\*\*\*|The ID of the Message Queue for Apache Kafka instance. |
-|RegionId|String|cn-hangzhou|The region ID of the Message Queue for Apache Kafka instance. |
-|ServiceStatus|Integer|5|The status of the Message Queue for Apache Kafka instance. Valid values:
+|Code|Integer|200|The response code. The HTTP 200 code indicates that the request was successful. |
+|InstanceList|Array| |The list of instances. |
+|InstanceVO| | | |
+|CreateTime|Long|1577961819000|The time when the instance was created. |
+|DeployType|Integer|5|The deployment mode of the instance. Valid values:
 
- -   **0:** To be deployed
--   **1:** Being deployed
--   **5:**Running
--   **15:** Expired |
-|VpcId|String|vpc-bp1ojac7bv448nifjl\*\*\*|The ID of the Virtual Private cCloud \(VPC\) where the Message Queue for Apache Kafka instance is deployed. |
-|VSwitchId|String|vsw-bp1fvuw0ljd7vzmo3d\*\*\*|The ID of the VSwitch associated with the VPC where the Message Queue for Apache Kafka instance is deployed. |
-|EndPoint|String|192.168.0.\*\*\*:9092,192.168.0. \*\*\*:9092,192.168.0. \*\*\*:9092,192.168.0. \*\*\*:9092|The default endpoint of the Message Queue for Apache Kafka instance. |
-|CreateTime|Long|1577961819000|The time when the Message Queue for Apache Kafka instance was created. |
-|ExpiredTime|Long|1893581018000|The time when the Message Queue for Apache Kafka instance expires. |
-|DeployType|Integer|5|The deployment mode of the Message Queue for Apache Kafka instance. Valid values:
-
- -   **4:**Instance of the Internet and VPC type
--   **5:**Instance of the VPC type |
-|SslEndPoint|String|47.111.\*\*. \*\*:9093,121.40. \*\*. \*\*:9093,47.111. \*\*. \*\*:9093|The SSL endpoint of the Message Queue for Apache Kafka instance. |
-|Name|String|alikafka\_post-cn-mp91gnw0p\*\*\*|The name of the Message Queue for Apache Kafka instance. |
-|IoMax|Integer|20|The peak traffic configured for the Message Queue for Apache Kafka instance. |
-|EipMax|Integer|20|The peak public traffic configured for the Message Queue for Apache Kafka instance. |
-|DiskType|Integer|1|The type of the disk configured for the Message Queue for Apache Kafka instance. Valid values:
+ -   **4**: Internet and virtual private cloud \(VPC\) type
+-   **5**: VPC type |
+|DiskSize|Integer|3600|The disk size for the instance. |
+|DiskType|Integer|1|The disk type for the instance. Valid values:
 
  -   **0:** Ultra disk
 -   **1:** SSD |
-|DiskSize|Integer|3600|The size of the disk configured for the Message Queue for Apache Kafka instance. |
-|MsgRetain|Integer|72|The retention period of a message in a Message Queue for Apache Kafka instance. |
-|TopicNumLimit|Integer|180|The maximum number of topics that can be configured for the Message Queue for Apache Kafka instance. |
-|ZoneId|String|zonei|The zone ID of the Message Queue for Apache Kafka instance. |
-|PaidType|Integer|1|The billing mode of the Message Queue for Apache Kafka instance. Valid values:
+|EipMax|Integer|20|The peak public traffic for the instance. |
+|EndPoint|String|192.168.0.\*\*\*:9092,192.168.0. \*\*\*:9092,192.168.0. \*\*\*:9092,192.168.0. \*\*\*:9092|The default endpoint of the instance. |
+|ExpiredTime|Long|1893581018000|The time when the instance expires. |
+|InstanceId|String|alikafka\_pre-cn-mp919o4v\*\*\*\*|The ID of the instance. |
+|IoMax|Integer|20|The peak traffic for the instance. |
+|MsgRetain|Integer|72|The retention period of messages on the instance. |
+|Name|String|alikafka\_post-cn-mp91gnw0p\*\*\*|The name of the instance. |
+|PaidType|Integer|1|The billing method of the instance. Valid values:
 
- -   **0:** Subscription
--   **1:** Pay-as-you-go |
-|SpecType|String|professional|The edition of the Message Queue for Apache Kafka instance. Valid values:
+ -   **0:** subscription
+-   **1:** pay-as-you-go |
+|RegionId|String|cn-hangzhou|The ID of the region where the instance is located. |
+|SecurityGroup|String|sg-bp13wfx7kz9pkowc\*\*\*|The security group of the instance.
 
- -   **professional:**Professional Edition
--   **normal:**Standard Edition |
-|UpgradeServiceDetailInfo|Array| |The upgrade information of the Message Queue for Apache Kafka instance. |
-|Current2OpenSourceVersion|String|2.2.0|The open-source Apache Kafka version to which the Message Queue for Apache Kafka instance is targeted. |
-|Tags|Array| |The tags bound to the Message Queue for Apache Kafka instance. |
-|Key|String|test|The key of the tag bound to the Message Queue for Apache Kafka instance. |
-|Value|String|test|The value of the tag bound to the Message Queue for Apache Kafka instance. |
+ -   If you deploy the instance in the Message Queue for Apache Kafka console or by calling the StartInstance operation without configuring a security group, the returned value is empty.
+-   If you deploy the instance by calling the StartInstance operation with a security group configured, the returned value is the configured security group. |
+|ServiceStatus|Integer|5|The status of the instance. Valid values:
+
+ -   **0:** waiting for deployment
+-   **1:** deploying
+-   **5:** running
+-   **15:** expired |
+|SpecType|String|professional|The edition of the instance. Valid values:
+
+ -   **professional**: Professional Edition
+-   **normal**: Standard Edition |
+|SslEndPoint|String|47.111.\*\*. \*\*:9093,121.40. \*\*. \*\*:9093,47.111. \*\*. \*\*:9093|The SSL endpoint of the instance. |
+|Tags|Array| |The tags bound to the instance. |
+|TagVO| | | |
+|Key|String|test|The key of the resource tag. |
+|Value|String|test|The value of the resource tag. |
+|TopicNumLimit|Integer|180|The maximum number of topics for the instance. |
+|UpgradeServiceDetailInfo|Array| |The upgrade information of the instance. |
+|UpgradeServiceDetailInfoVO| | | |
+|Current2OpenSourceVersion|String|2.2.0|The open-source Apache Kafka version to which the instance is targeted. |
+|VSwitchId|String|vsw-bp1fvuw0ljd7vzmo3d\*\*\*|The ID of the vSwitch for the instance. |
+|VpcId|String|vpc-bp1ojac7bv448nifjl\*\*\*|The ID of the VPC to which the instance belongs. |
+|ZoneId|String|zonei|The ID of the zone where the instance is located. |
+|Message|String|operation success.|The response message. |
+|RequestId|String|4B6D821D-7F67-4CAA-9E13-A5A997C35\*\*\*|The ID of the request. |
+|Success|Boolean|true|Indicates whether the request was successful. |
 
 ## Examples
 
@@ -76,8 +93,6 @@ Sample requests
 ```
 http(s)://[Endpoint]/? Action=GetInstanceList
 &RegionId=cn-hangzhou
-&Tag"Key":[{"Key":"test","Value":"test"}]
-&InstanceId=alikafka_post-cn-mp91gnw0p***
 &<Common request parameters>
 ```
 
@@ -86,87 +101,119 @@ Sample success responses
 `XML` format
 
 ```
-<Message>operation success. </Message> <RequestId>99B647DF-3F59-4A1F-8C1C-8CD4EBDC738B</RequestId>
-<Success>true</Success>
-<Code>200</Code>
-<InstanceList>
-    <InstanceVO>
-        <DeployType>5</DeployType>
-        <SpecType>professional</SpecType>
-        <PaidType>1</PaidType>
-        <InstanceId>alikafka_post-cn-mp91gnw0p***</InstanceId>
-        <MsgRetain>72</MsgRetain>
-        <ZoneId>zonei</ZoneId>
-        <IoMax>160</IoMax>
-        <VSwitchId>vsw-bp1fvuw0ljd7vzmo3d***</VSwitchId>
-        <VpcId>vpc-bp1ojac7bv448nifjl***</VpcId>
-        <UpgradeServiceDetailInfo>
-            <Current2OpenSourceVersion>2.2.0</Current2OpenSourceVersion>
-        </UpgradeServiceDetailInfo>
-        <ServiceStatus>5</ServiceStatus>
-        <Name>alikafka_post-cn-mp91gnw0p026</Name>
-        <Tags>
-            <TagVO>
-                <Value>test</Value>
-                <Key>test</Key>
-            </TagVO>
-        </Tags>
-        <TopicNumLimit>180</TopicNumLimit>
-        <DiskSize>3600</DiskSize>
-        <RegionId>cn-hangzhou</RegionId>
-        <CreateTime>1577961819000</CreateTime>
-        <SslEndPoint>47.111. **. **:9093,121.40. **. **:9093,47.111. **. **:9092</SslEndPoint>
-        <EipMax>20</EipMax>
-        <EndPoint>192.168.0. ***:9092,192.168.0. ***:9092,192.168.0. ***:9092,192.168.0. ***:9092</EndPoint>
-        <ExpiredTime>1893581018000</ExpiredTime>
-        <DiskType>1</DiskType>
-    </InstanceVO>
-</InstanceList>
+<GetInstanceListResponse>
+      <RequestId>4B6D821D-7F67-4CAA-9E13-A5A997C35***</RequestId>
+      <Message>operation success. </Message>
+      <InstanceList>
+            <InstanceVO>
+                  <DeployType>5</DeployType>
+                  <SslEndPoint>47.111. **. **:9093,121.40. **. **:9093,47.111. **. **:9093</SslEndPoint>
+                  <EipMax>20</EipMax>
+                  <ZoneId>zonei</ZoneId>
+                  <InstanceId>alikafka_pre-cn-mp919o4v****</InstanceId>
+                  <SpecType>professional</SpecType>
+                  <IoMax>20</IoMax>
+                  <VSwitchId>vsw-bp1fvuw0ljd7vzmo3d***</VSwitchId>
+                  <CreateTime>1577961819000</CreateTime>
+                  <EndPoint>192.168.0. ***:9092,192.168.0. ***:9092,192.168.0. ***:9092,192.168.0. ***:9092</EndPoint>
+                  <SecurityGroup>sg-bp13wfx7kz9pkowc***</SecurityGroup>
+                  <Name>alikafka_post-cn-mp91gnw0p***</Name>
+                  <DiskType>1</DiskType>
+                  <VpcId>vpc-bp1ojac7bv448nifjl***</VpcId>
+                  <ServiceStatus>5</ServiceStatus>
+                  <PaidType>1</PaidType>
+                  <ExpiredTime>1893581018000</ExpiredTime>
+                  <MsgRetain>72</MsgRetain>
+                  <DiskSize>3600</DiskSize>
+                  <TopicNumLimit>180</TopicNumLimit>
+                  <RegionId>cn-hangzhou</RegionId>
+            </InstanceVO>
+            <InstanceVO>
+                  <UpgradeServiceDetailInfo>
+                        <UpgradeServiceDetailInfoVO>
+                              <Current2OpenSourceVersion>2.2.0</Current2OpenSourceVersion>
+                        </UpgradeServiceDetailInfoVO>
+                        <UpgradeServiceDetailInfoVO>
+                              <Value>test</Value>
+                              <Key>test</Key>
+                        </UpgradeServiceDetailInfoVO>
+                  </UpgradeServiceDetailInfo>
+                  <Tags>
+                        <TagVO>
+                              <Current2OpenSourceVersion>2.2.0</Current2OpenSourceVersion>
+                        </TagVO>
+                        <TagVO>
+                              <Value>test</Value>
+                              <Key>test</Key>
+                        </TagVO>
+                  </Tags>
+            </InstanceVO>
+      </InstanceList>
+      <Code>200</Code>
+      <Success>true</Success>
+</GetInstanceListResponse>
 ```
 
 `JSON` format
 
 ```
 {
+    "RequestId": "4B6D821D-7F67-4CAA-9E13-A5A997C35***",
     "Message": "operation success.",
-    "RequestId": "99B647DF-3F59-4A1F-8C1C-8CD4EBDC738B",
-    "Success": true,
-    "Code": 200,
     "InstanceList": {
         "InstanceVO": [
             {
                 "DeployType": 5,
-                "SpecType": "professional",
-                "PaidType": 1,
-                "InstanceId": "alikafka_post-cn-mp91gnw0p***",
-                "MsgRetain": 72,
+                "SslEndPoint": "47.111. **. **:9093,121.40. **. **:9093,47.111. **. **:9093",
+                "EipMax": 20,
                 "ZoneId": "zonei",
-                "IoMax": 160,
+                "InstanceId": "alikafka_pre-cn-mp919o4v****",
+                "SpecType": "professional",
+                "IoMax": 20,
                 "VSwitchId": "vsw-bp1fvuw0ljd7vzmo3d***",
+                "CreateTime": 1577961819000,
+                "EndPoint": "192.168.0. ***:9092,192.168.0. ***:9092,192.168.0. ***:9092,192.168.0. ***:9092",
+                "SecurityGroup": "sg-bp13wfx7kz9pkowc***",
+                "Name": "alikafka_post-cn-mp91gnw0p***",
+                "DiskType": 1,
                 "VpcId": "vpc-bp1ojac7bv448nifjl***",
-                "UpgradeServiceDetailInfo": {
-                    "Current2OpenSourceVersion": "2.2.0"
-                },
                 "ServiceStatus": 5,
-                "Name": "alikafka_post-cn-mp91gnw0p026",
-                "Tags": {
-                    "TagVO": [
+                "PaidType": 1,
+                "ExpiredTime": 1893581018000,
+                "MsgRetain": 72,
+                "DiskSize": 3600,
+                "TopicNumLimit": 180,
+                "RegionId": "cn-hangzhou"
+            },
+            {
+                "UpgradeServiceDetailInfo": {
+                    "UpgradeServiceDetailInfoVO": [
+                        {
+                            "Current2OpenSourceVersion": "2.2.0"
+                        },
                         {
                             "Value": "test",
                             "Key": "test"
                         }
                     ]
                 },
-                "TopicNumLimit": 180,
-                "DiskSize": 3600,
-                "RegionId": "cn-hangzhou",
-                "CreateTime": 1577961819000,
-                "SslEndPoint": "47.111. **. **:9093,121.40. **. **:9093,47.111. **. **:9092",
-                "EipMax": "20",
-                "EndPoint": "192.168.0. ***:9092,192.168.0. ***:9092,192.168.0. ***:9092,192.168.0. ***:9092",
-                "ExpiredTime": 1893581018000,
-                "DiskType": 1
-} ] } }
+                "Tags": {
+                    "TagVO": [
+                        {
+                            "Current2OpenSourceVersion": "2.2.0"
+                        },
+                        {
+                            "Value": "test",
+                            "Key": "test"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "Code": 200,
+    "Success": true
+}
 ```
 
 ## Error codes
