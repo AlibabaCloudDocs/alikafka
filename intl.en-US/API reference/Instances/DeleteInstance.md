@@ -1,6 +1,6 @@
 # DeleteInstance
 
-You can call this operation to delete a Message Queue for Apache Kafka instance.
+Deletes a Message Queue for Apache Kafka instance.
 
 ## Debugging
 
@@ -10,18 +10,20 @@ You can call this operation to delete a Message Queue for Apache Kafka instance.
 
 |Parameter|Type|Required|Example|Description|
 |---------|----|--------|-------|-----------|
-|Action|String|Yes|DeleteInstance|The operation that you want to perform. Set the value to DeleteInstance.|
-|InstanceId|String|Yes|alikafka\_post-cn-mp919o4v\*\*\*\*|The ID of the Message Queue for Apache Kafka instance to be deleted. |
-|RegionId|String|Yes|cn-hangzhou|The ID of the region where the Message Queue for Apache Kafka instance is to be deleted. |
+|Action|String|Yes|DeleteInstance|The operation that you want to perform. Set the value to
+
+ **DeleteInstance**. |
+|InstanceId|String|Yes|alikafka\_post-cn-mp919o4v\*\*\*\*|The ID of the instance that you want to delete. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance is located. |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The returned status code. If "200" is returned, the request is successful. |
-|Message|String|operation success.|The returned message. |
+|Code|Integer|200|The response code. The HTTP 200 code indicates that the request was successful. |
+|Message|String|operation success.|The response message. |
 |RequestId|String|ABA4A7FD-E10F-45C7-9774-A5236015\*\*\*\*|The ID of the request. |
-|Success|Boolean|true|Indicates whether the request is successful. |
+|Success|Boolean|true|Indicates whether the request was successful. |
 
 ## Examples
 
@@ -39,28 +41,26 @@ Sample success responses
 `XML` format
 
 ```
-<Message>operation success. </Message>
-<RequestId>ABA4A7FD-E10F-45C7-9774-A523601****</RequestId>
-<Success>true</Success>
-<Code>200</Code>
+<DeleteInstanceResponse>
+      <Message>operation success. </Message>
+      <RequestId>ABA4A7FD-E10F-45C7-9774-A5236015****</RequestId>
+      <Success>true</Success>
+      <Code>200</Code>
+</DeleteInstanceResponse>
 ```
 
 `JSON` format
 
 ```
 {
+    "RequestId":"ABA4A7FD-E10F-45C7-9774-A5236015****",
     "Message":"operation success.",
-    "RequestId":"ABA4A7FD-E10F-45C7-9774-A523601****",
-    "Success":true,
-    "Code":200
+    "Code":"200",
+    "Success":"true"
 }
 ```
 
 ## Error codes
-
-|HTTP status code|Error code|Error message|Description|
-|----------------|----------|-------------|-----------|
-|500|InternalError|An internal error occurred; please try again later.|The error message returned because an internal error has occurred. Try again later.|
 
 For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/alikafka).
 
