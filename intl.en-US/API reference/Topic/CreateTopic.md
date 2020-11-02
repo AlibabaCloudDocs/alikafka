@@ -1,51 +1,44 @@
 # CreateTopic
 
-You can call this operation to create a topic.
-
-Note the following when you call this operation to create a topic:
+Creates a topic.
 
 -   Each user can send a maximum of one query per second \(QPS\).
--   The maximum number of topics that can be created in each Message Queue for Apache Kafka instance depends on the version of the Message Queue for Apache Kafka instance you purchased.
+-   The maximum number of topics that can be created in an instance depends on the instance type that you have purchased.
 
 ## Debugging
 
-[You can use OpenAPI Explorer to make API calls, search for API calls, perform debugging, and generate SDK example code.](https://api.aliyun.com/#product=alikafka&api=CreateTopic&type=RPC&version=2019-09-16)
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=alikafka&api=CreateTopic&type=RPC&version=2019-09-16)
 
 ## Request parameters
 
 |Parameter|Type|Required|Example|Description|
 |---------|----|--------|-------|-----------|
-|Action|String |Yes|CreateTopic|The operation that you want to perform. Set the value to
+|Action|String|Yes|CreateTopic|The operation that you want to perform. Set the value to **CreateTopic**. |
+|InstanceId|String|Yes|alikafka\_pre-cn-mp919o4v\*\*\*\*|The ID of the Message Queue for Apache Kafka instance on which you want to create the topic. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance is located. |
+|Remark|String|Yes|alikafka\_topic\_test|The description of the topic.
 
- **CreateTopic**. |
-|InstanceId|String|Yes|alikafka\_pre-cn-mp919o4v\*\*\*\*|The ID of the Message Queue for Apache Kafka instance where you want to create a topic. |
-|RegionId|String|Yes|cn-hangzhou|The region ID of the Message Queue for Apache Kafka instance where you want to create a topic. |
-|Remark|String|Yes|alikafka\_topic\_test|The name of the topic. The value of this parameter must meet the following requirements:
+ -   The description can contain only letters, digits, hyphens \(-\), and underscores \(\_\).
+-   The description must be 3 to 64 characters in length. |
+|Topic|String|Yes|alikafka\_topic\_test|The name of the topic.
 
- -   The value can only contain letters, digits, hyphens \(-\), and underscores \(\_\).
--   The value must be 3 to 64 characters in length. |
-|Topic|String|Yes|alikafka\_topic\_test|The name of the topic. The value of this parameter must meet the following requirements:
+ -   The name can contain only letters, digits, hyphens \(-\), and underscores \(\_\).
+-   The name must be 3 to 64 characters in length. Names that contain more than 64 characters will be automatically truncated.
+-   The name cannot be modified after the topic is created. |
+|PartitionNum|String|No|12|The number of partitions in the topic.
 
- -   The name can only contain letters, digits, hyphens \(-\), and underscores \(\_\).
--   The name must be 3 to 64 characters in length, and will be automatically truncated if it contains more characters.
--   The name cannot be modified after being created. |
-|PartitionNum|String|No|12|The number of partitions in the topic. Valid values:
-
- -   1 to 48
--   We recommend that you set the number of partitions to a multiple of 6 to reduce the risk of data skew.
-
-Note: For special requirements, submit a ticket. |
+ -   Valid values: 1 to 360.
+-   To reduce the risk of data skew, we recommend that you set the number of partitions to a multiple of 6.
+-   If you require more than 360 partitions, submit a ticket. |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The returned status code.
-
- If "200" is returned, the request is successful. |
-|Message|String|operation success|The returned message. |
+|Code|Integer|200|The response code. The HTTP 200 code indicates that the request was successful. |
+|Message|String|operation success|The response message. |
 |RequestId|String|9C0F207C-77A6-43E5-991C-9D98510A\*\*\*\*|The ID of the request. |
-|Success|Boolean|true|Indicates whether the request is successful. |
+|Success|Boolean|true|Indicates whether the request was successful. |
 
 ## Examples
 
@@ -66,10 +59,10 @@ Sample success responses
 
 ```
 <CreateTopicResponse>
-	    <Message>operation success</Message>
-	    <RequestId>9C0F207C-77A6-43E5-991C-9D98510A****</RequestId>
-	    <Success>true</Success>
-	    <Code>200</Code>
+      <RequestId>9C0F207C-77A6-43E5-991C-9D98510A****</RequestId>
+      <Message>operation success</Message>
+      <Code>200</Code>
+      <Success>true</Success>
 </CreateTopicResponse>
 ```
 
@@ -77,12 +70,10 @@ Sample success responses
 
 ```
 {
-    "CreateTopicResponse": {
-        "Message": "operation success",
-        "RequestId": "9C0F207C-77A6-43E5-991C-9D98510A****",
-        "Success":true,
-        "Code":"200"
-    }
+    "RequestId": "9C0F207C-77A6-43E5-991C-9D98510A****",
+    "Message": "operation success",
+    "Code": 200,
+    "Success": true
 }
 ```
 
