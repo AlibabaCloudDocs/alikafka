@@ -1,0 +1,12 @@
+# 是否支持Topic自动创建？
+
+消息队列Kafka版部分支持Topic自动创建。
+
+消息队列Kafka版Topic自动创建请参见[自动创建Topic](/intl.zh-CN/用户指南/Topic/自动创建Topic.md)。
+
+Topic自动创建，使用起来方便，运维起来却极其麻烦，且极易造成系统不稳定。消息队列Kafka版的Topic还涉及一系列鉴权问题。建议您通过以下方式创建Topic：
+
+-   控制台：[创建Topic](/intl.zh-CN/快速入门/步骤三：创建资源.md)
+-   API：[CreateTopic](/intl.zh-CN/API参考/Topic/CreateTopic.md)
+-   Terraform：[alicloud\_alikafka\_topic](https://www.terraform.io/docs/providers/alicloud/r/alikafka_topic.html)
+
