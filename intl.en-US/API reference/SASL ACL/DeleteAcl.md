@@ -13,7 +13,7 @@ Deletes an access control list \(ACL\).
 |Action|String|Yes|DeleteAcl|The operation that you want to perform. Set the value to
 
  **DeleteAcl**. |
-|AclOperationType|String|Yes|Write|The type of operations allowed by the ACL. Valid values:
+|AclOperationType|String|Yes|Write|The type of operation allowed by the ACL. Valid values:
 
  -   **Write**
 -   **Read** |
@@ -29,22 +29,22 @@ Deletes an access control list \(ACL\).
 
  -   **Topic**
 -   **Group** |
-|InstanceId|String|Yes|alikafka\_pre-cn-v0h1cng0\*\*\*\*|The ID of the Message Queue for Apache Kafka instance. |
-|RegionId|String|Yes|cn-hangzhou|The ID of the region where the Message Queue for Apache Kafka instance is located. |
-|Username|String|Yes|test12\*\*\*\*|The username of the Simple Authentication and Security Layer \(SASL\) user. |
+|InstanceId|String|Yes|alikafka\_pre-cn-v0h1cng0\*\*\*\*|The ID of the Message Queue for Apache Kafka instance from which you want to delete the ACL. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance is located. |
+|Username|String|Yes|test12\*\*\*\*|The name of the user. |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The returned HTTP status code. A 200 status code indicates that the request succeeded. |
-|Message|String|operation success|The returned message. |
+|Code|Integer|200|The response code. The HTTP 200 code indicates that the request was successful. |
+|Message|String|operation success|The response message. |
 |RequestId|String|B0740227-AA9A-4E14-8E9F-36ED6652\*\*\*|The ID of the request. |
 |Success|Boolean|true|Indicates whether the request was successful. |
 
 ## Examples
 
-Sample request
+Sample requests
 
 ```
 http(s)://[Endpoint]/? Action=DeleteAcl
@@ -75,12 +75,10 @@ Sample success responses
 
 ```
 {
-    "DeleteAclResponse": {
-        "RequestId": "B0740227-AA9A-4E14-8E9F-36ED6652***",
-        "Message": "operation success",
-        "Code": 200,
-        "Success": true
-    }
+    "RequestId": "B0740227-AA9A-4E14-8E9F-36ED6652***",
+    "Message": "operation success",
+    "Code": 200,
+    "Success": true
 }
 ```
 
