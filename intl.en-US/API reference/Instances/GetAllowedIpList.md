@@ -1,6 +1,6 @@
 # GetAllowedIpList
 
-You can call this operation to obtain an IP address whitelist.
+Queries an IP address whitelist.
 
 ## Debugging
 
@@ -8,37 +8,39 @@ You can call this operation to obtain an IP address whitelist.
 
 ## Request parameters
 
-|Parameter|Type|Required|Example|Description|
-|---------|----|--------|-------|-----------|
-|Action|String|Yes|GetAllowedIpList|The operation that you want to perform. Set the value to GetAllowedIpList. |
-|InstanceId|String|Yes|alikafka\_post-cn-mp91inkw\*\*\*\*|The ID of the Message Queue for Apache Kafka instance whose IP address whitelist you want to obtain. |
-|RegionId|String|Yes|cn-hangzhou|The region ID of the Message Queue for Apache Kafka instance whose IP address whitelist you want to obtain. |
+|Parameter|Type|Required|Example|Description |
+|---------|----|--------|-------|------------|
+|Action|String|Yes|GetAllowedIpList|The operation that you want to perform. Set the value to
+
+ **GetAllowedIpList**. |
+|InstanceId|String|Yes|alikafka\_post-cn-mp91inkw\*\*\*\*|The ID of the instance whose whitelist you want to obtain. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance is located. |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|AllowedList|Struct| |The returned IP address whitelist. |
-|DeployType|Integer|4|The deployment mode of the Message Queue for Apache Kafka instance. Valid values:
+|AllowedList|Struct| |The IP address whitelist. |
+|DeployType|Integer|4|The deployment mode of the instance. Valid values:
 
- -   **4**: deployment on the Internet and Virtual Private Cloud \(VPC\)
--   **5**: deployment on the VPC
+ -   **4**: Internet and VPC
+-   **5**: VPC
 
  **Note:** This parameter is necessary only for integrator customers. |
-|InternetList|Array| |The details of the returned IP address whitelist of the Internet type. |
-|AllowedIpList|List|0.0.0.0/0|The returned IP address whitelist. |
-|PortRange|String|9093/9093|The port number range corresponding to the IP address whitelist. Set the value to
+|InternetList|Array| |The whitelist for Internet access. |
+|AllowedIpList|List|0.0.0.0/0|The IP addresses in the whitelist. |
+|PortRange|String|9093/9093|The allowed port range for the IP addresses in the whitelist. Valid values:
 
  **9093/9093**. |
-|VpcList|Array| |The details of the returned IP address whitelist of the VPC type. |
-|AllowedIpList|List|192.XXX.X.X/XX|The returned IP address whitelist. |
-|PortRange|String|9092/9092|The port number range corresponding to the IP address whitelist. Set the value to
+|VpcList|Array| |The whitelist for VPC access. |
+|AllowedIpList|List|192.XXX.X.X/XX|The IP addresses in the whitelist. |
+|PortRange|String|9092/9092|The allowed port range for the IP addresses in the whitelist. Valid values:
 
  **9092/9092**. |
-|Code|Integer|200|The returned status code. If **"200"** is returned, the request is successful. |
-|Message|String|operation success.|The returned message. |
+|Code|Integer|200|The response code. The HTTP 200 code indicates that the request was successful. |
+|Message|String|operation success.|The response message. |
 |RequestId|String|A421CCD7-5BC5-4B32-8DD8-64668A8FCB56|The ID of the request. |
-|Success|Boolean|true|Indicates whether the request is successful. |
+|Success|Boolean|true|Indicates whether the request was successful. |
 
 ## Examples
 
@@ -56,50 +58,80 @@ Sample success responses
 `XML` format
 
 ```
-<Message>operation success. </Message>
-<RequestId>A421CCD7-5BC5-4B32-8DD8-64668A8FCB56</RequestId>
-<Success>true</Success>
-<Code>200</Code>
-<AllowedList>
-    <DeployType>4</DeployType>
-    <InternetList>
-        <PortRange>9093/9093</PortRange>
-        <AllowedIpList>0.0.0.0/0</AllowedIpList>
-    </InternetList>
-    <VpcList>
-        <PortRange>9092/9092</PortRange>
-        <AllowedIpList>192.XXX.X.X/XX</AllowedIpList>
-    </VpcList>
-</AllowedList>
+<GetAllowedIpListResponse>
+      <RequestId>A421CCD7-5BC5-4B32-8DD8-64668A8FCB56</RequestId>
+      <Message>operation success. </Message>
+      <AllowedList>
+            <DeployType>4</DeployType>
+            <InternetList>
+                  <PortRange>9092/9092</PortRange>
+            </InternetList>
+            <InternetList>
+                  <AllowedIpList>192.XXX.X.X/XX</AllowedIpList>
+            </InternetList>
+            <InternetList>
+                  <PortRange>9093/9093</PortRange>
+            </InternetList>
+            <InternetList>
+                  <AllowedIpList>0.0.0.0/0</AllowedIpList>
+            </InternetList>
+            <VpcList>
+                  <PortRange>9092/9092</PortRange>
+            </VpcList>
+            <VpcList>
+                  <AllowedIpList>192.XXX.X.X/XX</AllowedIpList>
+            </VpcList>
+            <VpcList>
+                  <PortRange>9093/9093</PortRange>
+            </VpcList>
+            <VpcList>
+                  <AllowedIpList>0.0.0.0/0</AllowedIpList>
+            </VpcList>
+      </AllowedList>
+      <Code>200</Code>
+      <Success>true</Success>
+</GetAllowedIpListResponse>
 ```
 
 `JSON` format
 
 ```
 {
-  "Message": "operation success.",
-  "RequestId": "A421CCD7-5BC5-4B32-8DD8-64668A8FCB56",
-  "Success": true,
-  "Code": 200,
-  "AllowedList": {
-    "DeployType": 4,
-    "InternetList": [
-      {
-        "PortRange": "9093/9093",
-        "AllowedIpList": [
-          "0.0.0.0/0"
+    "RequestId": "A421CCD7-5BC5-4B32-8DD8-64668A8FCB56",
+    "Message": "operation success.",
+    "AllowedList": {
+        "DeployType": 4,
+        "InternetList": [
+            {
+                "PortRange": "9092/9092"
+            },
+            {
+                "AllowedIpList": "192.XXX.X.X/XX"
+            },
+            {
+                "PortRange": "9093/9093"
+            },
+            {
+                "AllowedIpList": "0.0.0.0/0"
+            }
+        ],
+        "VpcList": [
+            {
+                "PortRange": "9092/9092"
+            },
+            {
+                "AllowedIpList": "192.XXX.X.X/XX"
+            },
+            {
+                "PortRange": "9093/9093"
+            },
+            {
+                "AllowedIpList": "0.0.0.0/0"
+            }
         ]
-      }
-    ],
-    "VpcList": [
-      {
-        "PortRange": "9092/9092",
-        "AllowedIpList": [
-          "192.XXX.X.X/XX"
-        ]
-      }
-    ]
-  }
+    },
+    "Code": 200,
+    "Success": true
 }
 ```
 
