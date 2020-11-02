@@ -22,7 +22,7 @@ keyword: [kafka, connector, 开启]
 
 3.  在左侧导航栏，单击**Connector**。
 
-4.  在**Connector**页面，选择实例，单击**开启Connector**。
+4.  在**Connector**页面，选择实例，单击**开通Connector**。
 
 5.  在**提示**对话框，单击**确认**。
 
