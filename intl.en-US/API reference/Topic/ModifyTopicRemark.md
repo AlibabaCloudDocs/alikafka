@@ -1,6 +1,6 @@
 # ModifyTopicRemark
 
-Modifies the remarks of a topic.
+Modifies the description of a topic.
 
 ## Debugging
 
@@ -13,23 +13,23 @@ Modifies the remarks of a topic.
 |Action|String|Yes|ModifyTopicRemark|The operation that you want to perform. Set the value to
 
  **ModifyTopicRemark**. |
-|InstanceId|String|Yes|alikafka\_post-cn-0pp1l9z8\*\*\*|The ID of the Message Queue for Apache Kafka instance. |
-|RegionId|String|Yes|cn-hangzhou|The ID of the region where the Message Queue for Apache Kafka instance is located. |
-|Topic|String|Yes|alikafka\_post-cn-0pp1l9z8z\*\*\*|The name of the topic. |
-|Remark|String|No|testremark|The remarks of the topic. |
+|InstanceId|String|Yes|alikafka\_post-cn-0pp1l9z8\*\*\*|The ID of the Message Queue for Apache Kafka instance that contains the topic. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance is located. |
+|Topic|String|Yes|alikafka\_post-cn-0pp1l9z8z\*\*\*|The name of the topic whose description you want to change. |
+|Remark|String|No|testremark|The description of the topic. |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The returned HTTP status code. A 200 status code indicates that the request succeeded. |
-|Message|String|operation success|The returned message. |
+|Code|Integer|200|The response code. The HTTP 200 code indicates that the request was successful. |
+|Message|String|operation success|The response message. |
 |RequestId|String|DB6F1BEA-903B-4FD8-8809-46E7E9CE\*\*\*|The ID of the request. |
 |Success|Boolean|true|Indicates whether the request was successful. |
 
 ## Examples
 
-Sample request
+Sample requests
 
 ```
 http(s)://[Endpoint]/? Action=ModifyTopicRemark
@@ -56,20 +56,14 @@ Sample success responses
 
 ```
 {
-    "ModifyTopicRemarkResponse": {
-        "RequestId": "DB6F1BEA-903B-4FD8-8809-46E7E9CE***",
-        "Message": "operation success",
-        "Code": 200,
-        "Success": true
-    }
+    "RequestId":"DB6F1BEA-903B-4FD8-8809-46E7E9CE***",
+    "Message":"operation success",
+    "Code":"200",
+    "Success":"true"
 }
 ```
 
 ## Error codes
-
-|HttpCode|Error code|Error message|Description|
-|--------|----------|-------------|-----------|
-|500|InternalError|An internal error occurred; please try again later.|The error message returned because an internal error has occurred. Try again later.|
 
 For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/alikafka).
 
