@@ -13,7 +13,7 @@ Creates an access control list \(ACL\).
 |Action|String|Yes|CreateAcl|The operation that you want to perform. Set the value to
 
  **CreateAcl**. |
-|AclOperationType|String|Yes|Read|The type of operations allowed by the ACL. Valid values:
+|AclOperationType|String|Yes|Read|The type of operation allowed by the ACL. Valid values:
 
  -   **Write**
 -   **Read** |
@@ -29,9 +29,9 @@ Creates an access control list \(ACL\).
 
  -   **Topic**
 -   **Group** |
-|InstanceId|String|Yes|alikafka\_pre-cn-v0h1cng00\*\*\*|The ID of the Message Queue for Apache Kafka instance. |
-|RegionId|String|Yes|cn-hangzhou|The ID of the region where the Message Queue for Apache Kafka instance is located. |
-|Username|String|Yes|test\*\*\*|The username of the Simple Authentication and Security Layer \(SASL\) user.
+|InstanceId|String|Yes|alikafka\_pre-cn-v0h1cng00\*\*\*|The ID of the Message Queue for Apache Kafka instance that contains the resource. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance is located. |
+|Username|String|Yes|test\*\*\*|The name of the user.
 
  You can use an asterisk \(\*\) to represent all usernames. |
 
@@ -39,14 +39,14 @@ Creates an access control list \(ACL\).
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The returned HTTP status code. A 200 status code indicates that the request succeeded. |
-|Message|String|operation success|The returned message. |
+|Code|Integer|200|The response code. The HTTP 200 code indicates that the request was successful. |
+|Message|String|operation success|The response message. |
 |RequestId|String|56729737-C428-4E1B-AC68-7A8C2D5\*\*\*\*|The ID of the request. |
 |Success|Boolean|true|Indicates whether the request was successful. |
 
 ## Examples
 
-Sample request
+Sample requests
 
 ```
 http(s)://[Endpoint]/? Action=CreateAcl
@@ -77,12 +77,10 @@ Sample success responses
 
 ```
 {
-    "CreateAclResponse": {
-        "RequestId": "56729737-C428-4E1B-AC68-7A8C2D5****",
-        "Message": "operation success",
-        "Code": 200,
-        "Success": true
-    }
+    "RequestId": "56729737-C428-4E1B-AC68-7A8C2D5****",
+    "Message": "operation success",
+    "Code": 200,
+    "Success": true
 }
 ```
 
