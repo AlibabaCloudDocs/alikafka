@@ -4,20 +4,31 @@ keyword: [kafka, connector, enable]
 
 # Enable the connector feature
 
-This topic describes how to enable the connector feature in your Message Queue for Apache Kafka instance.
+This topic describes how to enable the connector feature for your Message Queue for Apache Kafka instance.
 
-Your Message Queue for Apache Kafka instance meets the following conditions:
+A Message Queue for Apache Kafka instance is purchased and deployed, and the following conditions are met by the instance.
 
--   The instance edition is Professional Edition. For more information about how to upgrade the instance edition, see [Upgrade the instance configuration](/intl.en-US/User guide/Instances/Upgrade the instance configuration.md).
--   The major version is 2.2.0. For more information about how to upgrade the major version, see [Upgrade the major version of an instance](/intl.en-US/User guide/Instances/Upgrade the instance version.md).
--   The instance is in the Running state.
+|Item|Description|
+|----|-----------|
+|Status|The status of the instance must be Running.|
+|Version|The version of the Message Queue for Apache Kafka instance must be one of the following:-   The major version is 0.10.2, with the latest minor version.
+-   The major version is 2.2.0. |
 
-The following example shows an instance that meets the preceding conditions:
+**Note:** In the Message Queue for Apache Kafka console, you can view the running status and version of the instance in the **Basic Information** section on the **Instance Details** page.
 
-![require](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/3250549951/p128102.png)
+1.  Log on to the [Message Queue for Apache Kafka console](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm).
 
-1.  Submit [a ticket](https://workorder-intl.console.aliyun.com/#/ticket/add/?productId=1352) to contact Message Queue for Apache Kafka Customer Services to enable the connector feature.
+2.  In the top navigation bar, select a region.
 
-    **Note:** Optional. In the **Add Confidential Information** field of the ticket, enter the Message Queue for Apache Kafka instance ID.
+3.  In the left-side navigation pane, click **Connector**.
 
+4.  On the **Connector** page, click an instance and click **Enable Connector**.
+
+5.  In the **Note** dialog box, click **OK**.
+
+
+After the connector feature is enabled for your Message Queue for Apache Kafka instance, you can create a Function Compute or MaxCompute sink connector to synchronize data from your Message Queue for Apache Kafka instance to Function Compute or MaxCompute.
+
+-   [Create a Function Compute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a Function Compute sink connector.md)
+-   [Create a MaxCompute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MaxCompute sink connector.md)
 
