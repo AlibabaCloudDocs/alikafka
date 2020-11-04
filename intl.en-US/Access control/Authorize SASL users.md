@@ -55,8 +55,6 @@ After you upgrade the minor version of an instance, enable ACL for the instance 
 
 2.  In the **Basic Information** section, click **Enable ACL**.
 
-    ![pg_enable_acl](../images/p99533.png)
-
 3.  In the dialog box that appears, click **OK**.
 
     After you click **OK**, the following information appears:
