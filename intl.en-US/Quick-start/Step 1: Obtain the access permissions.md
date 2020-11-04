@@ -19,5 +19,5 @@ Then, the page jumps to the Message Queue for Apache Kafka console.
 
 Purchase a Message Queue for Apache Kafka instance and deploy it based on the network type.
 
--   [Access from a VPC](/intl.en-US/Quick-start/Step 2: Purchase and deploy an instance/Access from VPC.md)
+-   [Access from a VPC](/intl.en-US/Quick-start/Step 2: Purchase and deploy an instance/Connect Message Queue for Apache Kafka to a VPC.md)
 
