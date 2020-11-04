@@ -275,10 +275,10 @@ keyword: [apache kafka, kafka, 公网, 收发消息, 9093]
                     props.put(SslConfigs.SSL_ENDPOINT_IDENTIFICATION_ALGORITHM_CONFIG, "");
             
                     //构造消息对象，也即生成一个消费实例。
-                    KafkaConsumer&lt;String, String&gt; consumer = new org.apache.kafka.clients.consumer.KafkaConsumer&lt;String, String&gt;(props);
+                    KafkaConsumer<String, String> consumer = new org.apache.kafka.clients.consumer.KafkaConsumer<String, String>(props);
                     //设置消费组订阅的Topic，可以订阅多个。
                     //如果GROUP_ID_CONFIG是一样，则订阅的Topic也建议设置成一样。
-                    List&lt;String&gt; subscribedTopics =  new ArrayList&lt;String&gt;();
+                    List<String> subscribedTopics =  new ArrayList<String>();
                     //如果需要订阅多个Topic，则在这里加进去即可。
                     //每个Topic需要先在控制台进行创建。
                     subscribedTopics.add(kafkaProperties.getProperty("topic"));
@@ -287,10 +287,10 @@ keyword: [apache kafka, kafka, 公网, 收发消息, 9093]
                     //循环消费消息。
                     while (true){
                         try {
-                            ConsumerRecords&lt;String, String&gt; records = consumer.poll(1000);
+                            ConsumerRecords<String, String> records = consumer.poll(1000);
                             //必须在下次Poll之前消费完这些数据, 且总耗时不得超过SESSION_TIMEOUT_MS_CONFIG。
                             //建议开一个单独的线程池来消费消息，然后异步返回结果。
-                            for (ConsumerRecord&lt;String, String&gt; record : records) {
+                            for (ConsumerRecord<String, String> record : records) {
                                 System.out.println(String.format("Consume partition:%d offset:%d", record.partition(), record.offset()));
                             }
                         } catch (Exception e) {
