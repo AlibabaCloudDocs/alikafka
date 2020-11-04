@@ -4,7 +4,7 @@ keyword: [kafka, endpoint, plaintext, sasl, ssl]
 
 # Endpoint comparison
 
-This topic compares three types of Message Queue for Apache Kafka endpoints to help you choose an appropriate access method.
+This topic compares different types of Message Queue for Apache Kafka endpoints to help you choose an appropriate access method.
 
 |Item|Default endpoint|Simple Authentication and Security Layer \(SASL\) endpoint|
 |----|----------------|----------------------------------------------------------|
