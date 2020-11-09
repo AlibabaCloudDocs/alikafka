@@ -375,5 +375,5 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
 
 日志中显示发送的测试消息。
 
-![fc LOG](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/4906119951/p127831.png)
+![fc LOG](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/5972984061/p127831.png)
 
