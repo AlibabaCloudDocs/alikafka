@@ -266,7 +266,7 @@ The data synchronization tasks of a connector must use a consumer group named co
         |Transmission Mode|The message delivery mode. Valid values:         -   Asynchronous
         -   Synchronous We recommend that you select asynchronous mode. In synchronous transmission mode, if Function Compute takes a long time to process data, Message Queue for Apache Kafka will also take a long time to process data. If a batch of data takes longer than 5 minutes to process, the Message Queue for Apache Kafka client will rebalance the traffic.
 |Asynchronous|
-        |Data Size|The number of messages that are included in a batch. Default value: 20. The connector aggregates multiple messages into batches based on this value. Note that a batch cannot exceed 6 MB in synchronous more and 128 KB in asynchronous mode. Assume that the batch size is 20 and the sending mode is asynchronous. The first 17 messages have a total size of 127 KB, but the 18th message is 200 KB. In this case, the connector sends the first 17 messages as a single batch, and then sends the 18th message separately.**Note:** If you set the key to null when sending a message, the request does not contain the key. If you set the value to null, the request does not contain the value.
+        |Data Size|The number of messages that are included in a batch. Default value: 20. The connector aggregates multiple messages into batches based on this value. Note that a batch cannot exceed 6 MB in synchronous mode and 128 KB in asynchronous mode. Assume that the batch size is 20 and the sending mode is asynchronous. The first 17 messages have a total size of 127 KB, but the 18th message is 200 KB. In this case, the connector sends the first 17 messages as a single batch, and then sends the 18th message separately.**Note:** If you set the key to null when sending a message, the request does not contain the key. If you set the value to null, the request does not contain the value.
 
         -   If the messages in a batch do not exceed the size limit, the request contains the content of the messages. The following code provides a sample request:
 
@@ -375,5 +375,5 @@ After you send a message to the data source topic in Message Queue for Apache Ka
 
 The test message that you sent appears in the log.
 
-![fc LOG](../images/p127831.png)
+![fc LOG](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/5082984061/p127831.png)
 
