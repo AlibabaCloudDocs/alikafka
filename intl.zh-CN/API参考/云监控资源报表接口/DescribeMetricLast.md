@@ -2,7 +2,7 @@
 
 调用DescribeMetricLast接口查询指定监控对象的最新监控数据。
 
-关于各个阿里云产品的Project、Metric、Period、Dimensions等参数的取值，请参见[DescribeMetricMetaList](~~98846~~)或[云产品监控项](~~163515~~)。
+**说明：** 云服务Namespace、Project、Metric、Period、Dimensions等参数的取值，请参见[DescribeMetricMetaList](~~98846~~)或[云服务监控项](~~163515~~)。
 
 ## 调试
 
@@ -14,9 +14,7 @@
 |--|--|----|---|--|
 |Action|String|是|DescribeMetricLast|要执行的操作，取值：DescribeMetricLast。 |
 |MetricName|String|是|CPUUtilization|监控项名称。 |
-|Namespace|String|是|acs\_ecs\_dashboard|产品的数据命名空间，用于区分不同的产品。
-
- 命名方式：acs\_产品名。 |
+|Namespace|String|是|acs\_ecs\_dashboard|云服务的数据命名空间。命名方式：acs\_服务名称。 |
 |Period|String|否|60|时间间隔。通常为监控项的上报周期，单位：秒。
 
  **说明：** 如果不设置统计周期，则按照注册监控项时申请的上报周期来查询原始数据；如果设置报警规则时设置了统计周期，则会按照此周期查询对应的统计数据。 |
@@ -30,13 +28,11 @@
  格式为Unix时间戳，即从1970年1月1日开始所经过的毫秒。
 
  **说明：** 只能查询270天以内的监控数据。 |
-|Dimensions|String|否|\[\{"instanceId":"i-abcdefgh12\*\*\*\*"\}\]|用于查询指定资源的监控数据。
+|Dimensions|String|否|\[\{"instanceId":"i-abcdefgh12\*\*\*\*"\}\]|维度Map，用于查询指定资源的监控数据。
 
- 格式为`key-value`键值对形式的集合，常用的`key-value`集合为`i-abcdefgh12****`。
+ 格式：key-value键值对形式的集合，常用的key-value集合为`instanceId:i-2ze2d6j5uhg20x47****`。
 
- `key`和`value`的长度为1~64个字节，超过64个字节时截取前64字节。`key`和`value`的取值可包含大小写字母、数字、英文句点（.）、短划线（-）、下划线（\_）、正斜线（/）和反斜线（\\）。
-
- **说明：** `Dimensions`传入时需要使用JSON字符串表示指定资源的监控数据，必须按顺序传入。 |
+ **说明：** Dimensions传入时需要使用JSON字符串表示该Map对象，必须按顺序传入。 |
 |NextToken|String|否|15761432850009dd70bb64cff1f0fff6c0b08ffff073be5fb1e785e2b020f7fed9b5e137bd810a6d6cff5ae\*\*\*\*|分页游标的标识。
 
  -   如果匹配查询条件的返回结果超过了分页大小，则会返回这个分页游标。
@@ -54,7 +50,10 @@
 |Code|String|200|状态码。
 
  **说明：** 200表示成功。 |
-|Success|Boolean|true|操作是否成功。true表示成功，false表示失败。 |
+|Success|Boolean|true|操作是否成功。取值：
+
+ -   true：成功。
+-   false：失败。 |
 |Period|String|60|时间间隔。单位：秒。 |
 |NextToken|String|xxxxxx|分页游标标识。 |
 |Datapoints|String|\[\{"timestamp":1548777660000,"userId":"123456789876\*\*\*\*","instanceId":"i-abcdefgh12\*\*\*\*","Minimum":9.92,"Average":9.92,"Maximum":9.92\}\]|监控数据列表。 |
