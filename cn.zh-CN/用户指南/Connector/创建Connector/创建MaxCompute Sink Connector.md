@@ -8,12 +8,12 @@ keyword: [kafka, connector, maxcompute]
 
 在创建MaxCompute Sink Connector前，请确保您已完成以下操作：
 
-1.  为消息队列Kafka版实例开启Connector。详情请参见[开启Connector](/cn.zh-CN/用户指南/Connector/开启Connector.md)。
-2.  为消息队列Kafka版创建数据源Topic。详情请参见[步骤一：创建Topic](/cn.zh-CN/快速入门/步骤三：创建资源.md)。
+1.  为消息队列Kafka版实例开启Connector。更多信息，请参见[开启Connector](/cn.zh-CN/用户指南/Connector/开启Connector.md)。
+2.  为消息队列Kafka版创建数据源Topic。更多信息，请参见[步骤一：创建Topic](/cn.zh-CN/快速入门/步骤三：创建资源.md)。
 
     本文以名称为maxcompute-test-input的Topic为例。
 
-3.  通过MaxCompute客户端创建表。详情请参见[创建和查看表](/cn.zh-CN/快速入门/创建和查看表.md)。
+3.  通过MaxCompute客户端创建表。更多信息，请参见[创建和查看表](/cn.zh-CN/快速入门/创建和查看表.md)。
 
     本文以名称为test\_kafka的表为例。该示例表的建表语句如下：
 
@@ -114,7 +114,7 @@ keyword: [kafka, connector, maxcompute]
 Connector的数据同步任务必须使用名称为connect-任务名称的Consumer Group。如果您未手动创建该Consumer Group，系统将为您自动创建。
 
 |kafka-maxcompute-sink|
-        |任务类型|Connector的数据同步任务类型。本文以数据从消息队列Kafka版同步至函数计算为例。更多任务类型，请参见[Connector类型](/cn.zh-CN/用户指南/Connector/Connector概述.md)。|KAFKA2ODPS|
+        |任务类型|Connector的数据同步任务类型。本文以数据从消息队列Kafka版同步至MaxCompute为例。更多任务类型，请参见[Connector类型](/cn.zh-CN/用户指南/Connector/Connector概述.md)。|KAFKA2ODPS|
 
     2.  在**源实例配置**下方的**数据源Topic**文本框，输入数据源Topic名称，从**消费初始位置**列表，选择消费初始位置，在**创建资源**，选择**自动创建**或者选择**手动创建**并输入手动创建的Topic的名称，然后单击**下一步**。
 
@@ -155,8 +155,8 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
 
         |参数|描述|示例值|
         |--|--|---|
-        |MaxCompute连接地址|MaxCompute的服务接入点。详情请参见[配置Endpoint](/cn.zh-CN/准备工作/配置Endpoint.md)。         -   VPC网络Endpoint：低延迟，推荐。适用于消息队列Kafka版实例和MaxCompute处于同一地域场景。
-        -   外网Endpoint：高延迟，不推荐。适用于消息队列Kafka版实例和MaxCompute处于不同地域的场景。如需使用公网Endpoint，您需要为Connector开启公网访问。详情请参见[为Connector开启公网访问](/cn.zh-CN/用户指南/Connector/为Connector开启公网访问.md)。
+        |MaxCompute连接地址|MaxCompute的服务接入点。更多信息，请参见[配置Endpoint](/cn.zh-CN/准备工作/配置Endpoint.md)。         -   VPC网络Endpoint：低延迟，推荐。适用于消息队列Kafka版实例和MaxCompute处于同一地域场景。
+        -   外网Endpoint：高延迟，不推荐。适用于消息队列Kafka版实例和MaxCompute处于不同地域的场景。如需使用公网Endpoint，您需要为Connector开启公网访问。更多信息，请参见[为Connector开启公网访问](/cn.zh-CN/用户指南/Connector/为Connector开启公网访问.md)。
 |http://service.cn-hangzhou.maxcompute.aliyun-inc.com/api|
         |MaxCompute工作空间|MaxCompute的工作空间。|connector\_test|
         |MaxCompute表|MaxCompute的表。|test\_kafka|
