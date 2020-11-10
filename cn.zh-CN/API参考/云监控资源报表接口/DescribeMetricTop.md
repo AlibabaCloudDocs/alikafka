@@ -1,8 +1,8 @@
 # DescribeMetricTop
 
-调用DescribeMetricTop接口查询指定时间段内排序后的云产品时序指标监控数据。
+调用DescribeMetricTop接口查询排序后的指定云服务时序指标的监控数据。
 
-各云产品的Namespace、Orderby、Project、Metric、Period、Dimensions等参数的取值，请参见[DescribeMetricMetaList](~~98846~~)或[云监控主要监控项](~~163515~~)。
+**说明：** 云服务Namespace、Orderby、Project、Metric、Period、Dimensions等参数的取值，请参见[DescribeMetricMetaList](~~98846~~)或[云服务监控项](~~163515~~)。
 
 ## 调试
 
@@ -14,9 +14,7 @@
 |--|--|----|---|--|
 |Action|String|是|DescribeMetricTop|要执行的操作，取值：DescribeMetricTop。 |
 |MetricName|String|是|cpu\_idle|监控项名称。 |
-|Namespace|String|是|acs\_ecs\_dashboard|产品的数据命名空间，用于区分不同的产品。
-
- 命名方式：acs\_产品名。 |
+|Namespace|String|是|acs\_ecs\_dashboard|云服务的数据命名空间。命名方式：acs\_产品名。 |
 |Orderby|String|是|Average|排序字段，即按该排序字段进行排序。 |
 |Period|String|否|60|时间间隔，单位：秒。取值：60、300、900。
 
@@ -38,11 +36,7 @@
 -   Format格式：YYYY-MM-DDThh:mm:ssZ。 |
 |Dimensions|String|否|\[\{"instanceId": "i-abcdefgh12\*\*\*\*"\}\]|维度Map，用于查询指定资源的监控数据。
 
- 格式为：key-value键值对形式的集合，常用的key-value集合为：`instanceId:XXXXXX`。
-
- Key和Value的长度为1~64个字节，超过64个字节时截取前64字节。
-
- Key和Value的取值可包含大小写字母、数字、点号（.）、短划线（-）、下划线（\_）、正斜线（/）和反斜线（\\）。
+ 格式：key-value键值对形式的集合，常用的key-value集合为`instanceId:i-2ze2d6j5uhg20x47****`。
 
  **说明：** Dimensions传入时需要使用JSON字符串表示该Map对象，必须按顺序传入。 |
 |OrderDesc|String|否|False|排序方式。取值：
@@ -83,29 +77,31 @@ http(s)://[Endpoint]/?Action=DescribeMetricTop
 `XML` 格式
 
 ```
-<Period>60</Period>
-<Datapoints>
-    <order>1</order>
-    <timestamp>1551687360000</timestamp>
-    <userId>12345****</userId>
-    <instanceId>i-2zeehst1****</instanceId>
-    <Maximum>16.41</Maximum>
-    <Minimum>4.66</Minimum>
-    <Average>7.74</Average>
-    <_count>1</_count>
-</Datapoints>
-<Datapoints>
-    <order>2</order>
-    <timestamp>1551687360000</timestamp>
-    <userId>12345****</userId>
-    <instanceId>i-2zefxdy2****</instanceId>
-    <Maximum>15.74</Maximum>
-    <Minimum>5.03</Minimum>
-    <Average>7.14</Average>
-    <_count>1</_count>
-</Datapoints>
-<RequestId>1F68A4E8-4488-48E7-9189-3E1F5165E64E</RequestId>
-<Code>200</Code>
+<DescribeMetricTopResponse>
+	  <Period>60</Period>
+	  <Datapoints>
+		    <order>1</order>
+		    <timestamp>1551687360000</timestamp>
+		    <userId>12345****</userId>
+		    <instanceId>i-2zeehst1****</instanceId>
+		    <Maximum>16.41</Maximum>
+		    <Minimum>4.66</Minimum>
+		    <Average>7.74</Average>
+		    <_count>1</_count>
+	  </Datapoints>
+	  <Datapoints>
+		    <order>2</order>
+		    <timestamp>1551687360000</timestamp>
+		    <userId>12345****</userId>
+		    <instanceId>i-2zefxdy2****</instanceId>
+		    <Maximum>15.74</Maximum>
+		    <Minimum>5.03</Minimum>
+		    <Average>7.14</Average>
+		    <_count>1</_count>
+	  </Datapoints>
+	  <RequestId>1F68A4E8-4488-48E7-9189-3E1F5165E64E</RequestId>
+	  <Code>200</Code>
+</DescribeMetricTopResponse>
 ```
 
 `JSON` 格式
