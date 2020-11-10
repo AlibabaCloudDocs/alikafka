@@ -1,8 +1,8 @@
 # DescribeMetricList
 
-调用DescribeMetricList接口查询指定时间段内的云产品时序指标监控数据。
+调用DescribeMetricList接口查询指定云服务时序指标的监控数据。
 
-各云产品的Namespace、Project、Metric、Period、Dimensions等参数的取值，请参见[DescribeMetricMetaList](~~98846~~)或[云监控主要监控项](~~163515~~)。
+**说明：** 云服务Namespace、Project、Metric、Period、Dimensions等参数的取值，请参见[DescribeMetricMetaList](~~98846~~)或[云服务监控项](~~163515~~)。
 
 ## 调试
 
@@ -14,12 +14,12 @@
 |--|--|----|---|--|
 |Action|String|是|DescribeMetricList|要执行的操作，取值：DescribeMetricList。 |
 |MetricName|String|是|cpu\_idle|监控项名称。 |
-|Namespace|String|是|acs\_ecs\_dashboard|产品的数据命名空间，用于区分不同的产品。
+|Namespace|String|是|acs\_ecs\_dashboard|云服务的数据命名空间。
 
  命名方式：acs\_产品名。 |
 |Period|String|否|60|时间间隔。单位：秒。取值：60、300、900。
 
- 请根据您的实际需求设置该参数。 |
+ **说明：** 请根据您的实际需求设置该参数。 |
 |StartTime|String|否|2019-01-30 00:00:00|开始时间。支持的格式：
 
  -   Unix时间戳：从1970年1月1日开始所经过的毫秒数。
@@ -32,11 +32,7 @@
 -   Format格式：YYYY-MM-DDThh:mm:ssZ。 |
 |Dimensions|String|否|\[\{"instanceId": "i-abcdefgh12\*\*\*\*"\}\]|维度Map，用于查询指定资源的监控数据。
 
- 格式为：key-value键值对形式的集合，常用的key-value集合为：`instanceId:XXXXXX`。
-
- Key和Value的长度为1~64个字节，超过64个字节时截取前64字节。
-
- Key和Value的取值可包含大小写字母、数字、英文句点（.）、短划线（-）、下划线（\_）、正斜线（/）和反斜线（\\）。
+ 格式：key-value键值对形式的集合，常用的key-value集合为`instanceId:i-2ze2d6j5uhg20x47****`。
 
  **说明：** Dimensions传入时需要使用JSON字符串表示该Map对象，必须按顺序传入。 |
 |NextToken|String|否|15761485350009dd70bb64cff1f0fff750b08ffff073be5fb1e785e2b020f1a949d5ea14aea7fed82f01dd8\*\*\*\*|分页游标标识。
@@ -55,10 +51,11 @@
 |Code|String|200|状态码。
 
  **说明：** 200表示成功。 |
-|Success|Boolean|true|操作是否成功。true表示成功，false表示失败。 |
-|NextToken|String|15761441850009dd70bb64cff1f0fff6d0b08ffff073be5fb1e785e2b020f7fed9b5e137bd810a6d6cff5ae\*\*\*\*|分页游标标识。
+|Success|Boolean|true|操作是否成功。取值：
 
- **说明：** 如果不设置该参数，则表示获取第一页的数据。当该参数有返回值时，说明还有下一页，您可以将返回的NextToken作为参数再次请求获得下一页的数据，直到返回为null为止，表示获取到了所有的数据。 |
+ -   true：成功。
+-   false：失败。 |
+|NextToken|String|15761441850009dd70bb64cff1f0fff6d0b08ffff073be5fb1e785e2b020f7fed9b5e137bd810a6d6cff5ae\*\*\*\*|分页游标标识。 |
 |Period|String|60|时间间隔。单位：秒。取值：60、300、900。 |
 |Datapoints|String|\[\{"timestamp":1548777660000,"userId":"123","instanceId":"i-abc","Minimum":9.92,"Average":9.92,"Maximum":9.92\}\]|监控数据列表。 |
 |Message|String|The Request is not authorization.|错误信息。 |
@@ -79,7 +76,7 @@ http(s)://[Endpoint]/?Action=DescribeMetricList
 `XML` 格式
 
 ```
-<DescribeMetricList>
+<DescribeMetricListResponse>
 		  <Period>60</Period>
 		  <Datapoints>
 			    <timestamp>1490152860000</timestamp>
@@ -164,7 +161,7 @@ http(s)://[Endpoint]/?Action=DescribeMetricList
 		  <RequestId>6A5F022D-AC7C-460E-94AE-B9E75083D027</RequestId>
 		  <Success>true</Success>
 		  <Code>200</Code>
-</DescribeMetricList>
+</DescribeMetricListResponse>
 ```
 
 `JSON` 格式
