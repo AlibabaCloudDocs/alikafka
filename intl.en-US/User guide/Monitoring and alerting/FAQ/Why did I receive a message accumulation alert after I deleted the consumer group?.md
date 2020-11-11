@@ -1,11 +1,16 @@
+---
+keyword: [consumergroup, accumulation alert, delete]
+---
+
 # Why did I receive a message accumulation alert after I deleted the consumer group?
 
-The consumer group is logically deleted from the console. However, the information such as the consumer offset on the broker is not deleted. The accumulation alert is handled based on the consumer offset. Therefore, you still receive the accumulation alert.
+After a consumer group is deleted, its information such as the consumer offset will not be deleted from the broker.
 
-If you do not want to receive the accumulation alert after deleting the consumer group, you can perform the following operations:
+The consumer group is logically deleted from the console. However, its information such as the consumer offset is not deleted from the broker. The accumulation alert is handled based on the consumer offset. Therefore, you still received the accumulation alert.
+
+If you do not want to receive the accumulation alert after you delete the consumer group, you can choose to:
 
 -   Disable the accumulation alert.
-
 -   Wait until the consumer offset expires.
 
     The Message Queue for Apache Kafka consumer offset is stored in an internal topic and cannot be directly deleted. If the consumer offset is not updated after the message retention period ends, it will be cleared due to expiration.
