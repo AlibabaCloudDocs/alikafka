@@ -1,8 +1,10 @@
 # When are historical messages deleted from Message Queue for Apache Kafka?
 
--   When disk usage is less than 85%, messages that expired are deleted at 04:00 every day.
--   When disk usage reaches 85%, messages that expired are immediately deleted.
--   When disk usage reaches 90%, deletion starts from the earliest stored messages no matter whether they are expired or not.
+Instance downtime may occur due to insufficient disk capacity. To avoid instance downtime and maintain service availability, Message Queue for Apache Kafka dynamically controls disk usage of each instance.
 
-Message Queue for Apache Kafka dynamically controls disk usage to prevent instance downtime due to insufficient disk space and ensure service availability. We recommend that you keep disk usage at no more than 70% to ensure business health so that messages can be traced back. To resize disks, see [Upgrade the instance configuration](/intl.en-US/User guide/Instances/Upgrade instance specifications.md).
+-   If the disk usage is lower than 85%, expired messages are deleted at 04:00 every day.
+-   If the disk usage reaches 85%, expired messages are immediately deleted.
+-   If the disk usage reaches 90%, stored messages \(expired or not\) are deleted in the sequence that they were stored in the clients.
+
+**Note:** To ensure your service reliability and message backtracking capabilities, we recommend that you maintain a disk usage of lower than 70%.
 
