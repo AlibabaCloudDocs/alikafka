@@ -9,67 +9,36 @@ keyword: [kafka, acl, sasl]
 您的消息队列Kafka版实例必须满足以下条件：
 
 -   规格类型为专业版。
--   版本为2.2.0及以上。
 -   运行状态为服务中。
-
-企业A购买了消息队列Kafka版，企业A希望用户A只能从消息队列Kafka版的所有Topic中消费消息，而不能向消息队列Kafka版的任何Topic生产消息。
-
-## 步骤一：申请开启ACL
+-   大版本为2.2.0及以上。如何升级实例大版本，请参见[升级大版本](/cn.zh-CN/用户指南/实例/升级实例版本.md)。
+-   小版本为最新版。如何升级实例小版本，请参见[升级小版本](/cn.zh-CN/用户指南/实例/升级实例版本.md)。
 
 **说明：** 公网/VPC实例的默认SASL用户是没有任何权限的。开启ACL后，公网/VPC实例的默认SASL用户会因为没有任何权限而收发消息失败。您需要为该SASL用户授予所有Topic和Consumer Group的读写权限。
 
-提交[工单](https://selfservice.console.aliyun.com/ticket/category/alikafka)联系消息队列Kafka版技术人员开启ACL。
+企业A购买了消息队列Kafka版，企业A希望用户A只能从消息队列Kafka版的所有Topic中消费消息，而不能向消息队列Kafka版的任何Topic生产消息。
 
-## 步骤二：升级小版本
+## 步骤一：开启ACL
 
-申请通过后，将实例的小版本升级至最新版。
+升级实例的小版本后，在消息队列Kafka版控制台为实例开启ACL。
 
-1.  登录[消息队列Kafka版控制台](http://kafka.console.aliyun.com)。
+1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
 2.  在顶部菜单栏，选择地域。
 
 3.  在左侧导航栏，单击**实例详情**。
 
-4.  在**实例详情**页面，选择实例，在**基本信息**区域的**小版本**右侧，单击**升级小版本**。
+4.  在**实例详情**页面，选择实例，单击**实例详情**页签，在**基本信息**区域右侧，单击**开启ACL**。
 
-5.  在**升级小版本**对话框，完成以下操作。
+5.  在**提示**对话框，单击**确认**，然后手动刷新页面。
 
-    1.  在**姓名**文本框，输入您的姓名。
+    手动刷新页面后，**实例详情**页面的**基本信息**区域出现SASL接入点，运行状态显示升级中。
 
-    2.  在**紧急联系电话**文本框，输入您的紧急联系电话。
-
-    3.  单击**升级**。
-
-    实例的**运行状态**显示**升级中**。
-
-6.  在**运行状态**区域的**运行状态**，单击**进度详情**。
-
-    **进度详情**对话框显示任务的**剩余时间**和**当前进度**。
+    **说明：** 升级完成后，实例才会开启ACL。您才可以创建SASL用户并为其授权后，通过SASL接入点接入。升级预计需要15分钟~20分钟。
 
 
-## 步骤三：开启ACL
+## 步骤二：创建SASL用户
 
-升级实例的小版本后，在消息队列Kafka版控制台为实例开启ACL。
-
-1.  在消息队列Kafka版控制台的**实例详情**页面，选择申请开启的实例，单击**实例详情**页签。
-
-2.  在**基本信息**区域，单击**开启ACL**。
-
-    ![pg_enable_acl](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/7247559951/p99533.png)
-
-3.  在对话框，单击**确定**。
-
-    单击**确定**后：
-
-    -   实例的**基本信息**区域显示**SASL接入点**。
-
-        不同类型接入点的区别，请参见[接入点对比](/cn.zh-CN/产品简介/接入点对比.md)。
-
-    -   实例的运行状态显示**升级中**。
-
-## 步骤四：创建SASL用户
-
-实例升级完成后，为用户A创建SASL用户。
+实例开启ACL后，为用户A创建SASL用户。
 
 1.  在消息队列Kafka版控制台的**实例详情**页面，选择开启了ACL的实例，单击**SASL用户**页签。
 
@@ -77,7 +46,7 @@ keyword: [kafka, acl, sasl]
 
 3.  在**创建SASL用户**对话框，设置SASL用户，然后单击**创建**。
 
-    ![pg_create_sasl_user ](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/7247559951/p99571.png)
+    ![pg_create_sasl_user ](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/7247559951/p99571.png)
 
     |参数|描述|
     |--|--|
@@ -89,7 +58,7 @@ keyword: [kafka, acl, sasl]
     创建完成后，**SASL用户**页签下方显示您创建的SASL用户。
 
 
-## 步骤五：授予SASL用户权限
+## 步骤三：授予SASL用户权限
 
 为用户A创建SASL用户后，为该SASL用户授予从Topic和Consumer Group读取消息的权限。
 
@@ -99,7 +68,7 @@ keyword: [kafka, acl, sasl]
 
 3.  在**创建ACL**对话框，设置ACL，然后单击**创建**。
 
-    ![pg_read_from_Topic](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/7247559951/p99574.png)
+    ![pg_read_from_Topic](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/7247559951/p99574.png)
 
     |参数|描述|
     |--|--|
@@ -117,8 +86,10 @@ keyword: [kafka, acl, sasl]
 
 5.  在**创建ACL**对话框，设置ACL，然后单击**创建**。
 
-    ![pg_read_from_Topic](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/7247559951/p99587.png)
+    ![pg_read_from_Topic](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/7247559951/p99587.png)
 
 
-完成授权后，用户A可以通过SASL接入点接入消息队列Kafka版并使用PLAIN机制消费消息。详情请参见[SDK概述](/cn.zh-CN/SDK参考/SDK概述.md)。
+## 相关操作
+
+完成授权后，用户A可以通过SASL接入点接入消息队列Kafka版并使用PLAIN机制消费消息。如何使用SDK接入，请参见[SDK概述](/cn.zh-CN/SDK参考/SDK概述.md)。
 
