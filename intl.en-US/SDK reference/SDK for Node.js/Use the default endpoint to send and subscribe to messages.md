@@ -1,31 +1,65 @@
 # Use the default endpoint to send and subscribe to messages
 
-This topic describes how a Node.js client uses SDK for Node.js to connect to the default endpoint of Message Queue for Apache Kafka and send and subscribe to messages in a virtual private cloud \(VPC\).
+This topic describes how a Node.js client uses SDK for Node.js to connect to the default endpoint of Message Queue for Apache Kafka. This topic also describes how a Node.js client sends and subscribes to messages in a virtual private cloud \(VPC\).
 
--   Node.js is installed. For more information, see [Node.js downloads](https://nodejs.org/en/download/).
+-   [Install GCC](https://gcc.gnu.org/install/)
+-   [Install Node.js.](https://nodejs.org/en/download/)
 
     **Note:** The version of Node.js must be 4.0.0 or later.
 
--   OpenSSL is installed. For more information, see [OpenSSL downloads](https://www.openssl.org/source/).
+-   [Install OpenSSL](https://www.openssl.org/source/)
+
+## Install the C++ library
+
+1.  Run the following command to switch to the yum source configuration Directory: /etc/yum.repos.d/.
+
+    ```
+    
+            cd /etc/yum.repos.d/ 
+          
+    ```
+
+2.  Create the yum source configuration file confluent.repo.
+
+    ```
+    
+            [Confluent.dist] name=Confluent repository (dist) baseurl=https://packages.confluent.io/rpm/5.1/7 gpgcheck=1 gpgkey=https://packages.confluent.io/rpm/5.1/archive.key enabled=1 [Confluent] name=Confluent repository baseurl=https://packages.confluent.io/rpm/5.1 gpgcheck=1 gpgkey=https://packages.confluent.io/rpm/5.1/archive.key enabled=1 
+          
+    ```
+
+3.  Run the following command to install the C++ library:
+
+    ```
+    
+            yum install librdkafka-devel 
+          
+    ```
+
 
 ## Install the Node.js library
 
 1.  Run the following command to specify the file path of the OpenSSL header for the preprocessor:
 
     ```
-    export CPPFLAGS=-I/usr/local/opt/openssl/include
+    
+            export CPPFLAGS=-I/usr/local/opt/openssl/include 
+          
     ```
 
 2.  Run the following command to specify the path of the OpenSSL library for the connector:
 
     ```
-    export LDFLAGS=-L/usr/local/opt/openssl/lib
+    
+            export LDFLAGS=-L/usr/local/opt/openssl/lib 
+          
     ```
 
 3.  Run the following command to install the Node.js library:
 
     ```
-    npm install node-rdkafka
+    
+            npm install i --unsafe-perm node-rdkafka 
+          
     ```
 
 
@@ -43,14 +77,14 @@ This topic describes how a Node.js client uses SDK for Node.js to connect to the
 
     |Parameter|Description|
     |---------|-----------|
-    |bootstrap\_servers|The default endpoint of the Message Queue for Apache Kafka instance. You can obtain the default endpoint in the **Basic Information** section of the **Instance Details** page in the Message Queue for Apache Kafka console.|
-    |topic\_name|The name of the topic. You can obtain the name of the topic on the **Topics** page in the Message Queue for Apache Kafka console.|
+    |bootstrap\_servers|The Secure Sockets Layer \(SSL\) endpoint of the Message Queue for Apache Kafka instance. You can obtain the default endpoint in the **Basic Information** section of the **Instance Details** page in the Message Queue for Apache Kafka console.|
+    |topic\_name|The name of the topic that you want to query. You can obtain the name of the topic on the **Topics** page in the Message Queue for Apache Kafka console.|
     |consumer\_id|The name of the consumer group. You can obtain the name of the consumer group on the **Consumer Groups** page in the Message Queue for Apache Kafka console.|
 
 
 ## Send messages
 
-1.  Create a message sender producer.js.
+1.  Create a message sending program named producer.js.
 
     ```
     const Kafka = require('node-rdkafka');
@@ -127,7 +161,7 @@ This topic describes how a Node.js client uses SDK for Node.js to connect to the
 
 ## Subscribe to messages
 
-1.  Create a subscription program consumer.js.
+1.  Create a consumption program named consumer.js.
 
     ```
     const Kafka = require('node-rdkafka');
