@@ -17,7 +17,7 @@ keyword: [kafka, connector, 查看配置]
 
 3.  在左侧导航栏，单击**Connector**。
 
-4.  在**Connector**页面，选择实例，找到要查看任务配置的Connector，在其右侧**操作**列，单击**查看任务配置**。
+4.  在**Connector**页面，选择实例，找到要查看任务配置的Connector，在其右侧**操作**列，选择**![icon_more](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/8046936061/p185678.png)** \> **查看任务配置**。
 
     **查看任务配置**面板显示Connector的任务配置。
 
