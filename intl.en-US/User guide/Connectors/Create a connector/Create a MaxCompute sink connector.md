@@ -4,46 +4,118 @@ keyword: [kafka, connector, maxcompute]
 
 # Create a MaxCompute sink connector
 
-This topic describes how to create a MaxCompute sink connector to synchronize data from a source topic in a Message Queue for Apache Kafka instance to a table in MaxCompute.
+This topic describes how to create a MaxCompute sink connector to synchronize data from a source topic of a Message Queue for Apache Kafka instance to a MaxCompute table.
 
-The following operations are completed:
+Before you start, make sure that you have completed the following steps:
 
 1.  Enable the connector feature for the Message Queue for Apache Kafka instance. For more information, see [Enable the connector feature](/intl.en-US/User guide/Connectors/Enable the connector feature.md).
-2.  Create a source topic in the Message Queue for Apache Kafka instance. For more information, see [Step 1: Create a topic](/intl.en-US/Quick-start/Step 3: Create resources.md).
+2.  Create source topics for the Message Queue for Apache Kafka instance. For more information, see [Step 1: Create a topic](/intl.en-US/Quick-start/Step 3: Create resources.md).
 
-    For example, you can create a topic named maxcompute-test-input.
+    In this topic, a topic named maxcompute-test-input is created.
 
-3.  Create a table on the MaxCompute client. For more information, see [Create and view a table](/intl.en-US/Quick Start/Create and view a table.md).
+3.  Create a MaxCompute table from the MaxCompute client. For more information, see [Create and view a table](/intl.en-US/Quick Start/Create and view a table.md).
 
-    For example, you can execute the following SQL statement to create a table named test\_kafka:
+    In this topic, a MaxCompute table named test\_kafka is created in a project named connector\_test. You can run the following statement to create a MaxCompute table named test\_kafka:
 
     ```
-    CREATE TABLE IF NOT EXISTS test_kafka(topic STRING,`partition` BIGINT,`offset` BIGINT,key STRING,value STRING,dt DATETIME) STORED AS ALIORC TBLPROPERTIES ('comment'='');
+    CREATE TABLE IF NOT EXISTS test_kafka(topic STRING,partition BIGINT,offset BIGINT,key STRING,value STRING) PARTITIONED by (pt STRING);
     ```
 
 
 ## Procedure
 
-To synchronize data from a source topic in a Message Queue for Apache Kafka instance to a table in MaxCompute by using a MaxCompute sink connector, perform the following steps:
+To synchronize data from a source topic of a Message Queue for Apache Kafka instance to a MaxCompute table by using a MaxCompute sink connector, perform the following operations:
 
-1.  Optional. Create the topics and consumer groups that the MaxCompute sink connector requires.
+1.  Grant Message Queue for Apache Kafka the permissions to access MaxCompute.
+    -   [Create a RAM role](#section_e02_70i_3jg)
+    -   [Add permissions](#section_rbd_pjy_5dh)
+2.  Create topics and consumer groups that are required by the MaxCompute sink connector.
 
     If you do not want to specify the names of the topics and consumer groups, skip this step and select Automatically in the next step.
 
     **Note:** Some topics require a local storage engine. If the major version of your Message Queue for Apache Kafka instance is 0.10.2, you cannot manually create topics that use a local storage engine. In major version 0.10.2, these topics must be automatically created.
 
-    1.  [Create topics \(Optional\)](#section_jvw_8cp_twy)
-    2.  [Create consumer groups \(Optional\)](#section_xu7_scc_88s)
-2.  Create and deploy a MaxCompute sink connector.
+    1.  [Create topics that the MaxCompute sink connector requires](#section_jvw_8cp_twy)
+    2.  [Create consumer groups that the MaxCompute sink connector requires](#section_xu7_scc_88s)
+3.  Create and deploy a MaxCompute sink connector.
     1.  [Create a MaxCompute sink connector](#section_mjv_rqc_6ds)
     2.  [Deploy the MaxCompute sink connector](#section_444_q49_c46)
-3.  Verify the result.
+4.  Verify the result.
     1.  [Send messages](#section_idc_z6c_c33)
     2.  [View data in the MaxCompute table](#section_l1n_2qx_7kl)
 
-## Create topics \(Optional\)
+## Create a RAM role
 
-In the Message Queue for Apache Kafka console, you can manually create the five topics that the MaxCompute sink connector requires.
+You cannot select Message Queue for Apache Kafka as the trusted service of a Resource Access Management \(RAM\) role. When you create the RAM role, select a supported service as the trusted service. Then, manually modify the trust policy of the created RAM role.
+
+1.  Log on to the [RAM console](https://ram.console.aliyun.com/).
+
+2.  In the left-side navigation pane, click **RAM Roles**.
+
+3.  On the **RAM Roles** page, click **Create RAM Role**.
+
+4.  In the **Create RAM Role** panel, perform the following operations:
+
+    1.  Set **Trusted entity type** to **Alibaba Cloud Service** and click **Next**.
+
+    2.  Set **Role Type** to **Normal Service Role**. In the **RAM Role Name** field, enter AliyunKafkaMaxComputeUser1. From the **Select Trusted Service** drop-down list, select **Function Compute**. Then, click **OK**.
+
+5.  On the **RAM Roles** page, find **AliyunKafkaMaxComputeUser1** and click **AliyunKafkaMaxComputeUser1**.
+
+6.  On the **AliyunKafkaMaxComputeUser1** page, click the **Trust Policy Management** tab, and then click **Edit Trust Policy**.
+
+7.  In the **Edit Trust Policy** panel, replace **fc** in the script with alikafka and then click **OK**.
+
+    ![pg_ram](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/5105276061/p183450.png)
+
+
+## Add permissions
+
+To enable the MaxCompute sink connector to synchronize messages to the MaxCompute table, you must grant at least the following permissions to the RAM role.
+
+|Object|Action|Description|
+|------|------|-----------|
+|Project|CreateInstance|The permissions to create instances in projects.|
+|Table|Describe|The permissions to read the metadata of tables.|
+|Table|Alter|The permissions to modify the metadata of tables and the permissions to create and delete partitions.|
+|Table|Update|The permissions to overwrite data in tables and inset data to tables.|
+
+For more information about the preceding permissions and how to grant these permissions, see [Authorize users](/intl.en-US/Management/Configure security features/Manage users and permissions/Authorize users.md).
+
+The following example shows how to grant the required permissions to AliyunKafkaMaxComputeUser1:
+
+1.  Log on to the MaxCompute client.
+
+2.  Run the following command to add the RAM user:
+
+    ```
+    add user `RAM$:$<accountid>:role/aliyunkafkamaxcomputeuser1`;
+    ```
+
+    **Note:** Replace <accountid\> with the UID of your Alibaba Cloud account.
+
+3.  Grant the RAM user the least permissions that are required to access MaxComupte.
+
+    1.  Run the following command to grant the RAM user the permissions on projects:
+
+        ```
+        grant CreateInstance on project connector_test to user `RAM$<accountid>:role/aliyunkafkamaxcomputeuser1`;
+        ```
+
+        **Note:** Replace <accountid\> with the UID of your Alibaba Cloud account.
+
+    2.  Run the following command to grant the RAM user the permissions on tables:
+
+        ```
+        grant Describe, Alter, Update on table test_kafka to user `RAM$<accountid>:role/aliyunkafkamaxcomputeuser1`;
+        ```
+
+        **Note:** Replace <accountid\> with the UID of your Alibaba Cloud account.
+
+
+## Create topics that the MaxCompute sink connector requires
+
+You can log on to the Message Queue for Apache Kafka console and manually create the topics that are required by the MaxCompute sink connector.
 
 1.  Log on to the [Message Queue for Apache KafkaConsole](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm).
 
@@ -65,21 +137,21 @@ In the Message Queue for Apache Kafka console, you can manually create the five 
     -   Partitions: the number of partitions in the topic. Set the value to 1.
     -   Storage Engine: the storage engine of the topic. Set the value to Local Storage.
     -   cleanup.policy: the log cleanup policy for the topic. Set the value to compact. |
-    |Task status topic|The topic that is used to store task statuses.    -   Topic: the name of the topic. We recommend that you start the name with connect-status.
+    |Task status topic|The topic that is used to store task states.    -   Topic: the name of the topic. We recommend that you start the name with connect-status.
     -   Partitions: the number of partitions in the topic. We recommend that you set the value to 6.
     -   Storage Engine: the storage engine of the topic. Set the value to Local Storage.
     -   cleanup.policy: the log cleanup policy for the topic. Set the value to compact. |
-    |Dead-letter queue topic|The topic that is used to store the abnormal data of the connector framework. To save topic resources, you can use a dead-letter queue topic or an abnormal data topic to store all abnormal data.    -   Topic: the name of the topic. We recommend that you start the name with connect-error.
+    |Dead-letter queue topic|The topic that is used to store anomaly data of the connector framework. To save topic resources, this topic and the abnormal data topic can be the same topic.    -   Topic: the name of the topic. We recommend that you start the name with connect-error.
     -   Partitions: the number of partitions in the topic. We recommend that you set the value to 6.
     -   Storage Engine: the storage engine of the topic. Valid values: Local Storage and Cloud Storage. |
-    |Abnormal data topic|The topic that is used to store the abnormal data of the sink connector. To save topic resources, you can use an abnormal data topic or a dead-letter queue topic to store all abnormal data.    -   Topic: the name of the topic. We recommend that you start the name with connect-error.
+    |Abnormal data topic|The topic that is used to store anomaly data of the sink connector. To save topic resources, this topic and the dead-letter queue topic can be the same topic.    -   Topic: the name of the topic. We recommend that you start the name with connect-error.
     -   Partitions: the number of partitions in the topic. We recommend that you set the value to 6.
     -   Storage Engine: the storage engine of the topic. Valid values: Local Storage and Cloud Storage. |
 
 
-## Create consumer groups \(Optional\)
+## Create consumer groups that the MaxCompute sink connector requires
 
-In the Message Queue for Apache Kafka console, you can manually create the two consumer groups that the MaxCompute sink connector requires.
+You can log on to the Message Queue for Apache Kafka console and manually create the consumer groups that are required by the MaxCompute sink connector.
 
 1.  In the left-side navigation pane, click **Consumer Group management**.
 
@@ -87,15 +159,15 @@ In the Message Queue for Apache Kafka console, you can manually create the two c
 
 3.  In the **Create Consumer Group** dialog box, set the parameters as required and click **Create**.
 
-    |Consumer group|Description|
+    |Consumer Group|Description|
     |--------------|-----------|
-    |Connector task consumer group|The name of the consumer group that is used by data synchronization tasks. The name of this consumer group must be in the connect-task name format.|
+    |Connector task consumer group|The name of the consumer group that is used by the data synchronization task. The name of this consumer group must be in the connect-task name format.|
     |Connector consumer group|The name of the consumer group that is used by the connector. We recommend that you start the name of this consumer group with connect-cluster.|
 
 
 ## Create a MaxCompute sink connector
 
-To create a MaxCompute sink connector that is used to synchronize data from Message Queue for Apache Kafka to MaxCompute, perform the following steps:
+To create a MaxCompute sink connector that is used to synchronize data from Message Queue for Apache Kafka to the MaxCompute sink connector, perform the following operations:
 
 1.  Log on to the [Message Queue for Apache KafkaConsole](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm).
 
@@ -103,25 +175,25 @@ To create a MaxCompute sink connector that is used to synchronize data from Mess
 
 3.  In the **Connector**Page, select an instance and click **Create a connector.**.
 
-4.  In the **Create Connector** panel, perform the following steps:
+4.  In the **Create Connector** panel, perform the following operations:
 
-    1.  In the **Enter Basic Information** step, enter a connector name in the **Connector Name** field, select **Message Queue for Apache Kafka** from the **Dump Path** drop-down list, select **MaxCompute** from the **Dump To** drop-down list, and then click **Next**.
+    1.  On the **Enter Basic Information** wizard page, enter a connector name in the **Connector Name** field, select **Message Queue for Apache Kafka** from the **Dump Path** drop-down list, select **MaxCompute** from the **Dump To** drop-down list, and then click **Next**.
 
         |Parameter|Description|Example|
         |---------|-----------|-------|
-        |Connector Name|The name of the connector. The value must comply with the following rules:        -   The connector name must be 1 to 48 characters in length. It can contain digits, lowercase letters, and hyphens \(-\), but cannot start with a hyphen \(-\).
-        -   The name must be unique in a Message Queue for Apache Kafka instance.
-The data synchronization tasks of a connector must use a consumer group that is named in the format of connect-task name. If you have not manually created such a consumer group, the system automatically creates a consumer group for you.
+        |Connector Name|The name of the connector. The value must comply with the following rules:        -   The connector name must be 1 to 48 characters in length. It can contain digits, lowercase letters, and hyphens \(-\) but must not start with a hyphen \(-\).
+        -   Connector names must be unique for the same Message Queue for Apache Kafka instance.
+The data synchronization task of the connector must use a consumer group that is named in the format of connect-task name. If you have not created such a consumer group, the system automatically creates a consumer group for you.
 
 |kafka-maxcompute-sink|
-        |Task Type|The type of the data synchronization task of the connector. A MaxCompute sink connector runs data synchronization tasks to synchronize data from Message Queue for Apache Kafka to MaxCompute. For more information about task types, see [Types of connectors](/intl.en-US/User guide/Connectors/Overview.md).|KAFKA2ODPS|
+        |Task Type|The type of the data synchronization task of the connector. In this example, the task synchronizes data from Message Queue for Apache Kafka to MaxCompute. For more information about task types, see [Types of connectors](/intl.en-US/User guide/Connectors/Overview.md).|KAFKA2ODPS|
 
-    2.  In the **Configure Source Instance** step, enter a topic name in the **Data Source Topic** field, select a consumer offset from the **Consumer Offset** drop-down list, set the **Create Resource** parameter to **Automatically** or **Manually**, and then click **Next**. If you select Manually, enter the name of each manually created topic.
+    2.  On the **Configure Source Instance** wizard page, enter a topic name in the **Data Source Topic** field, select a consumer offset from the **Consumer Offset** drop-down list, set the **Create Resource** parameter to **Automatically** or **Manually**, and then click **Next**. If you select Manually, enter a name for each manually created topic.
 
         |Parameter|Description|Example|
         |---------|-----------|-------|
-        |VPC ID|The ID of the virtual private cloud \(VPC\) where the data synchronization task runs. The default value is the ID of the VPC where the Message Queue for Apache Kafka instance is located. You can retain the default value.|vpc-bp1xpdnd3l\*\*\*|
-        |VSwitch|The ID of the vSwitch based on which the data synchronization task runs. The vSwitch must be in the same VPC as the Message Queue for Apache Kafka instance. The default value is the ID of the vSwitch that you specify for the Message Queue for Apache Kafka instance.|vsw-bp1d2jgg81\*\*\*|
+        |VPC ID|The ID of the virtual private cloud \(VPC\) where the data synchronization task runs. The default value is the ID of the VPC where the Message Queue for Apache Kafka instance is deployed. You do not need to change the value.|vpc-bp1xpdnd3l\*\*\*|
+        |VSwitch ID|The ID of the vSwitch where the data synchronization task is created. The vSwitch must be in the same VPC as the Message Queue for Apache Kafka instance. The default value is the ID of the vSwitch that you have specified for the Message Queue for Apache Kafka instance.|vsw-bp1d2jgg81\*\*\*|
         |Data Source Topic|The name of the topic from which data is to be synchronized.|maxcompute-test-input|
         |Consumer Offset|The offset where consumption starts. Valid values:         -   latest: Consumption starts from the latest offset.
         -   earliest: Consumption starts from the initial offset.
@@ -137,33 +209,55 @@ The data synchronization tasks of a connector must use a consumer group that is 
         -   Storage Engine: the storage engine of the topic. Set the value to Local Storage.
         -   cleanup.policy: the log cleanup policy for the topic. Set the value to compact.
 |connect-config-kafka-maxcompute-sink|
-        |Task status Topic|The topic that is used to store task statuses.        -   Topic: the name of the topic. We recommend that you start the name with connect-status.
+        |Task status Topic|The topic that is used to store task states.        -   Topic: the name of the topic. We recommend that you start the name with connect-status.
         -   Partitions: the number of partitions in the topic. We recommend that you set the value to 6.
         -   Storage Engine: the storage engine of the topic. Set the value to Local Storage.
         -   cleanup.policy: the log cleanup policy for the topic. Set the value to compact.
 |connect-status-kafka-maxcompute-sink|
-        |Dead letter queue Topic|The topic that is used to store the abnormal data of the connector framework. To save topic resources, you can use a dead-letter queue topic or an abnormal data topic to store all abnormal data.        -   Topic: the name of the topic. We recommend that you start the name with connect-error.
+        |Dead letter queue Topic|The topic that is used to store anomaly data of the connector framework. To save topic resources, this topic and the abnormal data topic can be the same topic.        -   Topic: the name of the topic. We recommend that you start the name with connect-error.
         -   Partitions: the number of partitions in the topic. We recommend that you set the value to 6.
         -   Storage Engine: the storage engine of the topic. Valid values: Local Storage and Cloud Storage.
 |connect-error-kafka-maxcompute-sink|
-        |Abnormal Data Topic|The topic that is used to store the abnormal data of the sink connector. To save topic resources, you can use an abnormal data topic or a dead-letter queue topic to store all abnormal data.        -   Topic: the name of the topic. We recommend that you start the name with connect-error.
+        |Abnormal Data Topic|The topic that is used to store anomaly data of the sink connector. To save topic resources, this topic and the dead-letter queue topic can be the same topic.        -   Topic: the name of the topic. We recommend that you start the name with connect-error.
         -   Partitions: the number of partitions in the topic. We recommend that you set the value to 6.
         -   Storage Engine: the storage engine of the topic. Valid values: Local Storage and Cloud Storage.
 |connect-error-kafka-maxcompute-sink|
 
-    3.  In the **Configure Destination Instance** step, set the parameters as required and click **Next**.
+    3.  On the **Configure Destination Instance** wizard page, set the parameters as required and click **Next**.
 
         |Parameter|Description|Example|
         |---------|-----------|-------|
-        |MaxCompute Endpoint|The endpoint of MaxCompute. For more information, see [Configure endpoints](/intl.en-US/Prepare/Configure endpoints.md).         -   VPC endpoint: The VPC endpoint can be used when the Message Queue for Apache Kafka instance and MaxCompute project are in the same region. We recommend that you use the VPC endpoint because it has lower latency.
-        -   Public endpoint: The public endpoint can be used when the Message Queue for Apache Kafka instance and the MaxCompute project are in different regions. We recommend that you do not use the public endpoint because it has high latency. To use the public endpoint, you must enable Internet access for the connector. For more information, see [Enable Internet access for a connector](/intl.en-US/User guide/Connectors/Enable Internet access for a connector.md).
+        |MaxCompute Endpoint|The endpoint of MaxCompute. For more information, see [Configure endpoints](/intl.en-US/Prepare/Configure endpoints.md).         -   VPC endpoint: We recommend that you use the VPC endpoint because it has lower latency. The VPC endpoint can be used when the Message Queue for Apache Kafka instance and MaxCompute project are created in the same region.
+        -   Public endpoint: We recommend that you do not use the public endpoint because it has higher latency. The public endpoint can be used when the Message Queue for Apache Kafka instance and the MaxCompute project are created in different regions. To use the public endpoint, you must enable Internet access for the connector. For more information, see [Enable Internet access for a connector](/intl.en-US/User guide/Connectors/Enable Internet access for a connector.md).
 |http://service.cn-hangzhou.maxcompute.aliyun-inc.com/api|
         |MaxCompute Workspace|The name of the MaxCompute project to which you want to synchronize data.|connector\_test|
         |MaxCompute Table|The name of the MaxCompute table to which you want to synchronize data.|test\_kafka|
-        |Alibaba Cloud account ID|The AccessKey ID of the Alibaba Cloud account that is used to log on to MaxCompute.|LTAI4F\*\*\*|
-        |Alibaba Cloud Account Key|The AccessKey secret of the Alibaba Cloud account that is used to log on to MaxCompute.|wvDxjjR\*\*\*|
+        |Region of MaxCompute Table|The region where the MaxCompute table is created.|China \(Hangzhou\)|
+        |Alibaba Cloud Account|The UID of the Alibaba Cloud account that is used to access MaxCompute.|188\*\*\*|
+        |RAM Role|The name of the RAM role assumed by Message Queue for Apache Kafka. For more information, see [Create a RAM role](#section_e02_70i_3jg).|AliyunKafkaMaxComputeUser1|
+        |Mode|The mode in which messages are synchronized to the MaxCompute sink connector. The default value is DEFAULT. Valid values:        -   KEY: Only the keys of messages are retained and written into the Key column of the MaxCompute table.
+        -   VALUE: Only the values of messages are retained and written into the Value column of the MaxCompute table.
+        -   DEFAULT: Both keys and values of messages are retained and written into the Key and Value columns of the MaxCompute table.
 
-5.  In the **Preview/Create** step, confirm the configuration of the connector and click **Submit**.
+**Note:** In DEFAULT mode, the CSV format is not supported. You can select only the TEXT and BINARY formats.
+
+|DEFAULT|
+        |Format|The format in which messages are synchronized to the MaxCompute sink connector. The default value is TEXT. Valid values:        -   TEXT: strings.
+        -   BINARY: byte arrays.
+        -   CSV: strings separated with commas \(,\).
+
+**Note:** If you select the CSV format, the DEFAULT mode is not supported. Only the KEY and VALUE modes are supported.
+
+            -   KEY mode: Only the keys of messages are retained. Keys are separated with commas \(,\) and then written into the MaxCompute table in the order of indexes.
+            -   VALUE mode: Only the values of messages are retained. Values are separated with commas \(,\) and then written into the MaxCompute table in the order of indexes.
+|TEXT|
+        |Partition|The granularity level at which partitions are created. The default value is HOUR. Valid values:        -   DAY: writes data into a new partition every day.
+        -   HOUR: writes data into a new partition every hour.
+        -   MINUTE: writes data into a new partition every minute.
+|HOUR|
+        |Time Zone|The time zone of the Message Queue for Apache Kafka producer client that sends messages to the source topic of the MaxCompute sink connector. The default value is GMT 08:00.|GMT 08:00|
+
+5.  On the **Preview/Create** wizard page, confirm the configurations of the connector and click **Submit**.
 
     After you submit the configurations, refresh the **Connector** page. The connector that you create is displayed on the Connector page.
 
@@ -172,18 +266,18 @@ The data synchronization tasks of a connector must use a consumer group that is 
 
 After you create the MaxCompute sink connector, you must deploy it to synchronize data from Message Queue for Apache Kafka to MaxCompute.
 
-1.  On the **Connector** page, find the MaxCompute sink connector that you create and click **Deploy** in the **Actions** column.
+1.  On the **Connector** page, find the MaxCompute sink connector that you created and click **Deploy** in the **Actions** column.
 
-    After you deploy the MaxCompute sink connector, it enters the Running state.
+    After the MaxCompute sink connector is deployed, the state of the connector displays Running.
 
 
 ## Send messages
 
-After you deploy the MaxCompute sink connector, you can send messages to the source topic in Message Queue for Apache Kafka to test whether the data can be synchronized to MaxCompute.
+After you deploy the MaxCompute sink connector, you can send messages to the source topic of Message Queue for Apache Kafka to test whether data can be synchronized to MaxCompute.
 
 1.  In the left-side navigation pane, click **Topics**.
 
-2.  On the **Topics** page, select the instance that contains the maxcompute-test-input topic, find the **maxcompute-test-input** topic, and then click **Send Message** in the **Actions** column.
+2.  On the **Topics** page, select the instance, find the **maxcompute-test-input** topic, and then click **Send Message** in the **Actions** column.
 
 3.  In the **Sends a message.**Dialog box, send a test message.
 
@@ -198,16 +292,40 @@ After you deploy the MaxCompute sink connector, you can send messages to the sou
 
 ## View data in the MaxCompute table
 
-After you send a message to the source topic in Message Queue for Apache Kafka, you can view the data in the table on the MaxCompute client to check whether the message is received.
+After you send messages to the source topic of Message Queue for Apache Kafka, you can log on to the MaxCompute client and check whether the messages are received.
 
-1.  [Install and configure the odpscmd client](/intl.en-US/Prepare/Install and configure the odpscmd client.md).
+Perform the following operations to view the test\_kafka table:
 
-2.  Execute the following statement to view data in the test\_kafka table:
+1.  Log on to the MaxCompute client.
+
+2.  Run the following command to view the partitions of the table:
 
     ```
-    SELECT COUNT(*) FROM test_kafka;
+    show partitions test_kafka;
     ```
 
-    The sent message is returned in the response.
+    The following result is returned in this example:
+
+    ```
+    pt=11-17-2020 15
+    
+    OK
+    ```
+
+3.  Run the following command to view the data stored in the partitions:
+
+    ```
+    select * from test_kafka where pt ="11-17-2020 14";
+    ```
+
+    The following result is returned in this example:
+
+    ```
+    +-------+------------+------------+-----+-------+----+
+    | topic | partition  | offset     | key | value | pt |
+    +-------+------------+------------+-----+-------+----+
+    | maxcompute-test-input | 0          | 0          | 1   | 1     | 11-17-2020 14 |
+    +-------+------------+------------+-----+-------+----+
+    ```
 
 
