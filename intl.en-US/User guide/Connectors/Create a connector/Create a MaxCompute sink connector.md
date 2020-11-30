@@ -45,13 +45,13 @@ To synchronize data from a source topic in a Message Queue for Apache Kafka inst
 
 In the Message Queue for Apache Kafka console, you can manually create the five topics that the MaxCompute sink connector requires.
 
-1.  Log on to the [Message Queue for Apache Kafka console](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm).
+1.  Log on to the [Message Queue for Apache KafkaConsole](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm).
 
 2.  In the top navigation bar, select a region.
 
 3.  In the left-side navigation pane, click **Topics**.
 
-4.  On the **Topics** page, click **Create Topic**.
+4.  In the **Topics**Page, select an instance and click **Create a topic**.
 
 5.  In the **Create Topic** dialog box, set the parameters as required and click **Create**.
 
@@ -81,7 +81,7 @@ In the Message Queue for Apache Kafka console, you can manually create the five 
 
 In the Message Queue for Apache Kafka console, you can manually create the two consumer groups that the MaxCompute sink connector requires.
 
-1.  In the left-side navigation pane, click **Consumer Groups**.
+1.  In the left-side navigation pane, click **Consumer Group management**.
 
 2.  On the **Consumer Groups** page, select the instance and click **Create Consumer Group**.
 
@@ -97,11 +97,11 @@ In the Message Queue for Apache Kafka console, you can manually create the two c
 
 To create a MaxCompute sink connector that is used to synchronize data from Message Queue for Apache Kafka to MaxCompute, perform the following steps:
 
-1.  Log on to the [Message Queue for Apache Kafka console](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm).
+1.  Log on to the [Message Queue for Apache KafkaConsole](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm).
 
 2.  In the top navigation bar, select a region.
 
-3.  On the **Connector** page, click **Create Connector**.
+3.  In the **Connector**Page, select an instance and click **Create a connector.**.
 
 4.  In the **Create Connector** panel, perform the following steps:
 
@@ -185,13 +185,13 @@ After you deploy the MaxCompute sink connector, you can send messages to the sou
 
 2.  On the **Topics** page, select the instance that contains the maxcompute-test-input topic, find the **maxcompute-test-input** topic, and then click **Send Message** in the **Actions** column.
 
-3.  In the **Send Message** dialog box, send a test message.
+3.  In the **Sends a message.**Dialog box, send a test message.
 
-    1.  In the **Partitions** field, enter 0.
+    1.  In the **Partitions**Text box, enter 0.
 
-    2.  In the **Message Key** field, enter 1.
+    2.  In the **Message Key**Text box, enter 1.
 
-    3.  In the **Message Value** field, enter 1.
+    3.  In the **Message Value**Text box, enter 1.
 
     4.  Click **Send**.
 
@@ -209,7 +209,5 @@ After you send a message to the source topic in Message Queue for Apache Kafka, 
     ```
 
     The sent message is returned in the response.
-
-    ![table_result](../images/p127744.png)
 
 
