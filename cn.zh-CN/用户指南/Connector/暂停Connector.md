@@ -13,7 +13,7 @@
 
 3.  在左侧导航栏，单击**Connector**。
 
-4.  在**Connector**页面，选择实例，找到要暂停的Connector，在其右侧**操作**列，选择**更多** \> **暂停**。
+4.  在**Connector**页面，选择实例，找到要暂停的Connector，在其右侧**操作**列，选择**![icon_more](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/8046936061/p185678.png)** \> **暂停**。
 
 5.  在**提示**对话框，单击**确认**。
 
