@@ -15,6 +15,8 @@ keyword: [kafka, connector, fc]
 
 3.  在函数计算创建函数。更多信息，请参见[使用控制台创建函数]()。
 
+    **说明：** 函数类型必须为事件函数。
+
     本文以服务名称为guide-hello\_world、函数名称为hello\_world、运行环境为Python的事件函数为例。该示例函数的代码如下：
 
     ```
