@@ -15,6 +15,8 @@ Before you create a Function Compute sink connector, make sure that the followin
 
 3.  Create a function in Function Compute. For more information, see [Create a function in the Function Compute console]().
 
+    **Note:** The type of function must be event function.
+
     An event function named hello\_world is used as an example. This is an event function under the guide-hello\_world service that runs in the Python runtime environment. The following information shows the sample code of this function:
 
     ```
@@ -125,7 +127,7 @@ After you grant Message Queue for Apache Kafka permissions to access Function Co
 
         -   If no service linked role is created, Message Queue for Apache Kafka automatically creates a service linked role to use Function Compute sink connector.
         -   If you have created a service linked role, Message Queue for Apache Kafka does not create it again.
-        For more information about service linked roles, see [Service linked role]().
+        For more information about service linked roles, see [Service linked role](/intl.en-US/Access control/Service linked role.md).
 
         .
 
