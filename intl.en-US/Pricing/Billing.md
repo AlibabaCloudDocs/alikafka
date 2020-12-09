@@ -1,145 +1,147 @@
 # Billing
 
-This topic describes the instance editions, network types, billing items, and billing methods of Message Queue for Apache Kafka for you to better understand the billing rules and select instances as needed.
-
-**Note:** Message Queue for Apache Kafka is free of charge during public preview. You will be charged after public preview.
+This topic describes the instance editions, regions, instance types, billable items, and billing methods of Message Queue for Apache Kafka.
 
 ## Instance editions
 
-Message Queue for Apache Kafka provides instances of the Professional Edition and the Standard Edition by specifications.
+The following table describes the specifications for each instance edition of Message Queue for Apache Kafka.
 
-|Item|Professional Edition|Standard Edition|
-|----|--------------------|----------------|
-|Version|-   Version 0.10.x to version 2.x are supported.
--   Version 2.x is compatible with version 0.11.x and version 1.x.
--   The default version is version 0.10.x. For more information about how to upgrade the version, see [Upgrade the instance version](/intl.en-US/User guide/Instances/Upgrade the instance version.md).
+|Item|Standard Edition \(High Write\)|Professional Edition \(High Write\)|Professional Edition \(High Read\)|
+|----|-------------------------------|-----------------------------------|----------------------------------|
+|Version|Only version 0.10.x is supported.|-   Versions 0.10.x to 2.x are supported.
+-   Version 2.x is compatible with versions 0.11.x and 1.x.
+-   By default, version 0.10.x is deployed. For information about how to upgrade the version, see [Upgrade the instance version](/intl.en-US/User guide/Instances/Upgrade the instance version.md).
 
-|Only version 0.10.x is supported.|
-|Instance type|Exclusive instances, with a dedicated physical node for each instance|Virtual instances, with some instances sharing a physical node|
-|Message storage time|Customized based on your scenarios|Up to 7 days|
-|Disaster recovery|Multi-zone deployment|Single-zone deployment|
-|Performance optimization|Customized based on business scenarios|Not supported|
-|Cross-region message router|Coming soon|Not supported|
-|Topic|Number of available topics = Number of purchased topics × 2|Number of available topics = Number of purchased topics|
-
-## Network types
-
-Instances of the VPC type: provide only the default endpoints and can be accessed only through [VPC](/intl.en-US/Product Introduction/What is a VPC?.md) networks.
-
-## Billing items
-
-The following table describes the billing items of Message Queue for Apache Kafka.
-
-|Billing item|Description|Remarks|
-|------------|-----------|-------|
-|Peak traffic|The purchase of peak traffic is described as follows: -   Dual-channel read/write is implemented, and the read traffic is consistent with the write traffic. Set the peak traffic based on the maximum value of the peak read or write traffic. For business stability, a margin of about 30% of the maximum value of the peak read or write traffic is purchased for buffering. For example, if the peak write traffic is 100 MB/s and the peak read traffic is 200 MB/s, you need to purchase an instance that has the peak traffic as follows: 200 MB/s × \(1 + 30%\).
--   The maximum numbers of topics and partitions are specified for different peak traffic specifications. If the number of topics or partitions you want to create exceeds the maximum number specified for the peak traffic, you need to upgrade instance specifications or delete useless topics or partitions. For more information about how to upgrade instance specifications, see [Upgrade instance specifications](/intl.en-US/User guide/Instances/Upgrade instance specifications.md).
--   Each peak traffic specification has a disk space limit.
-
-|None|
-|Disk capacity|To ensure the performance and storage space, each peak traffic specification has a disk space limit. That is, you need to purchase an allowed disk capacity. The peak traffic is also limited by the disk type. Message Queue for Apache Kafka supports the following disk types: -   Ultra disk:
-
-    -   Standard Edition: supports a maximum of 120 MB/s peak traffic.
-    -   Professional Edition: does not support the ultra disk
-The maximum peak traffic is 120 MB/s.
-
--   \(Recommended\) SSD:
-    -   Standard Edition: supports a maximum of 120 MB/s peak traffic.
-    -   Professional Edition: supports a maximum of 2,000 MB/s peak traffic.
-
-|The disk type cannot be changed after the order is placed. Select the disk type with caution. The 3-replica mechanism is used for both [cloud storage and local storage](/intl.en-US/Introduction/Storage engine comparison.md). For example, if your actual business storage capacity is 100 GB, you need to purchase 300 GB for three replicas.|
-|Topic specifications|-   Topic specifications vary with peak traffic. For more information about the mappings between topic specifications and peak traffic values, see the billing rules for peak traffic in [Billing methods](#section_5z4_pg2_j7u).
--   In addition to the default number of partitions, 16 partitions are added for each additional topic. For example, you have purchased an instance that has 50 topics, 20 MB/s peak traffic, and 400 partitions by default. After you add 10 topics for this instance, the number of partitions of this instance is increased by 160, and the total number of partitions becomes 560.
--   The number of topics available for an instance of the Professional Edition is twice the number of purchased topics for this instance. For example, if you purchase a Professional Edition instance that has 50 topics, the actual number of topics you can create in the instance is 100.
-
-|None|
-
-**Note:**
-
--   You need to pay the fees of all billing items.
--   You can set the **Maximum Message Retention Period** parameter to conserve disk capacity. This parameter indicates the maximum retention period of a message when the disk capacity is sufficient. When the disk capacity is insufficient \(that is, the disk usage reaches 90%\), the old messages are deleted in advance to ensure service availability. By default, the maximum retention period of a message is 72 hours. This value ranges from 24 hours to 168 hours.
--   The number of API calls is not a billing item.
-
-## Billing methods
-
-Currently, Message Queue for Apache Kafka only supports subscription.
-
-Formulas
-
-Total fee = \(Unit price of peak traffic + Unit price of disk capacity × Purchased disk capacity/100 + Topic unit price × Number of added topics\) × Number of months
-
-Billing rules
-
-Billing rules include the rules for the peak traffic, disk capacity, and added topics:
-
--   Billing rules for peak traffic
-
-    Billing rules for peak traffic are related to instance editions.
-
-    |Peak traffic \(MB/s\)|Number of topics|Number of partitions|Unit price in Region 1 \(USD/month\)|Unit price in Region 2 \(USD/month\)|Unit price in Region 3 \(USD/month\)|
-    |---------------------|----------------|--------------------|------------------------------------|------------------------------------|------------------------------------|
-    |20|50|400|250|370|340|
-    |30|50|500|360|530|480|
-    |60|80|600|520|760|700|
-    |90|100|800|660|960|880|
-    |120|150|900|800|1,160|1,070|
-
-    |Peak traffic \(MB/s\)|Number of topics|Number of partitions|Unit price in Region 1 \(USD/month\)|Unit price in Region 2 \(USD/month\)|Unit price in Region 3 \(USD/month\)|
-    |---------------------|----------------|--------------------|------------------------------------|------------------------------------|------------------------------------|
-    |20|50|1,100|600|870|800|
-    |30|50|1,200|780|1,040|1,040|
-    |60|80|1,400|1,130|1,510|1,510|
-    |90|100|1,600|1,440|1,920|1,920|
-    |120|150|1,800|1,750|2,330|2,330|
-    |160|180|2,000|2,060|2,740|2,740|
-    |200|200|2,200|2,980|3,970|3,970|
-    |250|250|2,500|3,430|4,570|4,570|
-    |300|300|3,000|3,880|5,170|5,170|
-    |600|450|4,500|5,280|7,030|7,030|
-    |800|500|5,000|6,220|8,280|8,280|
-    |1,000|600|6,000|7,270|9,670|9,670|
-    |1,200|700|7,000|8,100|10,780|10,780|
-    |1,500|800|8,000|9,500|12,640|12,640|
-    |1,800|900|9,000|10,910|14,520|14,520|
-    |2,000|1,000|10,000|12,070|16,060|16,060|
-
--   Billing rules for disk capacity
-
-    |Disk type|Disk size \(GB\)|Unit price in Region 1 \(USD/month\)|Unit price in Region 2 \(USD/month\)|Unit price in Region 3 \(USD/month\)|
-    |---------|----------------|------------------------------------|------------------------------------|------------------------------------|
-    |Ultra disk|100|6|8|8|
-    |SSD|100|16|23|21|
-
--   Billing rules for added topics
-
-    |Billing item|Number of topics|Unit price in Region 1 \(USD/month\)|Unit price in Region 2 \(USD/month\)|Unit price in Region 3 \(USD/month\)|
-    |------------|----------------|------------------------------------|------------------------------------|------------------------------------|
-    |Topic|1|7|11|10|
-
+|-   Versions 0.10.x to 2.x are supported.
+-   Version 2.x is compatible with versions 0.11.x and 1.x.
+-   By default, version 0.10.x is deployed. For information about how to upgrade the version, see [Upgrade the instance version](/intl.en-US/User guide/Instances/Upgrade the instance version.md). |
+|Ratio of peak read traffic to peak write traffic|1:1|1:1|5:1|
+|Instance type|Virtual instance \(only part of virtual instances can be shared\)|Dedicated instance|Dedicated instance|
+|Message retention period|Up to 7 days|Customizable|Customizable|
+|Disaster recovery|Single-zone deployment|Multi-zone deployment|Multi-zone deployment|
+|Performance optimization|Not supported|Customizable|Customizable|
+|Cross-region message router|Not supported|Not supported|Not supported|
+|Topic|The number of available topics is equal to the number of purchased topics.|The number of available topics is twice the number of purchased topics.|The number of available topics is twice the number of purchased topics.|
 
 ## Regions
 
-Message Queue for Apache Kafka supports the following regions:
+The following table describes the regions where Message Queue for Apache Kafka can be deployed.
 
-|Region Type|Region|
-|-----------|------|
-|Region 1|China \(Hangzhou\)|
+|Region group|Region|
+|------------|------|
+|Region group 1|China \(Hangzhou\)|
 |China \(Shanghai\)|
 |China \(Qingdao\)|
 |China \(Beijing\)|
-|China \(Zhangjiakou-Beijing Winter Olympics\)|
+|China \(Zhangjiakou\)|
 |China \(Hohhot\)|
 |China \(Shenzhen\)|
 |China \(Heyuan\)|
 |China \(Chengdu\)|
-|Region 2|China \(Hong Kong\)|
+|Region group 2|China \(Hong Kong\)|
 |Singapore \(Singapore\)|
 |Japan \(Tokyo\)|
 |US \(Virginia\)|
 |US \(Silicon Valley\)|
 |Germany \(Frankfurt\)|
 |UK \(London\)|
-|Region 3|Malaysia \(Kuala Lumpur\)|
+|Region group 3|Malaysia \(Kuala Lumpur\)|
 |India \(Mumbai\)|
 |Indonesia \(Jakarta\)|
+
+## Instance types
+
+Message Queue for Apache Kafka provides the following instance types:
+
+VPC type: These instances can be accessed only by using a virtual private cloud \(VPC\).
+
+## Billable items
+
+The following table describes the billable items for Message Queue for Apache Kafka.
+
+|Item|Description|
+|----|-----------|
+|Traffic specification|-   Traffic specifications involve only business traffic, instead of cluster traffic. Business traffic is the actual messaging traffic of your business. Cluster traffic includes business and replication traffic generated when your Message Queue for Apache Kafka instance in the Message Queue for Apache Kafka cluster is replicated three times by default.
+-   Both read traffic and write traffic are calculated in business traffic. The ratio of peak read traffic to peak write traffic is 1:1 for the High Write edition and is 5:1 for the High Read edition. Select a traffic specification based on the maximum read or write traffic during peak hours. To ensure business stability, a margin is purchased for buffering. The margin is about 30% of the maximum read or write traffic during peak hours. |
+|Disk capacity|-   The minimum disk capacity depends on your traffic specification and storage space.
+-   Message Queue for Apache Kafka supports ultra disks and solid-state drives \(SSDs\). We recommend that you use SSDs.
+-   The unit price is different for each disk type.
+-   Exercise caution when you select a disk type. The disk type cannot be changed after the order is placed.
+-   By default, data is stored in three replicas.
+    -   For a Standard Edition instance, if you purchase a disk of 300 GB in size, the actual storage space you can use for your business is 100 GB and the remaining 200 GB of storage space is used to store backups.
+    -   For a Professional Edition instance, if you purchase a disk of 300 GB in size, the actual storage space you can use for your business is 300 GB and the other two replicas for your business data are stored free of charge.
+
+**Note:** Only topics whose storage engines are cloud storage support free storage for backups. For more information about cloud storage, see [Storage engine comparison](/intl.en-US/Introduction/Storage engine comparison.md). |
+|Topic specification|-   The maximum number of topics or partitions depends on your traffic specification.
+-   In addition to the default number of partitions, 16 partitions are added for each additional topic. For example, you have purchased an instance with 50 topics, 20 MB/s of bandwidth, and 400 default partitions. If you purchase another 10 topics for this instance, 160 additional partitions are added to the instance. The total number of partitions becomes 560.
+-   The number of available topics for a Professional Edition instance is twice the number purchased. For example, if you purchase a Professional Edition instance with 50 topics, the actual number of topics you can create in the instance is 100. |
+
+**Note:**
+
+-   You are charged for the items described in the previous tables.
+-   You can set Retain Messages For to save disk space. This parameter defines how long messages are retained when disk space is sufficient. If 90% of disk space is used, earlier messages are deleted to ensure service availability. By default, messages are retained for a maximum of 72 hours. You can change this value to a custom period between 24 and 168 hours.
+-   The number of API calls is not a billable item.
+
+## Billing methods
+
+Message Queue for Apache Kafka supports only the subscription billing method.
+
+Billing formulas
+
+Total fees = \(Unit price of traffic specification + Unit price of disk capacity × Disk capacity/100 + Unit price of topic × Number of additional topics\) × Number of months
+
+Billing rules
+
+Billing rules include the rules for traffic specifications, disk capacity, and additional topics:
+
+-   Billing rules for traffic specifications
+
+    The billing rules for traffic specifications depend on the edition of the instance.
+
+    |Traffic specification|Peak read traffic \(MB/s\)|Peak write traffic \(MB/s\)|Number of topics|Number of partitions|Unit price in Region group 1 \(USD/month\)|Unit price in Region group 2 \(USD/month\)|Unit price in Region group 3 \(USD/month\)|
+    |---------------------|--------------------------|---------------------------|----------------|--------------------|------------------------------------------|------------------------------------------|------------------------------------------|
+    |alikafka.hw.2xlarge|3×20|3×20|50|400|250|370|340|
+    |alikafka.hw.3xlarge|3×30|3×30|50|500|360|530|480|
+    |alikafka.hw.6xlarge|3×60|3×60|80|600|520|760|700|
+    |alikafka.hw.9xlarge|3×90|3×90|100|800|660|960|880|
+    |alikafka.hw.12xlarge|3×120|3×120|150|900|800|1160|1070|
+
+    |Traffic specification|Peak read traffic \(MB/s\)|Peak write traffic \(MB/s\)|Number of topics|Number of partitions|Unit price in Region group 1 \(USD/month\)|Unit price in Region group 2 \(USD/month\)|Unit price in Region group 3 \(USD/month\)|
+    |---------------------|--------------------------|---------------------------|----------------|--------------------|------------------------------------------|------------------------------------------|------------------------------------------|
+    |alikafka.hw.2xlarge|3×20|3×20|50|1100|600|870|800|
+    |alikafka.hw.3xlarge|3×30|3×30|50|1200|780|1040|1040|
+    |alikafka.hw.6xlarge|3×60|3×60|80|1400|1130|1510|1510|
+    |alikafka.hw.9xlarge|3×90|3×90|100|1600|1440|1920|1920|
+    |alikafka.hw.12xlarge|3×120|3×120|150|1800|1750|2330|2330|
+    |alikafka.hw.16xlarge|3×160|3×160|180|2000|2060|2740|2740|
+    |alikafka.hw.20xlarge|3×200|3×200|200|2200|2980|3970|3970|
+    |alikafka.hw.25xlarge|3×250|3×250|250|2500|3430|4570|4570|
+    |alikafka.hw.30xlarge|3×300|3×300|300|3000|3880|5170|5170|
+    |alikafka.hw.60xlarge|3×600|3×600|450|4500|5280|7030|7030|
+    |alikafka.hw.80xlarge|3×800|3×800|500|5000|6220|8280|8280|
+    |alikafka.hw.100xlarge|3×1000|3×1000|600|6000|7270|9670|9670|
+    |alikafka.hw.120xlarge|3×1200|3×1200|700|7000|8100|10780|10780|
+    |alikafka.hw.150xlarge|3×1500|3×1500|800|8000|9500|12640|12640|
+    |alikafka.hw.180xlarge|3×1800|3×1800|900|9000|10910|14520|14520|
+    |alikafka.hw.200xlarge|3×2000|3×2000|1000|10000|12070|16060|16060|
+
+    |Traffic specification|Peak read traffic \(MB/s\)|Peak write traffic \(MB/s\)|Number of topics|Number of partitions|Unit price in Region group 1 \(USD/month\)|Unit price in Region group 2 \(USD/month\)|Unit price in Region group 3 \(USD/month\)|
+    |---------------------|--------------------------|---------------------------|----------------|--------------------|------------------------------------------|------------------------------------------|------------------------------------------|
+    |alikafka.hr.2xlarge|50+2×10|10+2×10|50|1100|600|870|800|
+    |alikafka.hr.3xlarge|75+2×15|15+2×15|50|1200|780|1040|1040|
+    |alikafka.hr.6xlarge|150+2×30|30+2×30|80|1400|1130|1510|1510|
+
+-   Billing rules for disk capacity
+
+    |Disk type|Disk capacity \(GB\)|Unit price in Region group 1 \(USD/month\)|Unit price in Region group 2 \(USD/month\)|Unit price in Region group 3 \(USD/month\)|
+    |---------|--------------------|------------------------------------------|------------------------------------------|------------------------------------------|
+    |Ultra disk|100|6|8|8|
+    |SSD|100|16|23|21|
+
+-   Billing rules for additional topics
+
+    |Item|Number of topics|Unit price in Region group 1 \(USD/month\)|Unit price in Region group 2 \(USD/month\)|Unit price in Region group 3 \(USD/month\)|
+    |----|----------------|------------------------------------------|------------------------------------------|------------------------------------------|
+    |Topic|1|7|11|10|
+
 
