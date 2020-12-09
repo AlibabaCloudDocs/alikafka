@@ -1,6 +1,6 @@
 # Use the default endpoint to send and subscribe to messages
 
-This topic describes how a Node.js client uses SDK for Node.js to connect to the default endpoint of Message Queue for Apache Kafka. This topic also describes how a Node.js client sends and subscribes to messages in a virtual private cloud \(VPC\).
+This topic describes how to use SDK for Node.js to connect to the default endpoint of Message Queue for Apache Kafka and send and subscribe to messages in a virtual private cloud \(VPC\).
 
 -   [Install GCC](https://gcc.gnu.org/install/)
 -   [Install Node.js.](https://nodejs.org/en/download/)
@@ -63,7 +63,7 @@ This topic describes how a Node.js client uses SDK for Node.js to connect to the
     ```
 
 
-## Prepare configurations
+## Preparations
 
 1.  Create a Kafka configuration file setting.js.
 
