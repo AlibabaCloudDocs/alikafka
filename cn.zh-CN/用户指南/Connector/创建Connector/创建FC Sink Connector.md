@@ -40,20 +40,116 @@ keyword: [kafka, connector, fc]
 
 使用FC Sink Connector将数据从消息队列Kafka版实例的数据源Topic导出至函数计算的函数的操作流程如下：
 
-1.  创建FC Sink Connector依赖的Topic和Consumer Group
+1.  使FC Sink Connector跨地域访问函数计算
 
-    如果您不需要自定义Topic和Consumer Group的名称，您可以直接跳过该步骤，在下一步骤选择自动创建。
+    **说明：** 如果您不需要使FC Sink Connector跨地域访问函数计算，您可以直接跳过该步骤。
 
-    **说明：** 部分FC Sink Connector依赖的Topic的存储引擎必须为Local存储，大版本为0.10.2的消息队列Kafka版实例不支持手动创建Local存储的Topic，只支持自动创建。
+    [为FC Sink Connector开启公网访问](#section_y3y_7cd_gpk)
 
+2.  使FC Sink Connector跨账号访问函数计算
+
+    **说明：** 如果您不需要使FC Sink Connector跨账号访问函数计算，您可以直接跳过该步骤。
+
+    -   [创建自定义权限策略](#section_3wj_qkk_gwt)
+    -   [创建RAM角色](#section_24p_yc7_s0d)
+    -   [添加权限](#section_co0_y32_ams)
+3.  创建FC Sink Connector依赖的Topic和Consumer Group
+
+    **说明：**
+
+    -   如果您不需要自定义Topic和Consumer Group的名称，您可以直接跳过该步骤。
+    -   部分FC Sink Connector依赖的Topic的存储引擎必须为Local存储，大版本为0.10.2的消息队列Kafka版实例不支持手动创建Local存储的Topic，只支持自动创建。
     1.  [创建FC Sink Connector依赖的Topic](#section_0wn_cbs_hf5)
     2.  [创建FC Sink Connector依赖的Consumer Group](#section_fbf_mav_odr)
-2.  创建并部署FC Sink Connector
-    1.  [创建FC Sink Connector](#section_4dk_lib_xrh)
-    2.  [部署FC Sink Connector](#section_h1f_aa2_ydg)
-3.  结果验证
-    1.  [发送消息](#section_rt2_26k_a0s)
+4.  [创建并部署FC Sink Connector](#section_4dk_lib_xrh)
+5.  结果验证
+    1.  [发送测试消息](#section_rt2_26k_a0s)
     2.  [查看函数日志](#section_off_gyb_3lk)
+
+## 为FC Sink Connector开启公网访问
+
+如需使FC Sink Connector跨地域访问其他阿里云服务，您需要为FC Sink Connector开启公网访问。具体操作，请参见[为Connector开启公网访问](/cn.zh-CN/用户指南/Connector/为Connector开启公网访问.md)。
+
+## 创建自定义权限策略
+
+在目标账号下创建访问函数计算的自定义权限策略。
+
+1.  登录[访问控制控制台](https://ram.console.aliyun.com/)。
+
+2.  在左侧导航栏，选择**权限管理** \> **权限策略管理**。
+
+3.  在**权限策略管理**页面，单击**创建权限策略**。
+
+4.  在**新建自定义权限策略**页面，创建自定义权限策略。
+
+    1.  在**策略名称**文本框，输入KafkaConnectorFcAccess。
+
+    2.  在**配置模式**区域，选择**脚本配置**。
+
+    3.  在**策略内容**区域，输入自定义权限策略脚本。
+
+        访问函数计算的自定义权限策略脚本示例如下：
+
+        ```
+        {
+            "Version": "1",
+            "Statement": [
+                {
+                    "Action": [
+                        "fc:InvokeFunction",
+                        "fc:GetFunction"
+                    ],
+                    "Resource": "*",
+                    "Effect": "Allow"
+                }
+            ]
+        }
+        ```
+
+    4.  单击**确定**。
+
+
+## 创建RAM角色
+
+在目标账号下创建RAM角色。由于RAM角色不支持直接选择消息队列Kafka版作为受信服务，您在创建RAM角色时，需要选择任意支持的服务作为受信服务。RAM角色创建后，手工修改信任策略。
+
+1.  在左侧导航栏，单击**RAM角色管理**。
+
+2.  在**RAM角色管理**页面，单击**创建RAM角色**。
+
+3.  在**创建RAM角色**面板，创建RAM角色。
+
+    1.  在**当前可信实体类型**区域，选择**阿里云服务**，单击**下一步**。
+
+    2.  在**角色类型**区域，选择**普通服务角色**，在**角色名称**文本框，输入AliyunKafkaConnectorRole，从**选择受信服务**列表，选择**函数计算**，然后单击**完成**。
+
+4.  在**RAM角色管理**页面，找到**AliyunKafkaConnectorRole**，单击**AliyunKafkaConnectorRole**。
+
+5.  在**AliyunKafkaConnectorRole**页面，单击**信任策略管理**页签，单击**修改信任策略**。
+
+6.  在**修改信任策略**对话框，将脚本中**fc**替换为alikafka，单击**确定**。
+
+    ![AliyunKafkaConnectorRole](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/3906119951/p128120.png)
+
+
+## 添加权限
+
+在目标账号下为创建的RAM角色授予访问函数计算的权限。
+
+1.  在左侧导航栏，单击**RAM角色管理**。
+
+2.  在**RAM角色管理**页面，找到**AliyunKafkaConnectorRole**，在其右侧**操作**列，单击**添加权限**。
+
+3.  在**添加权限**对话框，添加**KafkaConnectorFcAccess**权限。
+
+    1.  在**选择权限**面板，选择**自定义策略**。
+
+    2.  在**权限策略名称**列表，找到**KafkaConnectorFcAccess**，单击**KafkaConnectorFcAccess**。
+
+    3.  单击**确定**。
+
+    4.  单击**完成**。
+
 
 ## 创建FC Sink Connector依赖的Topic
 
@@ -107,9 +203,9 @@ keyword: [kafka, connector, fc]
     |Connector消费组|Connector使用的Consumer Group。该Consumer Group的名称建议以connect-cluster开头。|
 
 
-## 创建FC Sink Connector
+## 创建并部署FC Sink Connector
 
-授予消息队列Kafka版访问函数计算的权限后，创建用于将数据从消息队列Kafka版同步至函数计算的FC Sink Connector。
+创建并部署用于将数据从消息队列Kafka版同步至函数计算的FC Sink Connector。
 
 1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
@@ -129,11 +225,9 @@ keyword: [kafka, connector, fc]
         -   如果已创建服务关联角色，消息队列Kafka版不会重复创建。
         关于该服务关联角色的更多信息，请参见[服务关联角色](/cn.zh-CN/权限控制/服务关联角色.md)。
 
-        。
-
         |参数|描述|示例值|
         |--|--|---|
-        |Connector名称|Connector的名称。取值：        -   可以包含数字、小写英文字母和短划线（-），但不能以短划线（-）开头，长度限制为48个字符。
+        |Connector名称|Connector的名称。命名规则：        -   可以包含数字、小写英文字母和短划线（-），但不能以短划线（-）开头，长度限制为48个字符。
         -   同一个消息队列Kafka版实例内保持唯一。
 Connector的数据同步任务必须使用名称为connect-任务名称的Consumer Group。如果您未手动创建该Consumer Group，系统将为您自动创建。
 
@@ -150,6 +244,11 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
         |消费初始位置|开始消费的位置。取值：         -   latest：从最新位点开始消费。
         -   earliest：从最初位点开始消费。
 |latest|
+        |消费线程并发数|数据源Topic的消费线程并发数。默认值为3。取值：        -   3
+        -   6
+        -   9
+        -   12
+|3|
         |Connector消费组|Connector使用的Consumer Group。该Consumer Group的名称建议以connect-cluster开头。|connect-cluster-kafka-fc-sink|
         |任务位点Topic|用于存储消费位点的Topic。        -   Topic名称：建议以connect-offset开头。
         -   分区数：Topic的分区数量必须大于1。
@@ -175,22 +274,36 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
         -   存储引擎：Topic的存储引擎可以为Local存储或云存储。
 |connect-error-kafka-fc-sink|
 
-    3.  在**目标实例配置**下方，输入函数计算服务的属性，设置发送模式和发送批大小，然后单击**下一步**。
+    3.  在**目标实例配置**下方，设置函数计算服务相关参数，设置发送模式和发送批大小，然后单击**下一步**。
 
         |参数|描述|示例值|
         |--|--|---|
-        |服务地域|函数计算服务的地域。|cn-hangzhou|
+        |是否跨账号/地域|FC Sink Connector是否跨账号/地域向函数计算服务同步数据。默认为**否**。取值：        -   否：同地域同账号模式。
+        -   是：跨地域同账号模式、同地域跨账号模式或跨地域跨账号模式。
+|否|
+        |服务地域|函数计算服务的地域。默认为FC Sink Connector所在地域。如需跨地域，您需要为Connector开启公网访问，然后选择目标地域。更多信息，请参见[为FC Sink Connector开启公网访问](#section_y3y_7cd_gpk)。**说明：** 是否跨账号/地域为**是**时，显示服务地域。
+
+|cn-hangzhou|
         |服务接入点|函数计算服务的接入点。在[函数计算控制台](https://fc.console.aliyun.com/fc/overview/cn-hangzhou)的**概览**页的**常用信息**区域获取。         -   内网Endpoint：低延迟，推荐。适用于消息队列Kafka版实例和函数计算处于同一地域场景。
-        -   公网Endpoint：高延迟，不推荐。适用于消息队列Kafka版实例和函数计算处于不同地域的场景。如需使用公网Endpoint，您需要为Connector开启公网访问。更多信息，请参见[为Connector开启公网访问](/cn.zh-CN/用户指南/Connector/为Connector开启公网访问.md)。
+        -   公网Endpoint：高延迟，不推荐。适用于消息队列Kafka版实例和函数计算处于不同地域的场景。如需使用公网Endpoint，您需要为Connector开启公网访问。更多信息，请参见[为FC Sink Connector开启公网访问](#section_y3y_7cd_gpk)。
+**说明：** 是否跨账号/地域为**是**时，显示服务接入点。
+
 |http://188\*\*\*.cn-hangzhou.fc.aliyuncs.com|
-        |服务账号|函数计算服务的阿里云账号ID。在函数计算控制台的**概览**页的**常用信息**区域获取。|188\*\*\*|
+        |服务账号|函数计算服务的阿里云账号ID。在函数计算控制台的**概览**页的**常用信息**区域获取。**说明：** 是否跨账号/地域为**是**时，显示服务账号。
+
+|188\*\*\*|
+        |授权角色名|消息队列Kafka版访问函数计算服务的RAM角色。        -   如不需跨账号，您需要在本账号下创建RAM角色并为其授权，然后输入该授权角色名。操作步骤，请参见[创建自定义权限策略](#section_3wj_qkk_gwt)、[创建RAM角色](#section_24p_yc7_s0d)和[添加权限](#section_co0_y32_ams)。
+        -   如需跨账号，您需要在目标账号下创建RAM角色并为其授权，然后输入该授权角色名。操作步骤，请参见[创建自定义权限策略](#section_3wj_qkk_gwt)、[创建RAM角色](#section_24p_yc7_s0d)和[添加权限](#section_co0_y32_ams)。
+**说明：** 是否跨账号/地域为**是**时，显示授权角色名。
+
+|AliyunKafkaConnectorRole|
         |服务名|函数计算服务的名称。|guide-hello\_world|
         |函数名|函数计算服务的函数名称。|hello\_world|
         |服务版本或别名|函数计算服务的版本或别名。|LATEST|
         |发送模式|消息发送模式。取值：         -   异步：推荐。
         -   同步：不推荐。同步发送模式下，如果函数计算的处理时间较长，消息队列Kafka版的处理时间也会较长。当同一批次消息的处理时间超过5分钟时，会触发消息队列Kafka版客户端Rebalance。
 |异步|
-        |发送批次大小|批量发送的消息条数。默认为20。Connector根据发送批次大小和请求大小限制（同步请求大小限制为6 MB，异步请求大小限制为128 KB）将多条消息聚合后发送。例如，发送模式为异步，发送批次大小为20，如果要发送18条消息，其中有17条消息的总大小为127 KB，有1条消息的大小为200 KB，Connector会将总大小不超过128 KB的17条消息聚合后发送，将大小超过128 KB的1条消息单独发送。**说明：** 如果您在发送消息时将key设置为null，则请求中不包含key。如果将value设置为null，则请求中不包含value。
+        |发送批大小|批量发送的消息条数。默认为20。Connector根据发送批次大小和请求大小限制（同步请求大小限制为6 MB，异步请求大小限制为128 KB）将多条消息聚合后发送。例如，发送模式为异步，发送批次大小为20，如果要发送18条消息，其中有17条消息的总大小为127 KB，有1条消息的大小为200 KB，Connector会将总大小不超过128 KB的17条消息聚合后发送，将大小超过128 KB的1条消息单独发送。**说明：** 如果您在发送消息时将key设置为null，则请求中不包含key。如果将value设置为null，则请求中不包含value。
 
         -   如果批量发送的多条消息的大小不超过请求大小限制，则请求中包含消息内容。请求示例如下：
 
@@ -281,27 +394,18 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
             -   如需恢复对出现错误的Topic的分区的订阅，您需要提交[提交工单](https://selfservice.console.aliyun.com/ticket/createIndex?spm=a2c4g.11186623.2.23.33183cc5K5SAef)联系消息队列Kafka版技术人员。
 |log|
 
-6.  在**预览/创建**下方，确认Connector的配置，然后单击**提交**。
+    4.  在**预览/提交**下方，确认Connector的配置，然后单击**提交**。
 
-    提交完成后，刷新**Connector**页面以显示创建的Connector。
-
-
-## 部署FC Sink Connector
-
-创建FC Sink Connector后，您需要部署该FC Sink Connector以使其将数据从消息队列Kafka版同步至函数计算。
-
-1.  在**Connector**页面，找到创建的FC Sink Connector，在其右侧**操作**列，单击**部署**。
-
-    部署完成后，Connector状态显示运行中。
+6.  在**创建Connector**面板，单击**部署**。
 
 
-## 发送消息
+## 发送测试消息
 
 部署FC Sink Connector后，您可以向消息队列Kafka版的数据源Topic发送消息，测试数据能否被同步至函数计算。
 
-1.  在左侧导航栏，单击**Topic管理**。
+1.  在**Connector**页面，找到目标Connector，在其右侧**操作**列，单击**测试**。
 
-2.  在**Topic管理**页面，选择实例，找到**fc-test-input**，在其右侧**操作**列，单击**发送消息**。
+2.  在**Topic管理**页面，选择实例，找到**fc-test-input**，在其右侧**操作**列，选择![icon_more](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/8046936061/p185678.png) \> **发送消息**。
 
 3.  在**发送消息**对话框，发送测试消息。
 
