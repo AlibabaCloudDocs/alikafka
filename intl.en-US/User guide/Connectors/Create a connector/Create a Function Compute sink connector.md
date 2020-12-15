@@ -4,18 +4,18 @@ keyword: [kafka, connector, fc]
 
 # Create a Function Compute sink connector
 
-This topic describes how to create a Function Compute sink connector to export data from topics in your Message Queue for Apache Kafka instance to functions in Function Compute.
+This topic describes how to create a Function Compute sink connector to export data from source topics in your Message Queue for Apache Kafka instance to functions in Function Compute.
 
 Before you create a Function Compute sink connector, make sure that the following operations are performed:
 
 1.  The connector feature for the Message Queue for Apache Kafka instance is enabled. For more information, see [Enable the connector feature](/intl.en-US/User guide/Connectors/Enable the connector feature.md).
-2.  Topics are created in the Message Queue for Apache Kafka instance. For more information, see [Step 1: Create a topic](/intl.en-US/Quick-start/Step 3: Create resources.md).
+2.  Source topics for the Message Queue for Apache Kafka instance are created. For more information, see [Step 1: Create a topic](/intl.en-US/Quick-start/Step 3: Create resources.md).
 
     A topic named fc-test-input is used in this example.
 
-3.  Create a function in Function Compute. For more information, see [Create a function in the Function Compute console]().
+3.  A function in Function Compute is created. For more information, see [Create a function in the Function Compute console]().
 
-    **Note:** The type of function must be event function.
+    **Note:** The functions you create must be event functions.
 
     An event function named hello\_world is used as an example. This is an event function under the guide-hello\_world service that runs in the Python runtime environment. The following information shows the sample code of this function:
 
@@ -38,16 +38,16 @@ Before you create a Function Compute sink connector, make sure that the followin
 
 ## Procedure
 
-Perform the following steps to export data from a topic in the Message Queue for Apache Kafka instance to a function in Function Compute by using a Function Compute sink connector:
+Perform the following steps to export data from a source topic in the Message Queue for Apache Kafka instance to a function in Function Compute by using a Function Compute sink connector:
 
 1.  Create the topics and consumer groups that the Function Compute sink connector requires.
 
     If you do not want to specify the names of the topics and consumer groups, skip this step and select Automatically in the next step.
 
-    **Note:** Some topics require a local storage engine. If the major version of your Message Queue for Apache Kafka instance is 0.10.2, you cannot manually create topics that use a local storage engine. In major version 0.10.2, these topics must be automatically created.
+    **Note:** Some topics that the Function Compute sink connector requires must use a local storage engine. If the major version of your Message Queue for Apache Kafka instance is 0.10.2, you cannot manually create topics that use a local storage engine. In major version 0.10.2, these topics must be automatically created.
 
-    1.  [Create topics](#section_0wn_cbs_hf5)
-    2.  [Create consumer groups](#section_fbf_mav_odr)
+    1.  [Create topics that the Function Compute sink connector requires](#section_0wn_cbs_hf5)
+    2.  [Create consumer groups that the Function Compute sink connector requires](#section_fbf_mav_odr)
 2.  Create and deploy the Function Compute sink connector.
     1.  [Create a Function Compute sink connector](#section_4dk_lib_xrh)
     2.  [Deploy the Function Compute sink connector](#section_h1f_aa2_ydg)
@@ -55,7 +55,7 @@ Perform the following steps to export data from a topic in the Message Queue for
     1.  [Send a message](#section_rt2_26k_a0s)
     2.  [View function logs](#section_off_gyb_3lk)
 
-## Create topics
+## Create topics that the Function Compute sink connector requires
 
 In the Message Queue for Apache Kafka console, you can manually create the five topics that the Function Compute sink connector requires.
 
@@ -71,27 +71,27 @@ In the Message Queue for Apache Kafka console, you can manually create the five 
 
     |Topic|Description|
     |-----|-----------|
-    |Task site Topic|The topic that is used to store consumer offsets.    -   Topic: the name of the topic. We recommend that you start the name with connect-offset.
+    |Task site topic|The topic that is used to store consumer offsets.    -   Topic: the name of the topic. We recommend that you start the name with connect-offset.
     -   Partitions: the number of partitions in the topic. The value must be greater than 1.
     -   Storage Engine: the storage engine of the topic. Set the value to Local Storage.
     -   cleanup.policy: the log cleanup policy for the topic. Set the value to compact. |
-    |Task configuration Topic|The topic that is used to store task configurations.    -   Topic: the name of the topic. We recommend that you start the name with connect-config.
+    |Task configuration topic|The topic that is used to store task configurations.    -   Topic: the name of the topic. We recommend that you start the name with connect-config.
     -   Partitions: the number of partitions in the topic. Set the value to 1.
     -   Storage Engine: the storage engine of the topic. Set the value to Local Storage.
     -   cleanup.policy: the log cleanup policy for the topic. Set the value to compact. |
-    |Task status Topic|The topic that is used to store task statuses.    -   Topic: the name of the topic. We recommend that you start the name with connect-status.
+    |Task status topic|The topic that is used to store task statuses.    -   Topic: the name of the topic. We recommend that you start the name with connect-status.
     -   Partitions: the number of partitions in the topic. We recommend that you set the value to 6.
     -   Storage Engine: the storage engine of the topic. Set the value to Local Storage.
     -   cleanup.policy: the log cleanup policy for the topic. Set the value to compact. |
-    |Dead-letter queue Topic|The topic that is used to store the abnormal data of the connector framework. To save topic resources, you can use a dead-letter queue topic or an Abnormal Data Topic to store all abnormal data.    -   Topic: the name of the topic. We recommend that you start the name with connect-error.
+    |Dead letter queue topic|The topic that is used to store abnormal data of the connector framework. To save topic resources, you can use a dead letter queue topic or an abnormal data topic to store abnormal data.    -   Topic: the name of the topic. We recommend that you start the name with connect-error.
     -   Partitions: the number of partitions in the topic. We recommend that you set the value to 6.
-    -   Storage Engine: the storage engine of the topic. Valid values: Local Storage and Cloud Storage. |
-    |Abnormal data Topic|The topic that is used to store the abnormal data of the sink connector. To save topic resources, you can use an abnormal data topic or a Dead-letter queue Topic to store all abnormal data.    -   Topic: the name of the topic. We recommend that you start the name with connect-error.
+    -   Storage Engine: the storage engine of the topic. The value can be Local Storage or Cloud Storage. |
+    |Abnormal data topic|The topic that is used to store abnormal data of the sink connector. To save topic resources, you can use an abnormal data topic or a dead letter queue topic to store abnormal data.    -   Topic: the name of the topic. We recommend that you start the name with connect-error.
     -   Partitions: the number of partitions in the topic. We recommend that you set the value to 6.
-    -   Storage Engine: the storage engine of the topic. Valid values: Local Storage and Cloud Storage. |
+    -   Storage Engine: the storage engine of the topic. The value can be Local Storage or Cloud Storage. |
 
 
-## Create consumer groups
+## Create consumer groups that the Function Compute sink connector requires
 
 In the Message Queue for Apache Kafka console, you can manually create the two consumer groups that the Function Compute sink connector requires.
 
@@ -99,11 +99,11 @@ In the Message Queue for Apache Kafka console, you can manually create the two c
 
 2.  In the **Consumer Group management**Page, select an instance and click **Create consumer groups**.
 
-3.  In the **Create Consumer Group** dialog box, set the parameters as required and click **Create**.
+3.  In the **Create Consumer Group** dialog box, set the attributes for the topic and click **Create**.
 
     |Consumer Group|Description|
     |--------------|-----------|
-    |Connector task consumer group|The name of the consumer group that is used by data synchronization tasks. The name of this consumer group must be in the connect-Task Name format.|
+    |Connector task consumer group|The name of the consumer group that is used by the data synchronization task. The name of the consumer group must be in the connect-Task name format.|
     |Connector consumer group|The name of the consumer group that is used by the connector. We recommend that you start the name of this consumer group with connect-cluster.|
 
 
@@ -119,34 +119,32 @@ After you grant Message Queue for Apache Kafka permissions to access Function Co
 
 4.  In the **Connector**Page, select an instance and click **Create a connector.**.
 
-5.  In the **Create Connector** page, perform the following steps:
+5.  In the **Create Connector** panel, perform the following steps:
 
     1.  In the **Enter Basic Information** step, enter a connector name in the **Connector Name** field, select **Message Queue for Apache Kafka** from the **Dump Path** drop-down list, select **Function Compute** from the **Dump To** drop-down list, and then click **Next**.
 
-        **Note:** Message Queue for Apache Kafka automatically selects **Authorize to create service linked roles**.
+        **Note:** Message Queue for Apache Kafka automatically selects **Authorize to Create Service Linked Role**.
 
-        -   If no service linked role is created, Message Queue for Apache Kafka automatically creates a service linked role to use Function Compute sink connector.
+        -   If no service linked role is created, Message Queue for Apache Kafka automatically creates a service linked role to use the Function Compute sink connector.
         -   If you have created a service linked role, Message Queue for Apache Kafka does not create it again.
-        For more information about service linked roles, see [Service linked role](/intl.en-US/Access control/Service linked role.md).
+        For more information about service linked roles, see [Service linked roles](/intl.en-US/Access control/Service linked roles.md).
 
-        .
-
-        |Parameter|Description|Example|
-        |---------|-----------|-------|
+        |Parameter|Description|Example value|
+        |---------|-----------|-------------|
         |Connector Name|The name of the connector. The value must comply with the following rules:        -   The connector name must be 1 to 48 characters in length. It can contain digits, lowercase letters, and hyphens \(-\), but cannot start with a hyphen \(-\).
-        -   The name must be unique in a Message Queue for Apache Kafka instance.
-The data synchronization tasks of a connector must use a consumer group that is named in the format of connect-Task Name. If you have not manually created such a consumer group, the system automatically creates a consumer group.
+        -   The connector name must be unique in the same Message Queue for Apache Kafka instance.
+The data synchronization task of the connector must use a consumer group that is named in the format of connect-Task name. If you have not manually created a consumer group, the system automatically creates a consumer group.
 
 |kafka-fc-sink|
         |Task Type|The type of the data synchronization task of the connector. In this example, the data synchronization task synchronizes data from Message Queue for Apache Kafka to Function Compute. For more information about task types, see [Types of connectors](/intl.en-US/User guide/Connectors/Overview.md).|KAFKA2FC|
 
     2.  In the **Configure Source Instance** step, enter a topic name in the **Data Source Topic** field, select a consumer offset from the **Consumer Offset** drop-down list, set **Create Resource** to **Automatically** or **Manually**, and then click **Next**. If you select Manually, enter the name of the manually created topic.
 
-        |Parameter|Description|Example|
-        |---------|-----------|-------|
-        |VPC ID|The virtual private cloud \(VPC\) where the data synchronization task runs. The default value is the ID of the VPC where the Message Queue for Apache Kafka instance is located. You can retain the default value.|vpc-bp1xpdnd3l\*\*\*|
-        |VSwitch ID|The ID of the vSwitch based on which the data synchronization task runs. The vSwitch must be in the same VPC as the Message Queue for Apache Kafka instance. The default value is the ID of the vSwitch that you specify for the Message Queue for Apache Kafka instance.|vsw-bp1d2jgg81\*\*\*|
-        |Data Source Topic|The name of the topic from which data is to be synchronized.|fc-test-input|
+        |Parameter|Description|Example value|
+        |---------|-----------|-------------|
+        |VPC ID|The ID of the virtual private cloud \(VPC\) where the data synchronization task runs. By default, the value is the ID of the VPC where the Message Queue for Apache Kafka instance is deployed. You do not need to change the value.|vpc-bp1xpdnd3l\*\*\*|
+        |VSwitch ID|The ID of the vSwitch where the data synchronization task runs. The vSwitch must be deployed in the same VPC as the Message Queue for Apache Kafka instance. By default, the value is the ID of the vSwitch that you specify when you deploy the Message Queue for Apache Kafka instance.|vsw-bp1d2jgg81\*\*\*|
+        |Data Source Topic|The topic from which data is to be synchronized.|fc-test-input|
         |Consumer Offset|The offset where consumption starts. Valid values:         -   latest: Consumption starts from the latest offset.
         -   earliest: Consumption starts from the initial offset.
 |latest|
@@ -154,7 +152,7 @@ The data synchronization tasks of a connector must use a consumer group that is 
         |Task site Topic|The topic that is used to store consumer offsets.        -   Topic: the name of the topic. We recommend that you start the name with connect-offset.
         -   Partitions: the number of partitions in the topic. The value must be greater than 1.
         -   Storage Engine: the storage engine of the topic. Set the value to Local Storage.
-        -   cleanup.policy: the log cleanup policy for the topic. The value must be compact.
+        -   cleanup.policy: the log cleanup policy for the topic. Set the value to compact.
 |connect-offset-kafka-fc-sink|
         |Task configuration Topic|The topic that is used to store task configurations.        -   Topic: the name of the topic. We recommend that you start the name with connect-config.
         -   Partitions: the number of partitions in the topic. Set the value to 1.
@@ -166,31 +164,31 @@ The data synchronization tasks of a connector must use a consumer group that is 
         -   Storage Engine: the storage engine of the topic. Set the value to Local Storage.
         -   cleanup.policy: the log cleanup policy for the topic. Set the value to compact.
 |connect-status-kafka-fc-sink|
-        |Dead-letter queue Topic|The topic that is used to store abnormal data of the connector framework. To save topic resources, you can use a dead-letter queue topic or an Abnormal Data Topic to store all abnormal data.        -   Topic: the name of the topic. We recommend that you start the name with connect-error.
+        |Dead letter queue Topic|The topic that is used to store abnormal data of the connector framework. To save topic resources, you can use a dead letter queue topic or an abnormal data topic to store abnormal data.        -   Topic: the name of the topic. We recommend that you start the name with connect-error.
         -   Partitions: the number of partitions in the topic. We recommend that you set the value to 6.
         -   Storage Engine: the storage engine of the topic. The value can be Local Storage or Cloud Storage.
 |connect-error-kafka-fc-sink|
-        |Abnormal Data Topic|The topic that is used to store anomaly data of the sink connector. To save topic resources, you can use an abnormal data topic or a Dead-letter queue Topic to store all abnormal data.        -   Topic: the name of the topic. We recommend that you start the name with connect-error.
+        |Abnormal Data Topic|The topic that is used to store abnormal data of the sink connector. To save topic resources, you can use an abnormal data topic or a dead letter queue topic to store abnormal data.        -   Topic: the name of the topic. We recommend that you start the name with connect-error.
         -   Partitions: the number of partitions in the topic. We recommend that you set the value to 6.
         -   Storage Engine: the storage engine of the topic. The value can be Local Storage or Cloud Storage.
 |connect-error-kafka-fc-sink|
 
-    3.  In the **Configure Destination Instance** step, set the attributes for the Function Compute service, configure Transmission Mode and Data Size parameters, and then click **Next**.
+    3.  In the **Configure Destination Instance** step, set the attributes for the Function Compute instance, configure the Transmission Mode and Data Size parameters, and then click **Next**.
 
-        |Parameter|Description|Example|
-        |---------|-----------|-------|
-        |Region|The region where Function Compute is located.|cn-hangzhou|
-        |Service Endpoint|The endpoint of Function Compute. In the [Function Compute](https://fc.console.aliyun.com/fc/overview/cn-hangzhou) console, you can view the endpoint of Function Compute in the **Common Info** section on the **Overview** page.         -   Internal Endpoint: The internal endpoint can be used when the Message Queue for Apache Kafka instance and Function Compute instance are in the same region. We recommend that you use the internal endpoint because it has lower latency.
-        -   Public Endpoint: The public endpoint can be used when the Message Queue for Apache Kafka instance and Function Compute instance are in different regions. We recommend that you do not use the public endpoint because it has high latency. To use the Public Endpoint value, you must enable Internet access for the connector. For more information, see [Enable Internet access for a connector](/intl.en-US/User guide/Connectors/Enable Internet access for a connector.md).
+        |Parameter|Description|Example value|
+        |---------|-----------|-------------|
+        |Region|The region where the Function Compute instance is located.|cn-hangzhou|
+        |Service Endpoint|The endpoint of the Function Compute instance. In the [Function Compute](https://fc.console.aliyun.com/fc/overview/cn-hangzhou) console, you can view the endpoint of the Function Compute instance in the **Common Info** section on the **Overview** page.         -   Internal Endpoint: The internal endpoint can be used when the Message Queue for Apache Kafka instance and the Function Compute instance are located in the same region. We recommend that you use the internal endpoint because it has lower latency.
+        -   Public Endpoint: The public endpoint can be used when the Message Queue for Apache Kafka instance and the Function Compute instance are located in different regions. We recommend that you do not use the public endpoint because it has high latency. To use the Public Endpoint value, enable Internet access for the connector. For more information, see [Enable Internet access for a connector](/intl.en-US/User guide/Connectors/Enable Internet access for a connector.md).
 |http://188\*\*\*.cn-hangzhou.fc.aliyuncs.com|
         |Alibaba Cloud Account|The ID of the Alibaba Cloud account that is used to log on to Function Compute. In the Function Compute console, you can view the Alibaba Cloud account in the **Common Info** section on the **Overview** page.|188\*\*\*|
-        |Service Name|The name of the Function Compute service that contains your function.|guide-hello\_world|
+        |Service Name|The name of the Function Compute instance that contains your function.|guide-hello\_world|
         |Function Name|The name of the function in Function Compute.|hello\_world|
         |Service Version or Alias|The version or alias of the service in Function Compute.|LATEST|
         |Transmission Mode|The message delivery mode. Valid values:         -   Async: recommended.
-        -   Sync: not recommended. In synchronous transmission mode, if Function Compute takes a long time to process data, Message Queue for Apache Kafka will also take a long time to process data. If it takes longer than five minutes to process multiple messages in a batch, the Message Queue for Apache Kafka client will rebalance the traffic.
-|Asynchronous|
-        |Data Size|The number of messages that are included in a batch. Default value: 20. The connector aggregates multiple messages into batches based on this value. A batch cannot exceed 6 MB in synchronous more and 128 KB in asynchronous mode. Assume that the batch size is 20 and the sending mode is asynchronous. The first 17 messages have a total size of 127 KB, but the 18th message is 200 KB. In this case, the connector sends the first 17 messages as a single batch, and then separately sends the 18th message.**Note:** If you set key to null when you send a message, the request does not contain the key. If the value is set to null, the request does not contain a value.
+        -   Sync: not recommended. In synchronous transmission mode, if Function Compute takes a long time to process data, Message Queue for Apache Kafka also takes a long time to process data. If Function Compute takes more than five minutes to process a batch of messages, the Message Queue for Apache Kafka client rebalances the traffic.
+|Async|
+        |Data Size|The number of messages that are included in a batch. Default value: 20. The connector aggregates multiple messages into batches based on this value. A batch cannot exceed 6 MB in synchronous mode and 128 KB in asynchronous mode. Assume that the batch size is 20 and the sending mode is asynchronous. The first 17 messages have a total size of 127 KB, but the 18th message is 200 KB. In this case, the connector sends the first 17 messages as a single batch, and then separately sends the 18th message.**Note:** If you set key to null when you send a message, the request does not contain the key. If the value is set to null, the request does not contain a value.
 
         -   If the messages in a batch do not exceed the size limit, the request contains the content of the messages. The following code provides a sample request:
 
@@ -259,45 +257,45 @@ The data synchronization tasks of a connector must use a consumer group that is 
 **Note:** To obtain the content of the message, you must manually pull the message by using its offset.
 
 |50|
-        |Retries|Retries after a message failed to be sent. Default value: 2. Valid values: 1 to 3. Message delivery failures do not support retries. The following list describes the types of error codes that support retries:        -   4XX: does not support a retry except for 429.
-        -   5XX: supports a retry.
+        |Retries|The number of retries after a message failed to be sent. Default value: 2. Valid values: 1 to 3. Partial message delivery failures do not support retries. The following list describes the types of error codes that support retries:        -   4xx: does not support a retry except for 429.
+        -   5xx: supports a retry.
 **Note:**
 
-        -   For more information about error codes, see [Common error codes]().
-        -   Connector calls the InvokeFunction operation to send messages to Function Compute. For more information about InvokeFunction, see [t1881175.md\#]().
+        -   For more information about error codes, see [Error codes]().
+        -   The connector calls the InvokeFunction operation to send messages to Function Compute. For more information about InvokeFunction, see [List of operations by function]().
 |2|
-        |Failure Handling Policy|Solutions to message delivery failures. Default value: log. Valid values: log and fail.        -   log: The partition in which the error occurs remains to be subscribed and the error is printed in the log. After an error occurs, you can view the error in the Connector log and find a solution based on the error code. This allows you to troubleshoot the error.
+        |Failure Handling Policy|The solution to message delivery failures. Default value: log. Valid values:        -   log: The partition in which the error occurs remains to be subscribed and the error is printed in the log. After an error occurs, you can view the error in the connector log and find a solution based on the error code. This allows you to troubleshoot the error.
 
 **Note:**
 
-            -   For more information about how to view Connector logs, see [View connector logs](/intl.en-US/User guide/Connectors/View connector logs.md).
-            -   For more information about how to search for solutions based on error codes, see[Common error codes]().
-        -   fail: The partition in which the error occurs is no longer subscribed to and the error is printed in the log. After an error occurs, you can view the error in the Connector log and find a solution based on the error code. This allows you to troubleshoot the error.
+            -   For more information about how to view the connector logs, see [View connector logs](/intl.en-US/User guide/Connectors/View connector logs.md).
+            -   For more information about how to search for solutions based on error codes, see [Error codes]().
+        -   fail: The partition in which the error occurs is no longer subscribed to and the error is printed in the log. After an error occurs, you can view the error in the connector log and find a solution based on the error code. This allows you to troubleshoot the error.
 
 **Note:**
 
-            -   For more information about how to view Connector logs, see [View connector logs](/intl.en-US/User guide/Connectors/View connector logs.md).
-            -   For more information about how to search for solutions based on error codes, see[Common error codes]().
+            -   For more information about how to view the connector logs, see [View connector logs](/intl.en-US/User guide/Connectors/View connector logs.md).
+            -   For more information about how to search for solutions based on error codes, see[Error codes]().
             -   To resume subscription to the partition in which an error occurs,[submit a ticket](https://workorder-intl.console.aliyun.com/?spm=5176.kafka.aliyun_topbar.8.79e425e8DncGA9#/ticket/add/?productId=1352) to request technical support of Message Queue for Apache Kafka.
 |log|
 
-6.  In the **Preview/Create** step, confirm the configuration of the connector and click **Submit**.
+6.  In the **Preview/Submit** step, confirm the configuration of the connector and click **Submit**.
 
-    After you submit the configurations, refresh the **Connector** page. The connector that you created appears on the Connector page.
+    After you submit the configuration, refresh the **Connector** page. The connector that you have created appears on the Connector page.
 
 
 ## Deploy the Function Compute sink connector
 
 After you create a Function Compute sink connector, you must deploy it to synchronize data from Message Queue for Apache Kafka to Function Compute.
 
-1.  On the **Connector** page, find the Function Compute sink connector that you created and click **Deploy** in the **Actions** column.
+1.  On the **Connector** page, find the Function Compute sink connector that you have created and click **Deploy** in the **Actions** column.
 
     After you deploy the Function Compute sink connector, it changes to the Running state.
 
 
 ## Send a message
 
-After you deploy the Function Compute sink connector, you can send messages to topics in Message Queue for Apache Kafka to test whether the data can be synchronized to Function Compute.
+After you deploy the Function Compute sink connector, you can send messages to source topics in Message Queue for Apache Kafka to test whether the data can be synchronized to Function Compute.
 
 1.  In the left-side navigation pane, click **Topics**.
 
@@ -316,9 +314,9 @@ After you deploy the Function Compute sink connector, you can send messages to t
 
 ## View function logs
 
-After you send a message to the data source topic in Message Queue for Apache Kafka, you can view the function log to check whether the message was received. For more information, see [Configure and view function logs]().
+After you send a message to the source topic in Message Queue for Apache Kafka, you can view the function logs to check whether the message is received. For more information, see [Configure and view function logs]().
 
-The test message that you sent appears in the log.
+The test message that you have sent appears in the logs.
 
 ![fc LOG](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/2228646061/p127831.png)
 
