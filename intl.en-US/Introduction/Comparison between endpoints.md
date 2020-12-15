@@ -14,7 +14,7 @@ This topic describes the comparison between two types of Message Queue for Apach
 |[Professional Edition](/intl.en-US/Pricing/Billing.md)|
 |Major version|0.10.x‒2.x|2.x|
 |Network type|Virtual private cloud \(VPC\)|VPC|
-|Enabling method|Automatically enabled|[Submit a ticket](https://workorder-intl.console.aliyun.com/#/ticket/add/?productId=1352)|
+|Enabling method|Automatically enabled|[Enable in the console](/intl.en-US/Access control/Authorize SASL users.md)|
 |Security protocol|PLAINTEXT|SASL\_PLAINTEXT|
 |Port|9092|9094|
 
