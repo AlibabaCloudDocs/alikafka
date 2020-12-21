@@ -4,7 +4,9 @@ keyword: [kafka, connector]
 
 # Connector概述
 
-消息队列Kafka版提供全托管、免运维的Connector，用于同一地域内的消息队列Kafka版和其他阿里云服务之间的数据同步。Connector当前处于公测阶段。本文介绍Connector的类型、使用流程、使用限制以及跨地域数据同步。
+消息队列Kafka版提供全托管、免运维的Connector，用于同一地域内的消息队列Kafka版和其他阿里云服务之间的数据同步。本文介绍Connector的类型、使用流程、使用限制以及跨地域数据同步。
+
+**说明：** 消息队列Kafka版的Connector组件处于公测阶段，且独立于消息队列Kafka版实例，因此不会在消息队列Kafka版侧产生费用。同时阿里云不承诺Connector的SLA，使用Connector所依赖的其他产品的SLA和费用说明请以对应产品为准。
 
 ## Connector类型
 
