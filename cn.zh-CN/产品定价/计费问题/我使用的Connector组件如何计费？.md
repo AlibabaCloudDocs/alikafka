@@ -1,0 +1,4 @@
+# 我使用的Connector组件如何计费？
+
+消息队列Kafka版的Connector组件处于公测阶段，且独立于消息队列Kafka版实例，因此不会在消息队列Kafka版侧产生费用。同时阿里云不承诺Connector的SLA，Connector显示依赖的其他产品的SLA和费用说明请以对应产品为准。
+
