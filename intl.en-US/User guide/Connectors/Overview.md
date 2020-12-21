@@ -6,6 +6,8 @@ keyword: [kafka, connector]
 
 Message Queue for Apache Kafka provides fully-managed and maintenance-free connectors for synchronizing data between Message Queue for Apache Kafka and other Alibaba Cloud services. The Connector feature is in public preview. This topic describes the types, procedure, and limits of connectors, and cross-region data synchronization by using connectors.
 
+**Note:** The connector component of Message Queue for Apache Kafka is in the public beta stage and is independent of the Kafka instance, so there will be no charges on the Message Queue for Apache Kafka side. At the same time, Alibaba Cloud does not promise the SLA of the Connector. For the SLA and cost descriptions of other products that the Connector relies on, please refer to the corresponding product.
+
 ## Types of connectors
 
 Message Queue for Apache Kafka only provides sink connectors to export data from Message Queue for Apache Kafka to other Alibaba Cloud services. The following table lists the types of sink connectors that Message Queue for Apache Kafka supports.
@@ -27,12 +29,12 @@ Perform the following steps to use connectors:
     -   [Create a MaxCompute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MaxCompute sink connector.md)
     -   [Create a Function Compute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a Function Compute sink connector.md)
 3.  Manage connectors.
-    -   [View task configurations of a connector](/intl.en-US/User guide/Connectors/View the task configurations of a connector.md)
+    -   [View task configurations of a connector](/intl.en-US/User guide/Connectors/View task configurations of a connector.md)
     -   [View connector logs](/intl.en-US/User guide/Connectors/View connector logs.md)
     -   [Suspend a connector](/intl.en-US/User guide/Connectors/Suspend a connector.md)
     -   [Resume a connector](/intl.en-US/User guide/Connectors/Resume a connector.md)
     -   [Delete a connector](/intl.en-US/User guide/Connectors/Delete a connector.md)
-    -   [Modify connector descriptions](/intl.en-US/User guide/Connectors/Modify the connector description.md)
+    -   [Modify the description of a connector](/intl.en-US/User guide/Connectors/Modify the description of a connector.md)
 
 ## Limits
 
