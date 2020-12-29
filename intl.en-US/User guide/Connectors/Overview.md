@@ -4,13 +4,13 @@ keyword: [kafka, connector]
 
 # Overview
 
-Message Queue for Apache Kafka provides fully-managed and maintenance-free connectors for synchronizing data between Message Queue for Apache Kafka and other Alibaba Cloud services. The Connector feature is in public preview. This topic describes the types, procedure, and limits of connectors, and cross-region data synchronization by using connectors.
+Message Queue for Apache Kafka provides fully managed and maintenance-free connectors to synchronize data between Message Queue for Apache Kafka and other Alibaba Cloud services. This topic describes the types, procedure, and limits of connectors. It also describes how to synchronize data between services in different regions by using connectors.
 
-**Note:** The connector component of Message Queue for Apache Kafka is in the public beta stage and is independent of the Kafka instance, so there will be no charges on the Message Queue for Apache Kafka side. At the same time, Alibaba Cloud does not promise the SLA of the Connector. For the SLA and cost descriptions of other products that the Connector relies on, please refer to the corresponding product.
+**Note:** The connector feature of Message Queue for Apache Kafka is in public preview. This feature is independent of Message Queue for Apache Kafka instances. Therefore, you are not charged on the Message Queue for Apache Kafka side when you use a connector to synchronize data between Message Queue for Apache Kafka and another Alibaba Cloud service. Alibaba Cloud does not provide Service Level Agreement \(SLA\) commitments for the connector feature in public preview. For more information about SLA commitments and billing of other related services, see descriptions of the corresponding services.
 
 ## Types of connectors
 
-Message Queue for Apache Kafka only provides sink connectors to export data from Message Queue for Apache Kafka to other Alibaba Cloud services. The following table lists the types of sink connectors that Message Queue for Apache Kafka supports.
+Message Queue for Apache Kafka provides only sink connectors. You can use these connectors to export data from Message Queue for Apache Kafka to other Alibaba Cloud services. The following table lists the types of sink connectors that Message Queue for Apache Kafka supports.
 
 |Sink connector type|Task type|Description|Documentation|
 |-------------------|---------|-----------|-------------|
@@ -21,7 +21,7 @@ Message Queue for Apache Kafka only provides sink connectors to export data from
 
 Perform the following steps to use connectors:
 
-1.  Enable the Connector feature.
+1.  Enable the connector feature.
 
     [Enable the connector feature](/intl.en-US/User guide/Connectors/Enable the connector feature.md)
 
@@ -42,11 +42,11 @@ The following table lists the limits of Message Queue for Apache Kafka on connec
 
 |Item|Limit|
 |----|-----|
-|Quantity|3|
+|Maximum number of connectors|3|
 |Region|-   China \(Hangzhou\)
 -   China \(Shanghai\)
 -   China \(Beijing\)
--   China \(Zhangjiakou-Beijing Winter Olympics\)
+-   China \(Zhangjiakou\)
 -   China \(Hohhot\)
 -   China \(Shenzhen\)
 -   China \(Chengdu\)
@@ -54,7 +54,7 @@ The following table lists the limits of Message Queue for Apache Kafka on connec
 -   Singapore \(Singapore\)
 -   Japan \(Tokyo\) |
 
-**Note:** To increase connectors for your instance or use connectors in more regions, submit a [ticket](https://workorder-intl.console.aliyun.com/#/ticket/add/?productId=1352) to Customer Service of Message Queue for Apache Kafka.
+**Note:** To increase the number connectors for your instance or use connectors in other regions, submit a[ticket](https://workorder-intl.console.aliyun.com/#/ticket/add/?productId=1352) to Message Queue for Apache Kafka Customer Services.
 
 ## Cross-region data synchronization
 
