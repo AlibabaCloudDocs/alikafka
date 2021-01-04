@@ -72,7 +72,7 @@ keyword: [apache kafka, kafka, 公网, 收发消息, 9093]
 
     -   如果实例未开启ACL，您可以在消息队列Kafka版控制台的**实例详情**页面获取默认用户的用户名和密码。
     -   如果实例已开启ACL，请确保要使用的SASL用户为PLAIN类型且已授权收发消息的权限，详情请参见[SASL用户授权](/cn.zh-CN/权限控制/SASL用户授权.md)。
-4.  创建Kafka配置文件kafka.properties。
+4.  创建消息队列Kafka版配置文件kafka.properties。
 
     ```
     ##SSL接入点，通过控制台获取。
@@ -162,7 +162,7 @@ keyword: [apache kafka, kafka, 公网, 收发消息, 9093]
             props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_SSL");
             //SASL鉴权方式，保持不变。
             props.put(SaslConfigs.SASL_MECHANISM, "PLAIN");
-            //Kafka消息的序列化方式。
+            //消息队列Kafka版消息的序列化方式。
             props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
             props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
             //请求的最长等待时间。
@@ -179,7 +179,7 @@ keyword: [apache kafka, kafka, 公网, 收发消息, 9093]
             //如果想提高性能，可以多构造几个对象，但不要太多，最好不要超过5个。
             KafkaProducer<String, String> producer = new KafkaProducer<String, String>(props);
     
-            //构造一个Kafka消息。
+            //构造一个消息队列Kafka版消息。
             String topic = kafkaProperties.getProperty("topic"); //消息所属的Topic，请在控制台申请之后，填写在这里。
             String value = "this is the message's value"; //消息的内容。
     
