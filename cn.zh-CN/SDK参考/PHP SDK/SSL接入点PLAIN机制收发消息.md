@@ -47,7 +47,7 @@
     pecl install rdkafka
     ```
 
-2.  在PHP的初始化文件php.ini中添加以下一行语句以开启Kafka扩展。
+2.  在PHP的初始化文件php.ini中添加以下一行语句以开启扩展。
 
     ```
     extension=rdkafka.so
@@ -58,7 +58,7 @@
 
 1.  [下载SSL根证书](https://code.aliyun.com/alikafka/aliware-kafka-demos/raw/master/kafka-php-demo/vpc-ssl/ca-cert.pem)。
 
-2.  创建Kafka配置文件。
+2.  创建消息队列Kafka版配置文件。
 
     ```
     <?php
