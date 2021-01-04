@@ -2,11 +2,45 @@
 
 本文介绍如何在公网环境下使用Node.js SDK接入消息队列Kafka版的SSL接入点并使用PLAIN机制收发消息。
 
+-   [安装GCC](https://gcc.gnu.org/install/)
 -   [安装Node.js](https://nodejs.org/en/download/)
 
     **说明：** Node.js版本必须大于等于4.0.0。
 
 -   [安装OpenSSL](https://www.openssl.org/source/)
+
+## 安装C++依赖库
+
+1.  执行以下命令切换到yum源配置目录/etc/yum.repos.d/。
+
+    ```
+    cd /etc/yum.repos.d/
+    ```
+
+2.  创建yum源配置文件confluent.repo。
+
+    ```
+    [Confluent.dist]
+    name=Confluent repository (dist)
+    baseurl=https://packages.confluent.io/rpm/5.1/7
+    gpgcheck=1
+    gpgkey=https://packages.confluent.io/rpm/5.1/archive.key
+    enabled=1
+    
+    [Confluent]
+    name=Confluent repository
+    baseurl=https://packages.confluent.io/rpm/5.1
+    gpgcheck=1
+    gpgkey=https://packages.confluent.io/rpm/5.1/archive.key
+    enabled=1
+    ```
+
+3.  执行以下命令安装C++依赖库。
+
+    ```
+    yum install librdkafka-devel
+    ```
+
 
 ## 安装Node.js依赖库
 
@@ -25,7 +59,7 @@
 3.  执行以下命令安装Node.js依赖库。
 
     ```
-    npm install node-rdkafka
+    npm install i --unsafe-perm node-rdkafka
     ```
 
 
@@ -33,7 +67,7 @@
 
 1.  [下载SSL根证书](https://code.aliyun.com/alikafka/aliware-kafka-demos/raw/master/kafka-nodejs-demo/vpc-ssl/ca-cert.pem)。
 
-2.  创建Kafka配置文件setting.js。
+2.  创建消息队列Kafka版配置文件setting.js。
 
     ```
     module.exports = {
@@ -48,9 +82,9 @@
     |参数|描述|
     |--|--|
     |sasl\_plain\_username|用户名。    -   如果实例未开启ACL，您可以在消息队列Kafka版控制台的**实例详情**页面获取默认用户的用户名。
-    -   如果实例已开启ACL，请确保要使用的SASL用户为PLAIN类型且已授权收发消息的权限。详情请参见[SASL用户授权](/cn.zh-CN/权限控制/SASL用户授权.md)。 |
+    -   如果实例已开启ACL，请确保要使用的SASL用户为PLAIN类型且已授权收发消息的权限。更多信息，请参见[SASL用户授权](/cn.zh-CN/权限控制/SASL用户授权.md)。 |
     |sasl\_plain\_password|密码。    -   如果实例未开启ACL，您可以在消息队列Kafka版控制台的**实例详情**页面获取默认用户的密码。
-    -   如果实例已开启ACL，请确保要使用的SASL用户为PLAIN类型且已授权收发消息的权限。详情请参见[SASL用户授权](/cn.zh-CN/权限控制/SASL用户授权.md)。 |
+    -   如果实例已开启ACL，请确保要使用的SASL用户为PLAIN类型且已授权收发消息的权限。更多信息，请参见[SASL用户授权](/cn.zh-CN/权限控制/SASL用户授权.md)。 |
     |bootstrap\_servers|SSL接入点。您可在消息队列Kafka版控制台的**实例详情**页面的**基本信息**区域获取。|
     |topic\_name|Topic名称。您可在消息队列Kafka版控制台的**Topic管理**页面获取。|
     |consumer\_id|Consumer Group名称。您可在消息队列Kafka版控制台的**Consumer Group管理**页面获取。|
@@ -138,7 +172,7 @@
 
 ## 订阅消息
 
-1.  创建订阅消息程序fileconsumer.js。
+1.  创建订阅消息程序consumer.js。
 
     ```
     const Kafka = require('node-rdkafka');
