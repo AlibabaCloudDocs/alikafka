@@ -25,7 +25,7 @@ keyword: [kafka, 收发消息, Python, VPC, sasl\_plain]
 
 1.  [下载SSL根证书](https://code.aliyun.com/alikafka/aliware-kafka-demos/raw/master/kafka-filebeat-demo/vpc-ssl/ca-cert)。
 
-2.  创建Kafka配置文件setting.py。
+2.  创建消息队列Kafka版配置文件setting.py。
 
     ```
     kafka_setting = {
