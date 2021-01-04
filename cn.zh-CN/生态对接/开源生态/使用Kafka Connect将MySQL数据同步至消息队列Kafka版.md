@@ -4,7 +4,7 @@
 
 Kafka Connect主要用于将数据流输入和输出消息队列Kafka版。Kafka Connect主要通过各种Source Connector的实现，将数据从第三方系统输入到Kafka broker，通过各种Sink Connector实现，将数据从Kafka broker中导入到第三方系统。
 
-![system](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/7219853951/p68623.png)
+![system](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/7219853951/p68623.png)
 
 ## 前提条件
 
@@ -92,7 +92,7 @@ Kafka Connect主要用于将数据流输入和输出消息队列Kafka版。Kafka
     -   VPC接入
 
         ```
-        ## Kafka接入点，通过控制台获取
+        ## 消息队列Kafka版接入点，通过控制台获取
         ## 您在控制台获取的默认接入点
         "database.history.kafka.bootstrap.servers" : "kafka:9092",
         ## 需要提前在控制台创建同名Topic，在本例中创建topic：server1
@@ -107,7 +107,7 @@ Kafka Connect主要用于将数据流输入和输出消息队列Kafka版。Kafka
     -   公网接入
 
         ```
-        ## Kafka接入点，通过控制台获取。存储db中schema变化信息
+        ## 消息队列Kafka版接入点，通过控制台获取。存储db中schema变化信息
         ## 您在控制台获取的SSL接入点
         "database.history.kafka.bootstrap.servers" : "kafka:9092",
         ## 需要提前在控制台创建同名topic，在本例中创建Topic：server1
