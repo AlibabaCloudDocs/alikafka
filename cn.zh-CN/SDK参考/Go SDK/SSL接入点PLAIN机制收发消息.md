@@ -6,7 +6,7 @@ keyword: [go, 公网, 收发消息, sasl\_plaintext]
 
 本文介绍如何在公网环境下使用Go SDK接入消息队列Kafka版的SSL接入点并使用PLAIN机制收发消息。
 
-您已安装Go，详情请参见[安装Go](https://golang.org/dl/)。
+您已安装Go。更多信息，请参见[安装Go](https://golang.org/dl/)。
 
 ## 安装Go依赖库
 
@@ -29,7 +29,7 @@ keyword: [go, 公网, 收发消息, sasl\_plaintext]
 
 1.  [下载SSL根证书](https://code.aliyun.com/alikafka/aliware-kafka-demos/raw/master/kafka-go-demo/vpc-ssl/conf/ca-cert)。
 
-2.  创建Kafka配置文件kafka.json。
+2.  创建消息队列Kafka版配置文件kafka.json。
 
     ```
     {
