@@ -16,18 +16,18 @@ keyword: [java, vpc, kafka, 收发消息, scram]
 
     ```
     <dependency>
-    	<groupId>org.apache.kafka</groupId>
-    	<artifactId>kafka-clients</artifactId>
-    	<version>0.10.2.2</version>
+        <groupId>org.apache.kafka</groupId>
+        <artifactId>kafka-clients</artifactId>
+        <version>0.10.2.2</version>
     </dependency>
     <dependency>
-    	<groupId>org.slf4j</groupId>
-    	<artifactId>slf4j-log4j12</artifactId>
-    	<version>1.7.6</version>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>1.7.6</version>
     </dependency>
     ```
 
-    **说明：** 建议您保持服务端和客户端版本一致，即保持客户端库版本和消息队列Kafka版实例的大版本一致。您可以消息队列Kafka版控制台的**实例详情**页面获取消息队列Kafka版实例的大版本。
+    **说明：** 建议您保持服务端和客户端版本一致，即保持客户端库版本和消息队列Kafka版实例的大版本一致。您可以在消息队列Kafka版控制台的**实例详情**页面获取消息队列Kafka版实例的大版本。
 
 
 ## 准备配置
@@ -67,7 +67,7 @@ keyword: [java, vpc, kafka, 收发消息, scram]
     };
     ```
 
-3.  创建Kafka配置文件kafka.properties。
+3.  创建消息队列Kafka版配置文件kafka.properties。
 
     ```
     ##SASL接入点，通过控制台获取。
@@ -153,7 +153,7 @@ keyword: [java, vpc, kafka, 收发消息, scram]
             //SCRAM方式。
             props.put(SaslConfigs.SASL_MECHANISM, "SCRAM-SHA-256");     
     
-            //Kafka消息的序列化方式。
+            //消息队列Kafka版消息的序列化方式。
             props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
             props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
             //请求的最长等待时间。
@@ -166,7 +166,7 @@ keyword: [java, vpc, kafka, 收发消息, scram]
             //如果想提高性能，可以多构造几个对象，但不要太多，最好不要超过5个。
             KafkaProducer<String, String> producer = new KafkaProducer<String, String>(props);
     
-            //构造一个Kafka消息。
+            //构造一个消息队列Kafka版消息。
             String topic = kafkaProperties.getProperty("topic"); //消息所属的Topic，请在控制台申请之后，填写在这里。
             String value = "this is the message's value"; //消息的内容。
     
