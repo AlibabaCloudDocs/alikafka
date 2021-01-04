@@ -67,7 +67,7 @@ keyword: [java, vpc, kafka, 收发消息, plain]
     };
     ```
 
-3.  创建Kafka配置文件kafka.properties。
+3.  创建消息队列Kafka版配置文件kafka.properties。
 
     ```
     ##SASL接入点，通过控制台获取。
@@ -153,7 +153,7 @@ keyword: [java, vpc, kafka, 收发消息, plain]
             //Plain方式。
             props.put(SaslConfigs.SASL_MECHANISM, "PLAIN");     
     
-            //Kafka消息的序列化方式。
+            //消息队列Kafka版消息的序列化方式。
             props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
             props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
             //请求的最长等待时间。
@@ -166,7 +166,7 @@ keyword: [java, vpc, kafka, 收发消息, plain]
             //如果想提高性能，可以多构造几个对象，但不要太多，最好不要超过5个。
             KafkaProducer<String, String> producer = new KafkaProducer<String, String>(props);
     
-            //构造一个Kafka消息。
+            //构造一个消息队列Kafka版消息。
             String topic = kafkaProperties.getProperty("topic"); //消息所属的Topic，请在控制台申请之后，填写在这里。
             String value = "this is the message's value"; //消息的内容。
     
