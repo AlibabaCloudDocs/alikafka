@@ -1,8 +1,8 @@
 # DescribeMetricList
 
-Queries the monitoring data on a time series metric of a cloud service in a specified period.
+Queries the data of a time series metric of a specified cloud service.
 
-For more information about how to assign values to the Namespace, Project, Metric, Period, and Dimensions parameters for cloud services, see [DescribeMetricMetaList](~~98846~~) or [Appendix 1: Metrics](~~163515~~).
+**Note:** For information about how to assign values to the Namespace, Project, Metric, Period, and Dimensions parameters for cloud services, see [DescribeMetricMetaList](~~98846~~) or [Metrics](~~163515~~).
 
 ## Debugging
 
@@ -13,35 +13,31 @@ For more information about how to assign values to the Namespace, Project, Metri
 |Parameter|Type|Required|Example|Description|
 |---------|----|--------|-------|-----------|
 |Action|String|Yes|DescribeMetricList|The operation that you want to perform. Set the value to DescribeMetricList. |
-|MetricName|String|Yes|cpu\_idle|The name of the metric that you want to query. |
-|Namespace|String|Yes|acs\_ecs\_dashboard|The namespace of the service.
+|MetricName|String|Yes|cpu\_idle|The name of the metric. |
+|Namespace|String|Yes|acs\_ecs\_dashboard|The namespace of the cloud service.
 
- Specify the value in the format of acs\_Service. |
-|Period|String|No|60|The time interval to query monitoring data. Unit: seconds. Valid values: 60, 300, and 900.
+ Specify the value in the acs\_service name format. |
+|Period|String|No|60|The time interval at which metric data is queried. Unit: seconds. Valid values: 60, 300, and 900.
 
- Set this parameter as needed. |
-|StartTime|String|No|2019-01-30 00:00:00|The beginning of the time range to query. Supported formats:
+ **Note:** Set this parameter as needed. |
+|StartTime|String|No|2019-01-30 00:00:00|The start of the time range to query. Supported formats:
 
- -   UNIX timestamp: the number of milliseconds that have elapsed since January 1, 1970, 00:00:00 UTC.
+ -   UNIX timestamp: the number of milliseconds that have elapsed since 00:00:00 Thursday, January 1, 1970.
 -   Time format: YYYY-MM-DDThh:mm:ssZ.
 
- **Note:** The period specified by StartTime and EndTime includes the time point specified by EndTime but does not include the time point specified by StartTime. StartTime must be earlier than EndTime. |
+ **Note:** The period specified by StartTime and EndTime includes the time specified by EndTime and excludes the time specified by StartTime. StartTime must be earlier than EndTime. |
 |EndTime|String|No|2019-01-30 00:10:00|The end of the time range to query. Supported formats:
 
- -   UNIX timestamp: the number of milliseconds that have elapsed since January 1, 1970, 00:00:00 UTC.
+ -   UNIX timestamp: the number of milliseconds that have elapsed since 00:00:00 Thursday, January 1, 1970.
 -   Time format: YYYY-MM-DDThh:mm:ssZ. |
-|Dimensions|String|No|\[\{"instanceId": "i-abcdefgh12\*\*\*\*"\}\]|The dimensions that specify the resources for which you want to query monitoring data.
+|Dimensions|String|No|\[\{"instanceId": "i-abcdefgh12\*\*\*\*"\}\]|The dimensions that specify the resources for which you want to query metric data.
 
- Set the value to a collection of key-value pairs. A typical key-value pair is `instanceId:XXXXXX`.
+ Set the value to a set of key-value pairs. A typical pair is `instanceId:i-2ze2d6j5uhg20x47****`.
 
- The key and value can each be 1 to 64 bytes in length. Values that contain more than 64 characters will be truncated.
-
- The key and value can contain letters, digits, periods \(.\), hyphens \(-\), underscores \(\_\), forward slashes \(/\), and backslashes \(\\\).
-
- **Note:** Dimensions must be organized in a JSON string and follow the required order. |
+ **Note:** Dimensions must be formatted as a JSON string in a specified order. |
 |NextToken|String|No|15761485350009dd70bb64cff1f0fff750b08ffff073be5fb1e785e2b020f1a949d5ea14aea7fed82f01dd8\*\*\*\*|The pagination cursor.
 
- **Note:** If this parameter is not specified, the data on the first page is returned. This pagination cursor can be used as an input parameter to obtain entries on the next page. If a response does not contain a pagination cursors, all query results have been returned. |
+ **Note:** If this parameter is not specified, the data on the first page is returned. The returned value indicates that not all entries have been returned. You can use this value as an input parameter to obtain entries on the next page. If a response is empty, all query results have been returned. |
 |Length|String|No|1000|The number of entries to return on each page. |
 |Express|String|No|\{"groupby":\["userId","instanceId"\]\}|The expression for real-time computation on the query results.
 
@@ -52,15 +48,16 @@ For more information about how to assign values to the Namespace, Project, Metri
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
 |RequestId|String|3121AE7D-4AFF-4C25-8F1D-C8226EBB1F42|The ID of the request. |
-|Code|String|200|The response code.
+|Code|String|200|The HTTP status code.
 
- **Note:** The HTTP 200 code indicates that the request was successful. |
-|Success|Boolean|true|Indicates whether the request was successful. The value true indicates success. The value false indicates failure. |
-|NextToken|String|15761441850009dd70bb64cff1f0fff6d0b08ffff073be5fb1e785e2b020f7fed9b5e137bd810a6d6cff5ae\*\*\*\*|The pagination cursor.
+ **Note:** The status code 200 indicates that the call was successful. |
+|Success|Boolean|true|Indicates whether the call was successful. Valid values:
 
- **Note:** If this parameter is not specified, the data on the first page is returned. This pagination cursor can be used as an input parameter to obtain entries on the next page. If a response does not contain a pagination cursors, all query results have been returned. |
-|Period|String|60|The time interval at which monitoring data was queried. Unit: seconds. Valid values: 60, 300, and 900. |
-|Datapoints|String|\[\{"timestamp":1548777660000,"userId":"123","instanceId":"i-abc","Minimum":9.92,"Average":9.92,"Maximum":9.92\}\]|The monitoring data of the metric. |
+ -   true: The call was successful.
+-   false: The call failed. |
+|NextToken|String|15761441850009dd70bb64cff1f0fff6d0b08ffff073be5fb1e785e2b020f7fed9b5e137bd810a6d6cff5ae\*\*\*\*|The pagination cursor. |
+|Period|String|60|The time interval at which metric data was queried. Unit: seconds. Valid values: 60, 300, and 900. |
+|Datapoints|String|\[\{"timestamp":1548777660000,"userId":"123","instanceId":"i-abc","Minimum":9.92,"Average":9.92,"Maximum":9.92\}\]|The data of the metric. |
 |Message|String|The Request is not authorization.|The error message. |
 
 ## Examples
@@ -79,7 +76,7 @@ Sample success responses
 `XML` format
 
 ```
-<DescribeMetricList>
+<DescribeMetricListResponse>
 		  <Period>60</Period>
 		  <Datapoints>
 			    <timestamp>1490152860000</timestamp>
@@ -164,7 +161,7 @@ Sample success responses
 		  <RequestId>6A5F022D-AC7C-460E-94AE-B9E75083D027</RequestId>
 		  <Success>true</Success>
 		  <Code>200</Code>
-</DescribeMetricList>
+</DescribeMetricListResponse>
 ```
 
 `JSON` format
