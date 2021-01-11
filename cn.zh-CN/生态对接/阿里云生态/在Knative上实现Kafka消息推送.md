@@ -19,6 +19,13 @@ Knative是一款基于Kubernetes的Serverless框架，其目标是制定云原�
 
 要让Eventing（事件系统）正常运行，就必须在Knative集群中实现Channel（内部事件存储层），目前支持的Channel实现方式包括Kafka、NATS。本文以消息队列Kafka版为例介绍如何实现Channel。
 
+## 适用场景
+
+-   在线短任务处理
+-   AI音视频消息处理
+-   监控告警
+-   数据格式转换
+
 ## 操作流程
 
 在Knative上实现Kafka消息推送的操作流程如下图所示。
