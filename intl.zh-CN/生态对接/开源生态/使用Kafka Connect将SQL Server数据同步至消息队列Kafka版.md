@@ -38,6 +38,14 @@
 配置好connect-distributed.properties后，执行以下命令启动Kafka Connect。
 
 ```
+## 如果是公网接入，需先设置java.security.auth.login.config。
+## 如果是VPC接入，可以跳过这一步。
+export KAFKA_OPTS="-Djava.security.auth.login.config=kafka_client_jaas.conf"
+## 启动Kafka Connect。
+bin/connect-distributed.sh config/connect-distributed.properties
+```
+
+```
 ## 启动Kafka Connect。
 bin/connect-distributed.sh config/connect-distributed.properties
 ```
@@ -70,7 +78,7 @@ bin/connect-distributed.sh config/connect-distributed.properties
     1.  执行以下命令开启CDC配置。
 
         ```
-        ## 开启CDC模板数据库
+        ## 开启CDC模板数据库。
         USE testDB
         GO
         EXEC sys.sp_cdc_enable_db
@@ -80,7 +88,7 @@ bin/connect-distributed.sh config/connect-distributed.properties
     2.  执行以下命令开启指定Table的CDC配置。
 
         ```
-        ## Enable a Table Specifying Filegroup Option Template
+        ## 开启指定Table的CDC配置。
         USE testDB
         GO
         
@@ -131,6 +139,29 @@ bin/connect-distributed.sh config/connect-distributed.properties
         "database.history.kafka.topic": "schema-changes-inventory"
         ```
 
+    -   公网接入
+
+        ```
+        ## 消息队列Kafka版实例的SSL接入点，您可以在消息队列Kafka版控制台获取。
+        "database.history.kafka.bootstrap.servers" : "kafka:9092",
+        ## 您需要提前在消息队列Kafka版控制台创建同名Topic，在本例中创建topic：server1。
+        ## 所有table的变更数据，会记录在server1.$DATABASE.$TABLE的Topic中，例如server1.testDB.products。
+        ## 因此您需要提前在消息队列Kafka版控制台中创建所有相关Topic。
+        "database.server.name": "server1",
+        ## 记录schema变化信息将记录在该Topic中。
+        ## 您需要提前在消息队列Kafka版控制台创建该Topic。
+        "database.history.kafka.topic": "schema-changes-inventory",
+        ## 通过SSL接入点访问，还需要修改以下配置。
+        "database.history.producer.ssl.truststore.location": "kafka.client.truststore.jks",
+        "database.history.producer.ssl.truststore.password": "KafkaOnsClient",
+        "database.history.producer.security.protocol": "SASL_SSL",
+        "database.history.producer.sasl.mechanism": "PLAIN",
+        "database.history.consumer.ssl.truststore.location": "kafka.client.truststore.jks",
+        "database.history.consumer.ssl.truststore.password": "KafkaOnsClient",
+        "database.history.consumer.security.protocol": "SASL_SSL",
+        "database.history.consumer.sasl.mechanism": "PLAIN",
+        ```
+
 3.  完成register-sqlserver.json配置后，您需要根据配置在控制台创建相应的Topic，相关操作步骤请参见[步骤一：创建Topic](/intl.zh-CN/快速入门/步骤三：创建资源.md)。
 
     按照本教程中的方式安装的SQL Server，您可以看到SQL Server中已经提前创建db name：testDB。其中有四张表：
@@ -151,7 +182,7 @@ bin/connect-distributed.sh config/connect-distributed.properties
 4.  执行以下命令启动SQL Server。
 
     ```
-    > curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/ -d @register-sqlserver.json
+    curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/ -d @register-sqlserver.json
     ```
 
 
