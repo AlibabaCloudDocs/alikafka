@@ -78,7 +78,7 @@ bin/connect-distributed.sh config/connect-distributed.properties
     1.  执行以下命令开启CDC配置。
 
         ```
-        ## 开启CDC模板数据库
+        ## 开启CDC模板数据库。
         USE testDB
         GO
         EXEC sys.sp_cdc_enable_db
@@ -88,7 +88,7 @@ bin/connect-distributed.sh config/connect-distributed.properties
     2.  执行以下命令开启指定Table的CDC配置。
 
         ```
-        ## Enable a Table Specifying Filegroup Option Template
+        ## 开启指定Table的CDC配置。
         USE testDB
         GO
         
@@ -182,7 +182,7 @@ bin/connect-distributed.sh config/connect-distributed.properties
 4.  执行以下命令启动SQL Server。
 
     ```
-    > curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/ -d @register-sqlserver.json
+    curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/ -d @register-sqlserver.json
     ```
 
 
