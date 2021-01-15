@@ -10,15 +10,15 @@ Kafka Connect主要用于将数据流输入和输出消息队列Kafka版。Kafka
 
 在开始本教程前，请确保您已完成以下操作：
 
--   已下载MySQL Source Connector。
+-   下载MySQL Source Connector。
 
     **说明：** 本教程以[0.5.2](https://repo1.maven.org/maven2/io/debezium/debezium-connector-mysql/0.5.2/)版本的MySQL Source Connector为例。
 
--   已下载Kafka Connect。
+-   下载Kafka Connect。
 
     **说明：** 本教程以[0.10.2.2](http://kafka.apache.org/downloads#0.10.2.2)版本的Kafka Connect为例。
 
--   已安装docker。
+-   安装docker。
 
 ## 步骤一：配置Kafka Connect
 
@@ -43,6 +43,9 @@ Kafka Connect主要用于将数据流输入和输出消息队列Kafka版。Kafka
 
 在配置好connect-distributed.properties后，执行以下命令启动Kafka Connect。
 
+-   公网接入
+    1.  执行命令`export KAFKA_OPTS="-Djava.security.auth.login.config=kafka_client_jaas.conf"`设置java.security.auth.login.config。
+    2.  执行命令`bin/connect-distributed.sh config/connect-distributed.properties`启动Kafka Connect。
 -   VPC接入
 
     执行命令`bin/connect-distributed.sh config/connect-distributed.properties`启动Kafka Connect。
@@ -89,16 +92,40 @@ Kafka Connect主要用于将数据流输入和输出消息队列Kafka版。Kafka
     -   VPC接入
 
         ```
-        ## 消息队列Kafka版接入点，通过控制台获取
-        ## 您在控制台获取的默认接入点
+        ## 消息队列Kafka版接入点，通过控制台获取。
+        ## 您在控制台获取的默认接入点。
         "database.history.kafka.bootstrap.servers" : "kafka:9092",
-        ## 需要提前在控制台创建同名Topic，在本例中创建topic：server1
-        ## 所有Table的变更数据，会记录在server1.$DATABASE.$TABLE的Topic中，如 server1.inventory.products
-        ## 因此用户需要提前在控制台中创建所有相关 Topic
+        ## 需要提前在控制台创建同名Topic，在本例中创建topic：server1。
+        ## 所有Table的变更数据，会记录在server1.$DATABASE.$TABLE的Topic中，如 server1.inventory.products。
+        ## 因此用户需要提前在控制台中创建所有相关 Topic。
         "database.server.name": "server1",
-        ## 记录schema变化信息将记录在这个Topic中
-        ## 需要提前在控制台创建
+        ## 记录schema变化信息将记录在这个Topic中。
+        ## 需要提前在控制台创建。
         "database.history.kafka.topic": "schema-changes-inventory"
+        ```
+
+    -   公网接入
+
+        ```
+        ## 消息队列Kafka版接入点，通过控制台获取。存储db中schema变化信息。
+        ## 您在控制台获取的SSL接入点。
+        "database.history.kafka.bootstrap.servers" : "kafka:9092",
+        ## 需要提前在控制台创建同名topic，在本例中创建Topic：server1。
+        ## 所有Table的变更数据，会记录在server1.$DATABASE.$TABLE的Topic中，如 server1.testDB.products。
+        ## 因此用户需要提前在控制台中创建所有相关 Topic。
+        "database.server.name": "server1",
+        ## schema变化信息将记录在这个Topic中。
+        ## 需要提前在控制台创建。
+        "database.history.kafka.topic": "schema-changes-inventory",
+        ## SSL公网方式访问配置。
+        "database.history.producer.ssl.truststore.location": "kafka.client.truststore.jks",
+        "database.history.producer.ssl.truststore.password": "KafkaOnsClient",
+        "database.history.producer.security.protocol": "SASL_SSL",
+        "database.history.producer.sasl.mechanism": "PLAIN",
+        "database.history.consumer.ssl.truststore.location": "kafka.client.truststore.jks",
+        "database.history.consumer.ssl.truststore.password": "KafkaOnsClient",
+        "database.history.consumer.security.protocol": "SASL_SSL",
+        "database.history.consumer.sasl.mechanism": "PLAIN",
         ```
 
 3.  配置好register-mysql.json后，您需要根据配置在控制台创建相应的Topic，相关操作步骤请参见[步骤一：创建Topic](/intl.zh-CN/快速入门/步骤三：创建资源.md)。
@@ -121,7 +148,7 @@ Kafka Connect主要用于将数据流输入和输出消息队列Kafka版。Kafka
 4.  执行以下命令启动MySQL Connector。
 
     ```
-    > curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/ -d @register-mysql.json
+    curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/ -d @register-mysql.json
     ```
 
 
