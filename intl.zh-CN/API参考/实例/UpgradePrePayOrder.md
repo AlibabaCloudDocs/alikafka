@@ -2,7 +2,7 @@
 
 调用UpgradePrePayOrder升配预付费实例。
 
-请确保在使用该接口前，已充分了解预付费实例的收费方式和价格。详情请参见[计费说明](~84737~)。
+请确保在使用该接口前，已充分了解预付费实例的收费方式和价格。详情请参见[计费说明](~~84737~~)。
 
 ## 调试
 
@@ -40,9 +40,9 @@
  不支持将实例从专业版降级到标准版。以上规格类型的说明请参见[计费说明](~~84737~~)。 |
 |EipMax|Integer|否|0|公网流量。
 
- 不支持公网访问，无需填写。
-
-  |
+ -   填写的公网流量必须大于或等于实例当前的公网流量。
+-   实例类型为公网/VPC实例时填写。
+-   取值范围请参见[计费说明](~~84737~~)。 |
 |IoMaxSpec|String|否|alikafka.hw.2xlarge|流量规格（推荐）。
 
  -   填写的流量规格必须大于或等于实例当前的流量规格。
@@ -64,10 +64,14 @@
 
 ```
 http(s)://[Endpoint]/?Action=UpgradePrePayOrder
-&DiskSize=900
-&InstanceId=alikafka_post-cn-mp919o4v****
 &RegionId=cn-hangzhou
 &TopicQuota=50
+&DiskSize=900
+&InstanceId=alikafka_post-cn-mp919o4v****
+&IoMax=40
+&SpecType=professional
+&EipMax=200
+&IoMaxSpec=alikafka.hw.2xlarge
 &<公共请求参数>
 ```
 
