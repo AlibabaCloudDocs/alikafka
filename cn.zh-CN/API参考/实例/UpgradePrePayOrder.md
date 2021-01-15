@@ -2,7 +2,7 @@
 
 调用UpgradePrePayOrder升配预付费实例。
 
-请确保在使用该接口前，已充分了解预付费实例的收费方式和价格。详情请参见[计费说明](~84737~)。
+请确保在使用该接口前，已充分了解预付费实例的收费方式和价格。详情请参见[计费说明](~~84737~~)。
 
 ## 调试
 
@@ -64,10 +64,14 @@
 
 ```
 http(s)://[Endpoint]/?Action=UpgradePrePayOrder
-&DiskSize=900
-&InstanceId=alikafka_post-cn-mp919o4v****
 &RegionId=cn-hangzhou
 &TopicQuota=50
+&DiskSize=900
+&InstanceId=alikafka_post-cn-mp919o4v****
+&IoMax=40
+&SpecType=professional
+&EipMax=200
+&IoMaxSpec=alikafka.hw.2xlarge
 &<公共请求参数>
 ```
 
