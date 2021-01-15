@@ -2,7 +2,7 @@
 
 调用CreatePrePayOrder创建预付费实例。
 
-请确保在使用该接口前，已充分了解预付费实例的收费方式和价格。详情请参见[计费说明](~84737~)。
+请确保在使用该接口前，已充分了解预付费实例的收费方式和价格。详情请参见[计费说明](~~84737~~)。
 
 ## 调试
 
@@ -15,9 +15,10 @@
 |Action|String|是|CreatePrePayOrder|要执行的操作。取值：
 
  **CreatePrePayOrder**。 |
-|DeployType|Integer|是|5|仅支持取值为5的VPC实例。
+|DeployType|Integer|是|5|部署类型。取值：
 
-  |
+ -   **4**：公网/VPC实例
+-   **5**：VPC实例 |
 |DiskSize|Integer|是|900|磁盘容量。
 
  取值范围请参见[计费说明](~~84737~~)。 |
@@ -36,9 +37,8 @@
 -   取值范围请参见[计费说明](~~84737~~)。 |
 |EipMax|Integer|否|40|公网流量。
 
- 不支持公网访问，无需填写。
-
-  |
+ -   如果DeployType为**4**，则需填写。
+-   取值范围请参见[按量计费](~~72142~~)。 |
 |SpecType|String|否|normal|规格类型。取值：
 
  -   **normal**：普通版（高写版）
@@ -67,11 +67,14 @@
 
 ```
 http(s)://[Endpoint]/?Action=CreatePrePayOrder
-&DeployType=5
-&DiskSize=900
-&DiskType=1
 &RegionId=cn-hangzhou
 &TopicQuota=50
+&DiskType=1
+&DiskSize=900
+&DeployType=5
+&IoMax=20
+&SpecType=normal
+&IoMaxSpec=alikafka.hw.2xlarge
 &<公共请求参数>
 ```
 
@@ -81,8 +84,8 @@ http(s)://[Endpoint]/?Action=CreatePrePayOrder
 
 ```
 <CreatePrePayOrderResponse>
-      <Message>operation success.</Message>
       <RequestId>06084011-E093-46F3-A51F-4B19A8AD****</RequestId>
+      <Message>operation success.</Message>
       <OrderId>20497346575****</OrderId>
       <Code>200</Code>
       <Success>true</Success>
@@ -93,8 +96,8 @@ http(s)://[Endpoint]/?Action=CreatePrePayOrder
 
 ```
 {
-    "Message":"operation success.",
     "RequestId":"06084011-E093-46F3-A51F-4B19A8AD****",
+    "Message":"operation success.",
     "OrderId":"20497346575****",
     "Code":"200",
     "Success":"true"
