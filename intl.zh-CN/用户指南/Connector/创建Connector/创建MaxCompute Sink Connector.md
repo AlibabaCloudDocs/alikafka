@@ -87,7 +87,7 @@ keyword: [kafka, connector, maxcompute]
 2.  执行以下命令添加RAM角色为用户。
 
     ```
-    add user `RAM$:$<accountid>:role/aliyunkafkamaxcomputeuser1`;
+    add user `RAM$<accountid>:role/aliyunkafkamaxcomputeuser1`;
     ```
 
     **说明：** 将<accountid\>替换为您自己的阿里云账号ID。
