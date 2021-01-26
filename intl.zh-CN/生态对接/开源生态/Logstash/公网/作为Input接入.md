@@ -16,58 +16,76 @@ keyword: [kafka, logstash, input, 公网]
 
 Logstash通过消息队列Kafka版的接入点与消息队列Kafka版建立连接，并通过用户名及密码进行校验。
 
-1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/)。
+1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
-2.  在左侧导航栏，单击**实例详情**。
+2.  在左侧导航栏，单击**实例列表**。
 
-3.  在**实例详情**页面，选择要作为Input接入Logstash的实例。
+3.  在**实例列表**页面，单击要作为Input接入Logstash的实例名称。
 
-4.  在**基本信息**区域，获取实例的接入点。
+4.  在**实例详情**页面的**基本信息**区域，获取实例的接入点。
 
-    ![step4](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/9284976951/p110459.png)
+    ![endpointzh](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/1836461161/p232431.png)
 
     **说明：** 不同接入点的差异，请参见[接入点对比](/intl.zh-CN/产品简介/接入点对比.md)。
 
 5.  在**安全配置**区域，获取实例的用户名和密码。
-
-    ![configure](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/9284976951/p110458.png)
 
 
 ## 步骤二：创建Topic
 
 创建用于存储消息的Topic。
 
-1.  在消息队列Kafka版控制台的左侧导航栏，单击**Topic管理**。
+1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
-2.  在**Topic管理**页面，单击**创建Topic**。
+2.  在左侧导航栏，单击**实例列表**。
 
-3.  在**创建Topic**页面，输入Topic信息，然后单击**创建**。
+3.  在**实例列表**页面，单击目标实例名称。
 
-    ![logstash_2](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/9284976951/p103888.png)
+4.  在左侧导航栏，单击**Topic管理**。
+
+5.  在**Topic管理**页面，单击**创建Topic**。
+
+6.  在**创建Topic**对话框，输入Topic信息，然后单击**创建**。
+
+    ![create topic](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/1451561161/p232533.png)
 
 
 ## 步骤三：发送消息
 
 向创建的Topic发送消息。
 
-1.  在消息队列Kafka版控制台的**Topic管理**页面，找到创建的Topic，在其右侧**操作**列，单击**发送消息**。
+1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
-2.  在**发送消息**对话框，输入消息信息，然后单击**发送**。
+2.  在左侧导航栏，单击**实例列表**。
 
-    ![logstash_4](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/9284976951/p103896.png)
+3.  在**实例列表**页面，单击目标实例名称。
+
+4.  在左侧导航栏，单击**Topic管理**。
+
+5.  在**Topic管理**页面，找到创建的Topic，在其右侧**操作**列，单击**发送消息**。
+
+6.  在**发送消息**对话框，输入消息信息，然后单击**发送**。
+
+    ![send](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/4669461161/p232539.png)
 
 
 ## 步骤四：创建Consumer Group
 
 创建Logstash所属的Consumer Group。
 
-1.  在消息队列Kafka版控制台的左侧导航栏，单击**Consumer Group管理**。
+1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
-2.  在**Consumer Group管理**页面，单击**创建Consumer Group**。
+2.  在左侧导航栏，单击**实例列表**。
 
-3.  在**创建Consumer Group**页面，输入Consumer Group信息，然后单击**创建**。
+3.  在**实例列表**页面，单击目标实例名称。
 
-    ![logstash_3](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/9284976951/p103892.png)
+4.  在左侧导航栏，单击**Consumer Group管理**。
+
+5.  在**Consumer Group管理**页面，单击**创建Consumer Group**。
+
+6.  在**创建Consumer Group**对话框，输入Consumer Group信息，然后单击**创建**。
+
+    ![logstash](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/9341661161/p232543.png)
 
 
 ## 步骤五：Logstash消费消息
