@@ -16,15 +16,15 @@ keyword: [kafka, filebeat, output, 公网]
 
 Filebeat通过消息队列Kafka版的接入点与消息队列Kafka版建立连接。
 
-1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/)。
+1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
-2.  在左侧导航栏，单击**实例详情**。
+2.  在左侧导航栏，单击**实例列表**。
 
-3.  在**实例详情**页面，选择要作为Output接入Filebeat的实例。
+3.  在**实例列表**页面，单击要作为Output接入Filebeat的实例的名称。
 
-4.  在**基本信息**区域，获取实例的接入点。
+4.  在**实例详情**页面的**基本信息**区域，获取实例的接入点。
 
-    ![endpoint](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/3484976951/p107786.png)
+    ![endpointzh](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/1836461161/p232431.png)
 
     **说明：** 不同接入点的差异，请参见[接入点对比](/cn.zh-CN/产品简介/接入点对比.md)。
 
@@ -33,13 +33,19 @@ Filebeat通过消息队列Kafka版的接入点与消息队列Kafka版建立连�
 
 创建用于存储消息的Topic。
 
-1.  在消息队列Kafka版控制台的左侧导航栏，单击**Topic管理**。
+1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
-2.  在**Topic管理**页面，单击**创建Topic**。
+2.  在左侧导航栏，单击**实例列表**。
 
-3.  在**创建Topic**页面，输入Topic信息，然后单击**创建**。
+3.  在**实例列表**页面，单击目标实例名称。
 
-    ![createtopic](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/3484976951/p107758.png)
+4.  在左侧导航栏，单击**Topic管理**。
+
+5.  在**Topic管理**页面，单击**创建Topic**。
+
+6.  在**创建Topic**对话框，输入Topic信息，然后单击**创建**。
+
+    ![create topic](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/1451561161/p232533.png)
 
 
 ## 步骤三：Filebeat发送消息
@@ -121,31 +127,39 @@ Filebeat通过消息队列Kafka版的接入点与消息队列Kafka版建立连�
 
 查看消息发送到Topic的情况。
 
-1.  在消息队列Kafka版控制台的左侧导航栏，单击**Topic管理**。
+1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
-2.  在**Topic管理**页面，选择作为Output接入Filebeat的实例，找到发送消息的Topic，在其右侧**操作**列单击**分区状态**。
+2.  在左侧导航栏，单击**实例列表**。
 
-3.  在**分区状态**页面，单击**刷新**。
+3.  在**实例列表**页面，单击目标实例名称。
+
+4.  在左侧导航栏，单击**Topic管理**。
+
+5.  在**Topic管理**页面，找到发送消息的Topic，在其右侧**操作**列，单击**分区状态**。
+
+6.  在**分区状态**对话框，单击![update](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/1836461161/p232497.png)刷新。
 
     发送的消息的分区ID和位点信息如下图所示。
 
-    ![topic_status](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/3484976951/p107774.png)
+    ![topic_atatus](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/3050561161/p232509.png)
 
 
 ## 步骤五：按位点查询消息
 
 您可以根据发送的消息的分区ID和位点信息查询该消息。
 
-1.  在消息队列Kafka版控制台的左侧导航栏，单击**消息查询**。
+1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
-2.  在**消息查询**页面，单击**按位点查询**页签。
+2.  在左侧导航栏，单击**实例列表**。
 
-3.  从**请输入Topic**列表，选择发送了消息的Topic，从**请选择分区**列表，选择发送的消息的分区ID，从**请输入位点**列表，选择发送的消息的位点，然后单击**搜索**。
+3.  在**实例列表**页面，单击目标实例名称。
 
-    ![query_1](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/3484976951/p107775.png)
+4.  在左侧导航栏，单击**消息查询**。
 
-4.  在搜索结果右侧的**操作**列，单击**消息详情**。
+5.  在**消息查询**页面，单击**按位点查询**页签。
 
-    ![query message](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/3484976951/p112483.png)
+6.  从**请输入Topic**列表，选择发送了消息的Topic，从**请选择分区**列表，选择发送的消息的分区ID，从**请输入位点**列表，选择发送的消息的位点，然后单击**查询**。
+
+7.  在查询结果右侧，可以查看消息详情。
 
 
