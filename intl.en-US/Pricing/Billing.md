@@ -147,6 +147,8 @@ Billing rules include the rules for the public traffic, traffic specifications, 
     |alikafka.hr.2xlarge|50+2×10|10+2×10|50|1100|600|870|800|
     |alikafka.hr.3xlarge|75+2×15|15+2×15|50|1200|780|1040|1040|
     |alikafka.hr.6xlarge|150+2×30|30+2×30|80|1400|1130|1510|1510|
+    |alikafka.hr.9xlarge|180+2×45|45+2×45|100|1600|1440|1920|1920|
+    |alikafka.hr.12xlarge|240+2×60|60+2×60|150|1800|1750|2330|2330|
 
 -   Billing rules for disk capacity
 
