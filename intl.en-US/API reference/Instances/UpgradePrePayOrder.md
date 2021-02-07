@@ -2,7 +2,7 @@
 
 Upgrades a subscription Message Queue for Apache Kafka instance.
 
-Before you call this operation, make sure that you have understood the billing methods and pricing of subscription Message Queue for Apache Kafka instances. For more information, see[Billing](~84737~).
+Before you call this operation, make sure that you have understood the billing methods and pricing of subscription Message Queue for Apache Kafka instances. For more information, see[Billing](~~84737~~).
 
 ## Debugging
 
@@ -12,49 +12,51 @@ Before you call this operation, make sure that you have understood the billing m
 
 |Parameter|Type|Required|Example|Description|
 |---------|----|--------|-------|-----------|
-|Action|String|Yes|UpgradePrePayOrder|The operation that you want to perform. Set the value to **UpgradePrePayOrder**. |
-|DiskSize|Integer|Yes|900|The size of the disk to be configured for the subscription Message Queue for Apache Kafka instance.
+|Action|String|Yes|UpgradePrePayOrder|The operation that you want to perform. Set the value to
 
- -   The specified disk size must be greater than or equal to the current disk size of the subscription Message Queue for Apache Kafka instance.
--   For more information about the value range, see[Billing](~~84737~~). |
-|InstanceId|String|Yes|alikafka\_post-cn-mp919o4v\*\*\*\*|The ID of the subscription Message Queue for Apache Kafka instance to be upgraded. |
-|RegionId|String|Yes|cn-hangzhou|The ID of the region where the subscription Message Queue for Apache Kafka instance is located. |
-|TopicQuota|Integer|Yes|50|The number of topics to be configured for the subscription Message Queue for Apache Kafka instance.
+**UpgradePrePayOrder**. |
+|DiskSize|Integer|Yes|900|The size of the disk for the instance.
 
- -   The specified number of topics must be greater than or equal to the current number of topics for the subscription Message Queue for Apache Kafka instance.
+-   The specified disk size must be at least the current disk size of the instance.
+-   For more information about the valid values, see [Billing](~~84737~~). |
+|InstanceId|String|Yes|alikafka\_post-cn-mp919o4v\*\*\*\*|The ID of the instance. |
+|RegionId|String|Yes|cn-hangzhou|The region ID of the instance. |
+|TopicQuota|Integer|Yes|50|The number of topics for the instance.
+
+-   The specified number of topics must be at least the current number of topics of the instance.
 -   The default value varies with the traffic specifications. If the value exceeds the default value, additional fees are charged.
--   For more information about the value range, see[Billing](~~84737~~). |
-|IoMax|Integer|No|40|The peak traffic to be configured for the subscription Message Queue for Apache Kafka instance \(not recommended\).
+-   For more information about the valid values, see [Billing](~~84737~~). |
+|IoMax|Integer|No|40|The maximum traffic for the instance \(not recommended\).
 
- -   The specified peak traffic must be greater than or equal to the current peak traffic configured for the subscription Message Queue for Apache Kafka instance.
--   You must specify either the peak traffic or traffic specifications. If you specify both fields, the traffic specifications prevail. We recommend that you specify only the traffic specifications.
--   For more information about the value range, see[Billing](~~84737~~). |
-|SpecType|String|No|professional|The edition of the subscription Message Queue for Apache Kafka instance. Valid values:
+-   The specified maximum traffic must be at least the current maximum traffic of the instance.
+-   You must specify the maximum traffic or the traffic specification. If you specify both fields, the traffic specification prevails. We recommend that you specify only the traffic specification.
+-   For more information about the valid values, see [Billing](~~84737~~). |
+|SpecType|String|No|professional|The edition of the instance. Valid values:
 
- -   **normal:**Standard Edition \(High Write\)
+-   **normal:**Standard Edition \(High Write\)
 -   **professional:**Professional Edition \(High Write\)
--   **professionalForHighRead:**Professional Edition \(High Read\)
+-   **professionalForHighRead:** Professional Edition \(High Read\)
 
- You cannot downgrade a subscription Message Queue for Apache Kafka instance from Professional Edition to Standard Edition. For more information about these instance editions, see[Billing](~~84737~~). |
-|EipMax|Integer|No|0|The public traffic to be configured for the subscription Message Queue for Apache Kafka instance.
+You cannot downgrade an instance from the Professional Edition to the Standard Edition. For more information about these instance editions, see[Billing](~~84737~~). |
+|EipMax|Integer|No|0|The public traffic for the instance.
 
- Internet access is not allowed. Therefore, you do not need to set this value.
+-   The specified public traffic must be at least the current public traffic of the instance.
+-   This parameter is required for instances of the Internet and VPC type.
+-   For more information about the valid values, see [Billing](~~84737~~). |
+|IoMaxSpec|String|No|alikafka.hw.2xlarge|The traffic specification \(recommended\).
 
-  |
-|IoMaxSpec|String|No|alikafka.hw.2xlarge|The traffic specifications \(recommended\).
-
- -   The specified traffic specifications must be greater than or equal to the current traffic specifications.
--   You must specify either the peak traffic or traffic specifications. If you specify both fields, the traffic specifications prevail. We recommend that you specify only the traffic specifications.
--   For more information about the value range, see[Billing](~~84737~~). |
+-   The specified traffic specification must be at least the current traffic specification of the instance.
+-   You must specify the maximum traffic or the traffic specification. If you specify both fields, the traffic specification prevails. We recommend that you specify only the traffic specification.
+-   For more information about the valid values, see [Billing](~~84737~~). |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The returned status code. If 200 is returned, the request is successful. |
-|Message|String|operation success.|The returned message. |
+|Code|Integer|200|The response code. The HTTP 200 status code indicates that the request was successful. |
+|Message|String|operation success.|The response message. |
 |RequestId|String|ABA4A7FD-E10F-45C7-9774-A5236015\*\*\*|The ID of the request. |
-|Success|Boolean|true|Indicates whether the call is successful. |
+|Success|Boolean|true|Indicates whether the request was successful. |
 
 ## Examples
 
@@ -62,10 +64,14 @@ Sample requests
 
 ```
 http(s)://[Endpoint]/? Action=UpgradePrePayOrder
-&DiskSize=900
-&InstanceId=alikafka_post-cn-mp919o4v****
 &RegionId=cn-hangzhou
 &TopicQuota=50
+&DiskSize=900
+&InstanceId=alikafka_post-cn-mp919o4v****
+&IoMax=40
+&SpecType=professional
+&EipMax=200
+&IoMaxSpec=alikafka.hw.2xlarge
 &<Common request parameters>
 ```
 
