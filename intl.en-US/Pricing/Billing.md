@@ -1,10 +1,10 @@
 # Billing
 
-This topic describes the instance specifications, regions, instance types, billable items, and billing methods of Message Queue for Apache Kafka.
+This topic describes the instance editions, regions, instance types, billable items, and billing methods of Message Queue for Apache Kafka.
 
 **Note:** The connector feature of Message Queue for Apache Kafka is in public preview. This feature is independent of Message Queue for Apache Kafka instances. Therefore, you are not charged on the Message Queue for Apache Kafka side when you use a connector to synchronize data between Message Queue for Apache Kafka and another Alibaba Cloud service. Alibaba Cloud does not provide Service Level Agreement \(SLA\) commitments for the connector feature in public preview. For more information about SLA commitments and billing of other related services, see descriptions of the corresponding services.
 
-## Instance specifications
+## Instance editions
 
 The following table describes the specifications for each instance edition of Message Queue for Apache Kafka.
 
@@ -18,12 +18,12 @@ The following table describes the specifications for each instance edition of Me
 -   Version 2.x is compatible with versions 0.11.x and 1.x.
 -   By default, version 0.10.x is deployed. For more information about how to upgrade the version, see [Upgrade the instance version](/intl.en-US/User guide/Instances/Upgrade the instance version.md). |
 |Ratio of maximum read traffic to maximum write traffic|1:1|1:1|5:1|
-|Instance type|Virtual instance \(some resources are shared.\)|Dedicated instance|Dedicated instance|
+|Instance type|Virtual instance \(Some resources are shared.\)|Dedicated instance|Dedicated instance|
 |Message retention period|Up to seven days|Customizable|Customizable|
 |Disaster recovery|Single-zone deployment|Multi-zone deployment|Multi-zone deployment|
 |Performance optimization|Not supported|Customizable|Customizable|
 |Cross-region message router|Not supported|Not supported|Not supported|
-|Topic|The number of topics you can create is the same as the number of topics you purchase.|The number of topics that you can create is twice the number of topics that you purchase.|The number of topics that you can create is twice the number of topics that you purchase.|
+|Topic|The number of topics that you can create is the same as the number of topics that you purchase.|The number of topics that you can create is twice the number of topics that you purchase.|The number of topics that you can create is twice the number of topics that you purchase.|
 
 ## Regions
 
@@ -56,7 +56,7 @@ The following table lists the regions where Message Queue for Apache Kafka can b
 Message Queue for Apache Kafka provides the following instance types:
 
 -   VPC type: Instances of this type can be accessed only from a virtual private cloud \(VPC\).
--   Internet and VPC type: Instances of this type can be accessed from the Internet or a VPC.
+-   Internet and VPC type: Instances of this type can be accessed from the Internet and a VPC.
 
 ## Billable items
 
@@ -64,43 +64,43 @@ The following table describes the billable items for Message Queue for Apache Ka
 
 |Billable item|Description|
 |-------------|-----------|
-|Public traffic|Public traffic is divided into read traffic and write traffic. The maximum read traffic rate and maximum write traffic rate provided by Message Queue for Apache Kafka are the same. Select a bandwidth based on your peak read or write traffic rate, whichever is higher. This billable item applies only to instances of the Internet and VPC type.|
+|Public traffic|Public traffic is divided into read traffic and write traffic. The maximum read traffic and the maximum write traffic provided by Message Queue for Apache Kafka are the same. Select a bandwidth based on your peak read or write traffic, whichever is higher. This billable item applies only to instances of the Internet and VPC type.|
 |Traffic specification|-   The traffic specification refers to all the traffic consumed by your elastic network interfaces \(ENIs\), including business traffic and in-cluster replication traffic. Business traffic is the actual messaging traffic of your business. In-cluster replication traffic includes the traffic generated when the data in your Message Queue for Apache Kafka cluster is backed up several times. After backup, the cluster has a total of three replicas by default.
--   Business traffic is divided into read traffic and write traffic. The ratio of maximum read traffic to maximum write traffic is 1:1 for the High Write edition and is 5:1 for the High Read edition. Select an ENI traffic specification based on your peak read or write traffic, whichever is higher. To ensure business stability, purchase a margin for buffering. The margin is about 30% of the peak read or write traffic, whichever is higher. |
-|Disk capacity|-   To ensure performance and sufficient storage space, select the minimum disk capacity based on your traffic specification.
+-   Business traffic is divided into read traffic and write traffic. The ratio of maximum read traffic to maximum write traffic is 1:1 for the High Write edition and is 5:1 for the High Read edition. Select an ENI traffic specification based on your peak read or write traffic, whichever is higher. For business stability, a margin is purchased for buffering. The margin is about 30% of your peak read or write traffic, whichever is higher. |
+|Disk capacity|-   Due to performance and storage space considerations, the minimum disk capacity varies based on the traffic specification.
 -   Message Queue for Apache Kafka supports ultra disks and solid-state drives \(SSDs\). We recommend that you use SSDs.
--   The unit price of a disk varies with the disk type.
+-   The price of a disk varies with the disk type.
 -   Exercise caution when you select a disk type, because the disk type cannot be changed after the order is placed.
 -   By default, data is stored in three replicas.
     -   For a Standard Edition instance, if you purchase a disk of 300 GB in size, the actual storage space that you can use to store your business data is 100 GB. The remaining 200 GB is used to store backups.
     -   For a Professional Edition instance, if you purchase a disk of 300 GB in size, the actual storage space that you can use to store your business data is 300 GB. 600 GB of storage space is free for you to store backups.
 
-**Note:** Gifted storage space applies only to topics whose storage engines are cloud storage. For more information about cloud storage, see [Storage engine comparison](/intl.en-US/Introduction/Storage engine comparison.md). |
+**Note:** Free storage space applies only to topics whose storage engines are cloud storage. For more information about cloud storage, see [Storage engine comparison](/intl.en-US/Introduction/Storage engine comparison.md). |
 |Topic specification|-   The maximum number of topics or partitions varies with your traffic specification.
--   In addition to the default number of partitions, 16 partitions are added for each additional topic. For example, you purchase an instance that has 50 topics, 20 MB/s of bandwidth, and 400 default partitions. If you purchase 10 additional topics for this instance, 160 partitions are added to the instance. The total number of partitions increases to 560.
--   The number of topics that you can create on a Professional Edition instance is twice the number of topics that you purchase. For example, if you purchase a Professional Edition instance that has 50 topics, the actual number of topics that you can create on this instance is 100. |
+-   In addition to the default number of partitions, 16 partitions are added each time you add a topic. For example, you have purchased an instance that has 50 topics, 20 MB/s maximum traffic, and 400 default partitions. After you purchase another 10 topics for this instance, 160 partitions are added to the instance. The total number of partitions increases to 560.
+-   The number of topics that you can create on a Professional Edition instance is twice the number of topics that you purchase. For example, if you purchase a Professional Edition instance that has 50 topics, the number of topics that you can create on the instance is 100. |
 
 **Note:**
 
--   You are charged for the items described in the previous table.
--   To save disk space, you can adjust down the value of Message Retention Period. This parameter specifies how long messages can be retained when disk space is sufficient. If the disk usage reaches 90%, earlier messages are deleted to ensure service availability. By default, messages are retained for a maximum of 72 hours. You can also select a period between 24 and 168 hours.
+-   You are billed for the items that are described in the previous tables.
+-   You can adjust the value of Message Retention Period to save disk space. This parameter specifies how long messages can be retained when disk space is sufficient. If disk usage reaches 90%, the disk capacity is insufficient, and the system deletes earlier messages to ensure service availability. By default, messages are retained for a maximum of 72 hours. You can also select a period between 24 and 168 hours.
 -   The number of API calls is not a billable item.
 
-## Billing method
+## Billing methods
 
 Message Queue for Apache Kafka supports only the subscription billing method.
 
 Billing formulas
 
-Billing formulas are related to instance types.
+Billing formulas are associated with instance types.
 
--   If you have bought an instance of the Internet and VPC type, select the public traffic, traffic specification, disk capacity, and number of additional topics as required. The following formula is used to calculate billing fees:
+-   If you have purchased an instance of the Internet and VPC type, select the public traffic, traffic specification, disk capacity, and number of additional topics as required. The following formula is used to calculate billing fees:
 
-    Total fees = \(Unit price of public traffic + Unit price of traffic specification + Unit price of disk capacity × Disk capacity/100 + Unit price of a topic × Number of additional topics\) × Number of months
+    Total fees = \(Unit price of public traffic + Unit price of traffic specification + Unit price of disk capacity × Disk capacity/100 + Price of a topic × Number of additional topics\) × Number of months
 
--   If you have bought an instance of the VPC type, select the traffic specification, disk capacity, and number of additional topics as required. The following formula is used to calculate billing fees:
+-   If you have purchased an instance of the VPC type, select the traffic specification, disk capacity, and number of additional topics as required. The following formula is used to calculate billing fees:
 
-    Total fees = \(Unit price of traffic specification + Unit price of disk capacity × Disk capacity/100 + Unit price of a topic × Number of additional topics\) × Number of months
+    Total fees = \(Unit price of traffic specification + Unit price of disk capacity × Disk capacity/100 + Price of a topic × Number of additional topics\) × Number of months
 
 
 Billing rules
