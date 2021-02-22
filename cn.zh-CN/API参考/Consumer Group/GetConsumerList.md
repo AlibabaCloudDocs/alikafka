@@ -41,8 +41,8 @@
 
 ```
 http(s)://[Endpoint]/?Action=GetConsumerList
-&InstanceId=alikafka_post-cn-v0h18sav****
 &RegionId=cn-hangzhou
+&InstanceId=alikafka_post-cn-v0h18sav****
 &<公共请求参数>
 ```
 
@@ -60,15 +60,9 @@ http(s)://[Endpoint]/?Action=GetConsumerList
                   <InstanceId>alikafka_post-cn-v0h18sav****</InstanceId>
                   <ConsumerId>CID_c34a6f44915f80d70cb42c4b14***</ConsumerId>
                   <RegionId>cn-hangzhou</RegionId>
-                  <Remark>test</Remark>
-            </ConsumerVO>
-            <ConsumerVO>
                   <Tags>
-                        <TagVO>
-                              <Value>test</Value>
-                              <Key>test</Key>
-                        </TagVO>
-                  </Tags>
+            </Tags>
+                  <Remark>test</Remark>
             </ConsumerVO>
       </ConsumerList>
       <Success>true</Success>
@@ -88,15 +82,10 @@ http(s)://[Endpoint]/?Action=GetConsumerList
                 "InstanceId": "alikafka_post-cn-v0h18sav****",
                 "ConsumerId": "CID_c34a6f44915f80d70cb42c4b14***",
                 "RegionId": "cn-hangzhou",
+	            "Tags": {
+	            	"TagVO": []
+	            },
                 "Remark": "test"
-            },
-            {
-                "Tags": {
-                    "TagVO": {
-                        "Value": "test",
-                        "Key": "test"
-                    }
-                }
             }
         ]
     },
