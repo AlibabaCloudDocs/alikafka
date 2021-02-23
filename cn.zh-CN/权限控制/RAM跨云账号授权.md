@@ -52,7 +52,7 @@
 
 3.  在**用户**页面，单击**创建用户**。
 
-4.  在**创建用户**页面的**用户账号信息**区域的**登录名称**，输入登录名称，在**显示名称**文本框，输入显示名称。
+4.  在**用户账号信息**区域的**登录名称**文本框，输入登录名称，在**显示名称**文本框，输入显示名称。
 
     **说明：**
 
@@ -93,14 +93,14 @@
 
         **说明：** RAM用户登录名称的格式为<$username\>@<$AccountAlias\>或<$username\>@<$AccountAlias\>.onaliyun.com。<$AccountAlias\>为账号别名，如果没有设置账号别名，则默认值为阿里云账号的ID。
 
-    3.  在子用户用户中心页面，将鼠标指针移到右上角头像，在浮层单击**切换身份**。
-    4.  在**阿里云－角色切换**页面，输入企业A的企业别名或默认域名，以及角色名，然后单击**切换**。
+    3.  在RAM用户的用户中心页面，将鼠标指针移到右上角头像，在浮层单击**切换身份**。
+    4.  在**角色切换**页面，输入企业A的企业别名或默认域名，以及角色名，然后单击**提交**。
 
         **说明：**
 
         -   企业别名：使用企业A的阿里云账号在阿里云账号用户中心，将鼠标指针移到右上角头像，在浮层查看。
         -   默认域名：使用企业A的阿里云账号在RAM控制台的**设置**页面，单击**高级设置**页签查看。
 -   API
-    1.  调用AssumeRole接口获取AccessKey ID、AccessKey Secret和SecurityToken（临时安全令牌）。详情请参见[AssumeRole](/cn.zh-CN/API 参考（STS）/操作接口/AssumeRole.md)。
+    1.  调用AssumeRole接口获取AccessKey ID、AccessKey Secret和SecurityToken（临时安全令牌）。详情请参见[AssumeRole](/cn.zh-CN/API参考/API 参考（STS）/操作接口/AssumeRole.md)。
     2.  在代码中使用获取的AccessKey ID、AccessKey Secret和SecurityToken（临时安全令牌）调用API访问消息队列Kafka版。
 
