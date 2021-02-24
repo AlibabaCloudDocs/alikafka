@@ -24,10 +24,10 @@
 |Code|Integer|200|状态码。返回200代表成功。 |
 |ConsumerProgress|Struct| |消费状态。 |
 |LastTimestamp|Long|1566874931671|此Consumer Group最后被消费的消息的产生时间。 |
-|TopicList|Array| |此Consumer Group对应的每个Topic的消费进度列表。 |
+|TopicList|Array of TopicList| |此Consumer Group对应的每个Topic的消费进度列表。 |
 |TopicList| | | |
 |LastTimestamp|Long|1566874931649|该Topic最后被消费的消息的产生时间。 |
-|OffsetList|Array| |偏移列表。 |
+|OffsetList|Array of OffsetList| |偏移列表。 |
 |OffsetList| | | |
 |BrokerOffset|Long|9|最大位点。 |
 |ConsumerOffset|Long|9|消费位点。 |
@@ -46,49 +46,48 @@
 
 ```
 http(s)://[Endpoint]/?Action=GetConsumerProgress
+&RegionId=cn-hangzhou
 &ConsumerId=kafka-test
 &InstanceId=alikafka_pre-cn-mp919o4v****
-&RegionId=cn-hangzhou
 &<公共请求参数>
 ```
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
-<GetConsumerProgressResponse>
+<createInstanceResponse>
       <RequestId>252820E1-A2E6-45F2-B4C9-1056B8CE****</RequestId>
       <Message>operation success.</Message>
       <ConsumerProgress>
             <LastTimestamp>1566874931671</LastTimestamp>
             <TopicList>
                   <TopicList>
-                        <LastTimestamp>1566874931649</LastTimestamp>
-                        <TotalDiff>0</TotalDiff>
-                        <Topic>kafka-test</Topic>
-                  </TopicList>
-                  <TopicList>
                         <OffsetList>
                               <OffsetList>
                                     <Partition>0</Partition>
                                     <ConsumerOffset>9</ConsumerOffset>
-                                    <LastTimestamp>1566874931649</LastTimestamp>
+                                    <LastTimestamp>1566874931671</LastTimestamp>
                                     <BrokerOffset>9</BrokerOffset>
                               </OffsetList>
                         </OffsetList>
+                        <LastTimestamp>1566874931671</LastTimestamp>
+                        <TotalDiff>0</TotalDiff>
+                        <Topic>kafka_test</Topic>
                   </TopicList>
             </TopicList>
             <TotalDiff>0</TotalDiff>
       </ConsumerProgress>
       <Code>200</Code>
       <Success>true</Success>
-</GetConsumerProgressResponse>
+</createInstanceResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
+{"createInstanceResponse":
 {
     "RequestId": "252820E1-A2E6-45F2-B4C9-1056B8CE****",
     "Message": "operation success.",
@@ -96,27 +95,28 @@ http(s)://[Endpoint]/?Action=GetConsumerProgress
         "LastTimestamp": 1566874931671,
         "TopicList": {
             "TopicList": [
-                {
-                    "LastTimestamp": 1566874931649,
-                    "TotalDiff": 0,
-                    "Topic": "kafka-test"
-                },
-                {
-                    "OffsetList": {
-                        "OffsetList": {
-                            "Partition": 0,
-                            "ConsumerOffset": 9,
-                            "LastTimestamp": 1566874931649,
-                            "BrokerOffset": 9
-                        }
-                    }
-                }
+				{
+					"OffsetList": {
+						"OffsetList": [
+							{
+								"Partition": 0,
+								"ConsumerOffset": 9,
+								"LastTimestamp": 1566874931671,
+								"BrokerOffset": 9
+							}
+						]
+					},
+					"LastTimestamp": 1566874931671,
+					"TotalDiff": 0,
+					"Topic": "kafka_test"
+				}
             ]
         },
         "TotalDiff": 0
     },
     "Code": 200,
     "Success": true
+}	
 }
 ```
 
