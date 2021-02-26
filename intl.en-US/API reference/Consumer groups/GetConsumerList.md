@@ -1,6 +1,6 @@
 # GetConsumerList
 
-Queries consumer groups.
+Queries consumer groups in a Message Queue for Apache Kafka instance.
 
 ## Debugging
 
@@ -10,20 +10,22 @@ Queries consumer groups.
 
 |Parameter|Type|Required|Example|Description|
 |---------|----|--------|-------|-----------|
-|Action|String|Yes|GetConsumerList|The operation that you want to perform. Set the value to **GetConsumerList**. |
-|InstanceId|String|Yes|alikafka\_post-cn-v0h18sav\*\*\*\*|The ID of the Message Queue for Apache Kafka instance whose consumer groups you want to query. |
-|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance is located. |
+|Action|String|Yes|GetConsumerList|The operation that you want to perform. Set the value to
+
+ **GetConsumerList**. |
+|InstanceId|String|Yes|alikafka\_post-cn-v0h18sav\*\*\*\*|The ID of the instance. |
+|RegionId|String|Yes|cn-hangzhou|The region ID of the instance. |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The response code. The HTTP 200 code indicates that the request was successful. |
+|Code|Integer|200|The response code. The HTTP 200 status code indicates that the request is successful. |
 |ConsumerList|Array of ConsumerVO| |The list of consumer groups. |
 |ConsumerVO| | | |
 |ConsumerId|String|CID\_c34a6f44915f80d70cb42c4b14\*\*\*|The name of the consumer group. |
-|InstanceId|String|alikafka\_post-cn-v0h18sav\*\*\*\*|The ID of the instance that was queried. |
-|RegionId|String|cn-hangzhou|The ID of the region where the instance is located. |
+|InstanceId|String|alikafka\_post-cn-v0h18sav\*\*\*\*|The ID of the instance. |
+|RegionId|String|cn-hangzhou|The region ID of the instance. |
 |Remark|String|test|The description of the consumer group. |
 |Tags|Array of TagVO| |The tags bound to the consumer group. |
 |TagVO| | | |
@@ -31,7 +33,7 @@ Queries consumer groups.
 |Value|String|test|The value of the resource tag. |
 |Message|String|operation success.|The response message. |
 |RequestId|String|808F042B-CB9A-4FBC-9009-00E7DDB6\*\*\*\*|The ID of the request. |
-|Success|Boolean|true|Indicates whether the request was successful. |
+|Success|Boolean|true|Indicates whether the request is successful. |
 
 ## Examples
 
@@ -39,8 +41,8 @@ Sample requests
 
 ```
 http(s)://[Endpoint]/? Action=GetConsumerList
-&InstanceId=alikafka_post-cn-v0h18sav****
 &RegionId=cn-hangzhou
+&InstanceId=alikafka_post-cn-v0h18sav****
 &<Common request parameters>
 ```
 
@@ -58,15 +60,9 @@ Sample success responses
                   <InstanceId>alikafka_post-cn-v0h18sav****</InstanceId>
                   <ConsumerId>CID_c34a6f44915f80d70cb42c4b14***</ConsumerId>
                   <RegionId>cn-hangzhou</RegionId>
-                  <Remark>test</Remark>
-            </ConsumerVO>
-            <ConsumerVO>
                   <Tags>
-                        <TagVO>
-                              <Value>test</Value>
-                              <Key>test</Key>
-                        </TagVO>
-                  </Tags>
+            </Tags>
+                  <Remark>test</Remark>
             </ConsumerVO>
       </ConsumerList>
       <Success>true</Success>
@@ -86,15 +82,10 @@ Sample success responses
                 "InstanceId": "alikafka_post-cn-v0h18sav****",
                 "ConsumerId": "CID_c34a6f44915f80d70cb42c4b14***",
                 "RegionId": "cn-hangzhou",
+	            "Tags": {
+	            	"TagVO": []
+	            },
                 "Remark": "test"
-            },
-            {
-                "Tags": {
-                    "TagVO": {
-                        "Value": "test",
-                        "Key": "test"
-                    }
-                }
             }
         ]
     },
