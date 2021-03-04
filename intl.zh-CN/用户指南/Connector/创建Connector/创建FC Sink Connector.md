@@ -8,12 +8,12 @@ keyword: [kafka, connector, fc]
 
 在创建FC Sink Connector前，请确保您已完成以下操作：
 
-1.  为消息队列Kafka版实例开启Connector。更多信息，请参见[开启Connector](/intl.zh-CN/用户指南/Connector/开启Connector.md)。
-2.  为消息队列Kafka版实例创建数据源Topic。更多信息，请参见[步骤一：创建Topic](/intl.zh-CN/快速入门/步骤三：创建资源.md)。
+-   为消息队列Kafka版实例开启Connector。更多信息，请参见[开启Connector](/intl.zh-CN/用户指南/Connector/开启Connector.md)。
+-   为消息队列Kafka版实例创建数据源Topic。更多信息，请参见[步骤一：创建Topic](/intl.zh-CN/快速入门/步骤三：创建资源.md)。
 
     本文以名称为fc-test-input的Topic为例。
 
-3.  在函数计算创建函数。更多信息，请参见[使用控制台创建函数]()。
+-   在函数计算创建函数。更多信息，请参见[使用控制台创建函数]()。
 
     **说明：** 函数类型必须为事件函数。
 
@@ -127,7 +127,7 @@ keyword: [kafka, connector, fc]
 
 5.  在**AliyunKafkaConnectorRole**页面，单击**信任策略管理**页签，单击**修改信任策略**。
 
-6.  在**修改信任策略**对话框，将脚本中**fc**替换为alikafka，单击**确定**。
+6.  在**修改信任策略**面板，将脚本中**fc**替换为alikafka，单击**确定**。
 
     ![AliyunKafkaConnectorRole](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/3906119951/p128120.png)
 
@@ -140,9 +140,9 @@ keyword: [kafka, connector, fc]
 
 2.  在**RAM角色管理**页面，找到**AliyunKafkaConnectorRole**，在其右侧**操作**列，单击**添加权限**。
 
-3.  在**添加权限**对话框，添加**KafkaConnectorFcAccess**权限。
+3.  在**添加权限**面板，添加**KafkaConnectorFcAccess**权限。
 
-    1.  在**选择权限**面板，选择**自定义策略**。
+    1.  在**选择权限**区域，选择**自定义策略**。
 
     2.  在**权限策略名称**列表，找到**KafkaConnectorFcAccess**，单击**KafkaConnectorFcAccess**。
 
@@ -159,30 +159,34 @@ keyword: [kafka, connector, fc]
 
 2.  在顶部菜单栏，选择地域。
 
-3.  在左侧导航栏，单击**Topic管理**。
+3.  在左侧导航栏，单击**实例列表**。
 
-4.  在**Topic管理**页面，选择实例，单击**创建Topic**。
+4.  在**实例列表**页面，单击目标实例名称。
 
-5.  在**创建Topic**对话框，设置Topic属性，然后单击**创建**。
+5.  在左侧导航栏，单击**Topic管理**。
+
+6.  在**Topic管理**页面，单击**创建 Topic**。
+
+7.  在**创建 Topic**面板，设置Topic属性，然后单击**创建**。
 
     |Topic|描述|
     |-----|--|
-    |任务位点Topic|用于存储消费位点的Topic。    -   Topic名称：建议以connect-offset开头。
+    |任务位点Topic|用于存储消费位点的Topic。    -   Topic：建议以connect-offset开头。
     -   分区数：Topic的分区数量必须大于1。
     -   存储引擎：Topic的存储引擎必须为Local存储。
     -   cleanup.policy：Topic的日志清理策略必须为compact。 |
-    |任务配置Topic|用于存储任务配置的Topic。    -   Topic名称：建议以connect-config开头。
+    |任务配置Topic|用于存储任务配置的Topic。    -   Topic：建议以connect-config开头。
     -   分区数：Topic的分区数量必须为1。
     -   存储引擎：Topic的存储引擎必须为Local存储。
     -   cleanup.policy：Topic的日志清理策略必须为compact。 |
-    |任务状态Topic|用于存储任务状态的Topic。    -   Topic名称：建议以connect-status开头。
+    |任务状态Topic|用于存储任务状态的Topic。    -   Topic：建议以connect-status开头。
     -   分区数：Topic的分区数量建议为6。
     -   存储引擎：Topic的存储引擎必须为Local存储。
     -   cleanup.policy：Topic的日志清理策略必须为compact。 |
-    |死信队列Topic|用于存储Connect框架的异常数据的Topic。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。    -   Topic名称：建议以connect-error开头。
+    |死信队列Topic|用于存储Connect框架的异常数据的Topic。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。    -   Topic：建议以connect-error开头。
     -   分区数：Topic的分区数量建议为6。
     -   存储引擎：Topic的存储引擎可以为Local存储或云存储。 |
-    |异常数据Topic|用于存储Sink的异常数据的Topic。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。    -   Topic名称：建议以connect-error开头。
+    |异常数据Topic|用于存储Sink的异常数据的Topic。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。    -   Topic：建议以connect-error开头。
     -   分区数：Topic的分区数量建议为6。
     -   存储引擎：Topic的存储引擎可以为Local存储或云存储。 |
 
@@ -191,11 +195,19 @@ keyword: [kafka, connector, fc]
 
 您可以在消息队列Kafka版控制台手动创建FC Sink Connector依赖的2个Consumer Group。
 
-1.  在左侧导航栏，单击**Consumer Group管理**。
+1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
-2.  在**Consumer Group管理**页面，选择实例，单击**创建Consumer Group**。
+2.  在顶部菜单栏，选择地域。
 
-3.  在**创建Consumer Group**对话框，设置Topic属性，然后单击**创建**。
+3.  在左侧导航栏，单击**实例列表**。
+
+4.  在**实例列表**页面，单击目标实例名称。
+
+5.  在左侧导航栏，单击**Consumer Group管理**。
+
+6.  在**Consumer Group管理**页面，单击**创建Consumer Group**。
+
+7.  在**创建Consumer Group**面板，设置Consumer Group属性，然后单击**创建**。
 
     |Consumer Group|描述|
     |--------------|--|
@@ -211,11 +223,15 @@ keyword: [kafka, connector, fc]
 
 2.  在顶部菜单栏，选择地域。
 
-3.  在左侧导航栏，单击**Connector**。
+3.  在左侧导航栏，单击**实例列表**。
 
-4.  在**Connector**页面，选择实例，单击**创建Connector**。
+4.  在**实例列表**页面，单击目标实例名称。
 
-5.  在**创建Connector**面板，完成以下操作。
+5.  在左侧导航栏，单击**Connector（公测组件）**。
+
+6.  在**Connector（公测组件）**页面，单击**创建Connector**。
+
+7.  在**创建Connector**面板，完成以下操作。
 
     1.  在**基础信息**下方的**Connector名称**文本框，输入Connector名称，从**转储路径**列表，选择**消息队列Kafka版**，从**转储到**列表，选择**函数计算**，单击**下一步**。
 
@@ -250,26 +266,26 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
         -   12
 |3|
         |Connector消费组|Connector使用的Consumer Group。该Consumer Group的名称建议以connect-cluster开头。|connect-cluster-kafka-fc-sink|
-        |任务位点Topic|用于存储消费位点的Topic。        -   Topic名称：建议以connect-offset开头。
+        |任务位点Topic|用于存储消费位点的Topic。        -   Topic：建议以connect-offset开头。
         -   分区数：Topic的分区数量必须大于1。
         -   存储引擎：Topic的存储引擎必须为Local存储。
         -   cleanup.policy：Topic的日志清理策略必须为compact。
 |connect-offset-kafka-fc-sink|
-        |任务配置Topic|用于存储任务配置的Topic。        -   Topic名称：建议以connect-config开头。
+        |任务配置Topic|用于存储任务配置的Topic。        -   Topic：建议以connect-config开头。
         -   分区数：Topic的分区数量必须为1。
         -   存储引擎：Topic的存储引擎必须为Local存储。
         -   cleanup.policy：Topic的日志清理策略必须为compact。
 |connect-config-kafka-fc-sink|
-        |任务状态Topic|用于存储任务状态的Topic。        -   Topic名称：建议以connect-status开头。
+        |任务状态Topic|用于存储任务状态的Topic。        -   Topic：建议以connect-status开头。
         -   分区数：Topic的分区数量建议为6。
         -   存储引擎：Topic的存储引擎必须为Local存储。
         -   cleanup.policy：Topic的日志清理策略必须为compact。
 |connect-status-kafka-fc-sink|
-        |死信队列Topic|用于存储Connect框架的异常数据的Topic。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。        -   Topic名称：建议以connect-error开头。
+        |死信队列Topic|用于存储Connect框架的异常数据的Topic。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。        -   Topic：建议以connect-error开头。
         -   分区数：Topic的分区数量建议为6。
         -   存储引擎：Topic的存储引擎可以为Local存储或云存储。
 |connect-error-kafka-fc-sink|
-        |异常数据Topic|用于存储Sink的异常数据的Topic。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。        -   Topic名称：建议以connect-error开头。
+        |异常数据Topic|用于存储Sink的异常数据的Topic。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。        -   Topic：建议以connect-error开头。
         -   分区数：Topic的分区数量建议为6。
         -   存储引擎：Topic的存储引擎可以为Local存储或云存储。
 |connect-error-kafka-fc-sink|
@@ -377,7 +393,7 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
 **说明：**
 
         -   关于错误码的更多信息，请参见[错误码]()。
-        -   Connector调用InvokeFunction向函数计算发送消息。关于InvokeFunction的更多信息，请参见[t1881175.md\#]()。
+        -   Connector调用InvokeFunction向函数计算发送消息。关于InvokeFunction的更多信息，请参见[API概览]()。
 |2|
         |失败处理|消息发送失败后的错误处理。默认为log。取值：        -   log：继续对出现错误的Topic的分区的订阅，并打印错误日志。出现错误后，您可以通过Connector日志查看错误，并根据错误的错误码查找解决方案，以进行自助排查。
 
@@ -396,18 +412,18 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
 
     4.  在**预览/提交**下方，确认Connector的配置，然后单击**提交**。
 
-6.  在**创建Connector**面板，单击**部署**。
+8.  在**创建Connector**面板，单击**部署**。
 
 
 ## 发送测试消息
 
 部署FC Sink Connector后，您可以向消息队列Kafka版的数据源Topic发送消息，测试数据能否被同步至函数计算。
 
-1.  在**Connector**页面，找到目标Connector，在其右侧**操作**列，单击**测试**。
+1.  在**Connector（公测组件）**页面，找到目标Connector，在其右侧**操作**列，单击**测试**。
 
-2.  在**Topic管理**页面，选择实例，找到**fc-test-input**，在其右侧**操作**列，选择![icon_more](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/8046936061/p185678.png) \> **发送消息**。
+2.  在**Topic管理**页面，选择实例，找到**fc-test-input**，在其右侧**操作**列，单击**发送消息**。
 
-3.  在**发送消息**对话框，发送测试消息。
+3.  在**发送消息**面板，发送测试消息。
 
     1.  在**分区**文本框，输入0。
 
