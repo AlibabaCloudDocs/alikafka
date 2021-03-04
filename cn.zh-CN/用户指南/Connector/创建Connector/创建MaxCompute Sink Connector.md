@@ -187,9 +187,9 @@ keyword: [kafka, connector, maxcompute]
 
 4.  在**实例列表**页面，单击目标实例名称。
 
-5.  在左侧导航栏，单击**\(公测组件\)**。
+5.  在左侧导航栏，单击**Connector（公测组件）**。
 
-6.  在**\(公测组件\)**页面，单击**创建Connector**。
+6.  在**Connector（公测组件）**页面，单击**创建Connector**。
 
 7.  在**创建Connector**面板，完成以下操作。
 
@@ -282,11 +282,11 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
 
 部署MaxCompute Sink Connector后，您可以向消息队列Kafka版的数据源Topic发送消息，测试数据能否被同步至MaxCompute。
 
-1.  在**\(公测组件\)**页面，找到目标Connector，在其右侧**操作**列，单击**测试**。
+1.  在**Connector（公测组件）**页面，找到目标Connector，在其右侧**操作**列，单击**测试**。
 
 2.  在**Topic管理**页面，选择实例，找到**maxcompute-test-input**，在其右侧**操作**列，单击**发送消息**。
 
-3.  在**发送消息**对话框，发送测试消息。
+3.  在**发送消息**面板，发送测试消息。
 
     1.  在**分区**文本框，输入0。
 
