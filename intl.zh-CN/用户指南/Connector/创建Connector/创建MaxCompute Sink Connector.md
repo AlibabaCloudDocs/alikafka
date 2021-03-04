@@ -8,12 +8,12 @@ keyword: [kafka, connector, maxcompute]
 
 在创建MaxCompute Sink Connector前，请确保您已完成以下操作：
 
-1.  为消息队列Kafka版实例开启Connector。更多信息，请参见[开启Connector](/intl.zh-CN/用户指南/Connector/开启Connector.md)。
-2.  为消息队列Kafka版实例创建数据源Topic。更多信息，请参见[步骤一：创建Topic](/intl.zh-CN/快速入门/步骤三：创建资源.md)。
+-   为消息队列Kafka版实例开启Connector。更多信息，请参见[开启Connector](/intl.zh-CN/用户指南/Connector/开启Connector.md)。
+-   为消息队列Kafka版实例创建数据源Topic。更多信息，请参见[步骤一：创建Topic](/intl.zh-CN/快速入门/步骤三：创建资源.md)。
 
     本文以名称为maxcompute-test-input的Topic为例。
 
-3.  通过MaxCompute客户端创建表。更多信息，请参见[创建和查看表](/intl.zh-CN/快速入门/创建和查看表.md)。
+-   通过MaxCompute客户端创建表。更多信息，请参见[创建和查看表](/intl.zh-CN/快速入门/创建和查看表.md)。
 
     本文以名称为connector\_test的项目下名称为test\_kafka的表为例。该表的建表语句如下：
 
@@ -119,11 +119,15 @@ keyword: [kafka, connector, maxcompute]
 
 2.  在顶部菜单栏，选择地域。
 
-3.  在左侧导航栏，单击**Topic管理**。
+3.  在左侧导航栏，单击**实例列表**。
 
-4.  在**Topic管理**页面，选择实例，单击**创建Topic**。
+4.  在**实例列表**页面，单击目标实例名称。
 
-5.  在**创建Topic**对话框，设置Topic属性，然后单击**创建**。
+5.  在左侧导航栏，单击**Topic管理**。
+
+6.  在**Topic管理**页面，单击**创建 Topic**。
+
+7.  在**创建 Topic**面板，设置Topic属性，然后单击**创建**。
 
     |Topic|描述|
     |-----|--|
@@ -151,11 +155,19 @@ keyword: [kafka, connector, maxcompute]
 
 您可以在消息队列Kafka版控制台手动创建MaxCompute Sink Connector依赖的2个Consumer Group。
 
-1.  在左侧导航栏，单击**Consumer Group管理**。
+1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
-2.  在**Consumer Group管理**页面，选择实例，单击**创建Consumer Group**。
+2.  在顶部菜单栏，选择地域。
 
-3.  在**创建Consumer Group**对话框，设置Topic属性，然后单击**创建**。
+3.  在左侧导航栏，单击**实例列表**。
+
+4.  在**实例列表**页面，单击目标实例名称。
+
+5.  在左侧导航栏，单击**Consumer Group管理**。
+
+6.  在**Consumer Group管理**页面，单击**创建Consumer Group**。
+
+7.  在**创建Consumer Group**面板，设置Consumer Group属性，然后单击**创建**。
 
     |Consumer Group|描述|
     |--------------|--|
@@ -171,9 +183,15 @@ keyword: [kafka, connector, maxcompute]
 
 2.  在顶部菜单栏，选择地域。
 
-3.  在**Connector**页面，选择实例，单击**创建Connector**。
+3.  在左侧导航栏，单击**实例列表**。
 
-4.  在**创建Connector**面板，完成以下操作。
+4.  在**实例列表**页面，单击目标实例名称。
+
+5.  在左侧导航栏，单击**Connector（公测组件）**。
+
+6.  在**Connector（公测组件）**页面，单击**创建Connector**。
+
+7.  在**创建Connector**面板，完成以下操作。
 
     1.  在**基础信息**下方的**Connector名称**文本框，输入Connector名称，从**转储路径**列表，选择**消息队列Kafka版**，从**转储到**列表，选择**MaxCompute**，然后单击**下一步**。
 
@@ -257,18 +275,18 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
 
     4.  在**预览/提交**下方，确认Connector的配置，然后单击**提交**。
 
-5.  在**创建Connector**面板，单击**部署**。
+8.  在**创建Connector**面板，单击**部署**。
 
 
 ## 发送测试消息
 
 部署MaxCompute Sink Connector后，您可以向消息队列Kafka版的数据源Topic发送消息，测试数据能否被同步至MaxCompute。
 
-1.  在**Connector**页面，找到目标Connector，在其右侧**操作**列，单击**测试**。
+1.  在**Connector（公测组件）**页面，找到目标Connector，在其右侧**操作**列，单击**测试**。
 
-2.  在**Topic管理**页面，选择实例，找到**maxcompute-test-input**，在其右侧**操作**列，选择![icon_more](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/8046936061/p185678.png) \> 单击**发送消息**。
+2.  在**Topic管理**页面，选择实例，找到**maxcompute-test-input**，在其右侧**操作**列，单击**发送消息**。
 
-3.  在**发送消息**对话框，发送测试消息。
+3.  在**发送消息**面板，发送测试消息。
 
     1.  在**分区**文本框，输入0。
 
