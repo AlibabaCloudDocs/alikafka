@@ -24,13 +24,17 @@
 |InstanceId|String|是|alikafka\_pre-cn-v0h1cng0\*\*\*|实例ID。 |
 |RegionId|String|是|cn-hangzhou|地域ID。 |
 |Username|String|是|test12\*\*\*\*|用户名。 |
+|AclResourcePatternType|String|否|LITERAL|匹配模式。取值：
+
+ -   LITERAL：全匹配
+-   PREFIXED：前缀匹配 |
 
 ## 返回数据
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
 |Code|Integer|200|状态码。返回200代表成功。 |
-|KafkaAclList|Array| |ACL列表。 |
+|KafkaAclList|Array of KafkaAclVO| |ACL列表。 |
 |KafkaAclVO| | | |
 |AclOperationType|String|Write|操作类型。取值：
 
@@ -70,7 +74,7 @@ http(s)://[Endpoint]/?Action=DescribeAcls
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <DescribeAclsResponse>
@@ -91,7 +95,7 @@ http(s)://[Endpoint]/?Action=DescribeAcls
 </DescribeAclsResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
@@ -100,7 +104,8 @@ http(s)://[Endpoint]/?Action=DescribeAcls
     "Code": 200,
     "Success": true,
     "KafkaAclList": {
-        "KafkaAclVO": {
+        "KafkaAclVO": [
+        {
             "AclResourceName": "demo",
             "Username": "test12***",
             "AclResourceType": "Topic",
@@ -108,6 +113,7 @@ http(s)://[Endpoint]/?Action=DescribeAcls
             "AclResourcePatternType": "LITERAL",
             "Host": "*"
         }
+        ]
     }
 }
 ```
