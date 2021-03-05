@@ -43,18 +43,18 @@ http(s)://[Endpoint]/?Action=ModifyInstanceName
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
-<ModifyInstanceName>
+<ModifyInstanceNameResponse>
       <Message>operation success.</Message>
       <RequestId>06084011-E093-46F3-A51F-4B19A8AD7A94</RequestId>
       <Success>true</Success>
       <Code>200</Code>
-</ModifyInstanceName>
+</ModifyInstanceNameResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
