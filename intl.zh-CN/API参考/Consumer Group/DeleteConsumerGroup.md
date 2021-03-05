@@ -16,8 +16,8 @@
 |ConsumerId|String|是|CID-test|Consumer Group名称。取值：
 
  -   只能包含字母、数字、短划线（-）、下划线（\_）。
--   长度限制在3~64字符，多于64字符将被自动截取。
--   Consumer Group名称一旦创建后，将不能修改。 |
+-   长度限制在3字符~64字符，多于64字符将被自动截取。
+-   Consumer Group名称创建后，将不能修改。 |
 |InstanceId|String|是|alikafka\_post-cn-v0h1fgs2\*\*\*\*|实例ID。 |
 |RegionId|String|是|cn-hangzhou|实例的地域ID。 |
 
@@ -44,18 +44,18 @@ http(s)://[Endpoint]/?Action=DeleteConsumerGroup
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <DeleteConsumerGroupResponse>
       <Message>operation success.</Message>
-      <RequestId>06084011-E093-46F3-A51F-4B19A8AD7A94</RequestId>
+      <RequestId>06084011-E093-46F3-A51F-4B19A8AD****</RequestId>
       <Success>true</Success>
       <Code>200</Code>
 </DeleteConsumerGroupResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
