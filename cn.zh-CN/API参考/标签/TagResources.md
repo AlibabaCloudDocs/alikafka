@@ -23,9 +23,9 @@
  例如：实例ID为alikafka\_post-cn-v0h1fgs2xxxx、Topic名称为test-topic、Consumer Group名称为test-consumer-group，则各资源ID分别为alikafka\_post-cn-v0h1fgs2xxxx、Kafka\_alikafka\_post-cn-v0h1fgs2xxxx\_test-topic、Kafka\_alikafka\_post-cn-v0h1fgs2xxxx\_test-consumer-group。 |
 |ResourceType|String|是|instance|资源类型。枚举类型。取值：
 
- -   **Instance**
--   **Topic**
--   **Consumer Group** |
+ -   **INSTANCE**
+-   **TOPIC**
+-   **CONSUMERGROUP** |
 |Tag.N.Key|String|是|FinanceDept|资源的标签键。
 
  -   N为1~20。
@@ -51,14 +51,14 @@
 http(s)://[Endpoint]/?Action=TagResources
 &RegionId=cn-hangzhou
 &ResourceId.1=alikafka_post-cn-v0h1fgs2****
-&ResourceType=instance
+&ResourceType=INSTANCE
 &Tag.1.Key=FinanceDept
 &<公共请求参数>
 ```
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <TagResourcesResponse>
@@ -66,7 +66,7 @@ http(s)://[Endpoint]/?Action=TagResources
 </TagResourcesResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
