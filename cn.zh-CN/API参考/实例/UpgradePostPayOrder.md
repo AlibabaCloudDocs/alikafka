@@ -2,7 +2,7 @@
 
 调用UpgradePostPayOrder升配后付费实例。
 
-请确保在使用该接口前，已充分了解后付费实例的收费方式和价格。详情请参见[计费说明](~84737~)。
+请确保在使用该接口前，已充分了解后付费实例的收费方式和价格。更多信息，请参见[计费说明](~~84737~~)。
 
 ## 调试
 
@@ -18,19 +18,19 @@
 |DiskSize|Integer|是|900|磁盘容量。
 
  -   填写的磁盘容量必须大于等于实例当前的磁盘容量。
--   取值范围请参见[计费说明](~~84737~~)。 |
+-   取值范围，请参见[计费说明](~~84737~~)。 |
 |InstanceId|String|是|alikafka\_post-cn-mp919o4v\*\*\*\*|实例ID。 |
 |RegionId|String|是|cn-hangzhou|实例的地域ID。 |
 |TopicQuota|Integer|是|50|Topic规格。
 
  -   填写的Topic规格必须大于或等于实例当前的Topic规格。
 -   流量规格不同，默认值不同。超过默认值，需额外收费。
--   取值范围请参见[计费说明](~~84737~~)。 |
+-   取值范围，请参见[计费说明](~~84737~~)。 |
 |IoMax|Integer|否|20|流量峰值（不推荐）。
 
  -   填写的流量峰值必须大于或等于实例当前的流量峰值。
 -   流量峰值和流量规格必须选填一个。同时填写时，以流量规格为准。建议您只填写流量规格。
--   取值范围请参见[计费说明](~~84737~~)。 |
+-   取值范围，请参见[计费说明](~~84737~~)。 |
 |SpecType|String|否|normal|规格类型。取值：
 
  -   **normal**：普通版（高写版）
@@ -42,12 +42,12 @@
 
  -   填写的公网流量必须大于或等于实例当前的公网流量。
 -   实例类型为公网/VPC实例时填写。
--   取值范围请参见[计费说明](~~84737~~)。 |
+-   取值范围，请参见[计费说明](~~84737~~)。 |
 |IoMaxSpec|String|否|alikafka.hw.2xlarge|流量规格（推荐）。
 
  -   填写的流量规格必须大于或等于实例当前的流量规格。
 -   流量峰值和流量规格必须选填一个。同时填写时，以流量规格为准。建议您只填写流量规格。
--   取值范围请参见[计费说明](~~84737~~)。 |
+-   取值范围，请参见[计费说明](~~84737~~)。 |
 
 ## 返回数据
 
@@ -64,16 +64,19 @@
 
 ```
 http(s)://[Endpoint]/?Action=UpgradePostPayOrder
-&DiskSize=900
-&InstanceId=alikafka_post-cn-mp919o4v****
+&InstanceId=alikafka_post-cn-m7r20thf****
+&TopicQuota=80
+&DiskSize=1500
 &RegionId=cn-hangzhou
-&TopicQuota=50
+&IoMax=90
+&SpecType=professional
+&IoMaxSpec=alikafka.hw.6xlarge
 &<公共请求参数>
 ```
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <UpgradePostPayOrderResponse>
@@ -84,7 +87,7 @@ http(s)://[Endpoint]/?Action=UpgradePostPayOrder
 </UpgradePostPayOrderResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
