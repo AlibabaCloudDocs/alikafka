@@ -16,9 +16,9 @@
 |RegionId|String|是|cn-hangzhou|资源的地域ID。 |
 |ResourceType|String|是|instance|资源类型。枚举类型。取值：
 
- -   **Instance**
--   **Topic**
--   **Consumergroup** |
+ -   **INSTANCE**
+-   **TOPIC**
+-   **CONSUMERGROUP** |
 |ResourceId.N|RepeatList|否|alikafka\_post-cn-v0h1fgs2\*\*\*\*|打标的资源ID 。资源ID规则：
 
  -   实例：instanceId
@@ -44,7 +44,7 @@
 |--|--|---|--|
 |NextToken|String|caeba0bbb2be03f84eb48b699f0a4883|下一个查询开始Token。 |
 |RequestId|String|DE65F6B7-7566-4802-9007-96F2494AC5XX|请求ID。 |
-|TagResources|Array| |由资源及其标签组成的集合，包含了资源ID、资源类型和标签键值等信息。 |
+|TagResources|Array of TagResource| |由资源及其标签组成的集合，包含了资源ID、资源类型和标签键值等信息。 |
 |TagResource| | | |
 |ResourceId|String|alikafka\_post-cn-v0h1fgs2\*\*\*\*|打标的资源ID 。资源ID规则：
 
@@ -68,13 +68,14 @@
 ```
 http(s)://[Endpoint]/?Action=ListTagResources
 &RegionId=cn-hangzhou
-&ResourceType=instance
+&ResourceType=INSTANCE
+&ResourceId=alikafka_post-cn-v0h1fgs2****
 &<公共请求参数>
 ```
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <ListTagResourcesResponse>
@@ -84,26 +85,28 @@ http(s)://[Endpoint]/?Action=ListTagResources
             <TagResource>
                   <ResourceId>alikafka_post-cn-v0h1fgs2****</ResourceId>
                   <TagKey>FinanceDept</TagKey>
-                  <ResourceType>instance</ResourceType>
+                  <ResourceType>ALIYUN::ALIKAFKA::INSTANCE</ResourceType>
                   <TagValue>FinanceJoshua</TagValue>
             </TagResource>
       </TagResources>
 </ListTagResourcesResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
     "RequestId": "DE65F6B7-7566-4802-9007-96F2494AC5XX",
     "NextToken": "caeba0bbb2be03f84eb48b699f0a4883",
     "TagResources": {
-        "TagResource": {
+        "TagResource": [
+          {
             "ResourceId": "alikafka_post-cn-v0h1fgs2****",
             "TagKey": "FinanceDept",
-            "ResourceType": "instance",
+            "ResourceType": "ALIYUN::ALIKAFKA::INSTANCE",
             "TagValue": "FinanceJoshua"
-        }
+          }  
+        ]
     }
 }
 ```
