@@ -57,7 +57,7 @@ http(s)://[Endpoint]/?Action=GetConsumerProgress
 `XML`格式
 
 ```
-<createInstanceResponse>
+<GetConsumerProgressResponse>
       <RequestId>252820E1-A2E6-45F2-B4C9-1056B8CE****</RequestId>
       <Message>operation success.</Message>
       <ConsumerProgress>
@@ -81,13 +81,12 @@ http(s)://[Endpoint]/?Action=GetConsumerProgress
       </ConsumerProgress>
       <Code>200</Code>
       <Success>true</Success>
-</createInstanceResponse>
+</GetConsumerProgressResponse>
 ```
 
 `JSON`格式
 
 ```
-{"createInstanceResponse":
 {
     "RequestId": "252820E1-A2E6-45F2-B4C9-1056B8CE****",
     "Message": "operation success.",
@@ -116,7 +115,6 @@ http(s)://[Endpoint]/?Action=GetConsumerProgress
     },
     "Code": 200,
     "Success": true
-}	
 }
 ```
 
