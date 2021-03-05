@@ -48,10 +48,10 @@ http(s)://[Endpoint]/?Action=GetConsumerList
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
-<GetConsumerList>
+<GetConsumerListResponse>
       <RequestId>808F042B-CB9A-4FBC-9009-00E7DDB6****</RequestId>
       <Message>operation success.</Message>
       <Code>200</Code>
@@ -66,10 +66,10 @@ http(s)://[Endpoint]/?Action=GetConsumerList
             </ConsumerVO>
       </ConsumerList>
       <Success>true</Success>
-</GetConsumerList>
+</GetConsumerListResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
