@@ -39,32 +39,33 @@
 http(s)://[Endpoint]/?Action=ConvertPostPayOrder
 &InstanceId=alikafka_post-cn-v0h1fgs2****
 &RegionId=cn-hangzhou
+&Duration=1
 &<公共请求参数>
 ```
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <CreatePostPayOrderResponse>
-      <Message>operation success.</Message>
-      <RequestId>06084011-E093-46F3-A51F-4B19A8AD7A94</RequestId>
-      <OrderId>204973465750800</OrderId>
-      <Success>true</Success>
-      <Code>200</Code>
+        <RequestId>09F11072-6273-493C-A78E-D446024AB8D7</RequestId>
+        <Message>operation success.</Message>
+        <OrderId>208415027510800</OrderId>
+        <Code>200</Code>
+        <Success>true</Success>
 </CreatePostPayOrderResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
-    "RequestId":"06084011-E093-46F3-A51F-4B19A8AD****",
-    "Message":"operation success.",
-    "OrderId":"20497346575****",
-    "Code":"200",
-    "Success":"true"
+  "RequestId": "09F11072-6273-493C-A78E-D446024AB8D7",
+  "Message": "operation success.",
+  "OrderId": 208415027510800,
+  "Code": 200,
+  "Success": true
 }
 ```
 
