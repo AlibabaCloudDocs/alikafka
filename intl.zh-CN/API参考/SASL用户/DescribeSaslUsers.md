@@ -23,7 +23,7 @@
 |Code|Integer|200|状态码。返回200代表成功。 |
 |Message|String|operation success.|返回信息。 |
 |RequestId|String|9E3B3592-5994-4F65-A61E-E62A77A7\*\*\*|请求ID。 |
-|SaslUserList|Array| |SASL用户列表。 |
+|SaslUserList|Array of SaslUserVO| |SASL用户列表。 |
 |SaslUserVO| | | |
 |Password|String|123\*\*\*|密码。 |
 |Type|String|scram|类型。取值：
@@ -48,7 +48,7 @@ http(s)://[Endpoint]/?Action=DescribeSaslUsers
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <DescribeSaslUsersResponse>
@@ -66,16 +66,18 @@ http(s)://[Endpoint]/?Action=DescribeSaslUsers
 </DescribeSaslUsersResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
     "SaslUserList": {
-        "SaslUserVO": {
+        "SaslUserVO": [
+        {
             "Type": "scram",
             "Username": "test12***",
             "Password": "123***"
         }
+    ]
     },
     "RequestId": "9E3B3592-5994-4F65-A61E-E62A77A7***",
     "Message": "operation success.",
