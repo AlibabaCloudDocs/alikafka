@@ -2,7 +2,7 @@
 
 调用CreatePostPayOrder创建后付费实例。
 
-请确保在使用该接口前，已充分了解后付费实例的收费方式和价格。详情请参见[计费说明](~84737~)。
+请确保在使用该接口前，已充分了解后付费实例的收费方式和价格。更多信息，请参见[计费说明](~~84737~~)。
 
 ## 调试
 
@@ -21,7 +21,7 @@
 -   **5**：VPC实例 |
 |DiskSize|Integer|是|500|磁盘容量。
 
- 取值范围请参见[计费说明](~~84737~~)。 |
+ 取值范围，请参见[计费说明](~~84737~~)。 |
 |DiskType|String|是|0|磁盘类型。取值：
 
  -   **0**：高效云盘
@@ -30,26 +30,26 @@
 |TopicQuota|Integer|是|50|Topic的数量。
 
  -   流量规格不同，默认值不同。超过默认值，需额外收费。
--   取值范围请参见[计费说明](~~84737~~)。 |
+-   取值范围，请参见[计费说明](~~84737~~)。 |
 |IoMax|Integer|否|20|流量峰值（不推荐）。
 
  -   流量峰值和流量规格必须选填一个。同时填写时，以流量规格为准。建议您只填写流量规格。
--   取值范围请参见[计费说明](~~84737~~)。 |
+-   取值范围，请参见[计费说明](~~84737~~)。 |
 |EipMax|Integer|否|0|公网流量。
 
- -   如果DeployType为**4**，则需填写。
--   取值范围请参见[计费说明](~~84737~~)。 |
+ -   如果**DeployType**为**4**，则需填写。
+-   取值范围，请参见[计费说明](~~84737~~)。 |
 |SpecType|String|否|normal|规格类型。取值：
 
- -   normal：标准版（高写版）
--   professional：专业版（高写版）
--   professionalForHighRead：专业版（高读版）
+ -   **normal**：标准版（高写版）
+-   **professional**：专业版（高写版）
+-   **professionalForHighRead**：专业版（高读版）
 
- 以上规格类型的说明请参见[计费说明](~~84737~~)。 |
+ 以上规格类型的说明，请参见[计费说明](~~84737~~)。 |
 |IoMaxSpec|String|否|alikafka.hw.2xlarge|流量规格（推荐）。
 
  -   流量峰值和流量规格必须选填一个。同时填写时，以流量规格为准。建议您只填写流量规格。
--   取值范围请参见[计费说明](~~84737~~)。 |
+-   取值范围，请参见[计费说明](~~84737~~)。 |
 
 ## 返回数据
 
@@ -67,17 +67,20 @@
 
 ```
 http(s)://[Endpoint]/?Action=CreatePostPayOrder
-&DeployType=5
-&DiskSize=500
-&DiskType=0
 &RegionId=cn-hangzhou
 &TopicQuota=50
+&DiskType=1
+&DiskSize=900
+&DeployType=5
+&IoMax=20
+&SpecType=normal
+&IoMaxSpec=alikafka.hw.2xlarge
 &<公共请求参数>
 ```
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <CreatePostPayOrderResponse>
@@ -89,7 +92,7 @@ http(s)://[Endpoint]/?Action=CreatePostPayOrder
 </CreatePostPayOrderResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
