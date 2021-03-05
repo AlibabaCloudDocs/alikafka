@@ -23,12 +23,12 @@
 |名称|类型|示例值|描述|
 |--|--|---|--|
 |Code|Integer|200|返回码。返回200代表成功。 |
-|CurrentPage|Integer|1|当前页面。 |
+|CurrentPage|Integer|1|当前页。 |
 |Message|String|operation success.|返回信息。 |
-|PageSize|Integer|10|页面大小。 |
+|PageSize|Integer|10|页大小。 |
 |RequestId|String|C0D3DC5B-5C37-47AD-9F22-1F5598809\*\*\*|请求ID。 |
 |Success|Boolean|true|调用是否成功。 |
-|TopicList|Array| |Topic详情。 |
+|TopicList|Array of TopicVO| |Topic详情。 |
 |TopicVO| | | |
 |CreateTime|Long|1576563109000|创建时间。 |
 |InstanceId|String|alikafka\_pre-cn-0pp1954n\*\*\*\*|实例ID。 |
@@ -47,7 +47,7 @@
  **服务中**。
 
  删除Topic，则Topic无服务状态名称。 |
-|Tags|Array| |标签。 |
+|Tags|Array of TagVO| |标签。 |
 |TagVO| | | |
 |Key|String|Test|标签键。 |
 |Value|String|Test|标签值。 |
@@ -64,15 +64,16 @@
 
 ```
 http(s)://[Endpoint]/?Action=GetTopicList
+&InstanceId=alikafka_pre-cn-0pp1954n****
 &CurrentPage=1
-&InstanceId=alikafka_pre-cn-0pp1954n2003
 &PageSize=10
+&RegionId=cn-hangzhou
 &<公共请求参数>
 ```
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <GetTopicListResponse>
@@ -84,20 +85,16 @@ http(s)://[Endpoint]/?Action=GetTopicList
       <TopicList>
             <TopicVO>
                   <Status>0</Status>
-                  <PartitionNum>6</PartitionNum>
+                  <PartitionNum>12</PartitionNum>
                   <CompactTopic>false</CompactTopic>
                   <InstanceId>alikafka_pre-cn-0pp1954n****</InstanceId>
-                  <CreateTime>1586260357000</CreateTime>
+                  <CreateTime>1614585068000</CreateTime>
                   <StatusName>服务中</StatusName>
                   <RegionId>cn-hangzhou</RegionId>
                   <Topic>TopicPartitionNum</Topic>
                   <LocalTopic>false</LocalTopic>
                   <Tags>
-                        <TagVO>
-                              <Value>Test</Value>
-                              <Key>Test</Key>
-                        </TagVO>
-                  </Tags>
+            </Tags>
                   <Remark>test</Remark>
             </TopicVO>
       </TopicList>
@@ -106,40 +103,36 @@ http(s)://[Endpoint]/?Action=GetTopicList
 </GetTopicListResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
-    "RequestId":"C0D3DC5B-5C37-47AD-9F22-1F5598809***",
-    "Message":"operation success.",
-    "PageSize":"10",
-    "CurrentPage":"1",
-    "Total":"1",
-    "TopicList":{
-        "TopicVO":[
-            {
-                "Status":"0",
-                "InstanceId":"alikafka_pre-cn-0pp1954n****",
-                "CreateTime":"1576563109000",
-                "StatusName":"服务中",
-                "RegionId":"cn-hangzhou",
-                "Topic":"TopicPartitionNum",
-                "Remark":"test"
-            },
-            {
-                "Tags":{
-                    "TagVO":[
-                        {
-                            "Value":"Test",
-                            "Key":"Test"
-                        }
-                    ]
-                }
-            }
-        ]
-    },
-    "Code":"200",
-    "Success":"true"
+  "RequestId": "C0D3DC5B-5C37-47AD-9F22-1F5598809***",
+  "Message": "operation success.",
+  "PageSize": 10,
+  "CurrentPage": 1,
+  "Total": 1,
+  "TopicList": {
+    "TopicVO": [
+      {
+        "Status": 0,
+        "PartitionNum": 12,
+        "CompactTopic": false,
+        "InstanceId": "alikafka_pre-cn-0pp1954n****",
+        "CreateTime": 1614585068000,
+        "StatusName": "服务中",
+        "RegionId": "cn-hangzhou",
+        "Topic": "TopicPartitionNum",
+        "LocalTopic": false,
+        "Tags": {
+          "TagVO": []
+        },
+        "Remark": "test"
+      }
+    ]
+  },
+  "Code": 200,
+  "Success": true
 }
 ```
 
