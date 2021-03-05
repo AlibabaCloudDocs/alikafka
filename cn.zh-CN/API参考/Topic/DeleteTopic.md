@@ -40,18 +40,18 @@ http(s)://[Endpoint]/?Action=DeleteTopic
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
-<DeleteTopic>
+<DeleteTopicResponse>
       <RequestId>06084011-E093-46F3-A51F-4B19A8AD****</RequestId>
       <Message>operation success.</Message>
       <Code>200</Code>
       <Success>true</Success>
-</DeleteTopic>
+</DeleteTopicResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
