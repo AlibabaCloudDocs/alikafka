@@ -4,14 +4,19 @@
 
 ## 前提条件
 
-**说明：** 仅支持在同地域内，将数据从消息队列Kafka版实例的数据源Topic导出至函数计算，再由函数计算导出至对象存储。
-
 在导出数据前，请确保您已完成以下操作：
 
 -   为消息队列Kafka版实例开启Connector。更多信息，请参见[开启Connector](/intl.zh-CN/用户指南/Connector/开启Connector.md)。
 -   为消息队列Kafka版实例创建数据源Topic。更多信息，请参见[步骤一：创建Topic](/intl.zh-CN/快速入门/步骤三：创建资源.md)。
 -   在[OSS管理控制台](https://oss.console.aliyun.com/bucket)创建存储空间。更多信息，请参见[创建存储空间](https://help.aliyun.com/document_detail/31885.html?spm=a2c4g.11174283.6.614.1bf37da24aeBfe)。
 -   开通函数计算服务。更多信息，请参见[开通函数计算服务]()。
+
+## 注意事项
+
+-   仅支持在同地域内，将数据从消息队列Kafka版实例的数据源Topic导出至函数计算，再由函数计算导出至对象存储。Connector的限制说明，请参见[使用限制](/intl.zh-CN/用户指南/Connector/Connector概述.md)。
+-   该功能基于函数计算服务提供。函数计算为您提供了一定的免费额度，超额部分将产生费用，请以函数计算的计费规则为准。计费详情，请参见[计费概述]()。
+-   函数计算的函数调用支持日志查询。具体操作步骤，请参见[配置并查看函数日志]()。
+-   消息转储时，消息队列Kafka版中消息用UTF-8 String序列化，暂不支持二进制的数据格式。
 
 ## 创建并部署对象存储Connector
 
@@ -66,6 +71,24 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
         |AccessKey ID|阿里云账号的AccessKey ID。|LTAI4GG2RGAjppjK\*\*\*\*\*\*\*\*|
         |AccessKey Secret|阿里云账号的AccessKey Secret。|WbGPVb5rrecVw3SQvEPw6R\*\*\*\*\*\*\*\*|
 
+        请确保您使用的AccessKey ID所对应的账号已被授予以下最小权限：
+
+        ```
+        {
+            "Version": "1",
+            "Statement": [
+                {
+                    "Action": [
+                        "oss:GetObject",
+                        "oss:PutObject"
+                    ],
+                    "Resource": "*",
+                    "Effect": "Allow"
+                }
+            ]
+        }
+        ```
+
         **说明：**
 
         AccessKey ID和AccessKey Secret是消息队列Kafka版创建任务时作为环境变量传递至函数计算的函数，任务创建成功后，消息队列Kafka版不保存AccessKey ID和AccessKey Secret信息。
@@ -76,7 +99,7 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
         |--|--|---|
         |VPC ID|数据同步任务所在的VPC。默认为消息队列Kafka版实例所在的VPC，您无需填写。|vpc-bp1xpdnd3l\*\*\*|
         |VSwitch ID|数据同步任务所在的交换机。该交换机必须与消息队列Kafka版实例处于同一VPC。默认为部署消息队列Kafka版实例时填写的交换机。|vsw-bp1d2jgg81\*\*\*|
-        |失败处理策略|消息发送失败后的错误处理。默认为log。取值：        -   log：继续对出现错误的Topic的分区的订阅，并打印错误日志。出现错误后，您可以通过Connector日志查看错误，并根据错误的错误码查找解决方案，以进行自助排查。
+        |失败处理策略|消息发送失败后的错误处理。默认为log。取值：        -   log：继续订阅出现错误的Topic的分区，并打印错误日志。出现错误后，您可以通过Connector日志查看错误，并根据错误码查找解决方案，以进行自助排查。
 
 **说明：**
 
@@ -164,4 +187,13 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
     }
 ]
 ```
+
+## 更多操作
+
+您可以按需对该Connector所依赖的函数计算资源进行配置。
+
+1.  在**Connector（公测组件）**页面，找到目标Connector，在其右侧**操作**列，单击**函数配置**。
+
+    页面跳转至函数计算控制台，您可以按需配置函数资源。
+
 
