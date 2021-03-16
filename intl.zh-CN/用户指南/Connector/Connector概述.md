@@ -4,31 +4,40 @@ keyword: [kafka, connector]
 
 # Connector概述
 
-消息队列Kafka版提供全托管、免运维的Connector，用于同一地域内的消息队列Kafka版和其他阿里云服务之间的数据同步。本文介绍Connector的类型、使用流程、使用限制以及跨地域数据同步。
+消息队列Kafka版提供全托管、免运维的Connector，用于消息队列Kafka版和其他阿里云服务之间的数据同步。本文介绍Connector支持的数据同步任务的类型、使用流程、使用限制以及跨地域数据同步。
 
-**说明：** 消息队列Kafka版的Connector组件处于公测阶段，且独立于消息队列Kafka版实例，因此不会在消息队列Kafka版侧产生费用。同时阿里云不承诺Connector的SLA，使用Connector所依赖的其他产品的SLA和费用说明请以对应产品为准。
+**说明：** 消息队列Kafka版的Connector组件处于公测阶段，且独立于消息队列Kafka版实例，因此不会在消息队列Kafka版侧产生费用。同时，阿里云不承诺Connector的SLA，使用Connector所依赖的其他产品的SLA和费用说明请以对应产品为准。
 
 ## Connector类型
 
-消息队列Kafka版目前仅提供Sink Connector，用于将数据从消息队列Kafka版导出至其他阿里云服务。消息队列Kafka版支持以下类型的Sink Connector：
+消息队列Kafka版支持以下两大类的Connector：
 
-|Sink Connector类型|任务类型|描述|文档|
-|----------------|----|--|--|
-|FC Sink Connector|KAFKA2FC|将数据从消息队列Kafka版导出至函数计算。|[创建FC Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建FC Sink Connector.md)|
-|MaxCompute Sink Connector|KAFKA2ODPS|将数据从消息队列Kafka版导出至大数据计算服务MaxCompute。|[创建MaxCompute Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建MaxCompute Sink Connector.md)|
+-   Sink Connector：Sink代表数据向外流转，即消息队列Kafka版为数据源，其他产品为数据目标。
+
+    |Connector|任务类型|描述|文档|
+    |---------|----|--|--|
+    |FC Sink Connector|KAFKA2FC|将数据从消息队列Kafka版导出至函数计算。|[创建FC Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建FC Sink Connector.md)|
+    |MaxCompute Sink Connector|KAFKA2ODPS|将数据从消息队列Kafka版导出至大数据计算服务MaxCompute。|[创建MaxCompute Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建MaxCompute Sink Connector.md)|
+    |OSS Sink Connector|KAFKA2OSS|将数据从消息队列Kafka版导出至对象存储OSS。|[创建OSS Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建OSS Sink Connector.md)|
+
+-   Source Connector：Source代表数据向内流转，即消息队列Kafka版为数据目标，其他产品为数据源。
+
+    |Connector|任务类型|描述|文档|
+    |---------|----|--|--|
+    |MySQL Source Connector|MySQL2KAFKA|将数据从阿里云数据库RDS MySQL版导出至消息队列Kafka版。|[创建MySQL Source Connector]()|
+
 
 ## 使用流程
 
 Connector的使用流程如下：
 
-1.  开启Connector
-
-    [开启Connector](/intl.zh-CN/用户指南/Connector/开启Connector.md)
-
+1.  [开启Connector](/intl.zh-CN/用户指南/Connector/开启Connector.md)
 2.  创建Connector
-    -   [创建MaxCompute Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建MaxCompute Sink Connector.md)
     -   [创建FC Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建FC Sink Connector.md)
-3.  管理Connector
+    -   [创建MaxCompute Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建MaxCompute Sink Connector.md)
+    -   [创建OSS Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建OSS Sink Connector.md)
+    -   [创建MySQL Source Connector]()
+3.  更多Connector的相关操作
     -   [查看Connector任务配置](/intl.zh-CN/用户指南/Connector/查看Connector任务配置.md)
     -   [查看Connector日志](/intl.zh-CN/用户指南/Connector/查看Connector日志.md)
     -   [暂停Connector](/intl.zh-CN/用户指南/Connector/暂停Connector.md)
@@ -42,7 +51,7 @@ Connector的使用流程如下：
 
 |项目|限制值|
 |--|---|
-|数量|3|
+|数量|单实例最多创建3个|
 |地域|-   华东1（杭州）
 -   华东2（上海）
 -   华北2（北京）
@@ -54,9 +63,11 @@ Connector的使用流程如下：
 -   新加坡（新加坡）
 -   日本（东京） |
 
-**说明：** 如果您需要提升您的实例的Connector的数量限制或者需要更多的地域，请提交工单[工单](https://workorder-intl.console.aliyun.com/#/ticket/add/?productId=1352)联系消息队列Kafka版技术人员。
+**说明：** 如果您需要提升您的实例的Connector的数量限制或者需要更多的地域，请提交工单[工单](https://selfservice.console.aliyun.com/ticket/category/alikafka)[工单](https://workorder-intl.console.aliyun.com/#/ticket/add/?productId=1352)联系消息队列Kafka版技术人员。
 
 ## 跨地域数据同步
 
-如果您需要将某个地域的Connector的数据同步到另一个地域的阿里云服务，您需要为该Connector开启公网访问，然后在公网进行数据同步。详情请参见[为Connector开启公网访问](/intl.zh-CN/用户指南/Connector/为Connector开启公网访问.md)。
+如果您需要将某个地域的数据，通过Connector同步到另一个地域的阿里云服务，您需要为该Connector开启公网访问，然后在公网进行数据同步。具体操作步骤，请参见[为Connector开启公网访问](/intl.zh-CN/用户指南/Connector/为Connector开启公网访问.md)。
+
+**说明：** MySQL Source Connector的跨地域数据同步比较特殊，需要您自行开通企业网。更多信息，请参见[创建MySQL Source Connector]()。
 
