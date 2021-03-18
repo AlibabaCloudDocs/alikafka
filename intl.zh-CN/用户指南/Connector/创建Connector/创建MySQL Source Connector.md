@@ -6,7 +6,7 @@
 
 -   为消息队列Kafka版实例开启Connector。更多信息，请参见[开启Connector](/intl.zh-CN/用户指南/Connector/开启Connector.md)。
 
-    **说明：** 请确保您的消息队列Kafka版实例部署在华南1（深圳）、西南1（成都）、华北2（北京）、华东1（杭州）或华东2（上海）地域。
+    **说明：** 请确保您的消息队列Kafka版实例部署在华南1（深圳）、西南1（成都）、华北2（北京）、华北3（张家口）、华东1（杭州）或华东2（上海）地域。
 
 -   [创建RDS MySQL实例](/intl.zh-CN/RDS MySQL 数据库/快速入门/创建RDS MySQL实例.md)。
 -   [创建数据库和账号](/intl.zh-CN/RDS MySQL 数据库/快速入门/创建数据库和账号.md)。
