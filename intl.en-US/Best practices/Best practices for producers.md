@@ -1,8 +1,8 @@
 # Best practices for producers
 
-This topic describes best practices of Message Queue for Apache Kafka producers to help you reduce errors when you send messages. The best practices in this topic are written based on a Java client. The basic concepts and ideas are the same for other languages, but the implementation details may be different.
+This article describes the best practices of Message Queue for Apache Kafka producers to help you reduce errors when you send messages. The best practices in this article are written based on a Java client. A Java client shares the basic concepts and ideas with other programming languages, but its implementation details may be different.
 
-## Send a message
+## Message sending
 
 Sample code for sending a message:
 
@@ -11,8 +11,8 @@ Future<RecordMetadata> metadataFuture = producer.send(new ProducerRecord<String,
         topic,   // The topic of the message.
         null,   // The partition number. We recommend that you set this parameter to null, and then the producer automatically allocates a partition number.
         System.currentTimeMillis(),   // The timestamp.
-        String.valueOf(value.hashCode()),   // The message key.
-        value   // The message value.
+        String.valueOf(value.hashCode()),   // The key of the message.
+        value   // The value of the message.
 ));
 ```
 
@@ -20,65 +20,148 @@ For more information about the complete sample code, see [SDK overview](/intl.en
 
 ## Key and Value fields
 
-Message Queue for Apache Kafka V0.10.2.2 has only two message fields: Key and Value.
+Message Queue for Apache Kafka version 0.10.2.2 has the following two message fields:
 
--   Key: The ID of the message.
--   Value: The content of the message.
+-   Key: the identifier of a message.
+-   Value: the content of a message.
 
-To facilitate tracing, set a unique key for each message. You can track a message by using the key, and print the sending and consumption logs to learn about the sending and consumption of the message.
+To facilitate tracing, set a unique key for each message. When you need to track the sending and consumption of a message, you can use a unique key to query the sending and consumption logs of the message.
 
-## Retry upon failure
+If you want to send a large number of messages, we recommend that you implement the sticky partitioning strategy instead of setting a key. For more information about the sticky partitioning strategy, see the [Sticky partitioning strategy](#section_dpm_034_tvv) section of this article.
 
-In a distributed environment, messages occasionally fail to be sent due to network issues. This may occur after a message is sent but ACK failure occurs, or a message fails to be sent.
+**Note:** Message Queue for Apache Kafka version 0.11.0 or later supports headers. If you need to use headers, upgrade your broker to version 2.2.0.
 
-Message Queue for Apache Kafka uses a virtual IP address \(VIP\) network architecture where idle connections are automatically closed. Therefore, clients that are inactive may receive the error message "Connection reset by peer". We recommend that you resend the message.
+## Retry
+
+In a distributed environment, a message may fail to be sent due to network issues. This may occur after a message is sent but ACK failure occurs, or a message fails to be sent.
+
+Message Queue for Apache Kafka uses a virtual IP address \(VIP\) network architecture where connections are closed after they are idle for more than 30 seconds. Therefore, inactive producers or consumers may receive the "Connection reset by peer" error message. In this case, we recommend that you resend the message.
 
 You can set the following retry parameters based on your business needs:
 
--   `retries`: the number of retries. We recommend that you set it to `3`.
--   `retry.backoff.ms`: the interval between retries. We recommend that you set it to `1000`.
+-   `retries`: the number of retries. We recommend that you set this parameter to `3`.
+-   `retry.backoff.ms`: the interval between retries. We recommend that you set this parameter to `1000`.
 
 ## Asynchronous transmission
 
-The methods for sending messages are asynchronous. To obtain the sending result, you can call metadataFuture.get\(timeout, TimeUnit.MILLISECONDS\).
+Messages are sent in asynchronous mode. To obtain the sending result, you can call the metadataFuture.get\(timeout, TimeUnit.MILLISECONDS\) method.
 
-## Thread-safe
+## Thread safety
 
-The producer is thread-safe and can send messages to all topics. In most cases, one application corresponds to one producer.
+Producers are thread-safe and they can send messages to all of the topics. In most cases, one application corresponds to one producer.
 
 ## ACKs
 
-ACKs have the following values:
+ACKs have the following settings:
 
--   `acks=0`: No response is returned from the Message Queue for Apache Kafka broker. In this mode, the performance is high, but the data loss risk is also high.
--   `acks=1`: A response is returned when data is written to the primary Message Queue for Apache Kafka broker. In this mode, the performance and data loss risk are moderate. Data loss may occur if the primary Message Queue for Apache Kafka broker unexpectedly quits.
+-   `acks=0`: No response is returned from the broker. In this mode, the performance is high, but the risk of data loss is also high.
+-   `acks=1`: A response is returned when data is written to the leader. In this mode, the performance and the risk of data loss are moderate. Data loss may occur if the leader fails.
 
--   `acks=all`: A response is returned only when data is written to the primary Message Queue for Apache Kafka broker and synchronized to the secondary Message Queue for Apache Kafka brokers. In this mode, the performance is low, but the data is secure. Data loss occurs only if all the primary and secondary Message Queue for Apache Kafka brokers unexpectedly quit.
+-   `acks=all`: A response is returned when data is written to the leader and synchronized to the followers. In this mode, the performance is low, but the risk of data loss is also low. Data loss occurs if the leader and the followers fail at the same time.
 
-We recommend that you set `acks=1` in normal cases and set `acks=all` for important services.
+We recommend that you set `acks=1` for regular services and set `acks=all` for key services.
 
-## Batch
+## Capability improvement for message sending
 
-The basic idea of batch sending is to cache messages in the memory and then send them in batches. Message Queue for Apache Kafka improves the throughput by sending messages in batches. However, this also increases the latency. Therefore, we must weigh these two factors in production. When you build a producer, you must consider the following two parameters:
+A Message Queue for Apache Kafka topic has multiple partitions. Before the Message Queue for Apache Kafka producer sends messages to the broker, the producer needs to select a partition of a topic to send messages to. To send multiple messages to the same partition, the producer packages relevant messages into a batch and sends the messages to the broker in batches. When the producer processes messages in batches, it incurs additional overheads. Small batches can result in a large number of requests that are generated by the producer. The requests queue on the producer and the broker and also lead to high CPU utilization. This prolongs the duration of message sending and increases the consumption latency. When the producer sends messages to the broker, a suitable size of each batch can reduce requests from the producer to the broker. This can also increase the throughput and lower the latency for message sending.
 
--   `batch.size`: When the message cache volume sent to each partition reaches this value, a network request is triggered. Then, the Message Queue for Apache Kafka client sends the messages to the Message Queue for Apache Kafka broker. The message volume indicates the total number of bytes in all messages in the batch, instead of the number of messages.
--   `linger.ms`: This parameter specifies the maximum retention duration for each message in the cache. If a message is stored longer than this time limit in the cache, the client immediately sends the message to the Message Queue for Apache Kafka broker without considering `batch.size`.
+The Message Queue for Apache Kafka producer manages batches based on two parameters:
 
-Therefore, Message Queue for Apache Kafka and `linger.ms` determine when a Message Queue for Apache Kafka client sends a message to the Message Queue for Apache Kafka broker. You can modify the parameter settings based on your business needs.
+-   `batch.size`: the volume of cached messages that are sent to each partition. This parameter specifies the total number of bytes in all of the messages in a batch, rather than the number of messages. When the volume of cached messages reaches the specified upper limit, a network request is triggered. Then, the producer sends the messages to the broker in a batch.
+-   `linger.ms`: the maximum storage duration for each message in the cache. If a message is stored longer than the specified time limit in the cache, the producer immediately sends the message to the broker without considering the setting of the `batch.size` parameter.
+
+Therefore, the `batch.size` and `linger.ms` parameters work together to determine when the Message Queue for Apache Kafka producer sends messages in batches to the broker. You can set these two parameters based on your business needs.
+
+## Sticky partitioning strategy
+
+Only messages to be sent to the same partition can be packaged into the same batch. The partitioning strategy of the Message Queue for Apache Kafka producer determines how to generate a batch. You can use the Partitioner class to select a suitable partition for the Message Queue for Apache Kafka producer based on your business needs. For messages that have a key, the default partitioning strategy of the Message Queue for Apache Kafka producer is to hash the key of each message, and then select a partition based on the hash result. Messages with the same key are sent to the same partition.
+
+For messages that do not have a key, the default partitioning strategy of the Message Queue for Apache Kafka producer in versions earlier than 2.4 is to recycle all of the partitions of a topic, and then send messages to each partition by polling. However, this default partitioning strategy may cause higher latency because a large number of small batches may be generated. In view of the low efficiency of this default partitioning strategy for key-free messages, the sticky partitioning strategy is introduced in Message Queue for Apache Kafka version 2.4.
+
+The sticky partitioning strategy can reduce the small batches, which are generated because the key-free messages scatter in different partitions. When a batch is full of messages, the producer randomly selects another partition and sends subsequent messages to this partition. In this strategy, messages are sent to the same partition in a short time, but messages can be evenly distributed in each partition when the producer works longer. This strategy can avoid partition skew of messages, and improve the overall performance with lower latency.
+
+If you are using the Message Queue for Apache Kafka producer in version 2.4 or later, the producer uses the sticky partitioning strategy by default. If you are using the producer in a version earlier than 2.4, you can set the `partitioner.class` parameter to specify a partitioning strategy based on the principles of the sticky partitioning strategy.
+
+To implement the sticky partitioning strategy, you can use the following Java sample code. The implementation logic of this code is to change partitions based on a specific interval.
+
+```
+public class MyStickyPartitioner implements Partitioner {
+
+    // Record the time of the last partition change.
+    private long lastPartitionChangeTimeMillis = 0L;
+    // Record the current partition.
+    private int currentPartition = -1;
+    // The interval between partition changes. Set the interval based on your business needs.
+    private long partitionChangeTimeGap = 100L;
+    
+    public void configure(Map<String, ? > configs) {}
+
+    /**
+     * Compute the partition for the given record.
+     *
+     * @param topic The topic name
+     * @param key The key to partition on (or null if no key)
+     * @param keyBytes serialized key to partition on (or null if no key)
+     * @param value The value to partition on or null
+     * @param valueBytes serialized value to partition on or null
+     * @param cluster The current cluster metadata
+     */
+    public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
+
+        // Query the information about all partitions.
+        List<PartitionInfo> partitions = cluster.partitionsForTopic(topic);
+        int numPartitions = partitions.size();
+
+        if (keyBytes == null) {
+            List<PartitionInfo> availablePartitions = cluster.availablePartitionsForTopic(topic);
+            int availablePartitionSize = availablePartitions.size();
+
+            // Determine the available partitions.
+            if (availablePartitionSize > 0) {
+                handlePartitionChange(availablePartitionSize);
+                return availablePartitions.get(currentPartition).partition();
+            } else {
+                handlePartitionChange(numPartitions);
+                return currentPartition;
+            }
+        } else {
+            // For messages that have a key, select a partition based on the hash value of the key.
+            return Utils.toPositive(Utils.murmur2(keyBytes)) % numPartitions;
+        }
+    }
+
+    private void handlePartitionChange(int partitionNum) {
+        long currentTimeMillis = System.currentTimeMillis();
+
+        // If the interval between partition changes is longer than the specified time, select another partition. If not, select the same partition.
+        if (currentTimeMillis - lastPartitionChangeTimeMillis >= partitionChangeTimeGap
+            || currentPartition < 0 || currentPartition >= partitionNum) {
+            lastPartitionChangeTimeMillis = currentTimeMillis;
+            currentPartition = Utils.toPositive(ThreadLocalRandom.current().nextInt()) % partitionNum;
+        }
+    }
+
+    public void close() {}
+
+}
+```
 
 ## OOM
 
-Based on the design of batch sending in Message Queue for Apache Kafka, Message Queue for Apache Kafka caches messages and then sends them in batches. However, if excessive messages are cached, an out of memory \(OOM\) error may occur.
+Based on the design of batches in Message Queue for Apache Kafka, Message Queue for Apache Kafka caches messages and then sends them in batches. However, if excessive messages are cached, an out of memory \(OOM\) error may occur.
 
--   `buffer.memory`: When the total size of all cached messages exceeds this value, these messages are sent to the Message Queue for Apache Kafka broker. `batch.size` and `linger.ms` are ignored.
--   `buffer.memory`: The default value is 32 MB, which can ensure sufficient performance for a single producer. However, if you enable multiple producers in the same Java Virtual Machine \(JVM\), an OOM error may occur because each producer may occupy 32 MB of the cache space.
--   In normal cases, you do not need to enable multiple producers during production. To prevent OOM in special scenarios, you must set the `buffer.memory` parameter.
+-   When the total size of all cached messages exceeds the cache size that is specified by the `buffer.memory` parameter, the producer sends these messages to the broker. In this case, the settings of the `batch.size` and `linger.ms` parameters are ignored.
+-   The default cache size that is specified by the `buffer.memory` parameter is 32 MB, which is sufficient for a single producer.
+
+    **Note:** If you enable multiple producers on the same Java virtual machine \(JVM\), an OOM error may occur because each producer may occupy 32 MB of the cache space.
+
+-   In most cases, you do not need to enable multiple producers during production. To avoid OOM errors in special scenarios, you must set the `buffer.memory` parameter.
 
 ## Partitionally ordered messages
 
-In a partition, messages are stored based on the order in which they are sent, and therefore are ordered.
+In each partition, messages are stored in the order that they are sent, and therefore are ordered.
 
-By default, to improve the availability, Message Queue for Apache Kafka does not guarantee the absolute order of messages in a single partition. A small number of messages become out of order during upgrade or downtime due to failovers, and then the messages in a failed partition are moved to other partitions.
+By default, to improve the availability, Message Queue for Apache Kafka does not ensure the absolute order of messages in a single partition. A small number of messages become out of order during upgrade or downtime due to failovers. Messages in a failed partition will be moved to other partitions.
 
-For subscription Message Queue for Apache Kafka instances of the Professional Edition, if your business requires messages to be strictly ordered in a partition, you must select Partitionally Ordered Message for Message Type when you create a topic.
+For Professional Edition instances that are billed in subscription mode, if your business requires messages to be strictly ordered in a partition, select local storage when you create a topic.
 
