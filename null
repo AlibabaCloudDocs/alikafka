@@ -8,8 +8,8 @@ keyword: [kafka, consumer, 自动创建]
 
 您已完成以下操作：
 
-1.  确保消息队列Kafka版实例的大版本为2.X，小版本为最新版本。如何查看并升级消息队列Kafka版实例的大版本或小版本，请参见[升级实例版本](/cn.zh-CN/用户指南/实例/升级实例版本.md)。
-2.  提交[工单](https://selfservice.console.aliyun.com/ticket/category/alikafka)为消息队列Kafka版实例开启自动创建Consumer Group。
+1.  确保消息队列Kafka版实例的大版本为2.X，小版本为最新版本。如何查看并升级消息队列Kafka版实例的大版本或小版本，请参见[升级实例版本](/intl.zh-CN/用户指南/实例/升级实例版本.md)。
+2.  提交[工单](https://workorder-intl.console.aliyun.com/)为消息队列Kafka版实例开启自动创建Consumer Group。
 
 自动创建Consumer Group是指当消息队列Kafka版实例开启自动创建Consumer Group后，客户端向消息队列Kafka版实例发送获取不存在的Consumer Group的元数据请求时，例如使用不存在的Consumer Group订阅消息，消息队列Kafka版实例会自动创建该Consumer Group。
 
