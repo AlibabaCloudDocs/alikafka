@@ -14,17 +14,18 @@ keyword: [kafka, connector]
 
 -   Sink Connector：Sink代表数据向外流转，即消息队列Kafka版为数据源，其他产品为数据目标。
 
-    |Connector|任务类型|描述|文档|
-    |---------|----|--|--|
-    |FC Sink Connector|KAFKA2FC|将数据从消息队列Kafka版导出至函数计算。|[创建FC Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建FC Sink Connector.md)|
-    |MaxCompute Sink Connector|KAFKA2ODPS|将数据从消息队列Kafka版导出至大数据计算服务MaxCompute。|[创建MaxCompute Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建MaxCompute Sink Connector.md)|
-    |OSS Sink Connector|KAFKA2OSS|将数据从消息队列Kafka版导出至对象存储OSS。|[创建OSS Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建OSS Sink Connector.md)|
+    |Connector|描述|文档|
+    |---------|--|--|
+    |FC Sink Connector|将数据从消息队列Kafka版导出至函数计算。|[创建FC Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建FC Sink Connector.md)|
+    |MaxCompute Sink Connector|将数据从消息队列Kafka版导出至大数据计算服务MaxCompute。|[创建MaxCompute Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建MaxCompute Sink Connector.md)|
+    |OSS Sink Connector|将数据从消息队列Kafka版导出至对象存储OSS。|[创建OSS Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建OSS Sink Connector.md)|
+    |Elasticsearch Sink Connector|将数据从消息队列Kafka版导出至阿里云Elasticsearch。|[创建Elasticsearch Sink Connector]()|
 
 -   Source Connector：Source代表数据向内流转，即消息队列Kafka版为数据目标，其他产品为数据源。
 
-    |Connector|任务类型|描述|文档|
-    |---------|----|--|--|
-    |MySQL Source Connector|MySQL2KAFKA|将数据从阿里云数据库RDS MySQL版导出至消息队列Kafka版。|[创建MySQL Source Connector]()|
+    |Connector|描述|文档|
+    |---------|--|--|
+    |MySQL Source Connector|将数据从阿里云数据库RDS MySQL版导出至消息队列Kafka版。|[创建MySQL Source Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建MySQL Source Connector.md)|
 
 
 ## 使用流程
@@ -36,7 +37,7 @@ Connector的使用流程如下：
     -   [创建FC Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建FC Sink Connector.md)
     -   [创建MaxCompute Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建MaxCompute Sink Connector.md)
     -   [创建OSS Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建OSS Sink Connector.md)
-    -   [创建MySQL Source Connector]()
+    -   [创建MySQL Source Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建MySQL Source Connector.md)
 3.  更多Connector的相关操作
     -   [查看Connector任务配置](/intl.zh-CN/用户指南/Connector/查看Connector任务配置.md)
     -   [查看Connector日志](/intl.zh-CN/用户指南/Connector/查看Connector日志.md)
@@ -63,11 +64,11 @@ Connector的使用流程如下：
 -   新加坡（新加坡）
 -   日本（东京） |
 
-**说明：** 如果您需要提升您的实例的Connector的数量限制或者需要更多的地域，请提交工单[工单](https://selfservice.console.aliyun.com/ticket/category/alikafka)[工单](https://workorder-intl.console.aliyun.com/#/ticket/add/?productId=1352)联系消息队列Kafka版技术人员。
+**说明：** 如果您需要提升您的实例的Connector的数量限制或者需要更多的地域，请提交工单[工单](https://workorder-intl.console.aliyun.com/#/ticket/add/?productId=1352)联系消息队列Kafka版技术人员。
 
 ## 跨地域数据同步
 
 如果您需要将某个地域的数据，通过Connector同步到另一个地域的阿里云服务，您需要为该Connector开启公网访问，然后在公网进行数据同步。具体操作步骤，请参见[为Connector开启公网访问](/intl.zh-CN/用户指南/Connector/为Connector开启公网访问.md)。
 
-**说明：** MySQL Source Connector的跨地域数据同步比较特殊，需要您自行开通企业网。更多信息，请参见[创建MySQL Source Connector]()。
+**说明：** MySQL Source Connector的跨地域数据同步比较特殊，需要您自行开通企业网。更多信息，请参见[创建MySQL Source Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建MySQL Source Connector.md)。
 
