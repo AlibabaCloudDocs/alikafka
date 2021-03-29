@@ -8,26 +8,26 @@ Queries the status of a consumer group.
 
 ## Request parameters
 
-|Parameter|Type|Required|Example|Description |
-|---------|----|--------|-------|------------|
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
 |Action|String|Yes|GetConsumerProgress|The operation that you want to perform. Set the value to
 
  **GetConsumerProgress**. |
 |ConsumerId|String|Yes|kafka-test|The name of the consumer group that you want to query. |
 |InstanceId|String|Yes|alikafka\_pre-cn-mp919o4v\*\*\*\*|The ID of the Message Queue for Apache Kafka instance that contains the consumer group. |
-|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance is located. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance resides. |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The response code. The HTTP 200 code indicates that the request was successful. |
+|Code|Integer|200|The HTTP status code. The HTTP status code 200 indicates that the request is successful. |
 |ConsumerProgress|Struct| |The status of the consumer group. |
 |LastTimestamp|Long|1566874931671|The time when the last message consumed by the consumer group was generated. |
-|TopicList|Array| |The consumption progress of each topic to which the consumer group is subscribed. |
+|TopicList|Array of TopicList| |The consumption progress of each topic to which the consumer group is subscribed. |
 |TopicList| | | |
 |LastTimestamp|Long|1566874931649|The time when the last consumed message in the topic was generated. |
-|OffsetList|Array| |The list of consumer offsets in the topic. |
+|OffsetList|Array of OffsetList| |The list of consumer offsets in the topic. |
 |OffsetList| | | |
 |BrokerOffset|Long|9|The maximum consumer offset in the partition of the topic. |
 |ConsumerOffset|Long|9|The consumer offset in the partition of the topic. |
@@ -38,7 +38,7 @@ Queries the status of a consumer group.
 |TotalDiff|Long|0|The total number of unconsumed messages in all topics. |
 |Message|String|operation success.|The response message. |
 |RequestId|String|252820E1-A2E6-45F2-B4C9-1056B8CE\*\*\*\*|The ID of the request. |
-|Success|Boolean|true|Indicates whether the request was successful. |
+|Success|Boolean|true|Indicates whether the request is successful. |
 
 ## Examples
 
@@ -46,9 +46,9 @@ Sample requests
 
 ```
 http(s)://[Endpoint]/? Action=GetConsumerProgress
+&RegionId=cn-hangzhou
 &ConsumerId=kafka-test
 &InstanceId=alikafka_pre-cn-mp919o4v****
-&RegionId=cn-hangzhou
 &<Common request parameters>
 ```
 
@@ -57,38 +57,37 @@ Sample success responses
 `XML` format
 
 ```
-<GetConsumerProgressResponse>
+<createInstanceResponse>
       <RequestId>252820E1-A2E6-45F2-B4C9-1056B8CE****</RequestId>
       <Message>operation success. </Message>
       <ConsumerProgress>
             <LastTimestamp>1566874931671</LastTimestamp>
             <TopicList>
                   <TopicList>
-                        <LastTimestamp>1566874931649</LastTimestamp>
-                        <TotalDiff>0</TotalDiff>
-                        <Topic>kafka-test</Topic>
-                  </TopicList>
-                  <TopicList>
                         <OffsetList>
                               <OffsetList>
                                     <Partition>0</Partition>
                                     <ConsumerOffset>9</ConsumerOffset>
-                                    <LastTimestamp>1566874931649</LastTimestamp>
+                                    <LastTimestamp>1566874931671</LastTimestamp>
                                     <BrokerOffset>9</BrokerOffset>
                               </OffsetList>
                         </OffsetList>
+                        <LastTimestamp>1566874931671</LastTimestamp>
+                        <TotalDiff>0</TotalDiff>
+                        <Topic>kafka_test</Topic>
                   </TopicList>
             </TopicList>
             <TotalDiff>0</TotalDiff>
       </ConsumerProgress>
       <Code>200</Code>
       <Success>true</Success>
-</GetConsumerProgressResponse>
+</createInstanceResponse>
 ```
 
 `JSON` format
 
 ```
+{"createInstanceResponse":
 {
     "RequestId": "252820E1-A2E6-45F2-B4C9-1056B8CE****",
     "Message": "operation success.",
@@ -97,19 +96,19 @@ Sample success responses
         "TopicList": {
             "TopicList": [
                 {
-                    "LastTimestamp": 1566874931649,
-                    "TotalDiff": 0,
-                    "Topic": "kafka-test"
-                },
-                {
                     "OffsetList": {
-                        "OffsetList": {
-                            "Partition": 0,
-                            "ConsumerOffset": 9,
-                            "LastTimestamp": 1566874931649,
-                            "BrokerOffset": 9
-                        }
-                    }
+                        "OffsetList": [
+                            {
+                                "Partition": 0,
+                                "ConsumerOffset": 9,
+                                "LastTimestamp": 1566874931671,
+                                "BrokerOffset": 9
+                            }
+                        ]
+                    },
+                    "LastTimestamp": 1566874931671,
+                    "TotalDiff": 0,
+                    "Topic": "kafka_test"
                 }
             ]
         },
@@ -117,6 +116,7 @@ Sample success responses
     },
     "Code": 200,
     "Success": true
+}    
 }
 ```
 
