@@ -1,10 +1,10 @@
 # Grant permissions across Alibaba Cloud accounts
 
-You can use a Resource Access Management \(RAM\) role to grant permissions across Alibaba Cloud accounts so that an enterprise can access the Message Queue for Apache Kafka instance of another enterprise.
+You can use a RAM role to grant permissions across Alibaba Cloud accounts so that an enterprise can access the Message Queue for Apache Kafka instance of another enterprise.
 
 Enterprise A has activated Message Queue for Apache Kafka. Enterprise A requires Enterprise B to manage Message Queue for Apache Kafka resources, such as instances, topics, and consumer groups. Enterprise A has the following requirements:
 
--   Enterprise A wants to focus on its business systems and only act as the owner of Message Queue for Apache Kafka. Enterprise A can authorize Enterprise B to maintain, monitor, and manage Message Queue for Apache Kafka.
+-   Enterprise A can focus on its business systems and only act as the owner of Message Queue for Apache Kafka. Enterprise A can authorize Enterprise B to maintain, monitor, and manage Message Queue for Apache Kafka.
 -   If an employee joins or leaves Enterprise B, no permission change is required. Enterprise B can grant its RAM users fine-grained permissions on cloud resources of Enterprise A. The RAM user credentials can be assigned to either employees or applications.
 -   If the agreement between Enterprise A and Enterprise B ends, Enterprise A can revoke the permissions from Enterprise B.
 
@@ -18,9 +18,9 @@ Use the Alibaba Cloud account of Enterprise A to log on to the RAM console, and 
 
 3.  On the **RAM Roles** page, click **Create RAM Role**.
 
-4.  In the **Create RAM Role** dialog box, select **Alibaba Cloud Account** and click **Next**.
+4.  In the **Create RAM Role** panel, select **Alibaba Cloud Account** and click **Next**.
 
-5.  In the **RAM Role Name** field, enter a RAM role name. In the **Select Trusted Alibaba Cloud Account** section, select **Other Alibaba Cloud Account**, and enter the ID of the Alibaba Cloud account of Enterprise B. Then, click **OK**.
+5.  In the **RAM Role Name** field, enter a RAM role name. Set the **Select Trusted Alibaba Cloud Account** parameter to **Other Alibaba Cloud Account** and enter the ID of the Alibaba Cloud account of Enterprise B. Then, click **OK**.
 
     **Note:**
 
@@ -29,17 +29,17 @@ Use the Alibaba Cloud account of Enterprise A to log on to the RAM console, and 
 
 ## Step 2: Enterprise A grants permissions to the RAM role
 
-Assign the RAM role the permission to access Message Queue for Apache Kafka of Enterprise A. The permission is granted to Enterprise B.
+Grant the RAM role the permissions to access the Message Queue for Apache Kafka resources of Enterprise A. The permissions are to be granted to Enterprise B.
 
 1.  In the left-side navigation pane of the RAM console, click **RAM Roles**.
 
 2.  On the **RAM Roles** page, find the RAM role, and click **Add Permissions** in the **Actions** column.
 
-3.  In the **Select Policy** section of the **Add Permissions** dialog box, click System Policy or Custom Policy, enter the keyword of the policy that you want to add in the search box, click the displayed policy, and then click **OK**.
+3.  In the **Select Policy** section of the **Add Permissions** panel, click System Policy or Custom Policy. Enter the keyword of the policy that you want to attach to the RAM role in the search box, click the displayed policy, and then click **OK**.
 
-    **Note:** For more information about the policies that can be granted to access Message Queue for Apache Kafka, see [RAM policies](/intl.en-US/Access control/RAM policies.md).
+    **Note:** For more information about the policies that authorize RAM roles and RAM users to access Message Queue for Apache Kafka, see [RAM policies](/intl.en-US/Access control/RAM policies.md).
 
-4.  In the **Add Permissions** dialog box, view the authorization information and click **Complete**.
+4.  In the **Add Permissions** panel, check the authorization information and click **Complete**.
 
 
 ## Step 3: Enterprise B creates a RAM user
@@ -52,7 +52,7 @@ Use the Alibaba Cloud account of Enterprise B to log on to the RAM console and c
 
 3.  On the **Users** page, click **Create User**.
 
-4.  On the **Create User** page, set **Logon Name** and **Display Name** in the **User Account Information** section.
+4.  In the **User Account Information** section, enter a logon name in the **Logon Name** field and a display name in the **Display Name** field.
 
     **Note:**
 
@@ -62,9 +62,9 @@ Use the Alibaba Cloud account of Enterprise B to log on to the RAM console and c
 
 6.  In the **Access Mode** section, select an access mode and click **OK**.
 
-    **Note:** For security purposes, we recommend that you select only one access mode.
+    **Note:** For security reasons, we recommend that you select only one access mode.
 
-    -   If you select **Console Password Logon**, you must complete further settings, including the console password setting, whether to reset the password upon the next logon, and whether to enable multi-factor authentication.
+    -   If you select **Console Access**, you must complete further settings, including the console password setting, whether to reset the password upon the next logon, and whether to enable multi-factor authentication.
     -   If you select **Programmatic Access**, RAM automatically creates an AccessKey pair for the RAM user.
 
         **Note:** For security reasons, the RAM console allows you to view or download the AccessKey secret only once. Therefore, when you create an AccessKey pair, you must keep your AccessKey secret strictly confidential.
@@ -74,33 +74,33 @@ Use the Alibaba Cloud account of Enterprise B to log on to the RAM console and c
 
 ## Step 4: Enterprise B grants permissions to the RAM user
 
-Assign the AliyunSTSAssumeRoleAccess permission to the RAM user.
+Attach the AliyunSTSAssumeRoleAccess permission policy to the RAM user.
 
 1.  In the left-side pane, choose **Identities** \> **Users**.
 
 2.  On the **Users** page, find the RAM user and click **Add Permissions** in the **Actions** column.
 
-3.  In **Select Policy** section of the **Add Permissions** dialog box, click **System Policy**, enter AliyunSTSAssumeRoleAccess in the search box, click the policy to add it to the Selected list, and then click **OK**.
+3.  In **Select Policy** section of the **Add Permissions** panel, click **System Policy**. Enter AliyunSTSAssumeRoleAccess in the search box, click the displayed policy to add it to the Selected list, and then click **OK**.
 
-4.  In the **Add Permissions** dialog box, view the authorization information and click **Complete**.
+4.  In the **Add Permissions** panel, check the authorization information and click **Complete**.
 
 
-The RAM user of Enterprise B can access Message Queue for Apache Kafka of Enterprise A in the following ways:
+The RAM user of Enterprise B can access the Message Queue for Apache Kafka resources of Enterprise A in the following ways:
 
--   Console
-    1.  Open the [RAM User Logon page](https://signin.aliyun.com/login.htm) in your browser.
-    2.  On the **RAM User Logon** page, enter the name of the RAM user, click **Next**, enter the password, and then click **Login**.
+-   Use the Alibaba Cloud Management console
+    1.  Open the [RAM Account Login page](https://signin.aliyun.com/login.htm) in your browser.
+    2.  On the **RAM Account Login** page, enter the name of the RAM user, click **Next**, enter the password, and then click **Login**.
 
-        **Note:** The logon name of the RAM user is in the format of <$username\>@<$AccountAlias\> or <$username\>@<$AccountAlias\>.onaliyun.com. <$AccountAlias\> is the account alias. If no account alias is set, the ID of the Alibaba Cloud account is used.
+        **Note:** The logon name of the RAM user is in the format of <$username\>@<$AccountAlias\> or <$username\>@<$AccountAlias\>.onaliyun.com. <$AccountAlias\> is the alias of the RAM user. If no alias is set, use the ID of the Alibaba Cloud account.
 
-    3.  On the RAM user center page, move the pointer to the profile in the upper-right corner and click **Switch Role**.
-    4.  On the **Alibaba Cloud - Switch Role** page, set the enterprise alias or default domain name of Enterprise A, and the RAM role name, and click **Switch**.
+    3.  On the RAM user center page, move the pointer over the profile in the upper-right corner and click **Switch Identity**.
+    4.  On the **Switch Role** page, enter the enterprise alias or default domain name of Enterprise A, and the RAM role name, and then click **Submit**.
 
         **Note:**
 
-        -   Enterprise alias: Use the Alibaba Cloud account of Enterprise A to log on to the Alibaba Cloud user center, move the pointer over the profile picture in the upper-right corner, and view the value on the floating layer.
-        -   Default domain name: Use the Alibaba Cloud account of Enterprise A to log on to the RAM console. On the **Settings** page, click the **Advanced** tab to view the default domain name.
--   API
-    1.  Call the AssumeRole operation to obtain the AccessKey ID, AccessKey secret, and SecurityToken. SecurityToken is the temporary security token. For more information, see [AssumeRole](/intl.en-US/API Reference (STS)/Operation interfaces/AssumeRole.md).
-    2.  Use the obtained AccessKey ID, AccessKey secret, and SecurityToken to call an API operation in the code to access Message Queue for Apache Kafka.
+        -   To view the enterprise alias, use the Alibaba Cloud account of Enterprise A to log on to the Alibaba Cloud user center. Move the pointer over the profile picture in the upper-right corner and view the value on the floating layer.
+        -   To view the default domain name, use the Alibaba Cloud account of Enterprise A to log on to the RAM console. On the **Settings** page, click the **Advanced** tab to view the default domain name.
+-   Call API operations
+    1.  Call the AssumeRole operation to obtain the AccessKey ID, AccessKey secret, and Security Token Service \(STS\) token. For more information, see [AssumeRole](/intl.en-US/API Reference/API Reference (STS)/Operation interfaces/AssumeRole.md).
+    2.  Use the obtained AccessKey ID, AccessKey secret, and STS token to call a specific API operation to access the corresponding Message Queue for Apache Kafka resources.
 
