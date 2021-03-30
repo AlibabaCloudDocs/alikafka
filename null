@@ -2,15 +2,15 @@
 keyword: [kafka, consumer group]
 ---
 
-# 是否支持Consumer Group自动创建？
+# Is automatic creation of consumer groups supported?
 
-消息队列Kafka版部分支持Consumer Group自动创建。
+Yes, Message Queue for Apache Kafka supports automatic creation of consumer groups.
 
-消息队列Kafka版Consumer Group自动创建请参见[自动创建Consumer Group]()。
+For more information about how to automatically create consumer groups in Message Queue for Apache Kafka, see [Automatically create consumer groups]().
 
-Consumer Group自动创建，使用起来方便，运维起来却极其麻烦，且极易造成系统不稳定。消息队列Kafka版的Consumer Group，还涉及一系列鉴权问题。建议您通过以下方式创建Consumer Group：
+Automatic creation of consumer groups facilitates usage but increases the O&M difficulty and causes system instability. In Message Queue for Apache Kafka, consumer groups must be authenticated. We recommend that you create consumer groups by using the following methods:
 
--   控制台：[步骤二：创建Consumer Group](/intl.zh-CN/快速入门/步骤三：创建资源.md)
--   API：[CreateConsumerGroup](/intl.zh-CN/API参考/Consumer Group/CreateConsumerGroup.md)
--   Terraform：[alicloud\_alikafka\_consumer\_group](https://www.terraform.io/docs/providers/alicloud/r/alikafka_consumer_group.html?spm=a2c4g.11186623.2.12.3c0d57bbgZShu7)
+-   In the console: [Step 2: Create a consumer group](/intl.en-US/Quick-start/Step 3: Create resources.md)
+-   By using API operations: [CreateConsumerGroup](/intl.en-US/API reference/Consumer groups/CreateConsumerGroup.md)
+-   By using Terraform: [alicloud\_alikafka\_consumer\_group](https://www.terraform.io/docs/providers/alicloud/r/alikafka_consumer_group.html?spm=a2c4g.11186623.2.12.3c0d57bbgZShu7)
 
