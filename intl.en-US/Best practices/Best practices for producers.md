@@ -27,7 +27,7 @@ Message Queue for Apache Kafka version 0.10.2.2 has the following two message fi
 
 To facilitate tracing, set a unique key for each message. When you need to track the sending and consumption of a message, you can use a unique key to query the sending and consumption logs of the message.
 
-If you want to send a large number of messages, we recommend that you implement the sticky partitioning strategy instead of setting a key. For more information about the sticky partitioning strategy, see the [Sticky partitioning strategy](#section_dpm_034_tvv) section of this article.
+If you want to send a large number of messages, we recommend that you implement the sticky partitioning strategy instead of setting a key. For more information about the sticky partitioning strategy, see the [Sticky partitioning strategy](#section_qxe_66m_wms) section of this article.
 
 **Note:** Message Queue for Apache Kafka version 0.11.0 or later supports headers. If you need to use headers, upgrade your broker to version 2.2.0.
 
