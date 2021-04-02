@@ -18,13 +18,13 @@ Message Queue for Apache Kafka provides two categories of connectors:
     |---------|---------|-----------|-------------|
     |Function Compute sink connector|KAFKA2FC|Exports data from Message Queue for Apache Kafka to Function Compute.|[Create a Function Compute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a Function Compute sink connector.md)|
     |MaxCompute sink connector|KAFKA2ODPS|Exports data from Message Queue for Apache Kafka to MaxCompute.|[Create a MaxCompute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MaxCompute sink connector.md)|
-    |OSS sink connector|KAFKA2OSS|Exports data from Message Queue for Apache Kafka to Object Storage Service \(OSS\).|[Create an OSS sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a connector to synchronize data to OSS.md)|
+    |OSS sink connector|KAFKA2OSS|Exports data from Message Queue for Apache Kafka to Object Storage Service \(OSS\).|[Create an OSS sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create an OSS sink connector.md)|
 
 -   Source connector: Source connectors are used to synchronize data from other Alibaba Cloud services to Message Queue for Apache Kafka.
 
     |Connector|Task type|Description|Documentation|
     |---------|---------|-----------|-------------|
-    |MySQL sink connector|MySQL2KAFKA|Imports data from ApsaraDB RDS for MySQL to Message Queue for Apache Kafka.|[Create a MySQL source connector]()|
+    |MySQL sink connector|MySQL2KAFKA|Imports data from ApsaraDB RDS for MySQL to Message Queue for Apache Kafka.|[Create a MySQL source connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MySQL source connector.md)|
 
 
 ## Procedure
@@ -35,8 +35,8 @@ To use connectors, perform the following steps:
 2.  Create a connector.
     -   [Create a Function Compute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a Function Compute sink connector.md).
     -   [Create a MaxCompute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MaxCompute sink connector.md).
-    -   [Create an OSS sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a connector to synchronize data to OSS.md).
-    -   [Create a MySQL source connector]().
+    -   [Create an OSS sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create an OSS sink connector.md).
+    -   [Create a MySQL source connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MySQL source connector.md).
 3.  Perform the following operations as required:
     -   [View task configurations of a connector](/intl.en-US/User guide/Connectors/View task configurations of a connector.md).
     -   [View connector logs](/intl.en-US/User guide/Connectors/View connector logs.md).
@@ -69,5 +69,5 @@ The following table describes the usage limits of connectors in Message Queue fo
 
 If you need to use a connector to synchronize data to an Alibaba Cloud service in another region over the Internet, you must enable Internet access for the connector. For more information, see [Enable Internet access for a connector](/intl.en-US/User guide/Connectors/Enable Internet access for a connector.md).
 
-**Note:** If you need to use MySQL source connectors to synchronize data across regions, you must first activate Cloud Enterprise Network \(CEN\). For more information, see [Create a MySQL source connector]().
+**Note:** If you need to use MySQL source connectors to synchronize data across regions, you must first activate Cloud Enterprise Network \(CEN\). For more information, see [Create a MySQL source connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MySQL source connector.md).
 
