@@ -12,13 +12,13 @@ keyword: [kafka, 公网, 跨地域]
 
 为Connector开启公网访问的方案如下：
 
-![公网访问方案](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/2016119951/p130354.png)
+![公网访问方案](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/2016119951/p130354.png)
 
 为Connector开启公网访问的操作流程如下：
 
 1.  为部署了消息队列Kafka版实例的VPC 1创建NAT网关。
 
-    详情请参见[创建NAT网关](/cn.zh-CN/用户指南/NAT网关实例/创建NAT网关.md)。
+    详情请参见[创建NAT网关]()。
 
 2.  为创建的NAT网关绑定弹性公网IP。
 
@@ -26,6 +26,6 @@ keyword: [kafka, 公网, 跨地域]
 
 3.  为VPC 1下消息队列Kafka版实例使用的交换机创建SNAT条目。
 
-    详情请参见[创建SNAT条目](/cn.zh-CN/用户指南/SNAT（访问公网服务）/创建SNAT条目.md)。
+    详情请参见[创建SNAT实现访问公网服务](/cn.zh-CN/基本功能操作/创建SNAT实现访问公网服务.md)。
 
 
