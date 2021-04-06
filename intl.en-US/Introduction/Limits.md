@@ -7,7 +7,6 @@ Message Queue for Apache Kafka sets limits for some metrics. To avoid program ex
 |Total number of topics \(partitions\)|Supported|In Message Queue for Apache Kafka, messages are stored and scheduled by partition. If messages are stored in a large number of topics \(partitions\), storage fragmentation occurs. This reduces cluster performance and stability.|
 |Reduction in the number of partitions of a topic|Not supported|This is due to the design constraints of Message Queue for Apache Kafka.|
 |Exposed ZooKeeper|Not supported|ZooKeeper has been masked since Message Queue for Apache Kafka 0.9.0. Therefore, you do not need to access ZooKeeper to use the client. In Message Queue for Apache Kafka, ZooKeeper is partially shared. For security purposes, it is not exposed. You do not need to learn about ZooKeeper.|
-|Topic-based authentication|Not supported|Topic-based authentication relies on ZooKeeper. Message Queue for Apache Kafka is deployed in virtual private clouds \(VPCs\) and provides sufficient security protection by using security groups and whitelists.|
 |Log on to the machines on which Message Queue for Apache Kafka is deployed|Not supported|None.|
 |Versions|-   Message Queue for Apache Kafka Standard Edition
 
