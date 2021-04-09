@@ -32,7 +32,7 @@ To view the migration progress, perform the following steps:
 
 1.  Log on to the [Message Queue for Apache Kafka console](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm).
 
-2.  In the top navigation bar, select a region.
+2.  In the top navigation bar, select the region where your instance is located.
 
 3.  In the left-side navigation pane, click **Migration**.
 
@@ -40,10 +40,6 @@ To view the migration progress, perform the following steps:
 
     All cloud migration tasks of the region appear on the **Migration** tab.
 
-    ![Migration progress](../images/p135788.png)
-
 5.  Find the migration task and click **Details**.
-
-    ![Migration progress details](../images/p135789.png)
 
 
