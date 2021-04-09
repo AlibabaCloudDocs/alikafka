@@ -32,10 +32,10 @@ Message Queue for Apache Kafka supports the following modes of consumer offset r
 
     -   **Clear all accumulated messages and consume messages from the latest offset.**: corresponds to the message clearing feature described at the beginning of this topic.
 
-        ![clearall](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/7050549951/p94025.png)
+        ![clearall](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/7050549951/p94025.png)
 
     -   **Reset Consumer Offset by Time**: corresponds to the feature of starting consumption at the specified time point described at the beginning of this topic. If you select this policy, you need to specify the time point.
 
-        ![bytime](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/7050549951/p94026.png)
+        ![bytime](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/7050549951/p94026.png)
 
 
