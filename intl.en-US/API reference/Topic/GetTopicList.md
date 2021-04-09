@@ -1,6 +1,6 @@
 # GetTopicList
 
-Queries topics on a Message Queue for Apache Kafka instance.
+Queries topics in a Message Queue for Apache Kafka instance.
 
 ## Debugging
 
@@ -8,35 +8,35 @@ Queries topics on a Message Queue for Apache Kafka instance.
 
 ## Request parameters
 
-|Parameter|Type|Required|Example|Description |
-|---------|----|--------|-------|------------|
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
 |Action|String|Yes|GetTopicList|The operation that you want to perform. Set the value to
 
  **GetTopicList**. |
-|CurrentPage|String|Yes|1|The page to return. |
-|InstanceId|String|Yes|alikafka\_pre-cn-0pp1954n\*\*\*\*|The ID of the instance in which you want to query topics. |
+|CurrentPage|String|Yes|1|The number of the page to return. |
+|InstanceId|String|Yes|alikafka\_pre-cn-0pp1954n\*\*\*\*|The ID of the Message Queue for Apache Kafka instance whose topics you want to query. |
 |PageSize|String|Yes|10|The number of entries to return on each page. |
-|RegionId|String|No|cn-hangzhou|The ID of the region where the instance is located. |
+|RegionId|String|No|cn-hangzhou|The ID of the region where the instance resides. |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The response code. The HTTP 200 code indicates that the request was successful. |
-|CurrentPage|Integer|1|The page that is returned. |
+|Code|Integer|200|The HTTP status code. If 200 is returned, the request is successful. |
+|CurrentPage|Integer|1|The number of the page returned. |
 |Message|String|operation success.|The response message. |
 |PageSize|Integer|10|The number of entries returned per page. |
 |RequestId|String|C0D3DC5B-5C37-47AD-9F22-1F5598809\*\*\*|The ID of the request. |
-|Success|Boolean|true|Indicates whether the request was successful. |
-|TopicList|Array| |Information about the topics. |
+|Success|Boolean|true|Indicates whether the request is successful. |
+|TopicList|Array of TopicVO| |The information about the topics. |
 |TopicVO| | | |
-|CreateTime|Long|1576563109000|The time when the instance was created. |
-|InstanceId|String|alikafka\_pre-cn-0pp1954n\*\*\*\*|The ID of the instance that was queried. |
-|RegionId|String|cn-hangzhou|The ID of the region where the instance is located. |
-|Remark|String|test|The description of the topic. Valid values:
+|CreateTime|Long|1576563109000|The time when the topic was created. |
+|InstanceId|String|alikafka\_pre-cn-0pp1954n\*\*\*\*|The ID of the instance. |
+|RegionId|String|cn-hangzhou|The ID of the region where the instance resides. |
+|Remark|String|test|The description of the topic. The description follows these rules:
 
- -   The value can contain only letters, digits, hyphens \(-\), and underscores \(\_\).
--   The value must be 3 to 64 characters in length. |
+ -   The value contain only letters, digits, hyphens \(-\), and underscores \(\_\).
+-   The value is 3 to 64 characters in length. |
 |Status|Integer|0|The service status of the topic. Valid values:
 
  **0:** The topic is running.
@@ -47,14 +47,14 @@ Queries topics on a Message Queue for Apache Kafka instance.
  **Running**
 
  A deleted topic does not have a service status name. |
-|Tags|Array| |The tags bound to the topic. |
+|Tags|Array of TagVO| |The tags attached to the topic. |
 |TagVO| | | |
-|Key|String|Test|The key of the resource tag. |
-|Value|String|Test|The value of the resource tag. |
-|Topic|String|TopicPartitionNum|The name of the topic. Valid values:
+|Key|String|Test|The key of the tag. |
+|Value|String|Test|The value of the tag. |
+|Topic|String|TopicPartitionNum|The name of the topic. The topic name follows these rules:
 
- -   The name can contain only letters, digits, hyphens \(-\), and underscores \(\_\).
--   The name must be 3 to 64 characters in length. Names that contain more than 64 characters will be automatically truncated.
+ -   The name contain only letters, digits, hyphens \(-\), and underscores \(\_\).
+-   The name is 3 to 64 characters in length. Names that contain more than 64 characters are automatically truncated.
 -   The name cannot be modified after the topic is created. |
 |Total|Integer|1|The total number of topics. |
 
@@ -63,10 +63,11 @@ Queries topics on a Message Queue for Apache Kafka instance.
 Sample requests
 
 ```
-http(s)://[Endpoint]/? Action=GetTopicList
+http(s)://[Endpoint]/?Action=GetTopicList
+&InstanceId=alikafka_pre-cn-0pp1954n****
 &CurrentPage=1
-&InstanceId=alikafka_pre-cn-0pp1954n2003
 &PageSize=10
+&RegionId=cn-hangzhou
 &<Common request parameters>
 ```
 
@@ -77,27 +78,23 @@ Sample success responses
 ```
 <GetTopicListResponse>
       <RequestId>C0D3DC5B-5C37-47AD-9F22-1F5598809***</RequestId>
-      <Message>operation success. </Message>
+      <Message>operation success.</Message>
       <PageSize>10</PageSize>
       <CurrentPage>1</CurrentPage>
       <Total>1</Total>
       <TopicList>
             <TopicVO>
                   <Status>0</Status>
-                  <PartitionNum>6</PartitionNum>
+                  <PartitionNum>12</PartitionNum>
                   <CompactTopic>false</CompactTopic>
                   <InstanceId>alikafka_pre-cn-0pp1954n****</InstanceId>
-                  <CreateTime>1586260357000</CreateTime>
+                  <CreateTime>1614585068000</CreateTime>
                   <StatusName>Running</StatusName>
                   <RegionId>cn-hangzhou</RegionId>
                   <Topic>TopicPartitionNum</Topic>
                   <LocalTopic>false</LocalTopic>
                   <Tags>
-                        <TagVO>
-                              <Value>Test</Value>
-                              <Key>Test</Key>
-                        </TagVO>
-                  </Tags>
+            </Tags>
                   <Remark>test</Remark>
             </TopicVO>
       </TopicList>
@@ -110,36 +107,32 @@ Sample success responses
 
 ```
 {
-    "RequestId":"C0D3DC5B-5C37-47AD-9F22-1F5598809***",
-    "Message":"operation success.",
-    "PageSize":"10",
-    "CurrentPage":"1",
-    "Total":"1",
-    "TopicList":{
-        "TopicVO":[
-            {
-                "Status":"0",
-                "InstanceId":"alikafka_pre-cn-0pp1954n****",
-                "CreateTime":"1576563109000",
-                "StatusName":"Running",
-                "RegionId":"cn-hangzhou",
-                "Topic":"TopicPartitionNum",
-                "Remark":"test"
-            },
-            {
-                "Tags":{
-                    "TagVO":[
-                        {
-                            "Value":"Test",
-                            "Key":"Test"
-                        }
-                    ]
-                }
-            }
-        ]
-    },
-    "Code":"200",
-    "Success":"true"
+  "RequestId": "C0D3DC5B-5C37-47AD-9F22-1F5598809***",
+  "Message": "operation success.",
+  "PageSize": 10,
+  "CurrentPage": 1,
+  "Total": 1,
+  "TopicList": {
+    "TopicVO": [
+      {
+        "Status": 0,
+        "PartitionNum": 12,
+        "CompactTopic": false,
+        "InstanceId": "alikafka_pre-cn-0pp1954n****",
+        "CreateTime": 1614585068000,
+        "StatusName": "Running",
+        "RegionId": "cn-hangzhou",
+        "Topic": "TopicPartitionNum",
+        "LocalTopic": false,
+        "Tags": {
+          "TagVO": []
+        },
+        "Remark": "test"
+      }
+    ]
+  },
+  "Code": 200,
+  "Success": true
 }
 ```
 
