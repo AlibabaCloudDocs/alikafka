@@ -19,7 +19,7 @@ keyword: [kafka, connector]
     |FC Sink Connector|将数据从消息队列Kafka版导出至函数计算。|[创建FC Sink Connector](/cn.zh-CN/用户指南/Connector/创建Connector/创建FC Sink Connector.md)|
     |MaxCompute Sink Connector|将数据从消息队列Kafka版导出至大数据计算服务MaxCompute。|[创建MaxCompute Sink Connector](/cn.zh-CN/用户指南/Connector/创建Connector/创建MaxCompute Sink Connector.md)|
     |OSS Sink Connector|将数据从消息队列Kafka版导出至对象存储OSS。|[创建OSS Sink Connector](/cn.zh-CN/用户指南/Connector/创建Connector/创建OSS Sink Connector.md)|
-    |Elasticsearch Sink Connector|将数据从消息队列Kafka版导出至阿里云Elasticsearch。|[创建Elasticsearch Sink Connector]()|
+    |Elasticsearch Sink Connector|将数据从消息队列Kafka版导出至阿里云Elasticsearch。|[创建Elasticsearch Sink Connector](/cn.zh-CN/用户指南/Connector/创建Connector/创建Elasticsearch Sink Connector.md)|
 
 -   Source Connector：Source代表数据向内流转，即消息队列Kafka版为数据目标，其他产品为数据源。
 
@@ -44,7 +44,7 @@ Connector的使用流程如下：
     -   [暂停Connector](/cn.zh-CN/用户指南/Connector/暂停Connector.md)
     -   [恢复Connnector](/cn.zh-CN/用户指南/Connector/恢复Connnector.md)
     -   [删除Connector](/cn.zh-CN/用户指南/Connector/删除Connector.md)
-    -   [修改Connector描述](/cn.zh-CN/用户指南/Connector/修改Connector描述.md)
+    -   [修改Connector配置](/cn.zh-CN/用户指南/Connector/修改Connector配置.md)
 
 ## 使用限制
 
