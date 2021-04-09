@@ -2,7 +2,7 @@
 
 Upgrades a subscription Message Queue for Apache Kafka instance.
 
-Before you call this operation, make sure that you have understood the billing methods and pricing of subscription Message Queue for Apache Kafka instances. For more information, see[Billing](~~84737~~).
+Before you call this operation, make sure that you have understood the billing methods and pricing of subscription Message Queue for Apache Kafka instances. For more information, see [Billing](~~84737~~).
 
 ## Debugging
 
@@ -37,7 +37,7 @@ Before you call this operation, make sure that you have understood the billing m
 -   **professional:**Professional Edition \(High Write\)
 -   **professionalForHighRead:** Professional Edition \(High Read\)
 
-You cannot downgrade an instance from the Professional Edition to the Standard Edition. For more information about these instance editions, see[Billing](~~84737~~). |
+You cannot downgrade an instance from the Professional Edition to the Standard Edition. For more information about these instance editions, see [Billing](~~84737~~). |
 |EipMax|Integer|No|0|The public traffic for the instance.
 
 -   The specified public traffic must be at least the current public traffic of the instance.
