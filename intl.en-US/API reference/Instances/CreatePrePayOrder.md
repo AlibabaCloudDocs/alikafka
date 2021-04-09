@@ -2,7 +2,7 @@
 
 Creates a subscription Message Queue for Apache Kafka instance.
 
-Before you call this operation, make sure that you have understood the billing methods and pricing of subscription Message Queue for Apache Kafka instances. For more information, see[Billing](~~84737~~).
+Before you call this operation, make sure that you have understood the billing methods and pricing of subscription Message Queue for Apache Kafka instances. For more information, see [Billing](~~84737~~).
 
 ## Debugging
 
@@ -38,14 +38,14 @@ For more information about the valid values, see [Billing](~~84737~~). |
 |EipMax|Integer|No|40|The public traffic for the instance.
 
 -   This parameter is required if DeployType is set to **4**.
--   For more information about the valid values, see[Pay-as-you-go](~~72142~~). |
+-   For more information about the valid values, see [Pay-as-you-go](~~72142~~). |
 |SpecType|String|No|normal|The edition of the instance. Valid values:
 
 -   **normal:** Standard Edition \(High Write\)
 -   **professional:** Professional Edition \(High Write\)
 -   **professionalForHighRead:** Professional Edition \(High Read\)
 
-For more information about these instance editions, see[Billing](~~84737~~). |
+For more information about these instance editions, see [Billing](~~84737~~). |
 |IoMaxSpec|String|No|alikafka.hw.2xlarge|The traffic specification \(recommended\).
 
 -   You must specify the maximum traffic or the traffic specification. If you specify both fields, the traffic specification prevails. We recommend that you specify only the traffic specification.
