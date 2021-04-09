@@ -1,6 +1,6 @@
 # UntagResources
 
-Unbinds and deletes a tag from a resource.
+Detaches a tag from a resource.
 
 ## Debugging
 
@@ -12,26 +12,26 @@ Unbinds and deletes a tag from a resource.
 |---------|----|--------|-------|-----------|
 |Action|String|Yes|UntagResources|The operation that you want to perform. Set the value to
 
- **UntagResources**. |
-|RegionId|String|Yes|cn-hangzhou|The ID of the region where the resource is located. |
-|ResourceId.N|RepeatList|Yes|alikafka\_post-cn-v0h1fgs2\*\*\*\*|The ID of the resource whose tag you want to delete. The resource ID follows these rules:
+**UntagResources**. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the Message Queue for Apache Kafka instance resides. |
+|ResourceId.N|RepeatList|Yes|alikafka\_post-cn-v0h1fgs2\*\*\*\*|The ID of the resource from which you want to detach a tag. Take note of the following rules when you specify a resource ID:
 
- -   The resource ID of an instance is the value of the instanceId parameter.
+-   The resource ID of an instance is the value of the instanceId parameter.
 -   The resource ID of a topic is the value of the Kafka\_instanceId\_topic parameter.
 -   The resource ID of a consumer group is the value of the Kafka\_instanceId\_consumerGroup parameter.
 
- For example, the resources from which the tag will be unbound include the alikafka\_post-cn-v0h1fgs2xxxx instance, the test-topic topic, and the test-consumer-group consumer group. In this case, their resource IDs are alikafka\_post-cn-v0h1fgs2xxxx, Kafka\_alikafka\_post-cn-v0h1fgs2xxxx\_test-topic, and Kafka\_alikafka\_post-cn-v0h1fgs2xxxx\_test-consumer-group, respectively. |
+For example, the resources from which the tag is to be detached include the alikafka\_post-cn-v0h1fgs2xxxx instance, the test-topic topic, and the test-consumer-group consumer group. In this case, their resource IDs are alikafka\_post-cn-v0h1fgs2xxxx, Kafka\_alikafka\_post-cn-v0h1fgs2xxxx\_test-topic, and Kafka\_alikafka\_post-cn-v0h1fgs2xxxx\_test-consumer-group. |
 |ResourceType|String|Yes|instance|The type of the resource. Valid values:
 
- -   **Instance**
--   **Topic**
--   **Consumer Group** |
-|TagKey.N|RepeatList|No|FinanceDept|The key of the resource tag.
+-   **INSTANCE**
+-   **TOPIC**
+-   **CONSUMERGROUP** |
+|TagKey.N|RepeatList|No|FinanceDept|The key of the tag.
 
- -   Valid values of N: 1 to 20.
--   If you do not set this parameter and set All to true, all tag keys are matched.
--   The tag key can be up to 128 characters in length. It cannot start with aliyun or acs:, or contain http:// or https://. |
-|All|Boolean|No|false|Specifies whether to delete all the tags bound to the resource. This parameter takes effect only when the TagKey.N parameter is not specified. Default value: **false**. |
+-   Valid values of N: 1 to 20.
+-   If you do not set this parameter and set the All parameter to true, all tag keys are matched.
+-   The tag key can be up to 128 characters in length and cannot start with acs: or aliyun. It cannot contain http:// or https://. |
+|All|Boolean|No|false|Specifies whether to detach all the tags that are attached to the resource. This parameter takes effect only when the TagKey.N parameter is not set. Default value: **false**. |
 
 ## Response parameters
 
@@ -44,10 +44,10 @@ Unbinds and deletes a tag from a resource.
 Sample requests
 
 ```
-http(s)://[Endpoint]/? Action=UntagResources
+http(s)://[Endpoint]/?Action=UntagResources
 &RegionId=cn-hangzhou
 &ResourceId.1=alikafka_post-cn-v0h1fgs2****
-&ResourceType=instance
+&ResourceType=INSTANCE
 &<Common request parameters>
 ```
 
