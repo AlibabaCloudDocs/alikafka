@@ -27,11 +27,11 @@ Create a topic for receiving messages.
 
 3.  On the top of the **Topics** page, click the instance on which you want to create the topic, and then click **Create Topic**.
 
-    ![create topic](../images/p87665.png)
+    ![create topic](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/0612597161/p87665.png)
 
 4.  In the **Create Topic** dialog box, set topic properties and then click **Create**.
 
-    ![createtopic](../images/p87632.png)
+    ![createtopic](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/6647967161/p87632.png)
 
     Descriptions of the parameters are provided:
 
@@ -47,11 +47,11 @@ Send a message to the specified partition of the created topic.
 
 1.  On the **Topics** page, find the created topic and click **Send Message** in the **Actions** column.
 
-    ![sendmessage](../images/p87667.png)
+    ![sendmessage](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/1612597161/p87667.png)
 
-2.  In the **Send Message**dialog box, set a partition and message properties, and then click **Send**.
+2.  In the **Send Message** dialog box, set a partition and message properties, and then click **Send**.
 
-    ![sendmessagesetting](../images/p87671.png)
+    ![sendmessagesetting](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/6647967161/p87671.png)
 
     Descriptions of the parameters are provided:
 
@@ -65,11 +65,11 @@ After you send a message to the specified partition, you can view the partition 
 
 1.  On the **Topics** page, find the topic to which the message is sent and click **Partition Status** in the **Actions** column.
 
-    ![sendmessage](../images/p87667.png)
+    ![sendmessage](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/1612597161/p87667.png)
 
 2.  In the **Partition Status** dialog box, click **Refresh**.
 
-    ![update](../images/p87686.png)
+    ![update](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/6647967161/p87686.png)
 
 
 ## Query a message by offset
@@ -88,6 +88,6 @@ Query a message based on the partition ID and offset.
 
     4.  Click the **Search** tab.
 
-    ![query message](../images/p87737.png)
+    ![query message](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/1612597161/p87737.png)
 
 
