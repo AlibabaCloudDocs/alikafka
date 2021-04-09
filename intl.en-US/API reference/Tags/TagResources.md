@@ -1,6 +1,6 @@
 # TagResources
 
-Binds a tag to a resource.
+Attaches a tag to a resource.
 
 ## Debugging
 
@@ -13,29 +13,29 @@ Binds a tag to a resource.
 |Action|String|Yes|TagResources|The operation that you want to perform. Set the value to
 
  **TagResources**. |
-|RegionId|String|Yes|cn-hangzhou|The ID of the region where the resource is located. |
-|ResourceId.N|RepeatList|Yes|alikafka\_post-cn-v0h1fgs2\*\*\*\*|The ID of the resource to which you want to bind a tag. The resource ID follows these rules:
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the Message Queue for Apache Kafka instance resides. |
+|ResourceId.N|RepeatList|Yes|alikafka\_post-cn-v0h1fgs2\*\*\*\*|The ID of the resource to which you want to attach a tag. Take note of the following rules when you specify a resource ID:
 
  -   The resource ID of an instance is the value of the instanceId parameter.
 -   The resource ID of a topic is the value of the Kafka\_alikafka\_instanceId\_topic parameter.
 -   The resource ID of a consumer group is the value of the Kafka\_alikafka\_instanceId\_consumerGroup parameter.
 
- For example, the resources to which the tag will be bound include the alikafka\_post-cn-v0h1fgs2xxxx instance, the test-topic topic, and the test-consumer-group consumer group. In this case, their resource IDs are alikafka\_post-cn-v0h1fgs2xxxx, Kafka\_alikafka\_post-cn-v0h1fgs2xxxx\_test-topic, and Kafka\_alikafka\_post-cn-v0h1fgs2xxxx\_test-consumer-group, respectively. |
+ For example, the resources to which the tag is to be attached include the alikafka\_post-cn-v0h1fgs2xxxx instance, the test-topic topic, and the test-consumer-group consumer group. In this case, their resource IDs are alikafka\_post-cn-v0h1fgs2xxxx, Kafka\_alikafka\_post-cn-v0h1fgs2xxxx\_test-topic, and Kafka\_alikafka\_post-cn-v0h1fgs2xxxx\_test-consumer-group. |
 |ResourceType|String|Yes|instance|The type of the resource. Valid values:
 
- -   **Instance**
--   **Topic**
--   **Consumer Group** |
-|Tag.N.Key|String|Yes|FinanceDept|The key of the resource tag.
+ -   **INSTANCE**
+-   **TOPIC**
+-   **CONSUMERGROUP** |
+|Tag.N.Key|String|Yes|FinanceDept|The key of the tag.
 
  -   Valid values of N: 1 to 20.
--   The value cannot be empty.
--   The tag key can be up to 128 characters in length. It cannot start with aliyun or acs:, or contain http:// or https://. |
-|Tag.N.Value|String|No|FinanceJoshua|The value of the resource tag.
+-   You must set this parameter.
+-   The tag key can be up to 128 characters in length and cannot start with acs: or aliyun. It cannot contain http:// or https://. |
+|Tag.N.Value|String|No|FinanceJoshua|The value of the tag.
 
  -   Valid values of N: 1 to 20.
--   The value can be empty.
--   The tag value can be up to 128 characters in length. It cannot start with aliyun or acs:, or contain http:// or https://. |
+-   This parameter is optional.
+-   The tag value can be up to 128 characters in length and cannot start with acs: or aliyun. It cannot contain http:// or https://. |
 
 ## Response parameters
 
@@ -48,10 +48,10 @@ Binds a tag to a resource.
 Sample requests
 
 ```
-http(s)://[Endpoint]/? Action=TagResources
+http(s)://[Endpoint]/?Action=TagResources
 &RegionId=cn-hangzhou
 &ResourceId.1=alikafka_post-cn-v0h1fgs2****
-&ResourceType=instance
+&ResourceType=INSTANCE
 &Tag.1.Key=FinanceDept
 &<Common request parameters>
 ```
