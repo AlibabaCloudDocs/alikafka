@@ -27,11 +27,11 @@
 
 3.  在**Topic管理**页面顶部，选择目标实例，然后单击**创建Topic**。
 
-    ![create topic](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/2606119951/p87665.png)
+    ![create topic](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/2606119951/p87665.png)
 
 4.  在**创建Topic**对话框，设置Topic属性，然后单击**创建**。
 
-    ![createtopic](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/2606119951/p87632.png)
+    ![createtopic](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/2606119951/p87632.png)
 
     字段说明如下：
 
@@ -47,11 +47,11 @@
 
 1.  在**Topic管理**页面，找到创建的Topic，在其**操作**列，单击**发送消息**。
 
-    ![sendmessage](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/2606119951/p87667.png)
+    ![sendmessage](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/2606119951/p87667.png)
 
 2.  在**发送消息**对话框，设置分区和消息属性，然后单击**发送**。
 
-    ![sendmessagesetting](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/2606119951/p87671.png)
+    ![sendmessagesetting](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/2606119951/p87671.png)
 
     字段说明如下：
 
@@ -65,11 +65,11 @@
 
 1.  在**Topic管理**页面，找到发送消息到的Topic，在其**操作**列，单击**分区状态**。
 
-    ![sendmessage](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/2606119951/p87667.png)
+    ![sendmessage](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/2606119951/p87667.png)
 
 2.  在**分区状态**对话框，单击**刷新**。
 
-    ![update](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/2606119951/p87686.png)
+    ![update](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/2606119951/p87686.png)
 
 
 ## 按位点查询消息
@@ -88,6 +88,6 @@
 
     4.  单击**搜索**。
 
-    ![query message](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/3606119951/p87737.png)
+    ![query message](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/3606119951/p87737.png)
 
 
