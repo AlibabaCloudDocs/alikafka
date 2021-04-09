@@ -18,18 +18,18 @@ When message accumulation or skewing occurs, you can view the subscriptions betw
 
     In the **Subscription Relationship** dialog box, all the consumer groups that subscribe to the topic appear.
 
-    ![Subscriptions](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/8050549951/p94116.png)
+    ![Subscriptions](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/8050549951/p94116.png)
 
 5.  In the **Consumer Group** column, find the consumer group whose consumption status you want to view and click **Details** in the **Actions** column.
 
     The message consumption details in each partition of the topic appear.
 
-    ![Subscriptions](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/8050549951/p94121.png)
+    ![Subscriptions](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/8050549951/p94121.png)
 
     |Parameter|Description|
     |---------|-----------|
     |Partition ID|The ID of the partition corresponding to the topic.|
-    |owner|The ID and IP address of the online consumer that has subscribed to the topic are displayed in real time. **Note:**
+    |owner|The ID and IP address of the online consumer that has subscribed to the topic are displayed in real time.**Note:**
 
     -   The value format is `<Client ID>_/<IP address>`.
     -   You cannot view the owner information of offline consumers. |
@@ -49,20 +49,20 @@ When message accumulation or skewing occurs, you can view the subscriptions betw
 
 4.  On the **Consumer Groups** page, click the instance, find the consumer group, and then click **Consumption Status** in the **Actions** column.
 
-    In the **Consumption Status** dialog box, all the topics to which the consumer group has subscribed and the **Messages Accumulated**and **Last Consumed At** of each topic appear.
+    In the **Consumption Status** dialog box, all the topics to which the consumer group has subscribed and the **Messages Accumulated** and **Last Consumed At** of each topic appear.
 
-    ![Consumption status](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/9050549951/p94123.png)
+    ![Consumption status](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/9050549951/p94123.png)
 
-5.  In the **Topic** column, find the topic whose consumption status you want to view and click **Details** in the **Actions**column.
+5.  In the **Topic** column, find the topic whose consumption status you want to view and click **Details** in the **Actions** column.
 
     The message consumption details in each partition of the topic appear.
 
-    ![Consumption status details](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/9050549951/p94114.png)
+    ![Consumption status details](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/9050549951/p94114.png)
 
     |Parameter|Description|
     |---------|-----------|
     |Partition ID|The ID of the partition corresponding to the topic.|
-    |owner|The ID and IP address of the online consumer that has subscribed to the topic are displayed in real time. **Note:**
+    |owner|The ID and IP address of the online consumer that has subscribed to the topic are displayed in real time.**Note:**
 
     -   The value format is `<Client ID>_/<IP address>`.
     -   You cannot view the owner information of offline consumers. |
