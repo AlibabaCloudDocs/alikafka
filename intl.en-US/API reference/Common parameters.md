@@ -34,7 +34,7 @@ https:/alikafka.cn-hangzhou.aliyuncs.com/? Action=GetInstanceList
 
 ## Common response parameters
 
-Every response returns a unique RequestID regardless of whether the request is successful. API responses use a unified format. The HTTP `2xx`response codes indicate a successful call, and the HTTP `4xx` and `5xx` response codes indicate a failed call.
+Every response returns a unique RequestID regardless of whether the request is successful. API responses use a unified format. The HTTP `2xx` response codes indicate a successful call, and the HTTP `4xx` and `5xx` response codes indicate a failed call.
 
 XML format
 
