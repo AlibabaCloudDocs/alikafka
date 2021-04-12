@@ -24,9 +24,9 @@ Filebeat establishes a connection to Message Queue for Apache Kafka by using a M
 
 4.  In the **Basic Information** section, obtain the endpoint of the instance.
 
-    ![basic info](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/0207892951/p128191.png)
+    ![basic info](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/0207892951/p128191.png)
 
-    **Note:** For information about the differences between endpoints, see [Comparison between endpoints](/intl.en-US/Introduction/Comparison between endpoints.md).
+    **Note:** For information about the differences between endpoints, see [Comparison among endpoints](/intl.en-US/Introduction/Comparison among endpoints.md).
 
 
 ## Step 2: Create a topic
@@ -39,7 +39,7 @@ Perform the following operations to create a topic for storing messages.
 
 3.  In the **Create Topic** dialog box, enter the topic information and click **Create**.
 
-    ![create_topic](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/8228082951/p106204.png)
+    ![create_topic](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/8228082951/p106204.png)
 
 
 ## Step 3: Use Filebeat to send a message
@@ -91,7 +91,7 @@ Default value: 1.|1|
 
     4.  Press the Esc key to return to the command line mode.
 
-    5.  Press the : key to enter the bottom line mode. Type wq, and then press Enter to save the file and exit.
+    5.  Press the : key to enter the bottom line mode. Type wq and press the Enter key to save the file and exit.
 
 3.  Send a message to the topic you created.
 
@@ -112,7 +112,7 @@ Perform the following operations to view the message that was sent to the topic.
 
     The following figure shows the partition ID and offset information of the message sent to the topic.
 
-    ![topic_status](../images/p107774.png)
+    ![topic_status](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/1627028161/p107774.png)
 
 
 ## Step 5: Query the message by offset
@@ -125,10 +125,10 @@ You can query the sent message based on its partition ID and offset information.
 
 3.  Enter the topic to which the message was sent, select the partition ID for the message, enter the offset for the message, and then click **Search**.
 
-    ![query_1](../images/p107775.png)
+    ![query_1](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/1627028161/p107775.png)
 
 4.  Find the search result, and click **Message Details** in the **Actions** column.
 
-    ![query_2](../images/p107776.png)
+    ![query_2](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/1627028161/p107776.png)
 
 
