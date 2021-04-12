@@ -44,7 +44,7 @@ This topic describes the terms used in Message Queue for Apache Kafka. This help
 
 -   **Endpoint**
 
-    An address that is used for producers or consumers to connect to Message Queue for Apache Kafka.This address consists of the broker URL and port number. For more information, see [Comparison between endpoints](/intl.en-US/Introduction/Comparison between endpoints.md).
+    An address that is used for producers or consumers to connect to Message Queue for Apache Kafka.This address consists of the broker URL and port number. For more information, see [Comparison among endpoints](/intl.en-US/Introduction/Comparison among endpoints.md).
 
 -   **Message**
 
@@ -116,7 +116,7 @@ This topic describes the terms used in Message Queue for Apache Kafka. This help
 
 -   **Message accumulation**
 
-    The total number of accumulated messages in the current partition. The value is equal to the maximum offset minus the consumer offset. Message accumulation is a key metric. If a large number of messages are accumulated, consumers may be blocked, or the consumption speed cannot keep up with the production speed. In this case, you must analyze the running status of consumers and improve the consumption speed. You can clear all accumulated messages, and start to consume from the maximum offset or reset consumer offsets based on time points. For more information, see [Reset consumer offsets](https://help.aliyun.com/document_detail/68329.html#task-68329-zh).
+    The total number of accumulated messages in the current partition. The value is equal to the maximum offset minus the consumer offset. Message accumulation is a key metric. If a large number of messages are accumulated, consumers may be blocked, or the consumption speed cannot keep up with the production speed. In this case, you must analyze the running status of consumers and improve the consumption speed. You can clear all accumulated messages, and start to consume from the maximum offset or reset consumer offsets based on time points. For more information, see [Reset consumer offsets](/intl.en-US/User guide/Consumer groups/Reset consumer offsets.md).
 
 -   **Local storage**
 
@@ -130,10 +130,10 @@ This topic describes the terms used in Message Queue for Apache Kafka. This help
 
     A log cleanup policy. Configure a log cleanup policy only if you use local storage. Message Queue for Apache Kafka supports the following log cleanup policies:
 
-    -   delete: It is the default message cleanup policy. If the remaining disk space is sufficient, messages are retained for the maximum retention period. If the remaining disk space is insufficient \(the disk usage exceeds 85%\), historical messages are deleted to ensure service availability.
-    -   compact: The [Apache Kafka log compaction policy](https://kafka.apache.org/documentation/?spm=a2c4g.11186623.2.15.1cde7bc3c8pZkD#compaction) is used. Based on the log compaction policy, if the keys of the messages are the same, messages that have the latest key values are retained. This policy is applicable to scenarios where the system is recovered from a system failure or the cache is reloaded after system restart. For example, when you use Kafka Connect or Confluent Schema Registry, you must store the system status information or configuration information in a log compacted topic.
+    -   delete: the default message cleanup policy. If the remaining disk space is sufficient, messages are retained for the maximum retention period. If disk usage exceeds 85%, the disk space is insufficient, and earlier messages are deleted to ensure service availability.
+    -   compact: the [log compaction policy in Apache Kafka](https://kafka.apache.org/documentation/?spm=a2c4g.11186623.2.15.1cde7bc3c8pZkD#compaction). Based on the log compaction policy, if the keys of the messages are the same, messages that have the latest key values are retained. This policy is applicable to scenarios where the system is recovered from a system failure or the cache is reloaded after system restart. For example, when you use Kafka Connect or Confluent Schema Registry, you must store the system status information or configuration information in a log-compacted topic.
 
-        **Note:** Log compacted topics are generally used only in some ecosystem components, such as Kafka Connect or Confluent Schema Registry. Do not set this attribute for a topic used to send and subscribe to messages in other components. For more information, see [Message Queue for Apache Kafka demos](https://code.aliyun.com/alikafka/aliware-kafka-demos/tree/master).
+        **Note:** Log-compacted topics are generally used only in some ecosystem components, such as Kafka Connect or Confluent Schema Registry. Do not set this attribute for a topic that is used to send and subscribe to messages in other components. For more information, see [Message Queue for Apache Kafkademos](https://code.aliyun.com/alikafka/aliware-kafka-demos/tree/master).
 
 -   **Normal message**
 
@@ -153,10 +153,10 @@ This topic describes the terms used in Message Queue for Apache Kafka. This help
 
 -   **RAM**
 
-    A service provided by Alibaba Cloud to manage user identities and resource access permissions. You can only grant permissions to RAM users in the Message Queue for Apache Kafka console or by using the API operations. No matter whether RAM users are authorized or not, RAM users can use SDKs to send and receive messages. For more information, see [Access control overview](/intl.en-US/Access control/Overview.md).
+    A service provided by Alibaba Cloud to manage user identities and resource access permissions. You can only grant permissions to RAM users in the Message Queue for Apache Kafka console or by using the API operations. No matter whether RAM users are authorized or not, RAM users can use SDKs to send and receive messages. For more information, see [Access control overview](/intl.en-US/Access control/Access control overview.md).
 
 -   **ACL**
 
-    A service provided by Message Queue for Apache Kafka to manage the permissions of SASL users and clients to send and receive messages by using SDKs. This feature is consistent with that in open source Apache Kafka. The ACL feature is only applicable to scenarios where you want to implement access control for users that use SDKs to send and receive messages. This feature is not applicable to scenarios where you want to implement access control for users that send and receive messages in the Message Queue for Apache Kafka console or by using API operations. For more information, see [Access control overview](/intl.en-US/Access control/Overview.md).
+    A service provided by Message Queue for Apache Kafka to manage the permissions of SASL users and clients to send and receive messages by using SDKs. This feature is consistent with that in open source Apache Kafka. The ACL feature is only applicable to scenarios where you want to implement access control for users that use SDKs to send and receive messages. This feature is not applicable to scenarios where you want to implement access control for users that send and receive messages in the Message Queue for Apache Kafka console or by using API operations. For more information, see [Access control overview](/intl.en-US/Access control/Access control overview.md).
 
 
