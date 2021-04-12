@@ -24,7 +24,7 @@ Message Queue for Apache Kafka supports the following modes of consumer offset r
 
 3.  In the left-side navigation pane, click **Consumer Groups**.
 
-4.  On the top of the **Consumer Groups** page, click the instance for which you want to reset the consumer offset, find the consumer group, and then click **Reset Consumer Offset** in the **Actions**column.
+4.  On the top of the **Consumer Groups** page, click the instance for which you want to reset the consumer offset, find the consumer group, and then click **Reset Consumer Offset** in the **Actions** column.
 
 5.  In the **Reset Consumer Offset** dialog box, select a topic from the **Topics** drop-down list, select a resetting policy, and then click **OK**.
 
