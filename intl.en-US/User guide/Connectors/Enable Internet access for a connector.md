@@ -12,7 +12,7 @@ Before you enable Internet access for a connector, ensure that the connector fea
 
 The following figure shows the solution for enabling Internet access for a connector.
 
-![Solution for enabling Internet access for a connector](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/3350549951/p130354.png)
+![Solution for enabling Internet access for a connector](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/3350549951/p130354.png)
 
 Complete the following steps to enable Internet access for a connector:
 
@@ -26,6 +26,6 @@ Complete the following steps to enable Internet access for a connector:
 
 3.  Create Source Network Address Translation \(SNAT\) entries for the vSwitch that is used by the Message Queue for Apache Kafka instance on VPC 1.
 
-    For more information, see [Create a SNAT entry]().
+    For more information, see [Create a SNAT entry to access the Internet](/intl.en-US/User Guide/Create a SNAT entry to access the Internet.md).
 
 
