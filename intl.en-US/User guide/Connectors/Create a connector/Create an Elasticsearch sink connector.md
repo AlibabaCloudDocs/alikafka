@@ -101,7 +101,7 @@ For more information, see [View the basic information of a cluster](/intl.en-US/
 
             -   For more information about how to view the connector logs, see [View connector logs](/intl.en-US/User guide/Connectors/View connector logs.md).
             -   For more information about how to troubleshoot errors based on error codes, see [Error codes]().
-            -   To resume the subscription to the partition where an error occurs, [submit a ticket](https://workorder-intl.console.aliyun.com/?spm=5176.kafka.aliyun_topbar.8.79e425e8DncGA9#/ticket/add/?productId=1352) to Message Queue for Apache Kafka Customer Services.
+            -   To resume the subscription to the partition where an error occurs,[submit a ticket](https://workorder-intl.console.aliyun.com/?spm=5176.kafka.aliyun_topbar.8.79e425e8DncGA9#/ticket/add/?productId=1352) to Message Queue for Apache Kafka Customer Services.
 |log|
         |**Create Resource**|The mode in which to create the consumer group and topics used for data synchronization. Valid values: **Automatically** and **Manually**. If you select Manually, enter resource names.|Automatically|
         |**Connector consumer group**|The consumer group that is used by the connector. We recommend that you start the name of this consumer group with connect-cluster.|connect-cluster-kafka-elasticsearch-sink|
@@ -144,7 +144,7 @@ After you create and deploy the Elasticsearch sink connector in the Message Queu
 
     The page is redirected to the Function Compute console.
 
-2.  In the Function Compute console, find the automatically created service and configure a VPC and vSwitch for the service. Make sure that the VPC and vSwitch are the same as those of your Elasticsearch instance. For more information, see[Modify a service]().
+2.  In the Function Compute console, find the automatically created service and configure a VPC and vSwitch for the service. Make sure that the VPC and vSwitch are the same as those of your Elasticsearch instance. For more information, see [Modify a service]().
 
 
 ## Send a test message
