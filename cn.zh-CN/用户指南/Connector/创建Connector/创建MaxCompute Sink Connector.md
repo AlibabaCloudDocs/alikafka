@@ -78,7 +78,7 @@ keyword: [kafka, connector, maxcompute]
 |Table|Alter|修改表的元信息或添加删除分区。|
 |Table|Update|覆盖或添加表的数据。|
 
-关于以上权限的详细说明以及授权操作，请参见[授权](/cn.zh-CN/管理/安全管理详解/用户及授权管理/授权.md)。
+关于以上权限的详细说明以及授权操作，请参见[授权](/cn.zh-CN/安全管理/安全管理详解/用户及授权管理/授权.md)。
 
 为本文创建的AliyunKafkaMaxComputeUser1添加权限的示例步骤如下：
 
@@ -193,85 +193,87 @@ keyword: [kafka, connector, maxcompute]
 
 7.  在**创建Connector**面板，完成以下操作。
 
-    1.  在**基础信息**下方的**Connector名称**文本框，输入Connector名称，从**转储路径**列表，选择**消息队列Kafka版**，从**转储到**列表，选择**MaxCompute**，然后单击**下一步**。
+    1.  在**基础信息**页签，配置以下参数，然后单击**下一步**。
 
         |参数|描述|示例值|
         |--|--|---|
-        |Connector名称|Connector的名称。命名规则：        -   可以包含数字、小写英文字母和短划线（-），但不能以短划线（-）开头，长度限制为48个字符。
+        |**Connector名称**|Connector的名称。命名规则：        -   可以包含数字、小写英文字母和短划线（-），但不能以短划线（-）开头，长度限制为48个字符。
         -   同一个消息队列Kafka版实例内保持唯一。
 Connector的数据同步任务必须使用名称为connect-任务名称的Consumer Group。如果您未手动创建该Consumer Group，系统将为您自动创建。
 
 |kafka-maxcompute-sink|
-        |任务类型|Connector的数据同步任务类型。本文以数据从消息队列Kafka版同步至MaxCompute为例。更多任务类型，请参见[Connector类型](/cn.zh-CN/用户指南/Connector/Connector概述.md)。|KAFKA2ODPS|
+        |**转储路径**|配置数据转储的源和目标。第一个下拉列表中选择数据源，第二个下拉列表中选择目标。|从**消息队列Kafka版**转储到**MaxCompute**|
 
-    2.  在**源实例配置**下方的**数据源Topic**文本框，输入数据源Topic名称，从**消费初始位置**列表，选择消费初始位置，在**创建资源**区域，选择**自动创建**或者选择**手动创建**并输入手动创建的Topic的名称，然后单击**下一步**。
+    2.  在**源实例配置**页签，按需配置以下参数，然后单击**下一步**。
+
+        **说明：** 如果您已创建好Topic和Consumer Group，那么请选择手动创建资源，并填写已创建的资源信息。否则，请选择自动创建资源。
 
         |参数|描述|示例值|
         |--|--|---|
-        |VPC ID|数据同步任务所在的VPC。默认为消息队列Kafka版实例所在的VPC，您无需填写。|vpc-bp1xpdnd3l\*\*\*|
-        |VSwitch ID|数据同步任务所在的交换机。用户交换机必须与消息队列Kafka版实例处于同一VPC。默认为部署消息队列Kafka版实例时填写的交换机。|vsw-bp1d2jgg81\*\*\*|
-        |数据源Topic|需要同步数据的Topic。|maxcompute-test-input|
-        |消费初始位置|开始消费的位置。取值：         -   latest：从最新位点开始消费。
-        -   earliest：从最初位点开始消费。
+        |**VPC ID**|数据同步任务所在的VPC。默认为消息队列Kafka版实例所在的VPC，您无需填写。|vpc-bp1xpdnd3l\*\*\*|
+        |**VSwitch ID**|数据同步任务所在的交换机。该交换机必须与消息队列Kafka版实例处于同一VPC。默认为部署消息队列Kafka版实例时填写的交换机。|vsw-bp1d2jgg81\*\*\*|
+        |**数据源Topic**|需要同步数据的Topic。|maxcompute-test-input|
+        |**消费初始位置**|开始消费的位置。取值说明如下：         -   **latest**：从最新位点开始消费。
+        -   **earliest**earliest：从最初位点开始消费。
 |latest|
-        |Connector消费组|Connector使用的Consumer Group。该Consumer Group的名称建议以connect-cluster开头。|connect-cluster-kafka-maxcompute-sink|
-        |任务位点Topic|用于存储消费位点的Topic。        -   Topic名称：建议以connect-offset开头。
+        |**Connector消费组**|Connector使用的Consumer Group。该Consumer Group的名称建议以connect-cluster开头。|connect-cluster-kafka-maxcompute-sink|
+        |**任务位点Topic**|用于存储消费位点的Topic。        -   Topic名称：建议以connect-offset开头。
         -   分区数：Topic的分区数量必须大于1。
         -   存储引擎：Topic的存储引擎必须为Local存储。
         -   cleanup.policy：Topic的日志清理策略必须为compact。
 |connect-offset-kafka-maxcompute-sink|
-        |任务配置Topic|用于存储任务配置的Topic。        -   Topic名称：建议以connect-config开头。
+        |**任务配置Topic**|用于存储任务配置的Topic。        -   Topic名称：建议以connect-config开头。
         -   分区数：Topic的分区数量必须为1。
         -   存储引擎：Topic的存储引擎必须为Local存储。
         -   cleanup.policy：Topic的日志清理策略必须为compact。
 |connect-config-kafka-maxcompute-sink|
-        |任务状态Topic|用于存储任务状态的Topic。        -   Topic名称：建议以connect-status开头。
+        |**任务状态Topic**|用于存储任务状态的Topic。        -   Topic名称：建议以connect-status开头。
         -   分区数：Topic的分区数量建议为6。
         -   存储引擎：Topic的存储引擎必须为Local存储。
         -   cleanup.policy：Topic的日志清理策略必须为compact。
 |connect-status-kafka-maxcompute-sink|
-        |死信队列Topic|用于存储Connect框架的异常数据的Topic。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。        -   Topic名称：建议以connect-error开头。
+        |**死信队列Topic**|用于存储Connect框架的异常数据的Topic。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。        -   Topic名称：建议以connect-error开头。
         -   分区数：Topic的分区数量建议为6。
         -   存储引擎：Topic的存储引擎可以为Local存储或云存储。
 |connect-error-kafka-maxcompute-sink|
-        |异常数据Topic|用于存储Sink的异常数据的Topic。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。        -   Topic名称：建议以connect-error开头。
+        |**异常数据Topic**|用于存储Sink的异常数据的Topic。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。        -   Topic名称：建议以connect-error开头。
         -   分区数：Topic的分区数量建议为6。
         -   存储引擎：Topic的存储引擎可以为Local存储或云存储。
 |connect-error-kafka-maxcompute-sink|
 
-    3.  在**目标实例配置**下方，输入MaxCompute的属性，然后单击**下一步**。
+    3.  在**目标实例配置**页签，按需配置以下参数，然后单击**下一步**。
 
         |参数|描述|示例值|
         |--|--|---|
-        |MaxCompute连接地址|MaxCompute的服务接入点。更多信息，请参见[配置Endpoint](/cn.zh-CN/准备工作/配置Endpoint.md)。         -   VPC网络Endpoint：低延迟，推荐。适用于消息队列Kafka版实例和MaxCompute处于同一地域场景。
+        |**MaxCompute连接地址**|MaxCompute的服务接入点。更多信息，请参见[配置Endpoint](/cn.zh-CN/准备工作/配置Endpoint.md)。         -   VPC网络Endpoint：低延迟，推荐。适用于消息队列Kafka版实例和MaxCompute处于同一地域场景。
         -   外网Endpoint：高延迟，不推荐。适用于消息队列Kafka版实例和MaxCompute处于不同地域的场景。如需使用公网Endpoint，您需要为Connector开启公网访问。更多信息，请参见[为Connector开启公网访问](/cn.zh-CN/用户指南/Connector/为Connector开启公网访问.md)。
 |http://service.cn-hangzhou.maxcompute.aliyun-inc.com/api|
-        |MaxCompute工作空间|MaxCompute的工作空间。|connector\_test|
-        |MaxCompute表|MaxCompute的表。|test\_kafka|
-        |MaxCompute表地域|MaxCompute表所在地域。|华东1（杭州）|
-        |服务账号|MaxCompute的阿里云账号ID。|188\*\*\*|
-        |授权角色名|消息队列Kafka版的RAM角色的名称。更多信息，请参见[创建RAM角色](#section_e02_70i_3jg)。|AliyunKafkaMaxComputeUser1|
-        |模式|消息同步到Connector的模式。默认为DEFAULT。取值：        -   KEY：只保留消息的Key，并将Key写入MaxCompute表的key列。
-        -   VALUE：只保留消息的Value，并将Value写入MaxCompute表的value列。
-        -   DEFAULT：同时保留消息的Key和Value，并将Key和Value分别写入MaxCompute表的key列和value列。
+        |**MaxCompute工作空间**|MaxCompute的工作空间。|connector\_test|
+        |**MaxCompute表**|MaxCompute的表。|test\_kafka|
+        |**MaxCompute表地域**|MaxCompute表所在地域。|华东1（杭州）|
+        |**服务账号**|MaxCompute的阿里云账号ID。|188\*\*\*|
+        |**授权角色名**|消息队列Kafka版的RAM角色的名称。更多信息，请参见[创建RAM角色](#section_e02_70i_3jg)。|AliyunKafkaMaxComputeUser1|
+        |**模式**|消息同步到Connector的模式。默认为DEFAULT。取值说明如下：        -   **KEY**：只保留消息的Key，并将Key写入MaxCompute表的key列。
+        -   **VALUE**：只保留消息的Value，并将Value写入MaxCompute表的value列。
+        -   **DEFAULT**：同时保留消息的Key和Value，并将Key和Value分别写入MaxCompute表的key列和value列。
 
 **说明：** DEFAULT模式下，不支持选择CSV格式，只支持TEXT格式和BINARY格式。
 
 |DEFAULT|
-        |格式|消息同步到Connector的格式。默认为TEXT。取值：        -   TEXT：消息的格式为字符串。
-        -   BINARY：消息的格式为字节数组。
-        -   CSV：消息的格式为逗号（,）分隔的字符串。
+        |**格式**|消息同步到Connector的格式。默认为TEXT。取值说明如下：        -   **TEXT**：消息的格式为字符串。
+        -   **BINARY**：消息的格式为字节数组。
+        -   **CSV**：消息的格式为逗号（,）分隔的字符串。
 
 **说明：** CSV格式下，不支持DEFAULT模式，只支持KEY模式和VALUE模式：
 
             -   KEY模式：只保留消息的Key，根据逗号（,）分隔Key字符串，并将分隔后的字符串按照索引顺序写入表。
             -   VALUE模式：只保留消息的Value，根据逗号（,）分隔Value字符串，并将分隔后的字符串按照索引顺序写入表。
 |TEXT|
-        |分区|分区的粒度。默认为HOUR。取值：        -   DAY：每天将数据写入一个新分区。
-        -   HOUR：每小时将数据写入一个新分区。
-        -   MINUTE：每分钟将数据写入一个新分区。
+        |**分区**|分区的粒度。默认为HOUR。取值说明如下：        -   **DAY**：每天将数据写入一个新分区。
+        -   **HOUR**：每小时将数据写入一个新分区。
+        -   **MINUTE**：每分钟将数据写入一个新分区。
 |HOUR|
-        |时区|向Connector的数据源Topic发送消息的消息队列Kafka版生产者客户端所在时区。默认为GMT 08:00。|GMT 08:00|
+        |**时区**|向Connector的数据源Topic发送消息的消息队列Kafka版生产者客户端所在时区。默认为GMT 08:00。|GMT 08:00|
 
     4.  在**预览/提交**下方，确认Connector的配置，然后单击**提交**。
 
@@ -282,9 +284,9 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
 
 部署MaxCompute Sink Connector后，您可以向消息队列Kafka版的数据源Topic发送消息，测试数据能否被同步至MaxCompute。
 
-1.  在**Connector（公测组件）**页面，找到目标Connector，在其右侧**操作**列，单击**测试**。
+1.  在**Connector（公测组件）**页面，找到目标Connector，在其**操作**列，单击**测试**。
 
-2.  在**Topic管理**页面，选择实例，找到**maxcompute-test-input**，在其右侧**操作**列，单击**发送消息**。
+2.  在**Topic管理**页面，选择实例，找到**maxcompute-test-input**，在其**操作**列，单击**发送消息**。
 
 3.  在**发送消息**面板，发送测试消息。
 
@@ -328,11 +330,11 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
     返回结果示例如下：
 
     ```
-    +-------+------------+------------+-----+-------+----+
-    | topic | partition  | offset     | key | value | pt |
-    +-------+------------+------------+-----+-------+----+
-    | maxcompute-test-input | 0          | 0          | 1   | 1     | 11-17-2020 14 |
-    +-------+------------+------------+-----+-------+----+
+    +----------------------+------------+------------+-----+-------+---------------+
+    | topic                | partition  | offset     | key | value | pt            |
+    +----------------------+------------+------------+-----+-------+---------------+
+    | maxcompute-test-input| 0          | 0          | 1   | 1     | 11-17-2020 14 |
+    +----------------------+------------+------------+-----+-------+---------------+
     ```
 
 
