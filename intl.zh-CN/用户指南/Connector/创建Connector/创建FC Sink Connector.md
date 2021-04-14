@@ -233,93 +233,95 @@ keyword: [kafka, connector, fc]
 
 7.  在**创建Connector**面板，完成以下操作。
 
-    1.  在**基础信息**下方的**Connector名称**文本框，输入Connector名称，从**转储路径**列表，选择**消息队列Kafka版**，从**转储到**列表，选择**函数计算**，单击**下一步**。
+    1.  在**基础信息**页签，按需配置以下参数，然后单击**下一步**。
 
         **说明：** 消息队列Kafka版会为您自动选中**授权创建服务关联角色**。
 
         -   如果未创建服务关联角色，消息队列Kafka版会为您自动创建一个服务关联角色，以便您使用FC Sink Connector。
         -   如果已创建服务关联角色，消息队列Kafka版不会重复创建。
-        关于该服务关联角色的更多信息，请参见[服务关联角色](/intl.zh-CN/权限控制/服务关联角色.md)。
+        服务关联角色的更多信息，请参见[服务关联角色](/intl.zh-CN/权限控制/服务关联角色.md)。
 
         |参数|描述|示例值|
         |--|--|---|
-        |Connector名称|Connector的名称。命名规则：        -   可以包含数字、小写英文字母和短划线（-），但不能以短划线（-）开头，长度限制为48个字符。
+        |**Connector名称**|Connector的名称。命名规则：        -   可以包含数字、小写英文字母和短划线（-），但不能以短划线（-）开头，长度限制为48个字符。
         -   同一个消息队列Kafka版实例内保持唯一。
 Connector的数据同步任务必须使用名称为connect-任务名称的Consumer Group。如果您未手动创建该Consumer Group，系统将为您自动创建。
 
 |kafka-fc-sink|
-        |任务类型|Connector的数据同步任务类型。本文以数据从消息队列Kafka版同步至函数计算为例。更多任务类型，请参见[Connector类型](/intl.zh-CN/用户指南/Connector/Connector概述.md)。|KAFKA2FC|
+        |**转储路径**|配置数据转储的源和目标。第一个下拉列表中选择数据源，第二个下拉列表中选择目标。|从**消息队列Kafka版**转储到**函数计算**|
 
-    2.  在**源实例配置**下方的**数据源Topic**文本框，输入数据源Topic的名称，从**消费初始位置**列表，选择消费初始位置，在**创建资源**，选择**自动创建**或者选择**手动创建**并输入手动创建的Topic的名称，然后单击**下一步**。
+    2.  在**源实例配置**页签，配置以下参数，然后单击**下一步**。
+
+        **说明：** 如果您已创建好Topic和Consumer Group，那么请选择手动创建资源，并填写已创建的资源信息。否则，请选择自动创建资源。
 
         |参数|描述|示例值|
         |--|--|---|
-        |VPC ID|数据同步任务所在的VPC。默认为消息队列Kafka版实例所在的VPC，您无需填写。|vpc-bp1xpdnd3l\*\*\*|
-        |VSwitch ID|数据同步任务所在的交换机。该交换机必须与消息队列Kafka版实例处于同一VPC。默认为部署消息队列Kafka版实例时填写的交换机。|vsw-bp1d2jgg81\*\*\*|
-        |数据源Topic|需要同步数据的Topic。|fc-test-input|
-        |消费初始位置|开始消费的位置。取值：         -   latest：从最新位点开始消费。
-        -   earliest：从最初位点开始消费。
+        |**VPC ID**|数据同步任务所在的VPC。默认为消息队列Kafka版实例所在的VPC，您无需填写。|vpc-bp1xpdnd3l\*\*\*|
+        |**VSwitch ID**|数据同步任务所在的交换机。该交换机必须与消息队列Kafka版实例处于同一VPC。默认为部署消息队列Kafka版实例时填写的交换机。|vsw-bp1d2jgg81\*\*\*|
+        |**数据源Topic**|需要同步数据的Topic。|fc-test-input|
+        |**消费初始位置**|开始消费的位置。取值说明如下：         -   **latest**：从最新位点开始消费。
+        -   **earliest**：从最初位点开始消费。
 |latest|
-        |消费线程并发数|数据源Topic的消费线程并发数。默认值为3。取值：        -   3
-        -   6
-        -   9
-        -   12
+        |**消费线程并发数**|数据源Topic的消费线程并发数。默认值为3。取值说明如下：        -   **3**
+        -   **6**
+        -   **9**
+        -   **12**
 |3|
-        |Connector消费组|Connector使用的Consumer Group。该Consumer Group的名称建议以connect-cluster开头。|connect-cluster-kafka-fc-sink|
-        |任务位点Topic|用于存储消费位点的Topic。        -   Topic：建议以connect-offset开头。
+        |**Connector消费组**|Connector使用的Consumer Group。该Consumer Group的名称建议以connect-cluster开头。|connect-cluster-kafka-fc-sink|
+        |**任务位点Topic**|用于存储消费位点的Topic。        -   Topic：建议以connect-offset开头。
         -   分区数：Topic的分区数量必须大于1。
         -   存储引擎：Topic的存储引擎必须为Local存储。
         -   cleanup.policy：Topic的日志清理策略必须为compact。
 |connect-offset-kafka-fc-sink|
-        |任务配置Topic|用于存储任务配置的Topic。        -   Topic：建议以connect-config开头。
+        |**任务配置Topic**|用于存储任务配置的Topic。        -   Topic：建议以connect-config开头。
         -   分区数：Topic的分区数量必须为1。
         -   存储引擎：Topic的存储引擎必须为Local存储。
         -   cleanup.policy：Topic的日志清理策略必须为compact。
 |connect-config-kafka-fc-sink|
-        |任务状态Topic|用于存储任务状态的Topic。        -   Topic：建议以connect-status开头。
+        |**任务状态Topic**|用于存储任务状态的Topic。        -   Topic：建议以connect-status开头。
         -   分区数：Topic的分区数量建议为6。
         -   存储引擎：Topic的存储引擎必须为Local存储。
         -   cleanup.policy：Topic的日志清理策略必须为compact。
 |connect-status-kafka-fc-sink|
-        |死信队列Topic|用于存储Connect框架的异常数据的Topic。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。        -   Topic：建议以connect-error开头。
+        |**死信队列Topic**|用于存储Connect框架的异常数据的Topic。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。        -   Topic：建议以connect-error开头。
         -   分区数：Topic的分区数量建议为6。
         -   存储引擎：Topic的存储引擎可以为Local存储或云存储。
 |connect-error-kafka-fc-sink|
-        |异常数据Topic|用于存储Sink的异常数据的Topic。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。        -   Topic：建议以connect-error开头。
+        |**异常数据Topic**|用于存储Sink的异常数据的Topic。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。        -   Topic：建议以connect-error开头。
         -   分区数：Topic的分区数量建议为6。
         -   存储引擎：Topic的存储引擎可以为Local存储或云存储。
 |connect-error-kafka-fc-sink|
 
-    3.  在**目标实例配置**下方，设置函数计算服务相关参数，设置发送模式和发送批大小，然后单击**下一步**。
+    3.  在**目标实例配置**页签，配置以下参数，然后单击**下一步**。
 
         |参数|描述|示例值|
         |--|--|---|
-        |是否跨账号/地域|FC Sink Connector是否跨账号/地域向函数计算服务同步数据。默认为**否**。取值：        -   否：同地域同账号模式。
-        -   是：跨地域同账号模式、同地域跨账号模式或跨地域跨账号模式。
+        |**是否跨账号/地域**|FC Sink Connector是否跨账号/地域向函数计算服务同步数据。默认为**否**。取值：        -   **否**：同地域同账号模式。
+        -   **是**：跨地域同账号模式、同地域跨账号模式或跨地域跨账号模式。
 |否|
-        |服务地域|函数计算服务的地域。默认为FC Sink Connector所在地域。如需跨地域，您需要为Connector开启公网访问，然后选择目标地域。更多信息，请参见[为FC Sink Connector开启公网访问](#section_y3y_7cd_gpk)。**说明：** 是否跨账号/地域为**是**时，显示服务地域。
+        |**服务地域**|函数计算服务的地域。默认为FC Sink Connector所在地域。如需跨地域，您需要为Connector开启公网访问，然后选择目标地域。更多信息，请参见[为FC Sink Connector开启公网访问](#section_y3y_7cd_gpk)。**说明：** **是否跨账号/地域**为**是**时，显示**服务地域**。
 
 |cn-hangzhou|
-        |服务接入点|函数计算服务的接入点。在[函数计算控制台](https://fc.console.aliyun.com/fc/overview/cn-hangzhou)的**概览**页的**常用信息**区域获取。         -   内网Endpoint：低延迟，推荐。适用于消息队列Kafka版实例和函数计算处于同一地域场景。
+        |**服务接入点**|函数计算服务的接入点。在[函数计算控制台](https://fc.console.aliyun.com/fc/overview/cn-hangzhou)的**概览**页的**常用信息**区域获取。         -   内网Endpoint：低延迟，推荐。适用于消息队列Kafka版实例和函数计算处于同一地域场景。
         -   公网Endpoint：高延迟，不推荐。适用于消息队列Kafka版实例和函数计算处于不同地域的场景。如需使用公网Endpoint，您需要为Connector开启公网访问。更多信息，请参见[为FC Sink Connector开启公网访问](#section_y3y_7cd_gpk)。
-**说明：** 是否跨账号/地域为**是**时，显示服务接入点。
+**说明：** **是否跨账号/地域**为**是**时，显示**服务接入点**。
 
 |http://188\*\*\*.cn-hangzhou.fc.aliyuncs.com|
-        |服务账号|函数计算服务的阿里云账号ID。在函数计算控制台的**概览**页的**常用信息**区域获取。**说明：** 是否跨账号/地域为**是**时，显示服务账号。
+        |**服务账号**|函数计算服务的阿里云账号ID。在函数计算控制台的**概览**页的**常用信息**区域获取。**说明：** **是否跨账号/地域**为**是**时，显示**服务账号**。
 
 |188\*\*\*|
-        |授权角色名|消息队列Kafka版访问函数计算服务的RAM角色。        -   如不需跨账号，您需要在本账号下创建RAM角色并为其授权，然后输入该授权角色名。操作步骤，请参见[创建自定义权限策略](#section_3wj_qkk_gwt)、[创建RAM角色](#section_24p_yc7_s0d)和[添加权限](#section_co0_y32_ams)。
+        |**授权角色名**|消息队列Kafka版访问函数计算服务的RAM角色。        -   如不需跨账号，您需要在本账号下创建RAM角色并为其授权，然后输入该授权角色名。操作步骤，请参见[创建自定义权限策略](#section_3wj_qkk_gwt)、[创建RAM角色](#section_24p_yc7_s0d)和[添加权限](#section_co0_y32_ams)。
         -   如需跨账号，您需要在目标账号下创建RAM角色并为其授权，然后输入该授权角色名。操作步骤，请参见[创建自定义权限策略](#section_3wj_qkk_gwt)、[创建RAM角色](#section_24p_yc7_s0d)和[添加权限](#section_co0_y32_ams)。
-**说明：** 是否跨账号/地域为**是**时，显示授权角色名。
+**说明：** **是否跨账号/地域**为**是**时，显示**授权角色名**。
 
 |AliyunKafkaConnectorRole|
-        |服务名|函数计算服务的名称。|guide-hello\_world|
-        |函数名|函数计算服务的函数名称。|hello\_world|
-        |服务版本或别名|函数计算服务的版本或别名。|LATEST|
-        |发送模式|消息发送模式。取值：         -   异步：推荐。
-        -   同步：不推荐。同步发送模式下，如果函数计算的处理时间较长，消息队列Kafka版的处理时间也会较长。当同一批次消息的处理时间超过5分钟时，会触发消息队列Kafka版客户端Rebalance。
+        |**服务名**|函数计算服务的名称。|guide-hello\_world|
+        |**函数名**|函数计算服务的函数名称。|hello\_world|
+        |**服务版本或别名**|函数计算服务的版本或别名。|LATEST|
+        |**发送模式**|消息发送模式。取值说明如下：         -   **异步**：推荐。
+        -   **同步**：不推荐。同步发送模式下，如果函数计算的处理时间较长，消息队列Kafka版的处理时间也会较长。当同一批次消息的处理时间超过5分钟时，会触发消息队列Kafka版客户端Rebalance。
 |异步|
-        |发送批大小|批量发送的消息条数。默认为20。Connector根据发送批次大小和请求大小限制（同步请求大小限制为6 MB，异步请求大小限制为128 KB）将多条消息聚合后发送。例如，发送模式为异步，发送批次大小为20，如果要发送18条消息，其中有17条消息的总大小为127 KB，有1条消息的大小为200 KB，Connector会将总大小不超过128 KB的17条消息聚合后发送，将大小超过128 KB的1条消息单独发送。**说明：** 如果您在发送消息时将key设置为null，则请求中不包含key。如果将value设置为null，则请求中不包含value。
+        |**发送批大小**|批量发送的消息条数。默认为20。Connector根据发送批次大小和请求大小限制（同步请求大小限制为6 MB，异步请求大小限制为128 KB）将多条消息聚合后发送。例如，发送模式为异步，发送批次大小为20，如果要发送18条消息，其中有17条消息的总大小为127 KB，有1条消息的大小为200 KB，Connector会将总大小不超过128 KB的17条消息聚合后发送，将大小超过128 KB的1条消息单独发送。**说明：** 如果您在发送消息时将key设置为null，则请求中不包含key。如果将value设置为null，则请求中不包含value。
 
         -   如果批量发送的多条消息的大小不超过请求大小限制，则请求中包含消息内容。请求示例如下：
 
@@ -388,29 +390,21 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
 **说明：** 如需获取消息内容，您需要根据位点主动拉取消息。
 
 |50|
-        |重试次数|消息发送失败后的重试次数。默认为2。取值范围为1~3。部分导致消息发送失败的错误不支持重试。错误码与是否支持重试的对应关系如下：        -   4XX：除429支持重试外，其余错误码不支持重试。
+        |**重试次数**|消息发送失败后的重试次数。默认为2。取值范围为1~3。部分导致消息发送失败的错误不支持重试。[错误码]()与是否支持重试的对应关系如下：        -   4XX：除429支持重试外，其余错误码不支持重试。
         -   5XX：支持重试。
-**说明：**
+**说明：** Connector调用[InvokeFunction]()向函数计算发送消息。
 
-        -   关于错误码的更多信息，请参见[错误码]()。
-        -   Connector调用InvokeFunction向函数计算发送消息。关于InvokeFunction的更多信息，请参见[API概览]()。
 |2|
-        |失败处理|消息发送失败后的错误处理。默认为log。取值：        -   log：继续对出现错误的Topic的分区的订阅，并打印错误日志。出现错误后，您可以通过Connector日志查看错误，并根据错误的错误码查找解决方案，以进行自助排查。
-
+        |**失败处理**|消息发送失败后，是否继续订阅出现错误的Topic的分区。取值说明如下：        -   log：继续订阅出现错误的Topic的分区，并打印错误日志。
+        -   fail：停止订阅出现错误的Topic的分区，并打印错误日志。
 **说明：**
 
-            -   如何查看Connector日志，请参见[查看Connector日志](/intl.zh-CN/用户指南/Connector/查看Connector日志.md)。
-            -   如何根据错误码查找解决方案，请参见[错误码]()。
-        -   fail：停止对出现错误的Topic的分区的订阅，并打印错误日志。出现错误后，您可以通过Connector日志查看错误，并根据错误的错误码查找解决方案，以进行自助排查。
-
-**说明：**
-
-            -   如何查看Connector日志，请参见[查看Connector日志](/intl.zh-CN/用户指南/Connector/查看Connector日志.md)。
-            -   如何根据错误码查找解决方案，请参见[错误码]()。
-            -   如需恢复对出现错误的Topic的分区的订阅，您需要提交[提交工单](https://workorder-intl.console.aliyun.com/?spm=5176.kafka.aliyun_topbar.8.79e425e8DncGA9#/ticket/add/?productId=1352)联系消息队列Kafka版技术人员。
+        -   如何查看日志，请参见[查看Connector日志](/intl.zh-CN/用户指南/Connector/查看Connector日志.md)。
+        -   如何根据错误码查找解决方案，请参见[错误码]()。
+        -   如需恢复对出现错误的Topic的分区的订阅，您需要[提交工单](https://workorder-intl.console.aliyun.com/?spm=5176.kafka.aliyun_topbar.8.79e425e8DncGA9#/ticket/add/?productId=1352)联系消息队列Kafka版技术人员。
 |log|
 
-    4.  在**预览/提交**下方，确认Connector的配置，然后单击**提交**。
+    4.  在**预览/提交**页签，确认Connector的配置，然后单击**提交**。
 
 8.  在**创建Connector**面板，单击**部署**。
 
