@@ -37,6 +37,7 @@ Connector的使用流程如下：
     -   [创建FC Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建FC Sink Connector.md)
     -   [创建MaxCompute Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建MaxCompute Sink Connector.md)
     -   [创建OSS Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建OSS Sink Connector.md)
+    -   [创建Elasticsearch Sink Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建Elasticsearch Sink Connector.md)
     -   [创建MySQL Source Connector](/intl.zh-CN/用户指南/Connector/创建Connector/创建MySQL Source Connector.md)
 3.  更多Connector的相关操作
     -   [查看Connector任务配置](/intl.zh-CN/用户指南/Connector/查看Connector任务配置.md)
@@ -45,6 +46,8 @@ Connector的使用流程如下：
     -   [恢复Connnector](/intl.zh-CN/用户指南/Connector/恢复Connnector.md)
     -   [删除Connector](/intl.zh-CN/用户指南/Connector/删除Connector.md)
     -   [修改Connector配置](/intl.zh-CN/用户指南/Connector/修改Connector配置.md)
+    -   [测试Connector](/intl.zh-CN/用户指南/Connector/测试Connector.md)
+    -   [为Connector开启公网访问](/intl.zh-CN/用户指南/Connector/为Connector开启公网访问.md)
 
 ## 使用限制
 
