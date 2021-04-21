@@ -2,7 +2,7 @@
 
 如果您需要恢复某个暂停的Connector，您可以在消息队列Kafka版控制台恢复该Connector。
 
-您已创建以下任意一种Connector，且该Connector处于运行中状态：
+您已创建以下任意一种Connector，且该Connector处于暂停状态：
 
 -   [创建FC Sink Connector](/cn.zh-CN/用户指南/Connector/创建Connector/创建FC Sink Connector.md)
 -   [创建MaxCompute Sink Connector](/cn.zh-CN/用户指南/Connector/创建Connector/创建MaxCompute Sink Connector.md)
