@@ -8,28 +8,33 @@ This topic describes how to test a connector by sending a test message to the co
 
 One of the connectors that are described in the following topics is created:
 
--   [Create a MaxCompute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MaxCompute sink connector.md)
 -   [Create a Function Compute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a Function Compute sink connector.md)
+-   [Create a MaxCompute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MaxCompute sink connector.md)
+-   [Create an OSS sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create an OSS sink connector.md)
+-   [Create an Elasticsearch sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create an Elasticsearch sink connector.md)
+-   [Create a MySQL source connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MySQL source connector.md)
 
-1.  Log on to the [Message Queue for Apache KafkaConsole](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm).
+1.  Log on to the [Message Queue for Apache Kafka console](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm).
 
-2.  In the top navigation bar, select a region.
+2.  In the top navigation bar, select the region where your instance is located.
 
-3.  In the left-side navigation pane, click **Connector**.
+3.  In the left-side navigation pane, click **Instances**.
 
-4.  On the **Connector** page, click the instance, find the connector you want to test, and then click **Test** in the **Actions** column.
+4.  On the **Instances** page, click the name of the instance that you want to manage.
 
-5.  In the **Note** message, click **OK**.
+5.  In the left-side navigation pane, click **Connector**.
 
-6.  In the **Topics** page, find Data Source Topic and click **Send Message** in the **Actions** column.
+6.  On the **Connector \(Public Preview\)** page, find the connector that you want to test, and click **Test** in the **Actions** column.
 
-7.  In the **Sends a message.**Dialog box, send a test message.
+7.  On the **Topics** page, find the data source topic, and click **Send Message** in the **Actions** column.
 
-    1.  In the **Partitions**Text box, enter 0.
+8.  In the **Send Message** panel, set the parameters used to send a test message.
 
-    2.  In the **Message Key**Text box, enter 1.
+    1.  In the **Partitions** field, enter 0.
 
-    3.  In the **Message Value**Text box, enter 1.
+    2.  In the **Message Key** field, enter 1.
+
+    3.  In the **Message Value** field, enter 1.
 
     4.  Click **Send**.
 
