@@ -6,19 +6,19 @@ keyword: [kafka, internet, cross-region]
 
 If you need to access other Alibaba Cloud services in other regions by using a connector, you must enable Internet access for the connector. This topic describes how to enable Internet access for a connector.
 
-Before you enable Internet access for a connector, ensure that the connector feature is enabled in your Message Queue for Apache Kafka instance. For more information, see [Enable the connector feature](/intl.en-US/User guide/Connectors/Enable the connector feature.md).
+Before you enable Internet access for a connector, make sure that the connector feature is enabled in your Message Queue for Apache Kafka instance. For more information, see [Enable the connector feature](/intl.en-US/User guide/Connectors/Enable the connector feature.md).
 
 ## Enable Internet access
 
-The following figure shows the solution for enabling Internet access for a connector.
+The following figure shows the solution to enabling Internet access for a connector.
 
-![Solution for enabling Internet access for a connector](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/3350549951/p130354.png)
+![Solution to enabling Internet access for a connector](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/3350549951/p130354.png)
 
-Complete the following steps to enable Internet access for a connector:
+To enable Internet access for a connector, perform the following steps:
 
 1.  Create a Network Address Translation \(NAT\) gateway for virtual private cloud \(VPC\) 1 where the Message Queue for Apache Kafka instance is deployed.
 
-    For more information, see [Create a NAT gateway]().
+    For more information, see [Create NAT gateways](/intl.en-US/User Guide/Create NAT gateways.md).
 
 2.  Bind an elastic IP address \(EIP\) to the created NAT gateway.
 
