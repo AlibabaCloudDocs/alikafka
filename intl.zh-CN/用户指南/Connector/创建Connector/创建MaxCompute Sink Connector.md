@@ -131,22 +131,22 @@ keyword: [kafka, connector, maxcompute]
 
     |Topic|描述|
     |-----|--|
-    |任务位点Topic|用于存储消费位点的Topic。    -   Topic名称：建议以connect-offset开头。
+    |**任务位点Topic**|用于存储消费位点的Topic。    -   Topic名称：建议以connect-offset开头。
     -   分区数：Topic的分区数量必须大于1。
     -   存储引擎：Topic的存储引擎必须为Local存储。
     -   cleanup.policy：Topic的日志清理策略必须为compact。 |
-    |任务配置Topic|用于存储任务配置的Topic。    -   Topic名称：建议以connect-config开头。
+    |**任务配置Topic**|用于存储任务配置的Topic。    -   Topic名称：建议以connect-config开头。
     -   分区数：Topic的分区数量必须为1。
     -   存储引擎：Topic的存储引擎必须为Local存储。
     -   cleanup.policy：Topic的日志清理策略必须为compact。 |
-    |任务状态Topic|用于存储任务状态的Topic。    -   Topic名称：建议以connect-status开头。
+    |**任务状态Topic**|用于存储任务状态的Topic。    -   Topic名称：建议以connect-status开头。
     -   分区数：Topic的分区数量建议为6。
     -   存储引擎：Topic的存储引擎必须为Local存储。
     -   cleanup.policy：Topic的日志清理策略必须为compact。 |
-    |死信队列Topic|用于存储Connect框架的异常数据的Topic。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。    -   Topic名称：建议以connect-error开头。
+    |**死信队列Topic**|用于存储Connect框架的异常数据的Topic。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。    -   Topic名称：建议以connect-error开头。
     -   分区数：Topic的分区数量建议为6。
     -   存储引擎：Topic的存储引擎可以为Local存储或云存储。 |
-    |异常数据Topic|用于存储Sink的异常数据的Topic。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。    -   Topic名称：建议以connect-error开头。
+    |**异常数据Topic**|用于存储Sink的异常数据的Topic。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。    -   Topic名称：建议以connect-error开头。
     -   分区数：Topic的分区数量建议为6。
     -   存储引擎：Topic的存储引擎可以为Local存储或云存储。 |
 
@@ -214,7 +214,7 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
         |**VSwitch ID**|数据同步任务所在的交换机。该交换机必须与消息队列Kafka版实例处于同一VPC。默认为部署消息队列Kafka版实例时填写的交换机。|vsw-bp1d2jgg81\*\*\*|
         |**数据源Topic**|需要同步数据的Topic。|maxcompute-test-input|
         |**消费初始位置**|开始消费的位置。取值说明如下：         -   **latest**：从最新位点开始消费。
-        -   **earliest**earliest：从最初位点开始消费。
+        -   **earliest**：从最初位点开始消费。
 |latest|
         |**Connector消费组**|Connector使用的Consumer Group。该Consumer Group的名称建议以connect-cluster开头。|connect-cluster-kafka-maxcompute-sink|
         |**任务位点Topic**|用于存储消费位点的Topic。        -   Topic名称：建议以connect-offset开头。
