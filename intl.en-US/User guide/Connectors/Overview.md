@@ -16,16 +16,16 @@ Message Queue for Apache Kafka provides two categories of connectors:
 
     |Connector|Description|References|
     |---------|-----------|----------|
-    |FC Sink Connector|Exports data from Message Queue for Apache Kafka to Function Compute.|[Create a Function Compute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a Function Compute sink connector.md)|
-    |MaxCompute Sink Connector|Exports data from Message Queue for Apache Kafka to MaxCompute.|[Create a MaxCompute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MaxCompute sink connector.md)|
-    |OSS Sink Connector|Exports data from Message Queue for Apache Kafka to Object Storage Service \(OSS\).|[Create an OSS sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create an OSS sink connector.md)|
-    |Elasticsearch Sink Connector|Exports data from Message Queue for Apache Kafka to Elasticsearch.|[Create an Elasticsearch sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create an Elasticsearch sink connector.md)|
+    |Function Compute sink connector|Synchronizes data from Message Queue for Apache Kafka to Function Compute.|[Create a Function Compute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a Function Compute sink connector.md)|
+    |MaxCompute sink connector|Synchronizes data from Message Queue for Apache Kafka to MaxCompute.|[Create a MaxCompute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MaxCompute sink connector.md)|
+    |OSS sink connector|Synchronizes data from Message Queue for Apache Kafka to Object Storage Service \(OSS\).|[Create an OSS sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create an OSS sink connector.md)|
+    |Elasticsearch sink onnector|Synchronizes data from Message Queue for Apache Kafka to Elasticsearch.|[Create an Elasticsearch sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create an Elasticsearch sink connector.md)|
 
 -   Source connector: Source connectors are used to synchronize data from other Alibaba Cloud services to Message Queue for Apache Kafka.
 
     |Connector|Description|References|
     |---------|-----------|----------|
-    |MySQL Source Connector|Exports data from ApsaraDB RDS for MySQL to Message Queue for Apache Kafka.|[Create a MySQL source connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MySQL source connector.md)|
+    |MySQL source connector|Synchronizes data from ApsaraDB RDS for MySQL to Message Queue for Apache Kafka.|[Create a MySQL source connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MySQL source connector.md)|
 
 
 ## Procedure
@@ -37,6 +37,7 @@ Perform the following steps to use connectors:
     -   [Create a Function Compute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a Function Compute sink connector.md)
     -   [Create a MaxCompute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MaxCompute sink connector.md)
     -   [Create an OSS sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create an OSS sink connector.md)
+    -   [Create an Elasticsearch sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create an Elasticsearch sink connector.md)
     -   [Create a MySQL source connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MySQL source connector.md)
 3.  Perform the following operations as required:
     -   [View task configurations of a connector](/intl.en-US/User guide/Connectors/View task configurations of a connector.md)
@@ -44,7 +45,9 @@ Perform the following steps to use connectors:
     -   [Suspend a connector](/intl.en-US/User guide/Connectors/Suspend a connector.md)
     -   [Resume a connector](/intl.en-US/User guide/Connectors/Resume a connector.md)
     -   [Delete a connector](/intl.en-US/User guide/Connectors/Delete a connector.md)
-    -   [Modify the description of a connector](/intl.en-US/User guide/Connectors/Modify the description of a connector.md)
+    -   [Modify connector configurations](/intl.en-US/User guide/Connectors/Modify connector configurations.md)
+    -   [Test a connector](/intl.en-US/User guide/Connectors/Test a connector.md)
+    -   [Enable Internet access for a connector](/intl.en-US/User guide/Connectors/Enable Internet access for a connector.md)
 
 ## Limits
 
@@ -53,7 +56,7 @@ The following table lists the limits of Message Queue for Apache Kafka on connec
 |Item|Limit|
 |----|-----|
 |Maximum number of connectors|You can create up to three connectors for each instance.|
-|Region|-   China \(Hangzhou\)
+|Regions|-   China \(Hangzhou\)
 -   China \(Shanghai\)
 -   China \(Beijing\)
 -   China \(Zhangjiakou\)
@@ -64,11 +67,11 @@ The following table lists the limits of Message Queue for Apache Kafka on connec
 -   Singapore \(Singapore\)
 -   Japan \(Tokyo\) |
 
-**Note:** To increase the number connectors for your instance or use connectors in other regions, submit a [ticket](https://workorder-intl.console.aliyun.com/#/ticket/add/?productId=1352) to Message Queue for Apache Kafka Customer Services.
+**Note:** To increase the number connectors for your instance or use connectors in other regions, submit a[ticket](https://workorder-intl.console.aliyun.com/#/ticket/add/?productId=1352) to Message Queue for Apache Kafka Customer Services.
 
 ## Cross-region data synchronization
 
 You must enable Internet access for a connector to synchronize data from an Alibaba Cloud service in one region to an Alibaba Cloud service in another region over the Internet. For more information, see [Enable Internet access for a connector](/intl.en-US/User guide/Connectors/Enable Internet access for a connector.md).
 
-**Note:** If you need to use MySQL source connectors to synchronize data across regions, you must first activate Cloud Enterprise Network. For more information, see [Create a MySQL source connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MySQL source connector.md).
+**Note:** If you need to use MySQL source connectors to synchronize data across regions, you must first activate Cloud Enterprise Network \(CEN\). For more information, see [Create a MySQL source connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MySQL source connector.md).
 
