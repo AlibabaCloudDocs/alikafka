@@ -8,7 +8,7 @@ The following operations are complete before you create an OSS sink connector:
 
 -   The connector feature for the Message Queue for Apache Kafka instance is enabled. For more information, see [Enable the connector feature](/intl.en-US/User guide/Connectors/Enable the connector feature.md).
 -   Topics in the Message Queue for Apache Kafka instance are created. For more information, see [Step 1: Create a topic](/intl.en-US/Quick-start/Step 3: Create resources.md).
--   Buckets are created in the [OSS console](https://oss.console.aliyun.com/bucket). For more information, see [Create buckets](https://help.aliyun.com/document_detail/31885.html?spm=a2c4g.11174283.6.614.1bf37da24aeBfe).
+-   Buckets are created in the [OSS console](https://oss.console.aliyun.com/bucket). For more information, see [Create buckets](/intl.en-US/Quick Start/OSS console/Create buckets.md).
 -   Function Compute is activated. For more information, see [Create a function in the Function Compute console]().
 
 ## Usage notes
@@ -165,7 +165,7 @@ After you deploy the OSS sink connector, you can send messages to the data sourc
 
 ## Verify the results
 
-After you send test messages to the data source topic in Message Queue for Apache Kafka, you can check the destination OSS bucket to verify the results. For more information, see [Overview](https://help.aliyun.com/document_detail/31908.html?spm=a2c4g.11186623.6.1828.183d62e7KAJ360).
+After you send test messages to the data source topic in Message Queue for Apache Kafka, you can check the destination OSS bucket to verify the results. For more information, see [Overview](/intl.en-US/Console User Guide/Overview.md).
 
 If new objects are generated in the OSS bucket, the data has been synchronized to OSS, as shown in the following figure.
 
