@@ -2,7 +2,7 @@
 
 This topic describes how to resume a suspended connector in the Message Queue for Apache Kafka console.
 
-One of the connectors that are described in the following topics is created, and the connector is in the Running state:
+One of the connectors that are described in the following topics is created, and the connector is in the Suspended state:
 
 -   [Create a MaxCompute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a MaxCompute sink connector.md)
 -   [Create a Function Compute sink connector](/intl.en-US/User guide/Connectors/Create a connector/Create a Function Compute sink connector.md)
@@ -11,12 +11,16 @@ One of the connectors that are described in the following topics is created, and
 
 2.  In the top navigation bar, select the region where your instance is located.
 
-3.  In the left-side navigation pane, click **Connector**.
+3.  In the left-side navigation pane, click **Instances**.
 
-4.  On the **Connector** page, select an instance, find the connector that you want to resume, click More, and then choose **![icon_more](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/6022597161/p185678.png)** \> **Resume** in the **Actions** column.
+4.  On the **Instances** page, click the name of the instance that you want to manage.
 
-5.  In the **Note** message, click **OK**.
+5.  In the left-side navigation pane, click **Connector**.
 
-    The **Status** column of the connector displays Running.
+6.  On the **Connector \(Public Preview\)** page, find the connector that you want to resume, click the ![icon_more](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/6022597161/p185678.png) icon in the **Actions** column, and then select **Resume**.
+
+7.  In the **Note** message, click **OK**.
+
+    The **Status** column displays **Running** for the connector.
 
 
