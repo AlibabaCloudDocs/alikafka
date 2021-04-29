@@ -22,17 +22,21 @@ Queries access control lists \(ACLs\).
  -   **Topic**
 -   **Group** |
 |InstanceId|String|Yes|alikafka\_pre-cn-v0h1cng0\*\*\*|The ID of the Message Queue for Apache Kafka instance that contains the resource. |
-|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance is located. |
-|Username|String|Yes|test12\*\*\*\*|The name of the user. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance resides. |
+|Username|String|Yes|test12\*\*\*\*|The name of the Simple Authentication and Security Layer \(SASL\) user. |
+|AclResourcePatternType|String|No|LITERAL|The matching mode. Valid values:
+
+ -   LITERAL: full match
+-   PREFIXED: prefix match |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The response code. The HTTP 200 code indicates that the request was successful. |
-|KafkaAclList|Array| |The list of ACLs. |
+|Code|Integer|200|The HTTP status code. If 200 is returned, the request is successful. |
+|KafkaAclList|Array of KafkaAclVO| |The list of ACLs. |
 |KafkaAclVO| | | |
-|AclOperationType|String|Write|The type of operation allowed by the ACL. Valid values:
+|AclOperationType|String|Write|The type of operations allowed by the ACL. Valid values:
 
  -   **Write**
 -   **Read** |
@@ -49,17 +53,17 @@ Queries access control lists \(ACLs\).
  -   **Topic**
 -   **Group** |
 |Host|String|\*|The host. |
-|Username|String|test12\*\*\*|The name of the user. |
+|Username|String|test12\*\*\*|The name of the SASL user. |
 |Message|String|operation success.|The response message. |
 |RequestId|String|46496E38-881E-4719-A2F3-F3DA6AEA\*\*\*|The ID of the request. |
-|Success|Boolean|true|Indicates whether the request was successful. |
+|Success|Boolean|true|Indicates whether the request is successful. |
 
 ## Examples
 
 Sample requests
 
 ```
-http(s)://[Endpoint]/? Action=DescribeAcls
+http(s)://[Endpoint]/?Action=DescribeAcls
 &AclResourceName=demo
 &AclResourceType=Topic
 &InstanceId=alikafka_pre-cn-v0h1cng0***
@@ -75,7 +79,7 @@ Sample success responses
 ```
 <DescribeAclsResponse>
       <RequestId>46496E38-881E-4719-A2F3-F3DA6AEA***</RequestId>
-      <Message>operation success. </Message>
+      <Message>operation success.</Message>
       <Code>200</Code>
       <Success>true</Success>
       <KafkaAclList>
@@ -100,7 +104,8 @@ Sample success responses
     "Code": 200,
     "Success": true,
     "KafkaAclList": {
-        "KafkaAclVO": {
+        "KafkaAclVO": [
+        {
             "AclResourceName": "demo",
             "Username": "test12***",
             "AclResourceType": "Topic",
@@ -108,6 +113,7 @@ Sample success responses
             "AclResourcePatternType": "LITERAL",
             "Host": "*"
         }
+        ]
     }
 }
 ```
