@@ -21,7 +21,7 @@ Queries the status of a consumer group.
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The HTTP status code. The HTTP status code 200 indicates that the request is successful. |
+|Code|Integer|200|The HTTP status code. If 200 is returned, the request is successful. |
 |ConsumerProgress|Struct| |The status of the consumer group. |
 |LastTimestamp|Long|1566874931671|The time when the last message consumed by the consumer group was generated. |
 |TopicList|Array of TopicList| |The consumption progress of each topic to which the consumer group is subscribed. |
@@ -45,7 +45,7 @@ Queries the status of a consumer group.
 Sample requests
 
 ```
-http(s)://[Endpoint]/? Action=GetConsumerProgress
+http(s)://[Endpoint]/?Action=GetConsumerProgress
 &RegionId=cn-hangzhou
 &ConsumerId=kafka-test
 &InstanceId=alikafka_pre-cn-mp919o4v****
@@ -57,9 +57,9 @@ Sample success responses
 `XML` format
 
 ```
-<createInstanceResponse>
+<GetConsumerProgressResponse>
       <RequestId>252820E1-A2E6-45F2-B4C9-1056B8CE****</RequestId>
-      <Message>operation success. </Message>
+      <Message>operation success.</Message>
       <ConsumerProgress>
             <LastTimestamp>1566874931671</LastTimestamp>
             <TopicList>
@@ -81,13 +81,12 @@ Sample success responses
       </ConsumerProgress>
       <Code>200</Code>
       <Success>true</Success>
-</createInstanceResponse>
+</GetConsumerProgressResponse>
 ```
 
 `JSON` format
 
 ```
-{"createInstanceResponse":
 {
     "RequestId": "252820E1-A2E6-45F2-B4C9-1056B8CE****",
     "Message": "operation success.",
@@ -95,28 +94,27 @@ Sample success responses
         "LastTimestamp": 1566874931671,
         "TopicList": {
             "TopicList": [
-                {
-                    "OffsetList": {
-                        "OffsetList": [
-                            {
-                                "Partition": 0,
-                                "ConsumerOffset": 9,
-                                "LastTimestamp": 1566874931671,
-                                "BrokerOffset": 9
-                            }
-                        ]
-                    },
-                    "LastTimestamp": 1566874931671,
-                    "TotalDiff": 0,
-                    "Topic": "kafka_test"
-                }
+				{
+					"OffsetList": {
+						"OffsetList": [
+							{
+								"Partition": 0,
+								"ConsumerOffset": 9,
+								"LastTimestamp": 1566874931671,
+								"BrokerOffset": 9
+							}
+						]
+					},
+					"LastTimestamp": 1566874931671,
+					"TotalDiff": 0,
+					"Topic": "kafka_test"
+				}
             ]
         },
         "TotalDiff": 0
     },
     "Code": 200,
     "Success": true
-}    
 }
 ```
 
