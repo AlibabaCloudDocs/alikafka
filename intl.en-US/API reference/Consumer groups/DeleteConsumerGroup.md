@@ -10,30 +10,32 @@ Deletes a consumer group from a Message Queue for Apache Kafka instance.
 
 |Parameter|Type|Required|Example|Description|
 |---------|----|--------|-------|-----------|
-|Action|String|Yes|DeleteConsumerGroup|The operation that you want to perform. Set the value to **DeleteConsumerGroup**. |
-|ConsumerId|String|Yes|CID-test|The name of the consumer group. The value must comply with the following rules:
+|Action|String|Yes|DeleteConsumerGroup|The operation that you want to perform. Set the value to
+
+ **DeleteConsumerGroup**. |
+|ConsumerId|String|Yes|CID-test|The name of the consumer group. Take note of the following rules when you specify a consumer group name:
 
  -   The name can contain only letters, digits, hyphens \(-\), and underscores \(\_\).
 -   The name must be 3 to 64 characters in length. Names that contain more than 64 characters will be automatically truncated.
 -   After a consumer group is created, its name cannot be modified. |
-|InstanceId|String|Yes|alikafka\_post-cn-v0h1fgs2\*\*\*\*|The ID of the instance. |
-|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance is located. |
+|InstanceId|String|Yes|alikafka\_post-cn-v0h1fgs2\*\*\*\*|The ID of the Message Queue for Apache Kafka instance from which you want to delete the consumer group. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance resides. |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The returned status code. If 200 is returned, the request was successful. |
+|Code|Integer|200|The HTTP status code. If 200 is returned, the request is successful. |
 |Message|String|operation success.|The response message. |
 |RequestId|String|06084011-E093-46F3-A51F-4B19A8AD\*\*\*\*|The ID of the request. |
-|Success|Boolean|true|Indicates whether the request was successful. |
+|Success|Boolean|true|Indicates whether the request is successful. |
 
 ## Examples
 
 Sample requests
 
 ```
-http(s)://[Endpoint]/? Action=DeleteConsumerGroup
+http(s)://[Endpoint]/?Action=DeleteConsumerGroup
 &ConsumerId=CID-test
 &InstanceId=alikafka_post-cn-v0h1fgs2****
 &RegionId=cn-hangzhou
@@ -46,8 +48,8 @@ Sample success responses
 
 ```
 <DeleteConsumerGroupResponse>
-      <Message>operation success. </Message>
-      <RequestId>06084011-E093-46F3-A51F-4B19A8AD7A94</RequestId>
+      <Message>operation success.</Message>
+      <RequestId>06084011-E093-46F3-A51F-4B19A8AD****</RequestId>
       <Success>true</Success>
       <Code>200</Code>
 </DeleteConsumerGroupResponse>
