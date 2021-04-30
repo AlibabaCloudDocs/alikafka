@@ -8,33 +8,33 @@ Changes the name of a Message Queue for Apache Kafka instance.
 
 ## Request parameters
 
-|Parameter|Type|Required|Example|Description |
-|---------|----|--------|-------|------------|
+|Parameter|Type|Required|Example|Description|
+|---------|----|--------|-------|-----------|
 |Action|String|Yes|ModifyInstanceName|The operation that you want to perform. Set the value to
 
  **ModifyInstanceName**. |
-|InstanceId|String|Yes|alikafka\_post-cn-v0h1fgs2\*\*\*\*|The ID of the instance whose name you want to change. |
-|InstanceName|String|Yes|dev-test|The name of the instance. Valid values:
+|InstanceId|String|Yes|alikafka\_post-cn-v0h1fgs2\*\*\*\*|The ID of the Message Queue for Apache Kafka instance whose name you want to change. |
+|InstanceName|String|Yes|dev-test|The name of the instance. Take note of the following rules when you specify an instance name:
 
  -   The name can contain only letters, digits, hyphens \(-\), and underscores \(\_\).
 -   The name must be 3 to 64 characters in length. Names that contain more than 64 characters will be automatically truncated. |
-|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance is located. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance resides. |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The response code. The HTTP 200 code indicates that the request was successful. |
+|Code|Integer|200|The HTTP status code. If 200 is returned, the request is successful. |
 |Message|String|operation success.|The response message. |
 |RequestId|String|06084011-E093-46F3-A51F-4B19A8AD\*\*\*\*|The ID of the request. |
-|Success|Boolean|true|Indicates whether the request was successful. |
+|Success|Boolean|true|Indicates whether the request is successful. |
 
 ## Examples
 
 Sample requests
 
 ```
-http(s)://[Endpoint]/? Action=ModifyInstanceName
+http(s)://[Endpoint]/?Action=ModifyInstanceName
 &InstanceId=alikafka_post-cn-v0h1fgs2****
 &InstanceName=dev-test
 &RegionId=cn-hangzhou
@@ -46,12 +46,12 @@ Sample success responses
 `XML` format
 
 ```
-<ModifyInstanceName>
-      <Message>operation success. </Message>
+<ModifyInstanceNameResponse>
+      <Message>operation success.</Message>
       <RequestId>06084011-E093-46F3-A51F-4B19A8AD7A94</RequestId>
       <Success>true</Success>
       <Code>200</Code>
-</ModifyInstanceName>
+</ModifyInstanceNameResponse>
 ```
 
 `JSON` format
