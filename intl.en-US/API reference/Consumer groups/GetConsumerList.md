@@ -13,24 +13,24 @@ Queries consumer groups in a Message Queue for Apache Kafka instance.
 |Action|String|Yes|GetConsumerList|The operation that you want to perform. Set the value to
 
  **GetConsumerList**. |
-|InstanceId|String|Yes|alikafka\_post-cn-v0h18sav\*\*\*\*|The ID of the instance. |
-|RegionId|String|Yes|cn-hangzhou|The region ID of the instance. |
+|InstanceId|String|Yes|alikafka\_post-cn-v0h18sav\*\*\*\*|The ID of the Message Queue for Apache Kafka instance whose consumer groups you want to query. |
+|RegionId|String|Yes|cn-hangzhou|The ID of the region where the instance resides. |
 
 ## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|Code|Integer|200|The response code. The HTTP 200 status code indicates that the request is successful. |
-|ConsumerList|Array of ConsumerVO| |The list of consumer groups. |
+|Code|Integer|200|The HTTP status code. If 200 is returned, the request is successful. |
+|ConsumerList|Array of ConsumerVO| |The information about the consumer groups. |
 |ConsumerVO| | | |
 |ConsumerId|String|CID\_c34a6f44915f80d70cb42c4b14\*\*\*|The name of the consumer group. |
 |InstanceId|String|alikafka\_post-cn-v0h18sav\*\*\*\*|The ID of the instance. |
-|RegionId|String|cn-hangzhou|The region ID of the instance. |
+|RegionId|String|cn-hangzhou|The ID of the region where the instance resides. |
 |Remark|String|test|The description of the consumer group. |
-|Tags|Array of TagVO| |The tags bound to the consumer group. |
+|Tags|Array of TagVO| |The tags attached to the consumer group. |
 |TagVO| | | |
-|Key|String|test|The key of the resource tag. |
-|Value|String|test|The value of the resource tag. |
+|Key|String|test|The key of the tag. |
+|Value|String|test|The value of the tag. |
 |Message|String|operation success.|The response message. |
 |RequestId|String|808F042B-CB9A-4FBC-9009-00E7DDB6\*\*\*\*|The ID of the request. |
 |Success|Boolean|true|Indicates whether the request is successful. |
@@ -40,7 +40,7 @@ Queries consumer groups in a Message Queue for Apache Kafka instance.
 Sample requests
 
 ```
-http(s)://[Endpoint]/? Action=GetConsumerList
+http(s)://[Endpoint]/?Action=GetConsumerList
 &RegionId=cn-hangzhou
 &InstanceId=alikafka_post-cn-v0h18sav****
 &<Common request parameters>
@@ -51,9 +51,9 @@ Sample success responses
 `XML` format
 
 ```
-<GetConsumerList>
+<GetConsumerListResponse>
       <RequestId>808F042B-CB9A-4FBC-9009-00E7DDB6****</RequestId>
-      <Message>operation success. </Message>
+      <Message>operation success.</Message>
       <Code>200</Code>
       <ConsumerList>
             <ConsumerVO>
@@ -66,7 +66,7 @@ Sample success responses
             </ConsumerVO>
       </ConsumerList>
       <Success>true</Success>
-</GetConsumerList>
+</GetConsumerListResponse>
 ```
 
 `JSON` format
