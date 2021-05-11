@@ -23,9 +23,10 @@
 |RegionId|String|是|cn-hangzhou|实例的地域ID。 |
 |VpcId|String|是|vpc-bp1r4eg3yrxmygv\*\*\*\*|实例部署的VPC ID |
 |VSwitchId|String|是|vsw-bp1j3sg5979fstnpl\*\*\*\*|实例部署的Vswitch ID。 |
-|ZoneId|String|是|zonea|实例部署的Zone ID。
+|ZoneId|String|否|cn-shanghai-a|实例部署的Zone ID。
 
- 必须为Vswitch的Zone ID。 |
+ -   必须为Vswitch的Zone ID。
+-   格式可以为zoneX，也可以为RegionId-X。例如，可以设置为zonea或者cn-shanghai-a。 |
 |IsEipInner|Boolean|否|false|是否支持EIP 。取值：
 
  -   **true**：公网/VPC实例
@@ -47,7 +48,7 @@
 |Name|String|否|newInstanceName|实例名称。 |
 |SecurityGroup|String|否|sg-bp13wfx7kz9pkow\*\*\*|实例的安全组。
 
- 不填写时，消息队列Kafka版会自动为您的实例配置安全组。如需填写，您需要先为实例创建安全组，详情请参见[创建安全组](~25468~)。 |
+ 不填写时，消息队列Kafka版会自动为您的实例配置安全组。如需填写，您需要先为实例创建安全组，详情请参见[创建安全组](~~25468~~)。 |
 |ServiceVersion|String|否|0.10.2|部署的消息队列Kafka版的版本，可选值为0.10.2或2.2.0。 |
 |Config|String|否|\{"kafka.log.retention.hours":"33"\}|部署的消息队列Kafka版的初始配置。配置信息必须是一个合法的JSON字符串。
 
@@ -87,7 +88,7 @@ http(s)://[Endpoint]/?Action=StartInstance
 &RegionId=cn-hangzhou
 &VpcId=vpc-bp1r4eg3yrxmygv****
 &VSwitchId=vsw-bp1j3sg5979fstnpl****
-&ZoneId=zonea
+&ZoneId=cn-shanghai-a
 &<公共请求参数>
 ```
 
