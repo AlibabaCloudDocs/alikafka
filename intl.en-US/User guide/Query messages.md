@@ -54,7 +54,7 @@ In Message Queue for Apache Kafka, each offset maps a message. If you know the l
 
 7.  Enter the name of the topic, select the partition, and enter the offset from which you want to query messages. Then, click **Search**.
 
-    On the **Query by Offset** tab, messages that start from the specified offset are displayed. For example, if the specified partition and offset are both 5, the returned results are messages that start from Offset 5 in Partition 5. The following figure shows the query results.
+    On the **Query by Offset** tab, messages that start from the specified offset are displayed. For example, if the specified partition and offset are both 5, the returned results are messages that start from Offset 5 in Partition 5.
 
     |Parameter|Description|
     |---------|-----------|
