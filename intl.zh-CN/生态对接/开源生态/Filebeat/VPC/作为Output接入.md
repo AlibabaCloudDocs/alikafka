@@ -112,6 +112,8 @@ Filebeat通过消息队列Kafka版的接入点与消息队列Kafka版建立连�
 
     发送的消息的分区ID和位点信息如下图所示。
 
+    ![topic_status](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/3484976951/p107774.png)
+
 
 ## 步骤五：按位点查询消息
 
