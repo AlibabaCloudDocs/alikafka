@@ -61,7 +61,7 @@ When messages are accumulated or skewing occurs, you can view the subscriptions 
 
     ![Consumption status](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/9845180261/p267615.png)
 
-7.  In the **Topic** column, find the topic whose consumption status you want to view, and click **Details** in the **Actions**column.
+7.  In the **Topic** column, find the topic whose consumption status you want to view, and click **Details** in the **Actions** column.
 
     The message consumption details in each partition of the topic appear.
 
