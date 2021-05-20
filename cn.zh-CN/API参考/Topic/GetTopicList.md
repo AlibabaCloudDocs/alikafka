@@ -2,6 +2,8 @@
 
 调用GetTopicList获取Topic信息。
 
+****
+
 ## 调试
 
 [您可以在OpenAPI Explorer中直接运行该接口，免去您计算签名的困扰。运行成功后，OpenAPI Explorer可以自动生成SDK代码示例。](https://api.aliyun.com/#product=alikafka&api=GetTopicList&type=RPC&version=2019-09-16)
@@ -13,9 +15,9 @@
 |Action|String|是|GetTopicList|要执行的操作。取值：
 
  **GetTopicList**。 |
-|CurrentPage|String|是|1|当前页。 |
 |InstanceId|String|是|alikafka\_pre-cn-0pp1954n\*\*\*\*|实例的ID。 |
-|PageSize|String|是|10|页大小。 |
+|CurrentPage|String|否|1|当前页码。 |
+|PageSize|String|否|10|分页大小。 |
 |RegionId|String|否|cn-hangzhou|实例的地域ID。 |
 
 ## 返回数据
@@ -23,15 +25,24 @@
 |名称|类型|示例值|描述|
 |--|--|---|--|
 |Code|Integer|200|返回码。返回200代表成功。 |
-|CurrentPage|Integer|1|当前页。 |
+|CurrentPage|Integer|1|当前页码。 |
+|PageSize|Integer|10|分页大小。 |
 |Message|String|operation success.|返回信息。 |
-|PageSize|Integer|10|页大小。 |
 |RequestId|String|C0D3DC5B-5C37-47AD-9F22-1F5598809\*\*\*|请求ID。 |
 |Success|Boolean|true|调用是否成功。 |
 |TopicList|Array of TopicVO| |Topic详情。 |
 |TopicVO| | | |
+|CompactTopic|Boolean|false|Topic的存储引擎配置为Local存储时，会配置日志清理策略。取值：
+
+ -   false：delete清理策略。
+-   true：compact清理策略。 |
 |CreateTime|Long|1576563109000|创建时间。 |
 |InstanceId|String|alikafka\_pre-cn-0pp1954n\*\*\*\*|实例ID。 |
+|LocalTopic|Boolean|false|Topic的存储引擎。取值：
+
+ -   false：云存储。
+-   true：Local存储。 |
+|PartitionNum|Integer|6|Topic的分区数量。 |
 |RegionId|String|cn-hangzhou|实例的地域ID。 |
 |Remark|String|test|备注。取值：
 
@@ -77,29 +88,33 @@ http(s)://[Endpoint]/?Action=GetTopicList
 
 ```
 <GetTopicListResponse>
-      <RequestId>C0D3DC5B-5C37-47AD-9F22-1F5598809***</RequestId>
-      <Message>operation success.</Message>
-      <PageSize>10</PageSize>
-      <CurrentPage>1</CurrentPage>
-      <Total>1</Total>
-      <TopicList>
-            <TopicVO>
-                  <Status>0</Status>
-                  <PartitionNum>12</PartitionNum>
-                  <CompactTopic>false</CompactTopic>
-                  <InstanceId>alikafka_pre-cn-0pp1954n****</InstanceId>
-                  <CreateTime>1614585068000</CreateTime>
-                  <StatusName>服务中</StatusName>
-                  <RegionId>cn-hangzhou</RegionId>
-                  <Topic>TopicPartitionNum</Topic>
-                  <LocalTopic>false</LocalTopic>
-                  <Tags>
-            </Tags>
-                  <Remark>test</Remark>
-            </TopicVO>
-      </TopicList>
-      <Code>200</Code>
-      <Success>true</Success>
+  <RequestId>C81688BE-F2B1-499F-B9D3-61CDA471F2C8</RequestId>
+  <Message>operation success.</Message>
+  <PageSize>10000</PageSize>
+  <CurrentPage>1</CurrentPage>
+  <Total>15</Total>
+  <TopicList>
+        <TopicVO>
+              <Status>0</Status>
+              <PartitionNum>6</PartitionNum>
+              <CompactTopic>false</CompactTopic>
+              <InstanceId>alikafka_post-cn-st21xhct6001</InstanceId>
+              <CreateTime>1618303927000</CreateTime>
+              <StatusName>服务中</StatusName>
+              <RegionId>cn-hangzhou</RegionId>
+              <Topic>connect-error-nianxu-kafka2fc-test</Topic>
+              <LocalTopic>false</LocalTopic>
+              <Tags>
+                    <TagVO>
+                          <Value>test</Value>
+                          <Key>test</Key>
+                    </TagVO>
+              </Tags>
+              <Remark>create_by_kafka_connector_do_not_delete</Remark>
+        </TopicVO>
+  </TopicList>
+  <Code>200</Code>
+  <Success>true</Success>
 </GetTopicListResponse>
 ```
 
@@ -107,27 +122,32 @@ http(s)://[Endpoint]/?Action=GetTopicList
 
 ```
 {
-  "RequestId": "C0D3DC5B-5C37-47AD-9F22-1F5598809***",
+  "RequestId": "C81688BE-F2B1-499F-B9D3-61CDA471F2C8",
   "Message": "operation success.",
-  "PageSize": 10,
+  "PageSize": 10000,
   "CurrentPage": 1,
-  "Total": 1,
+  "Total": 15,
   "TopicList": {
     "TopicVO": [
       {
         "Status": 0,
-        "PartitionNum": 12,
+        "PartitionNum": 6,
         "CompactTopic": false,
-        "InstanceId": "alikafka_pre-cn-0pp1954n****",
-        "CreateTime": 1614585068000,
+        "InstanceId": "alikafka_post-cn-st21xhct6001",
+        "CreateTime": 1618303927000,
         "StatusName": "服务中",
         "RegionId": "cn-hangzhou",
-        "Topic": "TopicPartitionNum",
+        "Topic": "connect-error-nianxu-kafka2fc-test",
         "LocalTopic": false,
         "Tags": {
-          "TagVO": []
+          "TagVO": [
+            {
+              "Value": "test",
+              "Key": "test"
+            }
+          ]
         },
-        "Remark": "test"
+        "Remark": "create_by_kafka_connector_do_not_delete"
       }
     ]
   },
