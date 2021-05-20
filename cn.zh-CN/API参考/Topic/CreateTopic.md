@@ -27,11 +27,19 @@
  -   只能包含字母、数字、下划线（\_）和短划线（-）。
 -   长度限制为3~64字符，多于64个字符将被自动截取。
 -   Topic名称一旦创建，将无法修改。 |
+|CompactTopic|Boolean|否|false|Topic的存储引擎配置为Local存储时，会配置日志清理策略。取值：
+
+ -   false：delete清理策略。
+-   true：compact清理策略。 |
 |PartitionNum|String|否|12|Topic的分区数。
 
  -   分区数限制1~360。
 -   建议分区数是6的倍数，减少数据倾斜风险。
 -   特殊需求请提交工单。 |
+|LocalTopic|Boolean|否|false|Topic的存储引擎。取值：
+
+ -   false：云存储。
+-   true：Local存储。 |
 
 ## 返回数据
 
@@ -57,7 +65,7 @@ http(s)://[Endpoint]/?Action=CreateTopic
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <CreateTopicResponse>
@@ -68,7 +76,7 @@ http(s)://[Endpoint]/?Action=CreateTopic
 </CreateTopicResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
