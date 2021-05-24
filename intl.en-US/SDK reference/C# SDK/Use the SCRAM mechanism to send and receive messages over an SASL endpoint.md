@@ -2,6 +2,17 @@
 
 This topic describes how to connect to Message Queue for Apache Kafka over a Simple Authentication and Security Layer \(SASL\) endpoint in a virtual private cloud \(VPC\) and use the SCRAM mechanism to send and receive messages.
 
+.NET is installed. For more information, see [Download .NET](https://dotnet.microsoft.com/download).
+
+## Install the C\# library
+
+1.  Run the following command to install the C\# library:
+
+    ```
+    dotnet add package -v 1.5.2 Confluent.Kafka
+    ```
+
+
 ## Send messages
 
 1.  Create a message sending program named producer.cs.
