@@ -14,7 +14,7 @@ The following operations are completed:
 
 Kafka mirroring can be used to back up data in Kafka clusters. MirrorMaker is the tool to implement this feature. You can use MirrorMaker to mirror the source user-created Kafka cluster to the destination cluster. The destination cluster is a Message Queue for Apache Kafka instance, as shown in the following figure. MirrorMaker uses a built-in consumer to consume messages from the user-created Kafka cluster and then uses a built-in producer to send these messages to the Message Queue for Apache Kafka instance.
 
-![dg_data_migration](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/2450549951/p98881.png)
+![dg_data_migration](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/2450549951/p98881.png)
 
 Fore more information, see [Apache Kafka MirrorMaker](https://kafka.apache.org/documentation/#basic_ops_mirror_maker).
 
@@ -62,7 +62,7 @@ Fore more information, see [Apache Kafka MirrorMaker](https://kafka.apache.org/d
 
 1.  Download [kafka.client.truststore.jks](https://github.com/AliwareMQ/aliware-kafka-demos/blob/master/kafka-mirror-maker-demo/kafka.client.truststore.jks?raw=true).
 
-2.  Configure the kakfa\_client\_jaas.conf file.
+2.  Configure the kafka\_client\_jaas.conf file.
 
     ```
     KafkaClient {
