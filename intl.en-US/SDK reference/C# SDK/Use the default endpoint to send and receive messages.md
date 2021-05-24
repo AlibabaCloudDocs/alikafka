@@ -6,6 +6,17 @@ keyword: [Kafka, send and receive messages, C\#, VPCs]
 
 This topic describes how to use SDKs for C\# to connect to the default endpoint of Message Queue for Apache Kafka and send and receive messages in a virtual private cloud \(VPC\).
 
+.NET is installed. For more information, see [Download .NET](https://dotnet.microsoft.com/download).
+
+## Install the C\# library
+
+1.  Run the following command to install the C\# library:
+
+    ```
+    dotnet add package -v 1.5.2 Confluent.Kafka
+    ```
+
+
 ## Send messages
 
 1.  Create a message sending program named producer.cs.
