@@ -6,6 +6,17 @@ keyword: [kafka, send and subscribe to messages, c\#, internet, ssl]
 
 This topic describes how a C\# client uses SDK for C\# to connect to the Secure Sockets Layer \(SSL\) endpoint of a Message Queue for Apache Kafka instance over the Internet and uses the PLAIN mechanism to send and subscribe to messages.
 
+.NET is installed. For more information, see [Download .NET](https://dotnet.microsoft.com/download).
+
+## Install the C\# library
+
+1.  Run the following command to install the C\# library:
+
+    ```
+    dotnet add package -v 1.5.2 Confluent.Kafka
+    ```
+
+
 ## Prepare configurations
 
 1.  [Download an SSL root certificate](https://code.aliyun.com/alikafka/aliware-kafka-demos/raw/master/kafka-php-demo/vpc-ssl/ca-cert.pem).
