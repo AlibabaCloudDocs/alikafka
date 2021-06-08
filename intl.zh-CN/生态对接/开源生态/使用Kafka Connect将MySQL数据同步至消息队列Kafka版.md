@@ -2,7 +2,7 @@
 
 本教程介绍如何使用Kafka Connect的Source Connector将MySQL的数据同步至消息队列Kafka版。
 
-Kafka Connect主要用于将数据流输入和输出消息队列Kafka版。Kafka Connect主要通过各种Source Connector的实现，将数据从第三方系统输入到Kafka broker，通过各种Sink Connector实现，将数据从Kafka broker中导入到第三方系统。
+Kafka Connect主要用于将数据流输入和输出消息队列Kafka版。Kafka Connect主要通过各种Source Connector的实现，将数据从第三方系统输入到Kafka Broker，通过各种Sink Connector实现，将数据从Kafka Broker中导入到第三方系统。
 
 ![system](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/7219853951/p68623.png)
 
@@ -18,7 +18,7 @@ Kafka Connect主要用于将数据流输入和输出消息队列Kafka版。Kafka
 
     **说明：** 本教程以[0.10.2.2](http://kafka.apache.org/downloads#0.10.2.2)版本的Kafka Connect为例。
 
--   安装docker。
+-   安装Docker。
 
 ## 步骤一：配置Kafka Connect
 
@@ -95,9 +95,9 @@ Kafka Connect主要用于将数据流输入和输出消息队列Kafka版。Kafka
         ## 消息队列Kafka版接入点，通过控制台获取。
         ## 您在控制台获取的默认接入点。
         "database.history.kafka.bootstrap.servers" : "kafka:9092",
-        ## 需要提前在控制台创建同名Topic，在本例中创建topic：server1。
+        ## 需要提前在控制台创建同名Topic，在本例中创建Topic：server1。
         ## 所有Table的变更数据，会记录在server1.$DATABASE.$TABLE的Topic中，如 server1.inventory.products。
-        ## 因此用户需要提前在控制台中创建所有相关 Topic。
+        ## 因此用户需要提前在控制台中创建所有相关Topic。
         "database.server.name": "server1",
         ## 记录schema变化信息将记录在这个Topic中。
         ## 需要提前在控制台创建。
@@ -110,9 +110,9 @@ Kafka Connect主要用于将数据流输入和输出消息队列Kafka版。Kafka
         ## 消息队列Kafka版接入点，通过控制台获取。存储db中schema变化信息。
         ## 您在控制台获取的SSL接入点。
         "database.history.kafka.bootstrap.servers" : "kafka:9092",
-        ## 需要提前在控制台创建同名topic，在本例中创建Topic：server1。
+        ## 需要提前在控制台创建同名Topic，在本例中创建Topic：server1。
         ## 所有Table的变更数据，会记录在server1.$DATABASE.$TABLE的Topic中，如 server1.testDB.products。
-        ## 因此用户需要提前在控制台中创建所有相关 Topic。
+        ## 因此用户需要提前在控制台中创建所有相关Topic。
         "database.server.name": "server1",
         ## schema变化信息将记录在这个Topic中。
         ## 需要提前在控制台创建。
@@ -128,7 +128,7 @@ Kafka Connect主要用于将数据流输入和输出消息队列Kafka版。Kafka
         "database.history.consumer.sasl.mechanism": "PLAIN",
         ```
 
-3.  配置好register-mysql.json后，您需要根据配置在控制台创建相应的Topic，相关操作步骤请参见[步骤一：创建Topic](/intl.zh-CN/快速入门/步骤三：创建资源.md)。
+3.  配置好register-mysql.json后，您需要根据配置在控制台创建相应的Topic，相关操作步骤，请参见[步骤一：创建Topic](/intl.zh-CN/快速入门/步骤三：创建资源.md)。
 
     按照本教程中的方式安装的MySQL，您可以看到MySQL中已经提前创建好了database：inventory。其中有四张表：
 
