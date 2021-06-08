@@ -12,18 +12,14 @@
 
 1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
-2.  在顶部菜单栏，选择地域。
+2.  在**概览**页面的**资源分布**区域，选择地域。
 
-3.  在左侧导航栏，单击**实例列表**。
+3.  在**实例列表**页面，单击目标实例名称。
 
-4.  在**实例列表**页面，单击目标实例名称。
+4.  在左侧导航栏，单击**Connector 管理**。
 
-5.  在左侧导航栏，单击**Connector（公测组件）**。
+5.  在**Connector 管理**页面，找到目标Connector，单击其**操作**的**启用**。
 
-6.  在**Connector（公测组件）**页面，找到需要恢复的Connector，在其**操作**列，单击![icon_more](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/8046936061/p185678.png)图标，从下拉列表中，选择**恢复**。
-
-7.  在**提示**对话框，单击**确认**。
-
-    Connector的**状态**列显示**运行中**。
+    在**Connector 管理**页面，找到启用的Connector，其**状态**已变更为**进行中**。
 
 
