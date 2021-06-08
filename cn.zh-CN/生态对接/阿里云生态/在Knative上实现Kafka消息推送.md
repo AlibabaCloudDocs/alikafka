@@ -28,7 +28,7 @@ Knative是一款基于Kubernetes的Serverless框架，其目标是制定云原�
 
 ## 操作流程
 
-在Knative上实现Kafka消息推送的操作流程如下图所示。
+在Knative上实现消息队列Kafka版消息推送的操作流程如下图所示。
 
 ![dg_task_flow](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/1398900161/p75834.jpg)
 
@@ -93,7 +93,7 @@ Knative是一款基于Kubernetes的Serverless框架，其目标是制定云原�
 
 ## 创建kafka-source服务
 
-1.  [通过kubectl连接Kubernetes集群](/cn.zh-CN/Kubernetes集群用户指南/集群/连接集群/通过kubectl连接Kubernetes集群.md)。
+1.  [通过kubectl管理Kubernetes集群](/cn.zh-CN/Kubernetes集群用户指南/集群/连接集群/通过kubectl管理Kubernetes集群.md)。
 
 2.  创建KafkaSource服务的配置文件kafka-source.yaml。
 
@@ -137,26 +137,27 @@ Knative是一款基于Kubernetes的Serverless框架，其目标是制定云原�
 
 1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4e.11153940.0.0.473e500dpMSQGl#/TopicManagement?regionId=cn-hangzhou&instanceId=alikafka_pre-cn-4591fbkd400a)。
 
-2.  在顶部菜单栏，选择地域。
+2.  在**概览**页面的**资源分布**区域，选择地域。
 
-3.  在左侧导航栏，单击**实例列表**。
+3.  在**实例列表**页面，单击目标实例名称。
 
-4.  在**实例列表**页面，找到目标实例，在其右侧**操作**列，单击**详情**。
+4.  在左侧导航栏，单击**Topic 管理**。
 
-5.  在左侧导航栏，单击**Topic管理**。
+5.  在**Topic 管理**页面，找到目标Topic，在其**操作**列中，选择**更多** \> **体验发送消息**。
 
-6.  在**Topic管理**页面，找到目标Topic，在其右侧**操作**列，选择**![more](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/2398900161/p211711.png)** \> **发送消息**。
+6.  在**快速体验消息收发**面板，发送测试消息。
 
-7.  在**发送消息**面板：
-
-    1.  在**Message Key**文本框，输入demo。
-
-    2.  在**Message Value**文本框，输入\{"key": "test"\}。
-
-        **说明：** Message Value必须为JSON格式。
-
-        ![send_message](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/2398900161/p211695.png)
-
+    -   **发送方式**选择**控制台**。
+        1.  在**消息 Key**文本框中输入消息的Key值，例如demo。
+        2.  在**消息内容**文本框输入测试的消息内容，例如 \{"key": "test"\}。
+        3.  设置**发送到指定分区**，选择是否指定分区。
+            1.  单击**是**，在**分区 ID**文本框中输入分区的ID，例如0。如果您需查询分区的ID，请参见[查看分区状态](/cn.zh-CN/用户指南/Topic/查看分区状态.md)。
+            2.  单击**否**，不指定分区。
+        4.  根据界面提示信息，通过SDK订阅消息，或者执行Docker命令订阅消息。
+    -   **发送方式**选择**Docker**，运行Docker容器。
+        1.  执行**运行 Docker 容器生产示例消息**区域的Docker命令，发送消息。
+        2.  执行**发送后如何消费消息？**区域的Docker命令，订阅消息。
+    -   **发送方式**选择**SDK**，根据您的业务需求，选择需要的语言或者框架的SDK以及接入方式，通过SDK体验消息收发。
 
 ## 结果验证
 
