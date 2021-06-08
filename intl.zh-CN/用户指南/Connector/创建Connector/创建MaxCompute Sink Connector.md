@@ -4,16 +4,16 @@ keyword: [kafka, connector, maxcompute]
 
 # 创建MaxCompute Sink Connector
 
-本文说明如何创建MaxCompute Sink Connector将数据从消息队列Kafka版实例的数据源Topic导出至MaxCompute的表。
+本文说明如何创建MaxCompute Sink Connector将数据从实例的数据源Topic导出至MaxCompute的表。
 
 在创建MaxCompute Sink Connector前，请确保您已完成以下操作：
 
--   为消息队列Kafka版实例开启Connector。更多信息，请参见[开启Connector](/intl.zh-CN/用户指南/Connector/开启Connector.md)。
--   为消息队列Kafka版实例创建数据源Topic。更多信息，请参见[步骤一：创建Topic](/intl.zh-CN/快速入门/步骤三：创建资源.md)。
+-   为实例开启Connector。更多信息，请参见[t1908611.md\#](/intl.zh-CN/用户指南/Connector/开启Connector.md)。
+-   为实例创建数据源Topic。更多信息，请参见[t998824.md\#section\_zm0\_ysj\_343](/intl.zh-CN/快速入门/步骤三：创建资源.md)。
 
     本文以名称为maxcompute-test-input的Topic为例。
 
--   通过MaxCompute客户端创建表。更多信息，请参见[创建和查看表](/intl.zh-CN/快速入门/创建和查看表.md)。
+-   通过MaxCompute客户端创建表。更多信息，请参见[t11950.md\#](/intl.zh-CN/快速入门/通过MaxCompute客户端使用MaxCompute/创建和查看表.md)。
 
     本文以名称为connector\_test的项目下名称为test\_kafka的表为例。该表的建表语句如下：
 
@@ -24,16 +24,16 @@ keyword: [kafka, connector, maxcompute]
 
 ## 操作流程
 
-使用MaxCompute Sink Connector将数据从消息队列Kafka版实例的数据源Topic导出至MaxCompute的表操作流程如下：
+使用MaxCompute Sink Connector将数据从实例的数据源Topic导出至MaxCompute的表操作流程如下：
 
-1.  授予消息队列Kafka版访问MaxCompute的权限
+1.  授予访问MaxCompute的权限。
     -   [创建RAM角色](#section_e02_70i_3jg)
     -   [添加权限](#section_rbd_pjy_5dh)
 2.  创建MaxCompute Sink Connector依赖的Topic和Consumer Group
 
     如果您不需要自定义Topic和Consumer Group的名称，您可以直接跳过该步骤，在下一步骤选择自动创建。
 
-    **说明：** 部分MaxCompute Sink Connector依赖的Topic的存储引擎必须为Local存储，大版本为0.10.2的消息队列Kafka版实例不支持手动创建Local存储的Topic，只支持自动创建。
+    **说明：** 部分MaxCompute Sink Connector依赖的Topic的存储引擎必须为Local存储，大版本为0.10.2的实例不支持手动创建Local存储的Topic，只支持自动创建。
 
     1.  [创建MaxCompute Sink Connector依赖的Topic](#section_jvw_8cp_twy)
     2.  [创建MaxCompute Sink Connector依赖的Consumer Group](#section_xu7_scc_88s)
@@ -44,7 +44,7 @@ keyword: [kafka, connector, maxcompute]
 
 ## 创建RAM角色
 
-由于RAM角色不支持直接选择消息队列Kafka版作为受信服务，您在创建RAM角色时，需要选择任意支持的服务作为受信服务。RAM角色创建后，手工修改信任策略。
+由于RAM角色不支持直接选择作为受信服务，您在创建RAM角色时，需要选择任意支持的服务作为受信服务。RAM角色创建后，手动修改信任策略。
 
 1.  登录[访问控制控制台](https://ram.console.aliyun.com/)。
 
@@ -56,7 +56,7 @@ keyword: [kafka, connector, maxcompute]
 
     1.  **当前可信实体类型**区域，选择**阿里云服务**，然后单击**下一步**。
 
-    2.  在**角色类型**区域，选择**普通服务角色**，在**角色名称**文本框，输入AliyunKafkaMaxComputeUser1，从**选择受信服务**列表，选择**函数计算**，然后单击**完成**。
+    2.  在**角色类型**区域，选择**普通服务角色**，在**角色名称**文本框，输入AliyunKafkaMaxComputeUser1，从**选择受信服务**列表，选择**大数据计算服务**，然后单击**完成**。
 
 5.  在**RAM角色管理**页面，找到**AliyunKafkaMaxComputeUser1**，单击**AliyunKafkaMaxComputeUser1**。
 
@@ -78,7 +78,7 @@ keyword: [kafka, connector, maxcompute]
 |Table|Alter|修改表的元信息或添加删除分区。|
 |Table|Update|覆盖或添加表的数据。|
 
-关于以上权限的详细说明以及授权操作，请参见[授权](/intl.zh-CN/安全管理/安全管理详解/用户及授权管理/授权.md)。
+关于以上权限的详细说明以及授权操作，请参见[t12097.md\#](/intl.zh-CN/安全管理/安全管理详解/用户及授权管理/授权.md)。
 
 为本文创建的AliyunKafkaMaxComputeUser1添加权限的示例步骤如下：
 
@@ -113,146 +113,92 @@ keyword: [kafka, connector, maxcompute]
 
 ## 创建MaxCompute Sink Connector依赖的Topic
 
-您可以在消息队列Kafka版控制台手动创建MaxCompute Sink Connector依赖的5个Topic。
-
-1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
-
-2.  在顶部菜单栏，选择地域。
-
-3.  在左侧导航栏，单击**实例列表**。
-
-4.  在**实例列表**页面，单击目标实例名称。
-
-5.  在左侧导航栏，单击**Topic管理**。
-
-6.  在**Topic管理**页面，单击**创建 Topic**。
-
-7.  在**创建 Topic**面板，设置Topic属性，然后单击**创建**。
-
-    |Topic|描述|
-    |-----|--|
-    |**任务位点Topic**|用于存储消费位点的Topic。    -   Topic名称：建议以connect-offset开头。
-    -   分区数：Topic的分区数量必须大于1。
-    -   存储引擎：Topic的存储引擎必须为Local存储。
-    -   cleanup.policy：Topic的日志清理策略必须为compact。 |
-    |**任务配置Topic**|用于存储任务配置的Topic。    -   Topic名称：建议以connect-config开头。
-    -   分区数：Topic的分区数量必须为1。
-    -   存储引擎：Topic的存储引擎必须为Local存储。
-    -   cleanup.policy：Topic的日志清理策略必须为compact。 |
-    |**任务状态Topic**|用于存储任务状态的Topic。    -   Topic名称：建议以connect-status开头。
-    -   分区数：Topic的分区数量建议为6。
-    -   存储引擎：Topic的存储引擎必须为Local存储。
-    -   cleanup.policy：Topic的日志清理策略必须为compact。 |
-    |**死信队列Topic**|用于存储Connect框架的异常数据的Topic。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。    -   Topic名称：建议以connect-error开头。
-    -   分区数：Topic的分区数量建议为6。
-    -   存储引擎：Topic的存储引擎可以为Local存储或云存储。 |
-    |**异常数据Topic**|用于存储Sink的异常数据的Topic。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。    -   Topic名称：建议以connect-error开头。
-    -   分区数：Topic的分区数量建议为6。
-    -   存储引擎：Topic的存储引擎可以为Local存储或云存储。 |
+您可以在控制台手动创建MaxCompute Sink Connector依赖的5个Topic，包括：任务位点Topic、任务配置Topic、任务状态Topic、死信队列Topic以及异常数据Topic。每个Topic所需要满足的分区数与存储引擎会有差异，具体信息，请参见[表 1](#table_y1t_x93_65g)。
 
 
 ## 创建MaxCompute Sink Connector依赖的Consumer Group
 
-您可以在消息队列Kafka版控制台手动创建MaxCompute Sink Connector依赖的2个Consumer Group。
-
-1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
-
-2.  在顶部菜单栏，选择地域。
-
-3.  在左侧导航栏，单击**实例列表**。
-
-4.  在**实例列表**页面，单击目标实例名称。
-
-5.  在左侧导航栏，单击**Consumer Group管理**。
-
-6.  在**Consumer Group管理**页面，单击**创建Consumer Group**。
-
-7.  在**创建Consumer Group**面板，设置Consumer Group属性，然后单击**创建**。
-
-    |Consumer Group|描述|
-    |--------------|--|
-    |Connector任务消费组|Connector的数据同步任务使用的Consumer Group。该Consumer Group的名称必须为connect-任务名称。|
-    |Connector消费组|Connector使用的Consumer Group。该Consumer Group的名称建议以connect-cluster开头。|
+您可以在控制台手动创建MaxCompute Sink Connector数据同步任务使用的Consumer Group。该Consumer Group的名称必须为connect-任务名称，具体信息，请参见[表 1](#table_y1t_x93_65g)。
 
 
 ## 创建并部署MaxCompute Sink Connector
 
-创建并部署用于将数据从消息队列Kafka版同步至MaxCompute的MaxCompute Sink Connector。
+创建并部署用于将数据从同步至MaxCompute的MaxCompute Sink Connector。
 
-1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
+1.  在**创建 Connector**配置向导面页面，完成以下操作。
 
-2.  在顶部菜单栏，选择地域。
-
-3.  在左侧导航栏，单击**实例列表**。
-
-4.  在**实例列表**页面，单击目标实例名称。
-
-5.  在左侧导航栏，单击**Connector（公测组件）**。
-
-6.  在**Connector（公测组件）**页面，单击**创建Connector**。
-
-7.  在**创建Connector**面板，完成以下操作。
-
-    1.  在**基础信息**页签，配置以下参数，然后单击**下一步**。
+    1.  在**配置基本信息**页签，按需配置以下参数，然后单击**下一步**。
 
         |参数|描述|示例值|
         |--|--|---|
-        |**Connector名称**|Connector的名称。命名规则：        -   可以包含数字、小写英文字母和短划线（-），但不能以短划线（-）开头，长度限制为48个字符。
-        -   同一个消息队列Kafka版实例内保持唯一。
+        |**名称**|Connector的名称。命名规则：        -   可以包含数字、小写英文字母和短划线（-），但不能以短划线（-）开头，长度限制为48个字符。
+        -   同一个实例内保持唯一。
 Connector的数据同步任务必须使用名称为connect-任务名称的Consumer Group。如果您未手动创建该Consumer Group，系统将为您自动创建。
 
 |kafka-maxcompute-sink|
-        |**转储路径**|配置数据转储的源和目标。第一个下拉列表中选择数据源，第二个下拉列表中选择目标。|从**消息队列Kafka版**转储到**MaxCompute**|
+        |**实例**|默认配置为实例的名称与实例ID。|demo alikafka\_post-cn-st21p8vj\*\*\*\*|
 
-    2.  在**源实例配置**页签，按需配置以下参数，然后单击**下一步**。
-
-        **说明：** 如果您已创建好Topic和Consumer Group，那么请选择手动创建资源，并填写已创建的资源信息。否则，请选择自动创建资源。
+    2.  在**配置源服务**页签，选择数据源为消息队列Kafka版，并配置以下参数，然后单击**下一步**。
 
         |参数|描述|示例值|
         |--|--|---|
-        |**VPC ID**|数据同步任务所在的VPC。默认为消息队列Kafka版实例所在的VPC，您无需填写。|vpc-bp1xpdnd3l\*\*\*|
-        |**VSwitch ID**|数据同步任务所在的交换机。该交换机必须与消息队列Kafka版实例处于同一VPC。默认为部署消息队列Kafka版实例时填写的交换机。|vsw-bp1d2jgg81\*\*\*|
-        |**数据源Topic**|需要同步数据的Topic。|maxcompute-test-input|
-        |**消费初始位置**|开始消费的位置。取值说明如下：         -   **latest**：从最新位点开始消费。
-        -   **earliest**：从最初位点开始消费。
-|latest|
-        |**Connector消费组**|Connector使用的Consumer Group。该Consumer Group的名称建议以connect-cluster开头。|connect-cluster-kafka-maxcompute-sink|
-        |**任务位点Topic**|用于存储消费位点的Topic。        -   Topic名称：建议以connect-offset开头。
+        |**数据源 Topic**|需要同步数据的Topic。|maxcompute-test-input|
+        |**消费线程并发数**|数据源Topic的消费线程并发数。默认值为6。取值说明如下：        -   **6**
+        -   **12**
+|**6**|
+        |**消费初始位置**|开始消费的位置。取值说明如下：         -   **最早位点**：从最初位点开始消费。
+        -   **最近位点**：从最新位点开始消费。
+|**最早位点**|
+        |**VPC ID**|数据同步任务所在的VPC。单击**配置运行环境**显示该参数。默认为实例所在的VPC，您无需填写。|vpc-bp1xpdnd3l\*\*\*|
+        |**VSwitch ID**|数据同步任务所在的交换机。单击**配置运行环境**显示该参数。该交换机必须与实例处于同一VPC。默认为部署实例时填写的交换机。|vsw-bp1d2jgg81\*\*\*|
+        |**失败处理**|消息发送失败后，是否继续订阅出现错误的Topic的分区。单击**配置运行环境**显示该参数。取值说明如下。        -   **继续订阅**：继续订阅出现错误的Topic的分区，并打印错误日志。
+        -   **停止订阅**：停止订阅出现错误的Topic的分区，并打印错误日志
+**说明：**
+
+        -   如何查看日志，请参见[t1909714.md\#](/intl.zh-CN/用户指南/Connector/查看Connector日志.md)。
+        -   如何根据错误码查找解决方案，请参见[t1881176.md\#section\_o0o\_6fa\_tcl]()。
+        -   如需恢复对出现错误的Topic的分区的订阅，您需要[提交工单](https://workorder-intl.console.aliyun.com/?spm=5176.kafka.aliyun_topbar.8.79e425e8DncGA9#/ticket/add/?productId=1352)联系技术人员。
+|**继续订阅**|
+        |**创建资源方式**|选择创建Connector所依赖的Topic与Group的方式。单击**配置运行环境**显示该参数。        -   **自动创建**
+        -   **手动创建**
+|**自动创建**|
+        |**Connector 消费组**|Connector的数据同步任务使用的Consumer Group。单击**配置运行环境**显示该参数。该Consumer Group的名称必须为connect-任务名称。|connect-kafka-maxcompute-sink|
+        |**任务位点 Topic**|用于存储消费位点的Topic。单击**配置运行环境**显示该参数。        -   Topic名称：建议以connect-offset开头。
         -   分区数：Topic的分区数量必须大于1。
         -   存储引擎：Topic的存储引擎必须为Local存储。
         -   cleanup.policy：Topic的日志清理策略必须为compact。
 |connect-offset-kafka-maxcompute-sink|
-        |**任务配置Topic**|用于存储任务配置的Topic。        -   Topic名称：建议以connect-config开头。
+        |**任务配置 Topic**|用于存储任务配置的Topic。单击**配置运行环境**显示该参数。        -   Topic名称：建议以connect-config开头。
         -   分区数：Topic的分区数量必须为1。
         -   存储引擎：Topic的存储引擎必须为Local存储。
         -   cleanup.policy：Topic的日志清理策略必须为compact。
 |connect-config-kafka-maxcompute-sink|
-        |**任务状态Topic**|用于存储任务状态的Topic。        -   Topic名称：建议以connect-status开头。
+        |**任务状态 Topic**|用于存储任务状态的Topic。单击**配置运行环境**显示该参数。        -   Topic名称：建议以connect-status开头。
         -   分区数：Topic的分区数量建议为6。
         -   存储引擎：Topic的存储引擎必须为Local存储。
         -   cleanup.policy：Topic的日志清理策略必须为compact。
 |connect-status-kafka-maxcompute-sink|
-        |**死信队列Topic**|用于存储Connect框架的异常数据的Topic。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。        -   Topic名称：建议以connect-error开头。
+        |**死信队列 Topic**|用于存储Connect框架的异常数据的Topic。单击**配置运行环境**显示该参数。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。        -   Topic名称：建议以connect-error开头。
         -   分区数：Topic的分区数量建议为6。
         -   存储引擎：Topic的存储引擎可以为Local存储或云存储。
 |connect-error-kafka-maxcompute-sink|
-        |**异常数据Topic**|用于存储Sink的异常数据的Topic。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。        -   Topic名称：建议以connect-error开头。
+        |**异常数据 Topic**|用于存储Sink的异常数据的Topic。单击**配置运行环境**显示该参数。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。        -   Topic名称：建议以connect-error开头。
         -   分区数：Topic的分区数量建议为6。
         -   存储引擎：Topic的存储引擎可以为Local存储或云存储。
 |connect-error-kafka-maxcompute-sink|
 
-    3.  在**目标实例配置**页签，按需配置以下参数，然后单击**下一步**。
+    3.  在**配置目标服务**页签，选择目标服务为大数据计算服务，并配置以下参数，然后单击**创建**。
 
         |参数|描述|示例值|
         |--|--|---|
-        |**MaxCompute连接地址**|MaxCompute的服务接入点。更多信息，请参见[配置Endpoint](/intl.zh-CN/准备工作/配置Endpoint.md)。         -   VPC网络Endpoint：低延迟，推荐。适用于消息队列Kafka版实例和MaxCompute处于同一地域场景。
-        -   外网Endpoint：高延迟，不推荐。适用于消息队列Kafka版实例和MaxCompute处于不同地域的场景。如需使用公网Endpoint，您需要为Connector开启公网访问。更多信息，请参见[为Connector开启公网访问](/intl.zh-CN/用户指南/Connector/为Connector开启公网访问.md)。
+        |**连接地址**|MaxCompute的服务接入点。更多信息，请参见[t11949.md\#](/intl.zh-CN/准备工作/配置Endpoint.md)。         -   VPC网络Endpoint：低延迟，推荐。适用于实例和MaxCompute处于同一地域场景。
+        -   外网Endpoint：高延迟，不推荐。适用于实例和MaxCompute处于不同地域的场景。如需使用公网Endpoint，您需要为Connector开启公网访问。更多信息，请参见[t1910210.md\#](/intl.zh-CN/用户指南/Connector/为Connector开启公网访问.md)。
 |http://service.cn-hangzhou.maxcompute.aliyun-inc.com/api|
-        |**MaxCompute工作空间**|MaxCompute的工作空间。|connector\_test|
-        |**MaxCompute表**|MaxCompute的表。|test\_kafka|
-        |**MaxCompute表地域**|MaxCompute表所在地域。|华东1（杭州）|
+        |**工作空间**|MaxCompute的工作空间。|connector\_test|
+        |**表**|MaxCompute的表。|test\_kafka|
+        |**表地域**|MaxCompute表所在地域。|华东1（杭州）|
         |**服务账号**|MaxCompute的阿里云账号ID。|188\*\*\*|
-        |**授权角色名**|消息队列Kafka版的RAM角色的名称。更多信息，请参见[创建RAM角色](#section_e02_70i_3jg)。|AliyunKafkaMaxComputeUser1|
+        |**授权角色名**|的RAM角色的名称。更多信息，请参见[创建RAM角色](#section_e02_70i_3jg)。|AliyunKafkaMaxComputeUser1|
         |**模式**|消息同步到Connector的模式。默认为DEFAULT。取值说明如下：        -   **KEY**：只保留消息的Key，并将Key写入MaxCompute表的key列。
         -   **VALUE**：只保留消息的Value，并将Value写入MaxCompute表的value列。
         -   **DEFAULT**：同时保留消息的Key和Value，并将Key和Value分别写入MaxCompute表的key列和value列。
@@ -273,35 +219,21 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
         -   **HOUR**：每小时将数据写入一个新分区。
         -   **MINUTE**：每分钟将数据写入一个新分区。
 |HOUR|
-        |**时区**|向Connector的数据源Topic发送消息的消息队列Kafka版生产者客户端所在时区。默认为GMT 08:00。|GMT 08:00|
+        |**时区**|向Connector的数据源Topic发送消息的生产者客户端所在时区。默认为GMT 08:00。|GMT 08:00|
 
-    4.  在**预览/提交**下方，确认Connector的配置，然后单击**提交**。
+        创建完成后，在**Connector 管理**页面，查看创建的Connector 。
 
-8.  在**创建Connector**面板，单击**部署**。
+2.  创建完成后，在**Connector 管理**页面，找到创建的Connector ，单击其**操作**列的**部署**。
 
 
 ## 发送测试消息
 
-部署MaxCompute Sink Connector后，您可以向消息队列Kafka版的数据源Topic发送消息，测试数据能否被同步至MaxCompute。
-
-1.  在**Connector（公测组件）**页面，找到目标Connector，在其**操作**列，单击**测试**。
-
-2.  在**Topic管理**页面，选择实例，找到**maxcompute-test-input**，在其**操作**列，单击**发送消息**。
-
-3.  在**发送消息**面板，发送测试消息。
-
-    1.  在**分区**文本框，输入0。
-
-    2.  在**Message Key**文本框，输入1。
-
-    3.  在**Message Value**文本框，输入1。
-
-    4.  单击**发送**。
+部署MaxCompute Sink Connector后，您可以向的数据源Topic发送消息，测试数据能否被同步至MaxCompute。
 
 
 ## 查看表数据
 
-向消息队列Kafka版的数据源Topic发送消息后，在MaxCompute客户端查看表数据，验证是否收到消息。
+向的数据源Topic发送消息后，在MaxCompute客户端查看表数据，验证是否收到消息。
 
 查看本文写入的test\_kafka的示例步骤如下：
 
