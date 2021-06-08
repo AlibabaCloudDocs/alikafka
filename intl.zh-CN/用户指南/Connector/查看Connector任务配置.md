@@ -16,16 +16,14 @@ keyword: [kafka, connector, 查看配置]
 
 1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
-2.  在顶部菜单栏，选择地域。
+2.  在**概览**页面的**资源分布**区域，选择地域。
 
-3.  在左侧导航栏，单击**实例列表**。
+3.  在**实例列表**页面，单击目标实例名称。
 
-4.  在**实例列表**页面，单击目标实例名称。
+4.  在左侧导航栏，单击**Connector 管理**。
 
-5.  在左侧导航栏，单击**Connector（公测组件）**。
+5.  在**Connector 管理**页面，找到目标Connector，单击**操作**的**详情**。
 
-6.  在**Connector（公测组件）**页面，找到需要查看任务配置的Connector，在其**操作**列，单击![icon_more](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/8046936061/p185678.png)图标，从下拉列表中，选择**查看任务配置**。
-
-    **查看任务配置**面板显示Connector的任务配置。
+    在**Connector详情**页面，显示Connector的**基础信息**、**源信息**和**目标信息**。
 
 
