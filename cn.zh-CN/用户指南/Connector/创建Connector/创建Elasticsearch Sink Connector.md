@@ -23,19 +23,17 @@
 
 1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
-2.  在顶部菜单栏，选择地域。
+2.  在**概览**页面的**资源分布**区域，选择地域。
 
-3.  在左侧导航栏，单击**实例列表**。
+3.  在**实例列表**页面，单击目标实例名称。
 
-4.  在**实例列表**页面，单击目标实例名称。
+4.  在左侧导航栏，单击**Connector 管理**。
 
-5.  在左侧导航栏，单击**Connector（公测组件）**。
+5.  在**Connector 管理**页面，单击**创建 Connector**。
 
-6.  在**Connector（公测组件）**页面，单击**创建Connector**。
+6.  在**创建 Connector**配置向导面页面，完成以下操作。
 
-7.  在**创建Connector**配置向导中，完成以下操作。
-
-    1.  在**基础信息**页签的**Connector名称**文本框，输入Connector名称，然后将**转储路径**配置为从**消息队列Kafka版**转储到**Elasticsearch**，单击**下一步**。
+    1.  在**配置基本信息**页签，按需配置以下参数，然后单击**下一步**。
 
         **说明：** 消息队列Kafka版会为您自动选中**授权创建服务关联角色**。
 
@@ -45,34 +43,71 @@
 
         |参数|描述|示例值|
         |--|--|---|
-        |**Connector名称**|Connector的名称。命名规则：        -   可以包含数字、小写英文字母和短划线（-），但不能以短划线（-）开头，长度限制为48个字符。
+        |**名称**|Connector的名称。命名规则：        -   可以包含数字、小写英文字母和短划线（-），但不能以短划线（-）开头，长度限制为48个字符。
         -   同一个消息队列Kafka版实例内保持唯一。
 Connector的数据同步任务必须使用名称为connect-任务名称的Consumer Group。如果您未手动创建该Consumer Group，系统将为您自动创建。
 
 |kafka-elasticsearch-sink|
-        |**转储路径**|配置数据转储的源和目标。第一个下拉列表中选择数据源，第二个下拉列表中选择目标。|从**消息队列Kafka版**转储到**Elasticsearch**|
+        |**实例**|默认配置为实例的名称与实例ID。|demo alikafka\_post-cn-st21p8vj\*\*\*\*|
 
-    2.  在**源实例配置**页签，配置以下参数，然后单击**下一步**。
-
-        |参数|描述|示例值|
-        |--|--|---|
-        |**数据源Topic**|需要同步数据的Topic。|elasticsearch-test-input|
-        |**消费初始位置**|开始消费的位置。取值：         -   latest：从最新位点开始消费。
-        -   earliest：从最初位点开始消费。
-|latest|
-        |**消费线程并发数**|数据源Topic的消费线程并发数。默认值为6。取值：        -   6
-        -   12
-|6|
-
-    3.  在**目标实例配置 运行环境配置**页签，配置目标实例相关参数。
+    2.  在**配置源服务**页签，选择数据源为消息队列Kafka版，并配置以下参数，然后单击**下一步**。
 
         |参数|描述|示例值|
         |--|--|---|
-        |**ES实例ID**|阿里云Elasticsearch实例ID。|es-cn-oew1o67x0000\*\*\*\*|
-        |**接入地址**|阿里云Elasticsearch实例的公网或私网地址。详细信息，请参见[查看实例的基本信息](/cn.zh-CN/Elasticsearch/实例管理/查看实例的基本信息.md)。|es-cn-oew1o67x0000\*\*\*\*.elasticsearch.aliyuncs.com|
+        |**数据源 Topic**|需要同步数据的Topic。|elasticsearch-test-input|
+        |**消费线程并发数**|数据源Topic的消费线程并发数。默认值为6。取值说明如下：        -   **6**
+        -   **12**
+|**6**|
+        |**消费初始位置**|开始消费的位置。取值说明如下：         -   **最早位点**：从最初位点开始消费。
+        -   **最近位点**：从最新位点开始消费。
+|**最早位点**|
+        |**VPC ID**|数据同步任务所在的VPC。单击**配置运行环境**显示该参数。默认为消息队列Kafka版实例所在的VPC，您无需填写。|vpc-bp1xpdnd3l\*\*\*|
+        |**VSwitch ID**|数据同步任务所在的交换机。单击**配置运行环境**显示该参数。该交换机必须与消息队列Kafka版实例处于同一VPC。默认为部署消息队列Kafka版实例时填写的交换机。|vsw-bp1d2jgg81\*\*\*|
+        |**失败处理**|消息发送失败后，是否继续订阅出现错误的Topic的分区。单击**配置运行环境**显示该参数。取值说明如下。        -   **继续订阅**：继续订阅出现错误的Topic的分区，并打印错误日志。
+        -   **停止订阅**：停止订阅出现错误的Topic的分区，并打印错误日志
+**说明：**
+
+        -   如何查看日志，请参见[查看Connector日志](/cn.zh-CN/用户指南/Connector/查看Connector日志.md)。
+        -   如何根据错误码查找解决方案，请参见[错误码]()。
+        -   如需恢复对出现错误的Topic的分区的订阅，您需要[提交工单](https://selfservice.console.aliyun.com/ticket/createIndex?spm=a2c4g.11186623.2.23.33183cc5K5SAef)联系消息队列Kafka版技术人员。
+|**继续订阅**|
+        |**创建资源方式**|选择创建Connector所依赖的Topic与Group的方式。单击**配置运行环境**显示该参数。        -   **自动创建**
+        -   **手动创建**
+|**自动创建**|
+        |**Connector 消费组**|Connector的数据同步任务使用的Consumer Group。单击**配置运行环境**显示该参数。该Consumer Group的名称必须为connect-任务名称。|connect-kafka-elasticsearch-sink|
+        |**任务位点 Topic**|用于存储消费位点的Topic。单击**配置运行环境**显示该参数。        -   Topic：建议以connect-offset开头。
+        -   分区数：Topic的分区数量必须大于1。
+        -   存储引擎：Topic的存储引擎必须为Local存储。
+        -   cleanup.policy：Topic的日志清理策略必须为compact。
+|connect-offset-kafka-elasticsearch-sink|
+        |**任务配置 Topic**|用于存储任务配置的Topic。单击**配置运行环境**显示该参数。        -   Topic：建议以connect-config开头。
+        -   分区数：Topic的分区数量必须为1。
+        -   存储引擎：Topic的存储引擎必须为Local存储。
+        -   cleanup.policy：Topic的日志清理策略必须为compact。
+|connect-config-kafka-elasticsearch-sink|
+        |**任务状态 Topic**|用于存储任务状态的Topic。单击**配置运行环境**显示该参数。        -   Topic：建议以connect-status开头。
+        -   分区数：Topic的分区数量建议为6。
+        -   存储引擎：Topic的存储引擎必须为Local存储。
+        -   cleanup.policy：Topic的日志清理策略必须为compact。
+|connect-status-kafka-elasticsearch-sink|
+        |**死信队列 Topic**|用于存储Connect框架的异常数据的Topic。单击**配置运行环境**显示该参数。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。        -   Topic：建议以connect-error开头。
+        -   分区数：Topic的分区数量建议为6。
+        -   存储引擎：Topic的存储引擎可以为Local存储或云存储。
+|connect-error-kafka-elasticsearch-sink|
+        |**异常数据 Topic**|用于存储Sink的异常数据的Topic。单击**配置运行环境**显示该参数。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。        -   Topic：建议以connect-error开头。
+        -   分区数：Topic的分区数量建议为6。
+        -   存储引擎：Topic的存储引擎可以为Local存储或云存储。
+|connect-error-kafka-elasticsearch-sink|
+
+    3.  在**配置目标服务**页签，选择目标服务为对象存储，并配置以下参数，然后单击**创建**。
+
+        |参数|描述|示例值|
+        |--|--|---|
+        |**ES 实例 ID**|阿里云Elasticsearch实例ID。|es-cn-oew1o67x0000\*\*\*\*|
+        |**接入地址**|阿里云Elasticsearch实例的公网或私网地址。更多信息，请参见[查看实例的基本信息](/cn.zh-CN/Elasticsearch/实例管理/查看实例的基本信息.md)。|es-cn-oew1o67x0000\*\*\*\*.elasticsearch.aliyuncs.com|
         |**接入端口**|访问阿里云Elasticsearch的公网或私网端口，取值如下：        -   9200：基于HTTP或HTTPS。
         -   9300：基于TCP。
-详细信息，请参见[查看实例的基本信息](/cn.zh-CN/Elasticsearch/实例管理/查看实例的基本信息.md)。
+更多信息，请参见[查看实例的基本信息](/cn.zh-CN/Elasticsearch/实例管理/查看实例的基本信息.md)。
 
 |9300|
         |**用户名**|登录Kibana控制台的用户名，默认为elastic。您也可以创建自定义用户，创建步骤，请参见[创建用户](/cn.zh-CN/访问控制/Kibana角色管理/创建用户.md)。|elastic|
@@ -83,64 +118,16 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
 
         -   用户名和用户密码会被用来初始化Elasticsearch对象，通过bulk投递消息，请确认账号对索引有写权限。
         -   用户名和用户密码是消息队列Kafka版创建任务时作为环境变量传递至函数计算的函数，任务创建成功后，消息队列Kafka版不保存相关信息。
-    4.  在**目标实例配置 运行环境配置**下方，配置运行环境，然后单击**下一步**。
+        创建完成后，在**Connector 管理**页面，查看创建的Connector 。
 
-        |参数|描述|示例值|
-        |--|--|---|
-        |**VPC ID**|数据同步任务所在的VPC。默认为消息队列Kafka版实例所在的VPC，您无需填写。|vpc-bp1xpdnd3l\*\*\*|
-        |**VSwitch ID**|数据同步任务所在的交换机。该交换机必须与消息队列Kafka版实例处于同一VPC。默认为部署消息队列Kafka版实例时填写的交换机。|vsw-bp1d2jgg81\*\*\*|
-        |**失败处理策略**|消息发送失败后的错误处理。默认为log。取值：        -   log：继续订阅出现错误的Topic的分区，并打印错误日志。出现错误后，您可以通过Connector日志查看错误，并根据错误码查找解决方案，以进行自助排查。
-
-**说明：**
-
-            -   如何查看Connector日志，请参见[查看Connector日志](/cn.zh-CN/用户指南/Connector/查看Connector日志.md)。
-            -   如何根据错误码查找解决方案，请参见[错误码]()。
-        -   fail：停止对出现错误的Topic的分区的订阅，并打印错误日志。出现错误后，您可以通过Connector日志查看错误，并根据错误的错误码查找解决方案，以进行自助排查。
-
-**说明：**
-
-            -   如何查看Connector日志，请参见[查看Connector日志](/cn.zh-CN/用户指南/Connector/查看Connector日志.md)。
-            -   如何根据错误码查找解决方案，请参见[错误码]()。
-            -   如需恢复对出现错误的Topic的分区的订阅，您需要提交[提交工单](https://selfservice.console.aliyun.com/ticket/createIndex?spm=a2c4g.11186623.2.23.33183cc5K5SAef)联系消息队列Kafka版技术人员。
-|log|
-        |**创建资源**|选择**自动创建**或者选择**手动创建**并输入手动创建的Topic的名称。|自动创建|
-        |**Connector消费组**|Connector使用的Consumer Group。该Consumer Group的名称建议以connect-cluster开头。|connect-cluster-kafka-elasticsearch-sink|
-        |**任务位点Topic**|用于存储消费位点的Topic。        -   Topic名称：建议以connect-offset开头。
-        -   分区数：Topic的分区数量必须大于1。
-        -   存储引擎：Topic的存储引擎必须为Local存储。
-        -   cleanup.policy：Topic的日志清理策略必须为compact。
-|connect-offset-kafka-elasticsearch-sink|
-        |**任务配置Topic**|用于存储任务配置的Topic。        -   Topic名称：建议以connect-config开头。
-        -   分区数：Topic的分区数量必须为1。
-        -   存储引擎：Topic的存储引擎必须为Local存储。
-        -   cleanup.policy：Topic的日志清理策略必须为compact。
-|connect-config-kafka-elasticsearch-sink|
-        |**任务状态Topic**|用于存储任务状态的Topic。        -   Topic名称：建议以connect-status开头。
-        -   分区数：Topic的分区数量建议为6。
-        -   存储引擎：Topic的存储引擎必须为Local存储。
-        -   cleanup.policy：Topic的日志清理策略必须为compact。
-|connect-status-kafka-elasticsearch-sink|
-        |**异常数据Topic**|用于存储Sink的异常数据的Topic。该Topic可以和**死信队列Topic**为同一个Topic，以节省Topic资源。        -   Topic名称：建议以connect-error开头。
-        -   分区数：Topic的分区数量建议为6。
-        -   存储引擎：Topic的存储引擎可以为Local存储或云存储。
-|connect-error-kafka-elasticsearch-sink|
-        |**死信队列Topic**|用于存储Connect框架的异常数据的Topic。该Topic可以和**异常数据Topic**为同一个Topic，以节省Topic资源。        -   Topic名称：建议以connect-error开头。
-        -   分区数：Topic的分区数量建议为6。
-        -   存储引擎：Topic的存储引擎可以为Local存储或云存储。
-|connect-error-kafka-elasticsearch-sink|
-
-    5.  在**预览/提交**页签，确认Connector的配置，然后单击**提交**。
-
-8.  在Connector列表，找到您刚创建的Connector，并在其**操作**列单击**部署**。
-
-    Connector状态切换至**运行中**，则说明部署成功。
+7.  创建完成后，在**Connector 管理**页面，找到创建的Connector ，单击其**操作**列的**部署**。
 
 
 ## 配置函数服务
 
 您在消息队列Kafka版控制台成功创建并部署Elasticsearch Sink Connector后，函数计算会自动为您创建给该Connector使用的函数服务，服务命名格式为`kafka-service-<connector_name>-<随机String>`。
 
-1.  在**Connector（公测组件）**页面，找到目标Connector，在其右侧**操作**列，单击**函数配置**。
+1.  在**Connector 管理**页面，找到目标Connector，在其右侧**操作**列，选择**更多** \> **查看日志**。
 
     页面跳转至函数计算控制台。
 
@@ -151,20 +138,18 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
 
 您可以向消息队列Kafka版的数据源Topic发送消息，测试数据能否被导出至阿里云Elasticsearch。
 
-1.  在**Connector（公测组件）**页面，找到目标Connector，在其右侧**操作**列，单击**测试**。
+1.  在**Connector 管理**页面，找到目标Connector，在其右侧**操作**列，单击**测试**。
 
-2.  在**Topic管理**页面，选择实例，找到数据源Topic，在其右侧**操作**列，单击**发送消息**。
+2.  在**发送消息**面板，发送测试消息。
 
-3.  在**发送消息**面板，发送测试消息。
-
-    1.  在**分区**文本框，输入0。
-
-    2.  在**Message Key**文本框，输入1。
-
-    3.  在**Message Value**文本框，输入1。
-
-    4.  单击**发送**。
-
+    -   **发送方式**选择**控制台**。
+        1.  在**消息 Key**文本框中输入消息的Key值，例如demo。
+        2.  在**消息内容**文本框输入测试的消息内容，例如 \{"key": "test"\}。
+        3.  设置**发送到指定分区**，选择是否指定分区。
+            1.  单击**是**，在**分区 ID**文本框中输入分区的ID，例如0。如果您需查询分区的ID，请参见[查看分区状态](/cn.zh-CN/用户指南/Topic/查看分区状态.md)。
+            2.  单击**否**，不指定分区。
+    -   **发送方式**选择**Docker**，执行**运行 Docker 容器生产示例消息**区域的Docker命令，发送消息。
+    -   **发送方式**选择**SDK**，根据您的业务需求，选择需要的语言或者框架的SDK以及接入方式，通过SDK发送消息。
 
 ## 验证结果
 
