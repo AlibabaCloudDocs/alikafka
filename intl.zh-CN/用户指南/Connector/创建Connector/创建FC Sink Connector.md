@@ -153,66 +153,69 @@ keyword: [kafka, connector, fc]
 
 ## 创建FC Sink Connector依赖的Topic
 
-您可以在消息队列Kafka版控制台手动创建FC Sink Connector依赖的5个Topic。
+您可以在消息队列Kafka版控制台手动创建MaxCompute Sink Connector依赖的5个Topic，包括：任务位点Topic、任务配置Topic、任务状态Topic、死信队列Topic以及异常数据Topic。每个Topic所需要满足的分区数与存储引擎会有差异，具体信息，请参见[表 1](#table_iwz_fij_3re)。
 
 1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
-2.  在顶部菜单栏，选择地域。
+2.  在**概览**页面的**资源分布**区域，选择地域。
 
-3.  在左侧导航栏，单击**实例列表**。
+    **说明：** Topic需要在应用程序所在的地域（即所部署的ECS的所在地域）进行创建。Topic不能跨地域使用。例如Topic创建在华北2（北京）这个地域，那么消息生产端和消费端也必须运行在华北2（北京）的ECS。
 
-4.  在**实例列表**页面，单击目标实例名称。
+3.  在**实例列表**页面，单击目标实例名称。
 
-5.  在左侧导航栏，单击**Topic管理**。
+4.  在左侧导航栏，单击**Topic 管理**。
 
-6.  在**Topic管理**页面，单击**创建 Topic**。
+5.  在**Topic 管理**页面，单击**创建 Topic**。
 
-7.  在**创建 Topic**面板，设置Topic属性，然后单击**创建**。
+6.  在**创建 Topic**面板，设置Topic属性，然后单击**确定**。
 
-    |Topic|描述|
-    |-----|--|
-    |任务位点Topic|用于存储消费位点的Topic。    -   Topic：建议以connect-offset开头。
-    -   分区数：Topic的分区数量必须大于1。
-    -   存储引擎：Topic的存储引擎必须为Local存储。
-    -   cleanup.policy：Topic的日志清理策略必须为compact。 |
-    |任务配置Topic|用于存储任务配置的Topic。    -   Topic：建议以connect-config开头。
-    -   分区数：Topic的分区数量必须为1。
-    -   存储引擎：Topic的存储引擎必须为Local存储。
-    -   cleanup.policy：Topic的日志清理策略必须为compact。 |
-    |任务状态Topic|用于存储任务状态的Topic。    -   Topic：建议以connect-status开头。
-    -   分区数：Topic的分区数量建议为6。
-    -   存储引擎：Topic的存储引擎必须为Local存储。
-    -   cleanup.policy：Topic的日志清理策略必须为compact。 |
-    |死信队列Topic|用于存储Connect框架的异常数据的Topic。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。    -   Topic：建议以connect-error开头。
-    -   分区数：Topic的分区数量建议为6。
-    -   存储引擎：Topic的存储引擎可以为Local存储或云存储。 |
-    |异常数据Topic|用于存储Sink的异常数据的Topic。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。    -   Topic：建议以connect-error开头。
-    -   分区数：Topic的分区数量建议为6。
-    -   存储引擎：Topic的存储引擎可以为Local存储或云存储。 |
+    ![创建Topic](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/8808912261/p278627.png)
+
+    |参数|说明|示例|
+    |--|--|--|
+    |**名称**|Topic名称。|demo|
+    |**描述**|Topic的简单描述。|demo test|
+    |**分区数**|Topic的分区数量。|12|
+    |**存储引擎**|Topic消息的存储引擎。 消息队列Kafka版支持以下两种存储引擎。
+
+     -   **云存储**：底层接入阿里云云盘，具有低时延、高性能、持久性、高可靠等特点，采用分布式3副本机制。实例的**规格类型**为**标准版（高写版）**时，存储引擎只能为**云存储**。
+    -   **Local 存储**：使用原生Kafka的ISR复制算法，采用分布式3副本机制。
+|**云存储**|
+    |**消息类型**|Topic消息的类型。     -   **普通消息**：默认情况下，保证相同Key的消息分布在同一个分区中，且分区内消息按照发送顺序存储。集群中出现机器宕机时，可能会造成消息乱序。当**存储引擎**选择**云存储**时，默认选择**普通消息**。
+    -   **分区顺序消息**：默认情况下，保证相同Key的消息分布在同一个分区中，且分区内消息按照发送顺序存储。集群中出现机器宕机时，仍然保证分区内按照发送顺序存储。但是会出现部分分区发送消息失败，等到分区恢复后即可恢复正常。当**存储引擎**选择**Local 存储**时，默认选择**分区顺序消息**。
+|**普通消息**|
+    |**日志清理策略**|Topic日志的清理策略。 当**存储引擎**选择**Local 存储**时，需要配置**日志清理策略**。
+
+ 消息队列Kafka版支持以下两种日志清理策略。
+
+     -   **Delete**：默认的消息清理策略。在磁盘容量充足的情况下，保留在最长保留时间范围内的消息；在磁盘容量不足时（一般磁盘使用率超过85%视为不足），将提前删除旧消息，以保证服务可用性。
+    -   **Compact**：使用[Kafka Log Compaction日志清理策略](https://kafka.apache.org/documentation/?spm=a2c4g.11186623.2.15.1cde7bc3c8pZkD#compaction)。Log Compaction清理策略保证相同Key的消息，最新的value值一定会被保留。主要适用于系统宕机后恢复状态，系统重启后重新加载缓存等场景。例如，在使用Kafka Connect或Confluent Schema Registry时，需要使用Kafka Compact Topic存储系统状态信息或配置信息。
+
+**说明：** Compact Topic一般只用在某些生态组件中，例如Kafka Connect或Confluent Schema Registry，其他情况的消息收发请勿为Topic设置该属性。具体信息，请参见[消息队列Kafka版Demo库](https://code.aliyun.com/alikafka/aliware-kafka-demos/tree/master)。
+
+|**Compact**|
+    |**标签**|Topic的标签。|demo|
+
+    创建完成后，在**Topic 管理**页面的列表中显示已创建的Topic。
 
 
 ## 创建FC Sink Connector依赖的Consumer Group
 
-您可以在消息队列Kafka版控制台手动创建FC Sink Connector依赖的2个Consumer Group。
+您可以在消息队列Kafka版控制台手动创建MaxCompute Sink Connector数据同步任务使用的Consumer Group。该Consumer Group的名称必须为connect-任务名称，具体信息，请参见[表 1](#table_iwz_fij_3re)。
 
 1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
-2.  在顶部菜单栏，选择地域。
+2.  在**概览**页面的**资源分布**区域，选择地域。
 
-3.  在左侧导航栏，单击**实例列表**。
+3.  在**实例列表**页面，单击目标实例名称。
 
-4.  在**实例列表**页面，单击目标实例名称。
+4.  在左侧导航栏，单击**Group 管理**。
 
-5.  在左侧导航栏，单击**Consumer Group管理**。
+5.  在**Group 管理**页面，单击**创建 Group**。
 
-6.  在**Consumer Group管理**页面，单击**创建Consumer Group**。
+6.  在**创建 Group**面板的**Group ID**文本框输入Group的名称，在**描述**文本框简要描述Group，并给Group添加标签，单击**确定**。
 
-7.  在**创建Consumer Group**面板，设置Consumer Group属性，然后单击**创建**。
-
-    |Consumer Group|描述|
-    |--------------|--|
-    |Connector任务消费组|Connector的数据同步任务使用的Consumer Group。该Consumer Group的名称必须为connect-任务名称。|
-    |Connector消费组|Connector使用的Consumer Group。该Consumer Group的名称建议以connect-cluster开头。|
+    创建完成后，在**Group 管理**页面的列表中显示已创建的Group。
 
 
 ## 创建并部署FC Sink Connector
@@ -221,78 +224,79 @@ keyword: [kafka, connector, fc]
 
 1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
-2.  在顶部菜单栏，选择地域。
+2.  在**概览**页面的**资源分布**区域，选择地域。
 
-3.  在左侧导航栏，单击**实例列表**。
+3.  在**实例列表**页面，单击目标实例名称。
 
-4.  在**实例列表**页面，单击目标实例名称。
+4.  在左侧导航栏，单击**Connector 管理**。
 
-5.  在左侧导航栏，单击**Connector（公测组件）**。
+5.  在**Connector 管理**页面，单击**创建 Connector**。
 
-6.  在**Connector（公测组件）**页面，单击**创建Connector**。
+6.  在**创建 Connector**配置向导面页面，完成以下操作。
 
-7.  在**创建Connector**面板，完成以下操作。
-
-    1.  在**基础信息**页签，按需配置以下参数，然后单击**下一步**。
-
-        **说明：** 消息队列Kafka版会为您自动选中**授权创建服务关联角色**。
-
-        -   如果未创建服务关联角色，消息队列Kafka版会为您自动创建一个服务关联角色，以便您使用FC Sink Connector。
-        -   如果已创建服务关联角色，消息队列Kafka版不会重复创建。
-        服务关联角色的更多信息，请参见[服务关联角色](/intl.zh-CN/权限控制/服务关联角色.md)。
+    1.  在**配置基本信息**页签，按需配置以下参数，然后单击**下一步**。
 
         |参数|描述|示例值|
         |--|--|---|
-        |**Connector名称**|Connector的名称。命名规则：        -   可以包含数字、小写英文字母和短划线（-），但不能以短划线（-）开头，长度限制为48个字符。
+        |**名称**c|Connector的名称。命名规则：        -   可以包含数字、小写英文字母和短划线（-），但不能以短划线（-）开头，长度限制为48个字符。
         -   同一个消息队列Kafka版实例内保持唯一。
 Connector的数据同步任务必须使用名称为connect-任务名称的Consumer Group。如果您未手动创建该Consumer Group，系统将为您自动创建。
 
 |kafka-fc-sink|
-        |**转储路径**|配置数据转储的源和目标。第一个下拉列表中选择数据源，第二个下拉列表中选择目标。|从**消息队列Kafka版**转储到**函数计算**|
+        |**实例**|默认配置为实例的名称与实例ID。|demo alikafka\_post-cn-st21p8vj\*\*\*\*|
 
-    2.  在**源实例配置**页签，配置以下参数，然后单击**下一步**。
+    2.  在**配置源服务**页签，选择数据源为消息队列Kafka版，并配置以下参数，然后单击**下一步**。
 
         **说明：** 如果您已创建好Topic和Consumer Group，那么请选择手动创建资源，并填写已创建的资源信息。否则，请选择自动创建资源。
 
         |参数|描述|示例值|
         |--|--|---|
-        |**VPC ID**|数据同步任务所在的VPC。默认为消息队列Kafka版实例所在的VPC，您无需填写。|vpc-bp1xpdnd3l\*\*\*|
-        |**VSwitch ID**|数据同步任务所在的交换机。该交换机必须与消息队列Kafka版实例处于同一VPC。默认为部署消息队列Kafka版实例时填写的交换机。|vsw-bp1d2jgg81\*\*\*|
-        |**数据源Topic**|需要同步数据的Topic。|fc-test-input|
-        |**消费初始位置**|开始消费的位置。取值说明如下：         -   **latest**：从最新位点开始消费。
-        -   **earliest**：从最初位点开始消费。
-|latest|
-        |**消费线程并发数**|数据源Topic的消费线程并发数。默认值为3。取值说明如下：        -   **3**
-        -   **6**
-        -   **9**
+        |**数据源 Topic**|需要同步数据的Topic。|fc-test-input|
+        |**消费线程并发数**|数据源Topic的消费线程并发数。默认值为6。取值说明如下：        -   **6**
         -   **12**
-|3|
-        |**Connector消费组**|Connector使用的Consumer Group。该Consumer Group的名称建议以connect-cluster开头。|connect-cluster-kafka-fc-sink|
-        |**任务位点Topic**|用于存储消费位点的Topic。        -   Topic：建议以connect-offset开头。
+|**6**|
+        |**消费初始位置**|开始消费的位置。取值说明如下：         -   **最早位点**：从最初位点开始消费。
+        -   **最近位点**：从最新位点开始消费。
+|**最早位点**|
+        |**VPC ID**|数据同步任务所在的VPC。单击**配置运行环境**显示该参数。默认为消息队列Kafka版实例所在的VPC，您无需填写。|vpc-bp1xpdnd3l\*\*\*|
+        |**VSwitch ID**|数据同步任务所在的交换机。单击**配置运行环境**显示该参数。该交换机必须与消息队列Kafka版实例处于同一VPC。默认为部署消息队列Kafka版实例时填写的交换机。|vsw-bp1d2jgg81\*\*\*|
+        |**失败处理**|消息发送失败后，是否继续订阅出现错误的Topic的分区。单击**配置运行环境**显示该参数。取值说明如下。        -   **继续订阅**：继续订阅出现错误的Topic的分区，并打印错误日志。
+        -   **停止订阅**：停止订阅出现错误的Topic的分区，并打印错误日志
+**说明：**
+
+        -   如何查看日志，请参见[查看Connector日志](/intl.zh-CN/用户指南/Connector/查看Connector日志.md)。
+        -   如何根据错误码查找解决方案，请参见[错误码]()。
+        -   如需恢复对出现错误的Topic的分区的订阅，您需要[提交工单](https://workorder-intl.console.aliyun.com/?spm=5176.kafka.aliyun_topbar.8.79e425e8DncGA9#/ticket/add/?productId=1352)联系消息队列Kafka版技术人员。
+|**继续订阅**|
+        |**创建资源方式**|选择创建Connector所依赖的Topic与Group的方式。单击**配置运行环境**显示该参数。        -   **自动创建**
+        -   **手动创建**
+|**自动创建**|
+        |**Connector 消费组**|Connector的数据同步任务使用的Consumer Group。单击**配置运行环境**显示该参数。该Consumer Group的名称必须为connect-任务名称。|connect-kafka-fc-sink|
+        |**任务位点 Topic**|用于存储消费位点的Topic。单击**配置运行环境**显示该参数。        -   Topic：建议以connect-offset开头。
         -   分区数：Topic的分区数量必须大于1。
         -   存储引擎：Topic的存储引擎必须为Local存储。
         -   cleanup.policy：Topic的日志清理策略必须为compact。
 |connect-offset-kafka-fc-sink|
-        |**任务配置Topic**|用于存储任务配置的Topic。        -   Topic：建议以connect-config开头。
+        |**任务配置 Topic**|用于存储任务配置的Topic。单击**配置运行环境**显示该参数。        -   Topic：建议以connect-config开头。
         -   分区数：Topic的分区数量必须为1。
         -   存储引擎：Topic的存储引擎必须为Local存储。
         -   cleanup.policy：Topic的日志清理策略必须为compact。
 |connect-config-kafka-fc-sink|
-        |**任务状态Topic**|用于存储任务状态的Topic。        -   Topic：建议以connect-status开头。
+        |**任务状态 Topic**|用于存储任务状态的Topic。单击**配置运行环境**显示该参数。        -   Topic：建议以connect-status开头。
         -   分区数：Topic的分区数量建议为6。
         -   存储引擎：Topic的存储引擎必须为Local存储。
         -   cleanup.policy：Topic的日志清理策略必须为compact。
 |connect-status-kafka-fc-sink|
-        |**死信队列Topic**|用于存储Connect框架的异常数据的Topic。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。        -   Topic：建议以connect-error开头。
+        |**死信队列 Topic**|用于存储Connect框架的异常数据的Topic。单击**配置运行环境**显示该参数。该Topic可以和异常数据Topic为同一个Topic，以节省Topic资源。        -   Topic：建议以connect-error开头。
         -   分区数：Topic的分区数量建议为6。
         -   存储引擎：Topic的存储引擎可以为Local存储或云存储。
 |connect-error-kafka-fc-sink|
-        |**异常数据Topic**|用于存储Sink的异常数据的Topic。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。        -   Topic：建议以connect-error开头。
+        |**异常数据 Topic**|用于存储Sink的异常数据的Topic。单击**配置运行环境**显示该参数。该Topic可以和死信队列Topic为同一个Topic，以节省Topic资源。        -   Topic：建议以connect-error开头。
         -   分区数：Topic的分区数量建议为6。
         -   存储引擎：Topic的存储引擎可以为Local存储或云存储。
 |connect-error-kafka-fc-sink|
 
-    3.  在**目标实例配置**页签，配置以下参数，然后单击**下一步**。
+    3.  在**配置目标服务**页签，选择目标服务为函数计算，并配置以下参数，然后单击**创建**。
 
         |参数|描述|示例值|
         |--|--|---|
@@ -317,10 +321,10 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
 |AliyunKafkaConnectorRole|
         |**服务名**|函数计算服务的名称。|guide-hello\_world|
         |**函数名**|函数计算服务的函数名称。|hello\_world|
-        |**服务版本或别名**|函数计算服务的版本或别名。|LATEST|
+        |**版本或别名**|函数计算服务的版本或别名。|LATEST|
         |**发送模式**|消息发送模式。取值说明如下：         -   **异步**：推荐。
         -   **同步**：不推荐。同步发送模式下，如果函数计算的处理时间较长，消息队列Kafka版的处理时间也会较长。当同一批次消息的处理时间超过5分钟时，会触发消息队列Kafka版客户端Rebalance。
-|异步|
+|**异步**|
         |**发送批大小**|批量发送的消息条数。默认为20。Connector根据发送批次大小和请求大小限制（同步请求大小限制为6 MB，异步请求大小限制为128 KB）将多条消息聚合后发送。例如，发送模式为异步，发送批次大小为20，如果要发送18条消息，其中有17条消息的总大小为127 KB，有1条消息的大小为200 KB，Connector会将总大小不超过128 KB的17条消息聚合后发送，将大小超过128 KB的1条消息单独发送。**说明：** 如果您在发送消息时将key设置为null，则请求中不包含key。如果将value设置为null，则请求中不包含value。
 
         -   如果批量发送的多条消息的大小不超过请求大小限制，则请求中包含消息内容。请求示例如下：
@@ -395,40 +399,30 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
 **说明：** Connector调用[InvokeFunction]()向函数计算发送消息。
 
 |2|
-        |**失败处理**|消息发送失败后，是否继续订阅出现错误的Topic的分区。取值说明如下：        -   log：继续订阅出现错误的Topic的分区，并打印错误日志。
-        -   fail：停止订阅出现错误的Topic的分区，并打印错误日志。
-**说明：**
 
-        -   如何查看日志，请参见[查看Connector日志](/intl.zh-CN/用户指南/Connector/查看Connector日志.md)。
-        -   如何根据错误码查找解决方案，请参见[错误码]()。
-        -   如需恢复对出现错误的Topic的分区的订阅，您需要[提交工单](https://workorder-intl.console.aliyun.com/?spm=5176.kafka.aliyun_topbar.8.79e425e8DncGA9#/ticket/add/?productId=1352)联系消息队列Kafka版技术人员。
-|log|
+        创建完成后，在**Connector 管理**页面，查看创建的Connector 。
 
-    4.  在**预览/提交**页签，确认Connector的配置，然后单击**提交**。
+7.  创建完成后，在**Connector 管理**页面，找到创建的Connector ，单击其**操作**列的**部署**。
 
-8.  在**创建Connector**面板，单击**部署**。
-
-    如需配置函数计算资源，单击**函数配置**，跳转至函数计算控制台完成操作。
+    如需配置函数计算资源，单击其**操作**列的**更多** \> **配置函数**，跳转至函数计算控制台完成操作。
 
 
 ## 发送测试消息
 
 部署FC Sink Connector后，您可以向消息队列Kafka版的数据源Topic发送消息，测试数据能否被同步至函数计算。
 
-1.  在**Connector（公测组件）**页面，找到目标Connector，在其右侧**操作**列，单击**测试**。
+1.  在**Connector 管理**页面，找到目标Connector，在其右侧**操作**列，单击**测试**。
 
-2.  在**Topic管理**页面，选择实例，找到**fc-test-input**，在其右侧**操作**列，单击**发送消息**。
+2.  在**发送消息**面板，发送测试消息。
 
-3.  在**发送消息**面板，发送测试消息。
-
-    1.  在**分区**文本框，输入0。
-
-    2.  在**Message Key**文本框，输入1。
-
-    3.  在**Message Value**文本框，输入1。
-
-    4.  单击**发送**。
-
+    -   **发送方式**选择**控制台**。
+        1.  在**消息 Key**文本框中输入消息的Key值，例如demo。
+        2.  在**消息内容**文本框输入测试的消息内容，例如 \{"key": "test"\}。
+        3.  设置**发送到指定分区**，选择是否指定分区。
+            1.  单击**是**，在**分区 ID**文本框中输入分区的ID，例如0。如果您需查询分区的ID，请参见[查看分区状态](/intl.zh-CN/用户指南/Topic/查看分区状态.md)。
+            2.  单击**否**，不指定分区。
+    -   **发送方式**选择**Docker**，执行**运行 Docker 容器生产示例消息**区域的Docker命令，发送消息。
+    -   **发送方式**选择**SDK**，根据您的业务需求，选择需要的语言或者框架的SDK以及接入方式，通过SDK发送消息。
 
 ## 查看函数日志
 
