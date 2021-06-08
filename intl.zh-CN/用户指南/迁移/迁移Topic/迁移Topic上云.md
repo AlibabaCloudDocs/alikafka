@@ -4,7 +4,7 @@ keyword: [topic, metadata, 迁移, kafka]
 
 # 迁移Topic上云
 
-本教程介绍如何使用消息队列Kafka版提供的迁移工具将自建Kafka集群的Topic迁移到消息队列Kafka版实例。
+本文介绍如何使用消息队列Kafka版提供的迁移工具将自建Kafka集群的Topic迁移到消息队列Kafka版实例。
 
 您已完成以下操作：
 
@@ -18,7 +18,7 @@ keyword: [topic, metadata, 迁移, kafka]
 
 1.  打开命令行工具。
 
-2.  使用cd将路径切换到迁移工具所在目录。
+2.  使用cd命令将路径切换到迁移工具所在目录。
 
 3.  执行以下命令确认要迁移的Topic。
 
@@ -61,12 +61,12 @@ keyword: [topic, metadata, 迁移, kafka]
 
     1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/)。
 
-    2.  在顶部菜单栏，选择目标实例所在地域。
+    2.  在**概览**页面的**资源分布**区域，选择地域。
 
-    3.  在左侧导航栏，单击**Topic管理**。
+    3.  在**实例列表**页面，单击目标实例名称。
 
-    4.  在**Topic管理**页面，选择目标实例。
+    4.  在左侧导航栏，单击**Topic 管理**。
 
-        **Topic**列表显示成功迁移的Topic。
+    5.  在**Topic 管理**页面的Topic列表中，显示成功迁移的Topic。
 
 
