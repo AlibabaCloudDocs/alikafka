@@ -11,7 +11,7 @@
 1.  [创建Topic](#section_jax_bs9_o5x)
 2.  [发送消息](#section_ldk_ge6_y1v)
 3.  [查看分区状态](#section_cyx_ddi_5vi)
-4.  [按位点查询消息](#section_tar_w7j_afd)
+4.  [按位点查询消息](#section_pix_vzn_7o2)
 
 您可以多次重复步骤2到步骤4，如果多次操作正常，则说明服务端正常。
 
@@ -21,73 +21,113 @@
 
 创建用于接收消息的Topic。
 
-1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/)。
+1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
-2.  在左侧导航栏，单击**Topic管理**。
+2.  在**概览**页面的**资源分布**区域，选择地域。
 
-3.  在**Topic管理**页面顶部，选择目标实例，然后单击**创建Topic**。
+3.  在**实例列表**页面，单击目标实例名称。
 
-    ![create topic](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/2606119951/p87665.png)
+4.  在左侧导航栏，单击**Topic 管理**。
 
-4.  在**创建Topic**对话框，设置Topic属性，然后单击**创建**。
+5.  在**Topic 管理**页面，单击**创建 Topic**。
 
-    ![createtopic](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/2606119951/p87632.png)
+6.  在**创建 Topic**面板，设置Topic属性，然后单击**确定**。
 
-    字段说明如下：
+    ![createtopic](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/5782313261/p87632.png)
 
-    -   **Topic**：Topic名称，例如demo。
-    -   **标签**：标签，例如demo。
-    -   **实例**：实例ID，例如alikafka\_pre-cn-\*\*\*。
-    -   **备注**：备注信息，例如demo。
-    -   **分区数**：Topic的分区数量，例如12。
+    |参数|说明|示例|
+    |--|--|--|
+    |**名称**|Topic名称。|demo|
+    |**描述**|Topic的简单描述。|demo test|
+    |**分区数**|Topic的分区数量。|12|
+    |**存储引擎**|Topic消息的存储引擎。消息队列Kafka版支持以下两种存储引擎。您可以了解界面的解释信息，选择满足业务需求的方式。
+
+    -   **云存储**
+    -   **Local 存储**
+|**云存储**|
+    |**消息类型**|Topic消息的类型。    -   当**存储引擎**选择**云存储**时，默认选择**普通消息**。
+    -   当**存储引擎**选择**Local 存储**时，默认选择**分区顺序消息**。
+|**普通消息**|
+    |**日志清理策略**|Topic日志的清理策略。当**存储引擎**选择**Local 存储**时，需要配置**日志清理策略**。
+
+消息队列Kafka版支持以下两种日志清理策略。您可以了解界面的解释信息，选择满足业务需求的方式。
+
+    -   **Delete**
+    -   **Compact**
+|**Compact**|
+    |**标签**|Topic的标签。|demo|
+
 
 ## 发送消息
 
-往创建的Topic的指定分区发送消息。
+向已创建的Topic发送消息。
 
-1.  在**Topic管理**页面，找到创建的Topic，在其**操作**列，单击**发送消息**。
+1.  在**Topic 管理**页面，找到目标Topic，在其**操作**列中，选择**更多** \> **体验发送消息**。
 
-    ![sendmessage](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/2606119951/p87667.png)
+2.  在**快速体验消息收发**面板，发送测试消息。
 
-2.  在**发送消息**对话框，设置分区和消息属性，然后单击**发送**。
-
-    ![sendmessagesetting](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/2606119951/p87671.png)
-
-    字段说明如下：
-
-    -   **分区**：分区ID，例如0。
-    -   **Message Key**：消息键，例如demo。
-    -   **Message Value**：消息值，例如 \{"key": "test"\}。
+    -   **发送方式**选择**控制台**。
+        1.  在**消息 Key**文本框中输入消息的Key值，例如demo。
+        2.  在**消息内容**文本框输入测试的消息内容，例如 \{"key": "test"\}。
+        3.  设置**发送到指定分区**，选择是否指定分区。
+            1.  单击**是**，在**分区 ID**文本框中输入分区的ID，例如0。如果您需查询分区的ID，请参见[查看分区状态](/intl.zh-CN/用户指南/Topic/查看分区状态.md)。
+            2.  单击**否**，不指定分区。
+        4.  根据界面提示信息，通过SDK订阅消息，或者执行Docker命令订阅消息。
+    -   **发送方式**选择**Docker**，运行Docker容器。
+        1.  执行**运行 Docker 容器生产示例消息**区域的Docker命令，发送消息。
+        2.  执行**发送后如何消费消息？**区域的Docker命令，订阅消息。
+    -   **发送方式**选择**SDK**，根据您的业务需求，选择需要的语言或者框架的SDK以及接入方式，通过SDK体验消息收发。
 
 ## 查看分区状态
 
 往指定分区发送消息后，查看该分区的状态。
 
-1.  在**Topic管理**页面，找到发送消息到的Topic，在其**操作**列，单击**分区状态**。
+1.  在**Topic 管理**页面，找到目标Topic，在其**操作**列中，选择**更多** \> **分区状态**。
 
-    ![sendmessage](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/2606119951/p87667.png)
+    |参数|说明|
+    |--|--|
+    |分区ID|该Topic分区的ID号。|
+    |最小位点|该Topic在当前分区下的最小消费位点。|
+    |最大位点|该Topic在当前分区下的最大消费位点。|
+    |最近更新时间|本分区中最近一条消息的存储时间。|
 
-2.  在**分区状态**对话框，单击**刷新**。
-
-    ![update](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/2606119951/p87686.png)
+    ![分区状态信息](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/3855612261/p278003.png)
 
 
 ## 按位点查询消息
 
-根据分区ID和位点查询消息。
+1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
-1.  在左侧导航栏，单击**消息查询**。
+2.  在**概览**页面的**资源分布**区域，选择地域。
 
-2.  在**消息查询**页面，选择目标实例，单击**按位点查询**页签。
+3.  在**实例列表**页面，单击目标实例名称。
 
-    1.  在**请输入Topic**文本框，输入Topic。
+4.  在左侧导航栏，单击**消息查询**。
 
-    2.  从**请选择分区**下拉列表，选择发送消息到的分区ID。
+5.  在**消息查询**页面的**查询方式**列表中，选择**按位点查询**。
 
-    3.  在**请输入位点**文本框，输入位点。
+6.  在**Topic**列表中，选择消息所属Topic名称；在**分区**列表中，选择消息所属的分区；在**起始位点**文本框，输入消息所在分区的位点，然后单击**查询**。
 
-    4.  单击**搜索**。
+    展示该查询位点及以后连续的消息。例如，指定的分区和位点都为“5”，那么返回的结果从位点“5”开始。
 
-    ![query message](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/3606119951/p87737.png)
+    |参数|描述|
+    |--|--|
+    |**分区**|消息的Topic分区。|
+    |**位点**|消息的所在的位点。|
+    |**Key**|消息的键（已强制转化为String类型）。|
+    |**Value**|消息的值（已强制转化为String类型），即消息的具体内容。|
+    |**消息创建时间**|发送消息时，客户端自带的或是您指定的`ProducerRecord`中的消息创建时间。 **说明：**
+
+    -   如果配置了该字段，则按配置值显示。
+    -   如果未配置该字段，则默认取消息发送时的系统时间。
+    -   如果显示值为1970/x/x x:x:x，则说明发送时间配置为0或其他有误的值。
+    -   0.9及以前版本的消息队列Kafka版客户端不支持配置该时间。 |
+    |**操作**|    -   单击**下载 Key**：下载消息的键值。
+    -   单击**下载 Value**：下载消息的具体内容。
+ **说明：**
+
+    -   查询到的每条消息在控制台上最多显示1 KB的内容，超过1 KB的部分将自动截断。如需查看完整的消息内容，请下载相应的消息。
+    -   仅专业版支持下载消息。
+    -   下载的消息最大为10 MB。如果消息超过10 MB，则只下载10 MB的内容。 |
 
 
