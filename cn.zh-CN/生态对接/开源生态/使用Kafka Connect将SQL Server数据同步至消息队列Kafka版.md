@@ -6,12 +6,12 @@
 
 在开始本教程前，请确保您已完成以下操作：
 
--   已下载SQL Server Source Connector。详情请参见[SQL Server Source Connector](https://repo1.maven.org/maven2/io/debezium/debezium-connector-sqlserver/)。
--   已下载Kafka Connect。详情请参见[Kafka Connect](http://kafka.apache.org/downloads#2.1.0)。
+-   已下载SQL Server Source Connector。具体信息，请参见[SQL Server Source Connector](https://repo1.maven.org/maven2/io/debezium/debezium-connector-sqlserver/)。
+-   已下载Kafka Connect。具体信息，请参见[Kafka Connect](http://kafka.apache.org/downloads#2.1.0)。
 
     **说明：** SQL Server Source Connector目前只支持2.1.0及以上版本的Kafka Connect。
 
--   已下载Docker。详情请参见[Docker](https://www.docker.com/products/docker-desktop)。
+-   已下载Docker。具体信息，请参见[Docker](https://www.docker.com/products/docker-desktop)。
 
 ## 步骤一：配置Kafka Connect
 
@@ -37,18 +37,18 @@
 
 配置好connect-distributed.properties后，执行以下命令启动Kafka Connect。
 
-```
-## 如果是公网接入，需先设置java.security.auth.login.config。
-## 如果是VPC接入，可以跳过这一步。
-export KAFKA_OPTS="-Djava.security.auth.login.config=kafka_client_jaas.conf"
-## 启动Kafka Connect。
-bin/connect-distributed.sh config/connect-distributed.properties
-```
+1.  如果是公网接入，需先设置java.security.auth.login.config，如果是VPC接入，可以跳过这一步。
 
-```
-## 启动Kafka Connect。
-bin/connect-distributed.sh config/connect-distributed.properties
-```
+    ```
+    export KAFKA_OPTS="-Djava.security.auth.login.config=kafka_client_jaas.conf"
+    ```
+
+2.  启动Kafka Connect。
+
+    ```
+    bin/connect-distributed.sh config/connect-distributed.properties
+    ```
+
 
 ## 步骤三：安装SQL Server
 
