@@ -16,17 +16,16 @@ keyword: [kafka, logstash, input, vpc]
 
 Logstash通过消息队列Kafka版的接入点与消息队列Kafka版建立连接。
 
+**说明：** 消息队列Kafka版支持以下VPC环境接入点：
+
+-   默认接入点：端口号为9092。
+-   SASL接入点：端口号为9094。如需使用SASL接入点，请开启ACL。您可以[提交工单](https://selfservice.console.aliyun.com/#/ticket/category/alikafka)申请开启ACL。
+
 1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
 2.  在**概览**页面的**资源分布**区域，选择地域。
 
 3.  在**实例列表**页面，单击作为Input接入Logstash的实例名称。
-
-4.  在**实例详情**页面的**接入点**页签，获取实例的接入点。
-
-    ![endpoint](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/2804172261/p111363.png)
-
-    **说明：** 不同接入点的差异，请参见[接入点对比](/intl.zh-CN/产品简介/接入点对比.md)。
 
 
 ## 步骤二：创建Topic
