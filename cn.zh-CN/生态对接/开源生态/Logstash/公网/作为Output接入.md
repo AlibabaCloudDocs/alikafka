@@ -22,14 +22,6 @@ Logstash通过消息队列Kafka版的接入点与消息队列Kafka版建立连�
 
 3.  在**实例列表**页面，单击作为Output接入Logstash的实例的名称。
 
-4.  在**实例详情**页面的**接入点信息**页签，获取实例的接入点。
-
-    ![endpoint](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/2804172261/p111363.png)
-
-    **说明：** 不同接入点的差异，请参见[接入点对比](/cn.zh-CN/产品简介/接入点对比.md)。
-
-5.  在**配置信息**页签，查看实例的**用户名**和**密码**。
-
 
 ## 步骤二：创建Topic
 
