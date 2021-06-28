@@ -153,7 +153,7 @@ keyword: [kafka, connector, fc]
 
 ## 创建FC Sink Connector依赖的Topic
 
-您可以在消息队列Kafka版控制台手动创建MaxCompute Sink Connector依赖的5个Topic，包括：任务位点Topic、任务配置Topic、任务状态Topic、死信队列Topic以及异常数据Topic。每个Topic所需要满足的分区数与存储引擎会有差异，具体信息，请参见[表 1](#table_iwz_fij_3re)。
+您可以在消息队列Kafka版控制台手动创建FC Sink Connector依赖的5个Topic，包括：任务位点Topic、任务配置Topic、任务状态Topic、死信队列Topic以及异常数据Topic。每个Topic所需要满足的分区数与存储引擎会有差异，具体信息，请参见[表 1](#table_iwz_fij_3re)。
 
 1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
@@ -176,19 +176,19 @@ keyword: [kafka, connector, fc]
     |**名称**|Topic名称。|demo|
     |**描述**|Topic的简单描述。|demo test|
     |**分区数**|Topic的分区数量。|12|
-    |**存储引擎**|Topic消息的存储引擎。 消息队列Kafka版支持以下两种存储引擎。
+    |**存储引擎**|Topic消息的存储引擎。消息队列Kafka版支持以下两种存储引擎。
 
-     -   **云存储**：底层接入阿里云云盘，具有低时延、高性能、持久性、高可靠等特点，采用分布式3副本机制。实例的**规格类型**为**标准版（高写版）**时，存储引擎只能为**云存储**。
+    -   **云存储**：底层接入阿里云云盘，具有低时延、高性能、持久性、高可靠等特点，采用分布式3副本机制。实例的**规格类型**为**标准版（高写版）**时，存储引擎只能为**云存储**。
     -   **Local 存储**：使用原生Kafka的ISR复制算法，采用分布式3副本机制。
 |**云存储**|
-    |**消息类型**|Topic消息的类型。     -   **普通消息**：默认情况下，保证相同Key的消息分布在同一个分区中，且分区内消息按照发送顺序存储。集群中出现机器宕机时，可能会造成消息乱序。当**存储引擎**选择**云存储**时，默认选择**普通消息**。
+    |**消息类型**|Topic消息的类型。    -   **普通消息**：默认情况下，保证相同Key的消息分布在同一个分区中，且分区内消息按照发送顺序存储。集群中出现机器宕机时，可能会造成消息乱序。当**存储引擎**选择**云存储**时，默认选择**普通消息**。
     -   **分区顺序消息**：默认情况下，保证相同Key的消息分布在同一个分区中，且分区内消息按照发送顺序存储。集群中出现机器宕机时，仍然保证分区内按照发送顺序存储。但是会出现部分分区发送消息失败，等到分区恢复后即可恢复正常。当**存储引擎**选择**Local 存储**时，默认选择**分区顺序消息**。
 |**普通消息**|
-    |**日志清理策略**|Topic日志的清理策略。 当**存储引擎**选择**Local 存储**时，需要配置**日志清理策略**。
+    |**日志清理策略**|Topic日志的清理策略。当**存储引擎**选择**Local 存储**时，需要配置**日志清理策略**。
 
- 消息队列Kafka版支持以下两种日志清理策略。
+消息队列Kafka版支持以下两种日志清理策略。
 
-     -   **Delete**：默认的消息清理策略。在磁盘容量充足的情况下，保留在最长保留时间范围内的消息；在磁盘容量不足时（一般磁盘使用率超过85%视为不足），将提前删除旧消息，以保证服务可用性。
+    -   **Delete**：默认的消息清理策略。在磁盘容量充足的情况下，保留在最长保留时间范围内的消息；在磁盘容量不足时（一般磁盘使用率超过85%视为不足），将提前删除旧消息，以保证服务可用性。
     -   **Compact**：使用[Kafka Log Compaction日志清理策略](https://kafka.apache.org/documentation/?spm=a2c4g.11186623.2.15.1cde7bc3c8pZkD#compaction)。Log Compaction清理策略保证相同Key的消息，最新的value值一定会被保留。主要适用于系统宕机后恢复状态，系统重启后重新加载缓存等场景。例如，在使用Kafka Connect或Confluent Schema Registry时，需要使用Kafka Compact Topic存储系统状态信息或配置信息。
 
 **说明：** Compact Topic一般只用在某些生态组件中，例如Kafka Connect或Confluent Schema Registry，其他情况的消息收发请勿为Topic设置该属性。具体信息，请参见[消息队列Kafka版Demo库](https://code.aliyun.com/alikafka/aliware-kafka-demos/tree/master)。
@@ -201,7 +201,7 @@ keyword: [kafka, connector, fc]
 
 ## 创建FC Sink Connector依赖的Consumer Group
 
-您可以在消息队列Kafka版控制台手动创建MaxCompute Sink Connector数据同步任务使用的Consumer Group。该Consumer Group的名称必须为connect-任务名称，具体信息，请参见[表 1](#table_iwz_fij_3re)。
+您可以在消息队列Kafka版控制台手动创建FC Sink Connector数据同步任务使用的Consumer Group。该Consumer Group的名称必须为connect-任务名称，具体信息，请参见[表 1](#table_iwz_fij_3re)。
 
 1.  登录[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)。
 
@@ -238,7 +238,7 @@ keyword: [kafka, connector, fc]
 
         |参数|描述|示例值|
         |--|--|---|
-        |**名称**c|Connector的名称。命名规则：        -   可以包含数字、小写英文字母和短划线（-），但不能以短划线（-）开头，长度限制为48个字符。
+        |**名称**|Connector的名称。命名规则：        -   可以包含数字、小写英文字母和短划线（-），但不能以短划线（-）开头，长度限制为48个字符。
         -   同一个消息队列Kafka版实例内保持唯一。
 Connector的数据同步任务必须使用名称为connect-任务名称的Consumer Group。如果您未手动创建该Consumer Group，系统将为您自动创建。
 
