@@ -99,7 +99,7 @@ Connector的数据同步任务必须使用名称为connect-任务名称的Consum
         -   存储引擎：Topic的存储引擎可以为Local存储或云存储。
 |connect-error-kafka-elasticsearch-sink|
 
-    3.  在**配置目标服务**页签，选择目标服务为对象存储，并配置以下参数，然后单击**创建**。
+    3.  在**配置目标服务**页签，选择目标服务为Elasticsearch，并配置以下参数，然后单击**创建**。
 
         |参数|描述|示例值|
         |--|--|---|
