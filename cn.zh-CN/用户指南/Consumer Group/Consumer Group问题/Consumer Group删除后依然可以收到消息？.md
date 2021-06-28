@@ -14,11 +14,11 @@
 
 1.  将服务版本升级为最新版。
 
-    在[控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)，进入**实例详情**的**配置信息**页签，在**小版本**右侧查看实例版本。
+    在[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)，进入**实例详情**的**基础信息**区域，在**小版本**右侧查看实例版本。
 
     -   如果显示为**当前版本为最新版本**，则无需处理。
     -   如果显示为**升级小版本**，请单击**升级小版本**，完成版本升级。
-2.  “创建-\>删除-\>再创建”Consumer Group
+2.  “创建-\>删除-\>再创建”Consumer Group。
 
     进入**Group 管理**页面，创建之前删除的Consumer Group，删除该Consumer Group，然后再次创建Consumer Group。
 
