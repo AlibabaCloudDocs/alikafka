@@ -1,6 +1,6 @@
 # Billing
 
-This topic describes the instance editions, regions, instance types, billable items, and billing methods of Message Queue for Apache Kafka.
+This topic describes the instance editions, instance types, billable items, and billing methods of Message Queue for Apache Kafka. This topic also lists the regions where Message Queue for Apache Kafka are available.
 
 **Note:** The connector feature of Message Queue for Apache Kafka is in public preview. This feature is independent of Message Queue for Apache Kafka instances. Therefore, you are not charged on the Message Queue for Apache Kafka side when you use a connector to synchronize data between Message Queue for Apache Kafka and another Alibaba Cloud service. Alibaba Cloud does not provide service level agreement \(SLA\) commitments for the connector feature in public preview. For information about the SLA commitments and billing of the services that are related to the connector feature, see the documentation of the services.
 
@@ -12,11 +12,11 @@ The following table describes the specifications for each instance edition of Me
 |----|-------------------------------|-----------------------------------|----------------------------------|
 |Version|Only version 0.10.x is supported.|-   Versions 0.10.x to 2.x are supported.
 -   Version 2.x is compatible with versions 0.11.x and 1.x.
--   By default, version 0.10.x is deployed. For more information about how to upgrade the version, see [Upgrade the instance version](/intl.en-US/User guide/Instances/Upgrade the instance version.md).
+-   By default, version 0.10.x is deployed. For more information about how to upgrade the version, see [Upgrade the version of an instance](/intl.en-US/User guide/Instances/Upgrade the instance version.md).
 
 |-   Versions 0.10.x to 2.x are supported.
 -   Version 2.x is compatible with versions 0.11.x and 1.x.
--   By default, version 0.10.x is deployed. For more information about how to upgrade the version, see [Upgrade the instance version](/intl.en-US/User guide/Instances/Upgrade the instance version.md). |
+-   By default, version 0.10.x is deployed. For more information about how to upgrade the version, see [Upgrade the version of an instance](/intl.en-US/User guide/Instances/Upgrade the instance version.md). |
 |Ratio of maximum read traffic to maximum write traffic|1:1|1:1|5:1|
 |Instance type|Virtual instance where specific resources are shared|Dedicated instance|Dedicated instance|
 |Message retention period|Up to seven days|Customizable|Customizable|
@@ -27,7 +27,7 @@ The following table describes the specifications for each instance edition of Me
 
 ## Regions
 
-The following table describes the regions where Message Queue for Apache Kafka can be deployed.
+The following table lists the regions where Message Queue for Apache Kafka are available.
 
 |Region group|Region|
 |------------|------|
@@ -56,7 +56,7 @@ The following table describes the regions where Message Queue for Apache Kafka c
 Message Queue for Apache Kafka provides the following instance types:
 
 -   VPC type: Instances of this type can be accessed only from a virtual private cloud \(VPC\).
--   Internet and VPC type: Instances of this type can be accessed from the Internet and a VPC.
+-   Internet and VPC type: Instances of this type can be accessed over the Internet or from a VPC.
 
 ## Billable items
 
@@ -65,9 +65,9 @@ The following table describes the billable items for Message Queue for Apache Ka
 |Billable item|Description|
 |-------------|-----------|
 |Public traffic|Public traffic is divided into read traffic and write traffic. The maximum read traffic and maximum write traffic provided by Message Queue for Apache Kafka are the same. Select a bandwidth based on your peak read or write traffic, whichever is higher. This billable item applies only to instances of the Internet and VPC type.|
-|Traffic specification|-   The traffic specification refers to all the traffic consumed by your elastic network interfaces \(ENIs\), including business traffic and in-cluster replication traffic. Business traffic is the actual messaging traffic of your business. In-cluster replication traffic includes the traffic generated when the data in your Message Queue for Apache Kafka cluster is backed up multiple times. By default, the cluster has a total of three replicas after backup.
+|Traffic specification|-   The traffic specification refers to all the traffic consumed by your elastic network interfaces \(ENIs\). The traffic includes both the business traffic and in-cluster replication traffic. Business traffic is the actual messaging traffic of your business. In-cluster replication traffic includes the traffic generated when the data in your Message Queue for Apache Kafka cluster is backed up multiple times. By default, the cluster has a total of three replicas after backup.
 -   Business traffic is divided into read traffic and write traffic. The ratio of maximum read traffic to maximum write traffic is 1:1 for the Professional Edition \(High Write\) and is 5:1 for the Professional Edition \(High Read\). Select an ENI traffic specification based on your peak read or write traffic, whichever is higher. To ensure business stability, we recommend that you purchase a margin for buffering. The margin is about 30% of your peak read or write traffic, whichever is higher. |
-|Disk Capacity|-   In consideration of performance and storage space, the minimum disk capacity varies based on the traffic specification.
+|Disk capacity|-   In consideration of performance and storage space, the minimum disk capacity varies based on the traffic specification.
 -   Message Queue for Apache Kafka supports ultra disks and solid-state drives \(SSDs\). We recommend that you use SSDs.
 -   The price of a disk varies with the disk type.
 -   Exercise caution when you select a disk type, because the disk type cannot be changed after the order is placed.
@@ -77,13 +77,13 @@ The following table describes the billable items for Message Queue for Apache Ka
 
 **Note:** Free storage space applies only to topics whose storage engines are cloud storage. For more information about cloud storage, see [Storage engine comparison](/intl.en-US/Introduction/Storage engine comparison.md). |
 |Topic specification|-   The maximum number of topics or partitions allowed varies with your traffic specification.
--   In addition to the default number of partitions, 16 partitions are added each time you purchase a topic. Assume that you have purchased an instance that has 50 topics, a maximum traffic volume of 20 MB/s, and 400 default partitions. After you purchase another 10 topics for this instance, 160 partitions are added to the instance. The total number of partitions increases to 560.
--   The number of topics that you can create on a Professional Edition instance is twice the number of topics that you purchase. For example, if you purchase a Professional Edition instance that has 50 topics, the number of topics that you can create on this instance is 100. |
+-   In addition to the default number of partitions, 16 partitions are added each time you purchase a topic. Assume that you have purchased an instance that has 50 topics, a maximum traffic rate of 20 MB/s, and 400 default partitions. After you purchase another 10 topics for this instance, 160 partitions are added to the instance. The total number of partitions increases to 560.
+-   The number of topics that you can create on a Professional Edition instance is twice the number of topics that you purchase. For example, if you purchase a Professional Edition instance that has 50 topics, the number of topics that you can create on the instance is 100. |
 
 **Note:**
 
 -   You are charged for the items that are described in the previous tables.
--   You can adjust the value of the Message Retention Period parameter to save disk space. This parameter specifies the maximum period for which messages can be retained when disk space is sufficient. If disk usage reaches 90%, the disk capacity is insufficient. In this case, the system deletes messages from the earliest ones to ensure service availability. By default, messages are retained for a maximum of 72 hours. You can also select a period between 24 hours and 168 hours.
+-   You can adjust the value of the Message Retention Period parameter to save disk space. This parameter specifies the maximum period for which messages can be retained when disk space is sufficient. If disk usage reaches 85%, the disk capacity is insufficient. In this case, the system deletes messages from the earliest stored ones to ensure service availability. By default, messages are retained for a maximum of 72 hours. You can also select a period between 24 hours and 168 hours. For more information, see [When are historical messages deleted from Message Queue for Apache Kafka?](/intl.en-US/User guide/Instances/Instances/When are historical messages deleted from Message Queue for Apache Kafka?.md).
 -   The number of API calls is not a billable item.
 
 ## Billing methods
@@ -94,13 +94,13 @@ Billing formulas
 
 Billing formulas are associated with instance types.
 
--   If you have purchased an instance of the Internet and VPC type, select the public traffic, traffic specification, disk capacity, and number of additional topics as required. The following formula is used to calculate billing fees:
+-   If you have purchased an instance of the Internet and VPC type, select the public traffic, traffic specification, disk capacity, and number of additional topics as required. The following formula is used to calculate the related fees:
 
-    Total fees = \(Unit price of public traffic + Unit price of traffic specification + Unit price of disk capacity × Disk capacity to be purchased/100 + Price of one topic × Number of additional topics\) × Number of months
+    Total fees = \(Unit price of public traffic + Unit price of traffic specification + Unit price of disk capacity × Disk capacity purchased/100 + Price of one topic × Number of additional topics\) × Number of months
 
--   If you have purchased an instance of the VPC type, select the traffic specification, disk capacity, and number of additional topics as required. The following formula is used to calculate billing fees:
+-   If you have purchased an instance of the VPC type, select the traffic specification, disk capacity, and number of additional topics as required. The following formula is used to calculate the related fees:
 
-    Total fees = \(Unit price of traffic specification + Unit price of disk capacity × Disk capacity to be purchased/100 + Price of one topic × Number of additional topics\) × Number of months
+    Total fees = \(Unit price of traffic specification + Unit price of disk capacity × Disk capacity purchased/100 + Price of one topic × Number of additional topics\) × Number of months
 
 
 Billing rules
@@ -115,16 +115,16 @@ Billing rules include the rules for the public traffic, traffic specifications, 
 
     The billing rules for traffic specifications vary with your instance edition.
 
-    |Traffic specification|Maximum read traffic of ENIs \(MB/s\)|Maximum write traffic of ENIs \(MB/s\)|Topics in the subscription|Partitions in the subscription|Unit price in region group 1 \(USD/month\)|Unit price in region group 2 \(USD/month\)|Unit price in region group 3 \(USD/month\)|
-    |---------------------|-------------------------------------|--------------------------------------|--------------------------|------------------------------|------------------------------------------|------------------------------------------|------------------------------------------|
+    |Traffic specification|Maximum read traffic of ENIs \(MB/s\)|Maximum write traffic of ENIs \(MB/s\)|Default number of topics|Default number of partitions|Unit price in region group 1 \(USD/month\)|Unit price in region group 2 \(USD/month\)|Unit price in region group 3 \(USD/month\)|
+    |---------------------|-------------------------------------|--------------------------------------|------------------------|----------------------------|------------------------------------------|------------------------------------------|------------------------------------------|
     |alikafka.hw.2xlarge|3×20|3×20|50|400|250|370|340|
     |alikafka.hw.3xlarge|3×30|3×30|50|500|360|530|480|
     |alikafka.hw.6xlarge|3×60|3×60|80|600|520|760|700|
     |alikafka.hw.9xlarge|3×90|3×90|100|800|660|960|880|
     |alikafka.hw.12xlarge|3×120|3×120|150|900|800|1160|1070|
 
-    |Traffic specification|Maximum read traffic of ENIs \(MB/s\)|Maximum write traffic of ENIs \(MB/s\)|Topics in the subscription|Partitions in the subscription|Unit price in region group 1 \(USD/month\)|Unit price in region group 2 \(USD/month\)|Unit price in region group 3 \(USD/month\)|
-    |---------------------|-------------------------------------|--------------------------------------|--------------------------|------------------------------|------------------------------------------|------------------------------------------|------------------------------------------|
+    |Traffic specification|Maximum read traffic of ENIs \(MB/s\)|Maximum write traffic of ENIs \(MB/s\)|Default number of topics|Default number of partitions|Unit price in region group 1 \(USD/month\)|Unit price in region group 2 \(USD/month\)|Unit price in region group 3 \(USD/month\)|
+    |---------------------|-------------------------------------|--------------------------------------|------------------------|----------------------------|------------------------------------------|------------------------------------------|------------------------------------------|
     |alikafka.hw.2xlarge|3×20|3×20|50|1100|600|870|800|
     |alikafka.hw.3xlarge|3×30|3×30|50|1200|780|1040|1040|
     |alikafka.hw.6xlarge|3×60|3×60|80|1400|1130|1510|1510|
@@ -142,8 +142,8 @@ Billing rules include the rules for the public traffic, traffic specifications, 
     |alikafka.hw.180xlarge|3×1800|3×1800|900|9000|10910|14520|14520|
     |alikafka.hw.200xlarge|3×2000|3×2000|1000|10000|12070|16060|16060|
 
-    |Traffic specification|Maximum read traffic of ENIs \(MB/s\)|Maximum write traffic of ENIs \(MB/s\)|Topics in the subscription|Partitions in the subscription|Unit price in region group 1 \(USD/month\)|Unit price in region group 2 \(USD/month\)|Unit price in region group 3 \(USD/month\)|
-    |---------------------|-------------------------------------|--------------------------------------|--------------------------|------------------------------|------------------------------------------|------------------------------------------|------------------------------------------|
+    |Traffic specification|Maximum read traffic of ENIs \(MB/s\)|Maximum write traffic of ENIs \(MB/s\)|Default number of topics|Default number of partitions|Unit price in region group 1 \(USD/month\)|Unit price in region group 2 \(USD/month\)|Unit price in region group 3 \(USD/month\)|
+    |---------------------|-------------------------------------|--------------------------------------|------------------------|----------------------------|------------------------------------------|------------------------------------------|------------------------------------------|
     |alikafka.hr.2xlarge|50+2×10|10+2×10|50|1100|600|870|800|
     |alikafka.hr.3xlarge|75+2×15|15+2×15|50|1200|780|1040|1040|
     |alikafka.hr.6xlarge|150+2×30|30+2×30|80|1400|1130|1510|1510|
@@ -157,7 +157,7 @@ Billing rules include the rules for the public traffic, traffic specifications, 
     |Ultra disk|100|6|8|8|
     |SSD|100|16|23|21|
 
-    **Note:** If the disk capacity in the subscription does not meet your requirements, you must purchase additional disk capacity by adjusting the value of Disk Capacity on the buy page to a larger value.
+    **Note:** If the default disk capacity does not meet your requirements, you must purchase additional disk capacity by adjusting the value of Disk Capacity on the buy page to a larger value.
 
 -   Billing rules for additional topics
 
@@ -165,6 +165,6 @@ Billing rules include the rules for the public traffic, traffic specifications, 
     |-------------|----------------|------------------------------------------|------------------------------------------|------------------------------------------|
     |Topic|1|7|11|10|
 
-    **Note:** If the number of topics in the subscription does not meet your requirements, you must purchase additional topics by adjusting the value of Supported Topics on the buy page to a larger value.
+    **Note:** If the default number of topics does not meet your requirements, you must purchase additional topics by adjusting the value of Supported Topics on the buy page to a larger value.
 
 
