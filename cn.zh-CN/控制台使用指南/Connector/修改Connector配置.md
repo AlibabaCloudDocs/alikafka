@@ -28,7 +28,7 @@ keyword: [connector, kafka, 编辑描述]
     -   **6**
     -   **12** |
     |**失败处理**|消息发送失败后，是否继续订阅出现错误的Topic的分区。取值说明如下。    -   **继续订阅**：继续订阅出现错误的Topic的分区，并打印错误日志。
-    -   **停止订阅**：停止订阅出现错误的Topic的分区，并打印错误日志
+    -   **停止订阅**：停止订阅出现错误的Topic的分区，并打印错误日志。
 **说明：**
 
     -   如何查看日志，请参见[查看Connector日志](/cn.zh-CN/控制台使用指南/Connector/查看Connector日志.md)。
@@ -39,5 +39,5 @@ keyword: [connector, kafka, 编辑描述]
 **说明：** Connector调用[InvokeFunction]()向函数计算发送消息。 |
 
 
-修改完成后，在**Connector 管理**页面，找到目标Connector，单击其**操作**的**详情**。在**Connector的详情**页面，查看到更新后的Connector配置。
+修改完成后，在**Connector 管理**页面，找到目标Connector，单击其**操作**列的**详情**。在**Connector的详情**页面，查看到更新后的Connector配置。
 
