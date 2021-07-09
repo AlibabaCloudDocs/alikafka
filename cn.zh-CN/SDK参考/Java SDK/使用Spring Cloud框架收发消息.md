@@ -9,7 +9,7 @@ Spring Cloud是用于构建消息驱动的微服务应用程序的框架。详�
 -   [安装1.8或以上版本JDK](https://www.oracle.com/java/technologies/javase-downloads.html)。
 -   [安装2.5或以上版本Maven](http://maven.apache.org/download.cgi#)。
 -   下载[kafka-spring-stream-demo](https://github.com/AliwareMQ/aliware-kafka-demos/tree/master/kafka-spring-stream-demo)，并将其上传在准备好的Linux操作系统。
--   确保您的消息队列Kafka版实例为2.x或以上版本。具体操作，请参见[升级实例版本](https://help.aliyun.com/document_detail/113173.htm#concept-113173-zh)。
+-   确保您的消息队列Kafka版实例为2.x或以上版本。具体操作，请参见[升级实例版本](/cn.zh-CN/控制台使用指南/实例/升级实例版本.md)。
 
 ## 公网环境（消息传输需鉴权与加密）
 
