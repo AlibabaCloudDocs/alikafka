@@ -20,7 +20,7 @@
 
  实例的部署模式必须与其类型一致。VPC实例，部署模式为**vpc**。公网/VPC实例，部署模式为**eip**。 |
 |InstanceId|String|是|alikafka\_post-cn-v0h1fgs2\*\*\*\*|实例的ID。 |
-|RegionId|String|是|cn-hangzhou|实例的地域ID。 |
+|RegionId|String|是|cn-shanghai|实例的地域ID。 |
 |VpcId|String|是|vpc-bp1r4eg3yrxmygv\*\*\*\*|实例部署的VPC ID |
 |VSwitchId|String|是|vsw-bp1j3sg5979fstnpl\*\*\*\*|实例部署的Vswitch ID。 |
 |ZoneId|String|否|cn-shanghai-a|实例部署的Zone ID。
@@ -85,7 +85,7 @@
 http(s)://[Endpoint]/?Action=StartInstance
 &DeployModule=vpc
 &InstanceId=alikafka_post-cn-v0h1fgs2****
-&RegionId=cn-hangzhou
+&RegionId=cn-shanghai
 &VpcId=vpc-bp1r4eg3yrxmygv****
 &VSwitchId=vsw-bp1j3sg5979fstnpl****
 &ZoneId=cn-shanghai-a
