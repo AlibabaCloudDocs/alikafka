@@ -2,8 +2,6 @@
 
 Queries the topics on a Message Queue for Apache Kafka instance.
 
-****
-
 ## Debugging
 
 [OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=alikafka&api=GetTopicList&type=RPC&version=2019-09-16)
@@ -14,7 +12,7 @@ Queries the topics on a Message Queue for Apache Kafka instance.
 |---------|----|--------|-------|-----------|
 |Action|String|Yes|GetTopicList|The operation that you want to perform. Set the value to
 
- **GetTopicList**. |
+**GetTopicList**. |
 |InstanceId|String|Yes|alikafka\_pre-cn-0pp1954n\*\*\*\*|The ID of the Message Queue for Apache Kafka instance whose topics you want to query. |
 |CurrentPage|String|No|1|The number of the page to return. |
 |PageSize|String|No|10|The number of entries to return on each page. |
@@ -34,37 +32,37 @@ Queries the topics on a Message Queue for Apache Kafka instance.
 |TopicVO| | | |
 |CompactTopic|Boolean|false|The log cleanup policy for the topic. This parameter is returned when the Local Storage mode is specified for the topic. Valid values:
 
- -   false: The default log cleanup policy is used.
+-   false: The default log cleanup policy is used.
 -   true: The Apache Kafka log compaction policy is used. |
 |CreateTime|Long|1576563109000|The time when the topic was created. |
 |InstanceId|String|alikafka\_pre-cn-0pp1954n\*\*\*\*|The ID of the Message Queue for Apache Kafka instance. |
 |LocalTopic|Boolean|false|The storage engine of the topic. Valid values:
 
- -   false: the Cloud Storage mode.
+-   false: the Cloud Storage mode.
 -   true: the Local Storage mode. |
 |PartitionNum|Integer|6|The number of partitions in the topic. |
 |RegionId|String|cn-hangzhou|The region ID of the Message Queue for Apache Kafka instance. |
 |Remark|String|test|The description of the topic. The description follows these rules:
 
- -   The description contains only letters, digits, hyphens \(-\), and underscores \(\_\).
+-   The description contains only letters, digits, hyphens \(-\), and underscores \(\_\).
 -   The description is 3 to 64 characters in length. |
 |Status|Integer|0|The status of the topic. Valid values:
 
- **0:** The topic is running.
+**0:** The topic is running.
 
- A deleted topic does not have a status. |
+A deleted topic does not have a status. |
 |StatusName|String|Running|The name of the status of the topic. Valid values:
 
- **Running**
+**Running**
 
- A deleted topic does not have a status name. |
+A deleted topic does not have a status name. |
 |Tags|Array of TagVO| |The tags attached to the topic. |
 |TagVO| | | |
 |Key|String|Test|The key of the tag. |
 |Value|String|Test|The value of the tag |
 |Topic|String|TopicPartitionNum|The name of the topic. The topic name follows these rules:
 
- -   The name contains only letters, digits, hyphens \(-\), and underscores \(\_\).
+-   The name contains only letters, digits, hyphens \(-\), and underscores \(\_\).
 -   The name is 3 to 64 characters in length. Names that contain more than 64 characters are automatically truncated.
 -   The name cannot be modified after the topic is created. |
 |Total|Integer|1|The total number of topics. |
