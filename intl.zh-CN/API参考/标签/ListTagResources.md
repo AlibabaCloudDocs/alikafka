@@ -25,7 +25,9 @@
 -   Topic ：Kafka\_alikafka\_instanceId\_topic
 -   Consumer Group：Kafka\_alikafka\_instanceId\_consumerGroup
 
- 例如：实例ID为alikafka\_post-cn-v0h1fgs2xxxx、Topic名称为test-topic、Consumer Group名称为test-consumer-group，则各资源ID分别为alikafka\_post-cn-v0h1fgs2xxxx、Kafka\_alikafka\_post-cn-v0h1fgs2xxxx\_test-topic、Kafka\_alikafka\_post-cn-v0h1fgs2xxxx\_test-consumer-group。 |
+ 例如：实例ID为alikafka\_post-cn-v0h1fgs2xxxx、Topic名称为test-topic、Consumer Group名称为test-consumer-group，则各资源ID分别为alikafka\_post-cn-v0h1fgs2xxxx、Kafka\_alikafka\_post-cn-v0h1fgs2xxxx\_test-topic、Kafka\_alikafka\_post-cn-v0h1fgs2xxxx\_test-consumer-group。
+
+ **说明：** **ResourceId**与**Tag**参数必须配置其中任意一个，才能查询资源绑定的标签列表。否则，API调用失败。 |
 |Tag.N.Key|String|否|FinanceDept|资源的标签键。
 
  -   N为1~20。
