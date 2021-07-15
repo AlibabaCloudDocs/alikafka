@@ -32,17 +32,17 @@ keyword: [go, 公网, 收发消息, PLAIN]
 
     |参数|描述|是否必须|
     |--|--|----|
-    |topic|实例的Topic名称。您可在[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)的**Topic管理**页面获取。|是|
-    |group.id|实例的Consumer Group。您可在[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)的**Consumer Group管理**页面获取。|否**说明：** 如果应用运行producer.go发送消息，该参数可以不配置；如果应用运行consumer.go订阅消息，该参数必须配置。 |
-    |bootstrap.servers|SSL接入点的IP地址以及端口。您可在[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)的**实例详情**页面的**基本信息**区域获取。|是|
+    |topic|实例的Topic名称。您可在[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)的**Topic 管理**页面获取。|是|
+    |group.id|实例的Consumer Group。您可在[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)的**Group 管理**页面获取。|否**说明：** 如果应用运行producer.go发送消息，该参数可以不配置；如果应用运行consumer.go订阅消息，该参数必须配置。 |
+    |bootstrap.servers|SSL接入点的IP地址以及端口。您可在[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)的**实例详情**页面的**接入点信息**区域获取。|是|
     |security.protocol|SASL用户认证协议，默认为plaintext，需配置为sasl\_ssl。|是|
     |sasl.mechanism|消息收发的机制，默认为 PLAIN。|是|
-    |sasl.username|SASL用户名。您可以在[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)**实例详情**页面的**SASL用户**页签获取。**说明：** 如果实例已开启ACL，请确保要接入的SASL用户为PLAIN类型且已授权收发消息的权限。具体操作，请参见[SASL用户授权](/intl.zh-CN/权限控制/SASL用户授权.md)。
+    |sasl.username|SASL用户名。**说明：**
 
+    -   如果实例未开启ACL，您可以在[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)的**实例详情**页面的**配置信息**区域获取默认的**用户名**和**密码**。
+    -   如果实例已开启ACL，请确保要使用的SASL用户已被授予向消息队列Kafka版实例收发消息的权限。具体操作，请参见[SASL用户授权](/intl.zh-CN/访问控制（权限管理）/SASL用户授权.md)。
 |是|
-    |sasl.password|SASL用户密码。您可以在[消息队列Kafka版控制台](https://kafka.console.aliyun.com/?spm=a2c4g.11186623.2.22.6bf72638IfKzDm)**实例详情**页面的**SASL用户**页签获取。**说明：** 如果实例已开启ACL，请确保要接入的SASL用户为PLAIN类型且已授权收发消息的权限。具体操作，请参见[SASL用户授权](/intl.zh-CN/权限控制/SASL用户授权.md)。
-
-|是|
+    |sasl.password|SASL用户密码。|是|
 
 
 ## 发送消息
